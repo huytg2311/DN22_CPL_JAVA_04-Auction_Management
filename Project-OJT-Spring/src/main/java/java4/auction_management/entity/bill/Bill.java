@@ -35,6 +35,5 @@ public class Bill {
     @ManyToOne
     private User user;
 
-    @ManyToOne
-    private Cart cart;
+
 }

@@ -31,5 +31,5 @@ public class Bid {
     @ManyToOne
     private User user;
 
-    private String addressBid;
+
 }

@@ -34,8 +34,7 @@ public class Cart {
     )
     private List<Product> productList;
 
-    @OneToMany(mappedBy = "cart")
-    private List<Bill> billList;
+
 
 
 
