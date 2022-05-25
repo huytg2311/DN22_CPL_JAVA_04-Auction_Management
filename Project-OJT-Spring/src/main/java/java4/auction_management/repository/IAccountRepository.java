@@ -1,4 +1,14 @@
 package java4.auction_management.repository;
 
-public interface IAccountRepository {
+import java4.auction_management.entity.user.Account;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+public interface IAccountRepository extends JpaRepository<Account, String> {
+
+    Boolean existsByUsername(String username);
+
+    @Query("select a.enable from Account a where a.username = :username")
+    Boolean getEnableByUsername(@Param("username") String username);
 }

@@ -1,4 +1,14 @@
 package java4.auction_management.repository;
 
-public interface IUserRepository {
+import java4.auction_management.entity.user.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
+
+public interface IUserRepository extends JpaRepository<User, String>, JpaSpecificationExecutor<User> {
+    @Query(value = "select * from user as u inner join account as a on u.account_username = a.username\n" +
+            "where a.role = 'ROLE_USER'",nativeQuery = true)
+    List<User> getAllUser();
 }
