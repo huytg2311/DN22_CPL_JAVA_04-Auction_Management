@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -22,7 +21,8 @@ import java.util.List;
 public class User {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String fullname;
 
@@ -49,14 +49,11 @@ public class User {
     private Account account;
 
     @OneToMany(mappedBy = "user")
-    @JsonIgnore
     private List<Bid> bidList;
 
     @OneToMany(mappedBy = "user")
-    @JsonIgnore
     private  List<Cart> cartList;
 
     @OneToMany(mappedBy = "user")
-    @JsonIgnore
     private  List<Bill> billLlist;
 }

@@ -48,11 +48,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
 
         // Các trang không yêu cầu login
-        http.authorizeRequests().antMatchers("/", "/login", "/logout", "/index").permitAll();
-        http.authorizeRequests().antMatchers("/admin").permitAll();
+        http.authorizeRequests().antMatchers("/", "/login", "/logout", "/index", "/signUp").permitAll();
+//        http.authorizeRequests().antMatchers("/admin").permitAll();
 
 
-        // Trang chỉ dành cho ADMIN
+//        // Trang chỉ dành cho ADMIN
         http.authorizeRequests().antMatchers("/admin").access("hasRole('ROLE_ADMIN')");
         http.authorizeRequests().antMatchers("/admin/edit/{id}").access("hasRole('ROLE_ADMIN')");
         http.authorizeRequests().antMatchers("/admin/edit").access("hasRole('ROLE_ADMIN')");

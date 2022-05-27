@@ -22,13 +22,14 @@ public class Account {
 
     private String password;
 
+    @Column(columnDefinition = "default 'ROLE_USER'")
     @Enumerated(EnumType.STRING)
-    private ERole role;
+    private ERole role = ERole.ROLE_USER;
 
-    private boolean enable;
+    @Column(columnDefinition = "default true")
+    private boolean enable = true;
 
     @OneToOne(mappedBy = "account")
-    @JsonIgnore
     private User user;
 
     public boolean getEnable() {

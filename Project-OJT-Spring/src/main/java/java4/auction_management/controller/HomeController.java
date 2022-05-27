@@ -1,5 +1,7 @@
 package java4.auction_management.controller;
 
+
+import java4.auction_management.entity.user.Account;
 import java4.auction_management.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +16,8 @@ public class HomeController {
 
     @GetMapping(value = {"/","/welcome"})
     public String welcomePage(Model model) {
-        model.addAttribute("nameAccount", accountService.getAll());
+//        model.addAttribute("nameAccount", accountService.getAll());
+        model.addAttribute("account", new Account());
         return "index";
     }
 
@@ -27,4 +30,8 @@ public class HomeController {
     public String registerForm() {
         return "register";
     }
+
+
+
+
 }
