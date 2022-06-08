@@ -21,6 +21,13 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping(value = {"/index2"})
+    public String welcomePage2(Model model) {
+//        model.addAttribute("nameAccount", accountService.getAll());
+        model.addAttribute("account", new Account());
+        return "index2";
+    }
+
     @GetMapping(value = {"/403"})
     public String accessDenied(Model model) {
         return "403";

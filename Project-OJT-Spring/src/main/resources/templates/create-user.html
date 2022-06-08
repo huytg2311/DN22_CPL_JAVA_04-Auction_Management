@@ -75,7 +75,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav mx-auto p-4 p-lg-0">
-            <a th:href="@{/welcome}" class="nav-item nav-link active">Home</a>
+            <a href="index.html" class="nav-item nav-link active">Home</a>
             <a href="about.html" class="nav-item nav-link">About</a>
             <a href="service.html" class="nav-item nav-link">Services</a>
             <a href="product.html" class="nav-item nav-link">Products</a>
@@ -103,12 +103,12 @@
 <!-- Navbar End -->
 
 <!-- Page Header Start -->
-<div class="container-fluid page-header1 py-6 wow fadeIn" data-wow-delay="0.1s">
+<div class="container-fluid page-header2 py-6 wow fadeIn" data-wow-delay="0.1s">
     <div class="container text-center pt-5 pb-3">
-        <h1 class="display-4 text-white animated slideInDown mb-3">Login In Now !</h1>
+        <h1 class="display-4 text-white animated slideInDown mb-3">Sign Up Now !</h1>
         <nav aria-label="breadcrumb animated slideInDown">
             <ol class="breadcrumb justify-content-center mb-0">
-                <li class="breadcrumb-item"><a class="text-white" th:href="@{/welcome}">Home</a></li>
+                <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
                 <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
                 <li class="breadcrumb-item text-primary active" aria-current="page">Contact</li>
             </ol>
@@ -122,51 +122,53 @@
 <div class="container-xxl py-6">
     <div class="container">
         <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-            <p class="text-primary text-uppercase mb-2">~ Get account Now ~</p>
-            <h1 class="display-6 mb-4">Login</h1>
+            <p class="text-primary text-uppercase mb-2">~ Get Account Now ~</p>
+            <h1 class="display-6 mb-4">Sign Up</h1>
         </div>
         <div class="row g-0 justify-content-center">
             <div class="col-lg-8 wow fadeInUp" data-wow-delay="0.1s">
-                <form th:action="@{/j_spring_security_check}" method='POST'>
-                    <div>
-                        <div class="col-md-9" style="align-content: center">
-                            <div class="form-floating" style="margin-left: 200px">
-                                <input type="text" class="form-control" name="username" id="name" placeholder="Your Name">
-                                <label for="name">User Name</label>
+                <form th:action="@{/signUp}" th:object="${user}" method="post">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" th:field="*{fullname}" class="form-control" id="name" placeholder="Your Name">
+                                <label for="name">Your Name</label>
                             </div>
                         </div>
-
-                        <div class="col-md-9" style="align-content: center">
-                            <div class="form-floating" style="margin-left: 200px; margin-top: 10px">
-                                <input type="password" name="password" class="form-control" id="subject" placeholder="Subject">
-                                <label for="subject">Password</label>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" th:field="*{email}" class="form-control" id="e-mail" placeholder="Your Email">
+                                <label for="e-mail">Your Email</label>
                             </div>
                         </div>
-
-
-                            <label>
-                                <input style="margin-left: 200px; margin-top: 10px" type="checkbox" name="remember-me" /> Remember me
-                            </label>
-
-
-                        <div th:if="${#request.getParameter('error') == 'true'}"
-                             style="color:red;margin:10px 0px;text-align: center">
-                            Login Failed!!!<br />
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" th:field="*{phoneNumber}" class="form-control" id="phone" placeholder="Your Email">
+                                <label for="phone">Phone Number</label>
+                            </div>
                         </div>
-
-                        <div th:if="${#request.getParameter('role') == 'ROLE_ADMIN'}"
-                             style="color:red;margin:10px 0px;text-align: center">
-                            Login Failed!!!<br />
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" th:field="*{idCard}" class="form-control" id="id-card" placeholder="Your Email">
+                                <label for="id-card">ID Card</label>
+                            </div>
                         </div>
-
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" th:field="*{account.username}" class="form-control" id="account" placeholder="Your Email">
+                                <label for="account">User Name</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="password" th:field="*{account.password}" class="form-control" id="password" placeholder="Your Email">
+                                <label for="password">Password</label>
+                            </div>
+                        </div>
                         <div class="col-12 text-center">
                             <button class="btn btn-primary rounded-pill py-3 px-5" type="submit"
-                                    style="margin-top: 10px; margin-bottom: 20px">Sign in</button>
+                                    style="margin-top: 10px; margin-bottom: 20px">Sign up</button>
                         </div>
-
-
-                        <a class="text-primary text-uppercase mb-2" style="margin-left: 380px; margin-top: 20px" th:href="@{/signUp}">~ Sign up ~</a>
-
                     </div>
                 </form>
             </div>
@@ -183,6 +185,8 @@
             frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
 </div>
 <!-- Google Map End -->
+
+
 
 
 

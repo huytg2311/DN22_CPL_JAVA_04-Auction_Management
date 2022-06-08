@@ -35,6 +35,8 @@
 					Pages
 				</li>
 
+
+
 				<li class="sidebar-item active">
 					<a class="sidebar-link" href="home-admin.html">
 						<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Transaction Management</span>
@@ -81,6 +83,10 @@
 			<a class="sidebar-toggle js-sidebar-toggle">
 				<i class="hamburger align-self-center"></i>
 			</a>
+			<h4 style="margin-left: 850px">Welcome :
+				<span th:utext="${#request.userPrincipal.name}"></span>
+			</h4>
+			<a th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a>
 
 		</nav>
 
@@ -117,7 +123,9 @@
 									<button type="button" class="btn btn-outline-info">Detail</button>
 									<button type="button" class="btn btn-outline-success">
 										<a  style="text-decoration: none;" th:href="@{/admin/edit/{id}(id = ${user.id})}">Edit</a></button>
-									<button type="button" class="btn btn-outline-danger">Lock</button>
+									<button type="button" class="btn btn-outline-danger">
+										Lock
+									</button>
 								</td>
 							</tr>
 							</tbody>

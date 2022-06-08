@@ -212,10 +212,32 @@ h6,
     background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(../img/carousel-1.jpg) center center no-repeat;
     background-size: cover;
 }
+.page-header1 {
+    margin-bottom: 6rem;
+    background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(../img/login.jpg) center center no-repeat;
+    background-size: cover;
+}
+
+.page-header2 {
+    margin-bottom: 6rem;
+    background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(../img/signp.jpg) center center no-repeat;
+    background-size: cover;
+}
+
 
 .breadcrumb-item+.breadcrumb-item::before {
     color: var(--light);
 }
+
+.page-link {
+    border-radius: 50%;
+}
+
+
+.pagination li {
+    margin-right: 5px;
+}
+
 
 
 /*** Facts ***/
@@ -415,3 +437,5 @@ h6,
 .copyright a:hover {
     color: var(--light);
 }
+
+

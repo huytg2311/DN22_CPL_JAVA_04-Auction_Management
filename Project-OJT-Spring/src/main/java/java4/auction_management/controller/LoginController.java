@@ -1,6 +1,5 @@
 package java4.auction_management.controller;
-
-import java4.auction_management.entity.user.Account;
+import org.springframework.security.core.Authentication;
 import java4.auction_management.entity.user.User;
 import java4.auction_management.service.IAccountService;
 import java4.auction_management.service.IUserService;
@@ -10,6 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.util.WebUtils;
+
+
+import java.security.Principal;
 
 @Controller
 public class LoginController {
@@ -41,6 +44,12 @@ public class LoginController {
     @GetMapping("/success")
     public String success(Model model) {
         return "success";
+    }
+
+    @RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
+    public String logoutSuccessfulPage(Model model) {
+        model.addAttribute("title", "Logout");
+        return "/index";
     }
 
 }

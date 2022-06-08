@@ -43,16 +43,6 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-//    @GetMapping("/add")
-//    public String showAddForm(Model model) {
-//        model.addAttribute("user", new User());
-//        return "create-user";
-//    }
-//
-//    @PostMapping("/add")
-//    public String addUser(@ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-//        userService.save(user);
-//        redirectAttributes.addFlashAttribute("message", "Add successful");
-//        return "redirect:/admin";
-//    }
+
+
 }
