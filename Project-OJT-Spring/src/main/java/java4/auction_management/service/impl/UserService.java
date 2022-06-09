@@ -1,5 +1,6 @@
 package java4.auction_management.service.impl;
 
+import java4.auction_management.entity.user.Provider;
 import java4.auction_management.entity.user.User;
 import java4.auction_management.repository.IUserRepository;
 import java4.auction_management.service.IUserService;
@@ -44,4 +45,8 @@ public class UserService implements IUserService {
     public List<User> getAllUser() {
         return this.iUserRepository.getAllUser();
     }
+
+
+
+
 }

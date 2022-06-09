@@ -5,14 +5,20 @@ import java4.auction_management.entity.user.Account;
 import java4.auction_management.repository.IAccountRepository;
 import java4.auction_management.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.mail.internet.MimeMessage;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class AccountService implements IAccountService {
+
+//    @Autowired
+//    private JavaMailSender javaMailSender;
 
     @Autowired
     private IAccountRepository accountRepository;
@@ -40,10 +46,6 @@ public class AccountService implements IAccountService {
         return this.accountRepository.existsByUsername(username);
     }
 
-    @Override
-    public Boolean sendOtpToEmail(String toEmail, String otp) {
-        return null;
-    }
 
     @Override
     public List<Account> getAll() {
@@ -62,6 +64,42 @@ public class AccountService implements IAccountService {
 
     @Override
     public void deleteById(String id) {
+
+    }
+
+    @Override
+    public Boolean sendOtpToEmail(String email, String otp) {
+//        try {
+//            MimeMessage message = this.javaMailSender.createMimeMessage();
+//            MimeMessageHelper helper = new MimeMessageHelper(message);
+//
+//            helper.setTo(email);
+//            helper.setSubject("MÃ OTP - ĐỔI MẬT KHẨU");
+//            helper.setText("<h3>Xin chao ! </h3>" +
+//                    "<p>Vui long khong chia se ma nay cho bat ky ai.</p>" +
+//                    "<p>Ma OTP cua ban la: <span style='color: blue; font-size: x-large'>" + otp + "</span></p>" +
+//                    "<p>Link dan den trang chu: <a style='color: red; text-decoration: underline' href='http://localhost:4200'>bam vao day</a></p>", true
+//            );
+//            this.javaMailSender.send(message);
+//            System.out.println("Send OTP to mail success !!!");
+//            return true;
+//        } catch (Exception e) {
+//            return false;
+//        }
+        return false;
+    }
+
+    public void processOAuthPostLogin(String username) {
+        Account existUser = accountRepository.getUserByUsername(username);
+
+        if (existUser == null) {
+            Account newAccount = new Account();
+            newAccount.setUsername(username);
+            newAccount.setEnable(true);
+
+
+            accountRepository.save(newAccount);
+        }
 
     }
 }

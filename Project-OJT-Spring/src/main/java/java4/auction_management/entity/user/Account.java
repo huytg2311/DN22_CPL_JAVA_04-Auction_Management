@@ -39,4 +39,20 @@ public class Account {
     @OneToMany(mappedBy = "account")
     @JsonIgnore
     private List<Chat> chatList;
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

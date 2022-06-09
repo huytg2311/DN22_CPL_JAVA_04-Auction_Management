@@ -438,4 +438,8 @@ h6,
     color: var(--light);
 }
 
+.btgmail:hover {
+    color: #FFFFFF;
+}
+
 

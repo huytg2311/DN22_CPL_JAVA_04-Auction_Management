@@ -1,6 +1,6 @@
 package java4.auction_management.entity.user;
 // provider
 public enum Provider {
-    LOCAL, FACEBOOK, GOOGLE
+    LOCAL, GOOGLE
 
 }

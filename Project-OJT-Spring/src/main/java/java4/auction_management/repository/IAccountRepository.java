@@ -12,5 +12,10 @@ public interface IAccountRepository extends JpaRepository<Account, String> {
     @Query("select a.enable from Account a where a.username = :username")
     Boolean getEnableByUsername(@Param("username") String username);
 
+    @Query("SELECT a FROM Account a WHERE a.username = :username")
+    public Account getUserByUsername(@Param("username") String username);
+
+    @Query("SELECT a FROM Account a WHERE a.password = :password")
+    public Account getPasswordByUsername(@Param("password") String password);
 
 }

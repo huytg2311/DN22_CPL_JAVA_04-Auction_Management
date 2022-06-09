@@ -14,7 +14,8 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -34,7 +35,8 @@
 <body>
 
 <!-- Spinner Start -->
-<div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+<div id="spinner"
+     class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
     <div class="spinner-grow text-primary" role="status"></div>
 </div>
 <!-- Spinner End -->
@@ -56,7 +58,8 @@
             <div class="h-100 d-inline-flex align-items-center">
                 <a class="btn-lg-square text-primary border-end rounded-0" href=""><i class="fab fa-facebook-f"></i></a>
                 <a class="btn-lg-square text-primary border-end rounded-0" href=""><i class="fab fa-twitter"></i></a>
-                <a class="btn-lg-square text-primary border-end rounded-0" href=""><i class="fab fa-linkedin-in"></i></a>
+                <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
+                        class="fab fa-linkedin-in"></i></a>
                 <a class="btn-lg-square text-primary pe-0" href=""><i class="fab fa-instagram"></i></a>
             </div>
         </div>
@@ -131,41 +134,68 @@
                     <div>
                         <div class="col-md-9" style="align-content: center">
                             <div class="form-floating" style="margin-left: 200px">
-                                <input type="text" class="form-control" name="username" id="name" placeholder="Your Name">
+                                <input type="text" class="form-control" name="username" id="name"
+                                       placeholder="Your Name">
                                 <label for="name">User Name</label>
                             </div>
                         </div>
 
                         <div class="col-md-9" style="align-content: center">
                             <div class="form-floating" style="margin-left: 200px; margin-top: 10px">
-                                <input type="password" name="password" class="form-control" id="subject" placeholder="Subject">
+                                <input type="password" name="password" class="form-control" id="subject"
+                                       placeholder="Subject">
                                 <label for="subject">Password</label>
                             </div>
                         </div>
 
 
-                            <label>
-                                <input style="margin-left: 200px; margin-top: 10px" type="checkbox" name="remember-me" /> Remember me
-                            </label>
+                        <label>
+                            <input style="margin-left: 200px; margin-top: 10px" type="checkbox" name="remember-me"/>
+                            Remember me
+                        </label>
+                        <label style="margin-left: 180px">
+                            <a href="#">Forgot Password??</a>
+                        </label>
 
 
                         <div th:if="${#request.getParameter('error') == 'true'}"
                              style="color:red;margin:10px 0px;text-align: center">
-                            Login Failed!!!<br />
+                            Login Failed!!!<br/>
                         </div>
 
                         <div th:if="${#request.getParameter('role') == 'ROLE_ADMIN'}"
                              style="color:red;margin:10px 0px;text-align: center">
-                            Login Failed!!!<br />
+                            Login Failed!!!<br/>
                         </div>
 
                         <div class="col-12 text-center">
                             <button class="btn btn-primary rounded-pill py-3 px-5" type="submit"
-                                    style="margin-top: 10px; margin-bottom: 20px">Sign in</button>
+                                    style="margin-top: 10px; margin-bottom: 20px">Sign in
+                            </button>
+                        </div>
+
+                        <span style="margin-left: 44.7%; color: darkgrey">Or login with</span>
+                        <br>
+
+                        <button type="button" class="btn btn-outline-warning btgmail" style="margin-left: 43.5%;margin-top: 10px">&nbsp;
+                            <a class="bi bi-google" th:href="@{/oauth2/authorization/google}">&nbsp;&nbsp;Gmail</a>&nbsp;&nbsp;
+                        </button>
+                        <br>
+                        <div style="margin-top: 30px">
+                            <span style="margin-left: 38%">Not a member?</span>
+                            <button type="button" class="btn btn-outline-warning btgmail" style="margin-left: 2px">&nbsp;
+                                <a class="bi bi-person-plus-fill"
+                                   th:href="@{/signUp}">&nbsp;&nbsp;Sign up</a>&nbsp;
+                            </button>
                         </div>
 
 
-                        <a class="text-primary text-uppercase mb-2" style="margin-left: 380px; margin-top: 20px" th:href="@{/signUp}">~ Sign up ~</a>
+
+
+
+
+<!--                        <a class="text-primary text-uppercase mb-2" style="margin-left: 380px; margin-top: 20px"-->
+<!--                           th:href="@{/signUp}">~ Sign up ~</a>-->
 
                     </div>
                 </form>
@@ -185,7 +215,6 @@
 <!-- Google Map End -->
 
 
-
 <!-- Footer Start -->
 <div class="container-fluid bg-dark text-light footer my-6 mb-0 py-5 wow fadeIn" data-wow-delay="0.1s">
     <div class="container py-5">
@@ -196,10 +225,14 @@
                 <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
                 <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
                 <div class="d-flex pt-2">
-                    <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i class="fab fa-youtube"></i></a>
-                    <a class="btn btn-square btn-outline-light rounded-circle me-0" href=""><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
+                            class="fab fa-twitter"></i></a>
+                    <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
+                            class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
+                            class="fab fa-youtube"></i></a>
+                    <a class="btn btn-square btn-outline-light rounded-circle me-0" href=""><i
+                            class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
@@ -257,7 +290,8 @@
             <div class="col-md-6 text-center text-md-end">
                 <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
                 Designed By <a href="https://htmlcodex.com">HTML Codex</a>
-                <br>Distributed By: <a class="border-bottom" href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                <br>Distributed By: <a class="border-bottom" href="https://themewagon.com"
+                                       target="_blank">ThemeWagon</a>
             </div>
         </div>
     </div>

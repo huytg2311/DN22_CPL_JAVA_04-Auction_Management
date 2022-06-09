@@ -56,4 +56,14 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private  List<Bill> billLlist;
+
+    public Provider getProvider() {
+        return provider;
+    }
+
+    public void setProvider(Provider provider) {
+        this.provider = provider;
+    }
+
+
 }
