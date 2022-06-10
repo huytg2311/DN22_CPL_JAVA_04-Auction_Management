@@ -28,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
-        @Autowired
+    @Autowired
     private CustomOAuth2UserService oauthUserService;
 
     @Autowired
@@ -100,7 +100,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .userService(oauthUserService);
 
         http.oauth2Login()
-                .loginPage("/login1")
+                .loginPage("/login")
                 .userInfoEndpoint()
                 .userService(oauthUserService)
                 .and()

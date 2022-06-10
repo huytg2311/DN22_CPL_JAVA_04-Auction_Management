@@ -25,8 +25,8 @@ public class BeanConfig {
 //        mailSender.setHost("smtp.gmail.com");
 //        mailSender.setPort(587);
 //        // get username & password (password of application in GoogleManagement) of admin or me
-//        mailSender.setUsername("trungtrongcr21@gmail.com");
-//        mailSender.setPassword("ejxtbmcjvswzgiak");
+//        mailSender.setUsername("fptintern@gmail.com");
+//        mailSender.setPassword("fptintern123");
 //
 //        Properties javaMailProperties = new Properties();
 //        javaMailProperties.put("mail.smtp.starttls.enable", "true");

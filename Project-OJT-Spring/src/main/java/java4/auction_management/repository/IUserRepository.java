@@ -14,5 +14,11 @@ public interface IUserRepository extends JpaRepository<User, String>, JpaSpecifi
             "where a.role = 'ROLE_USER'",nativeQuery = true)
     List<User> getAllUser();
 
+    @Query(value = "select u from User u where u.email = ?1")
+    User findByEmail(String email);
+
+    User findByResetPasswordToken(String token);
+
+
 
 }

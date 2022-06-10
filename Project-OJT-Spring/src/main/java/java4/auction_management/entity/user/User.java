@@ -57,6 +57,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     private  List<Bill> billLlist;
 
+    @Column(name = "reset_password_token")
+    private String resetPasswordToken;
+
     public Provider getProvider() {
         return provider;
     }
@@ -65,5 +68,11 @@ public class User {
         this.provider = provider;
     }
 
+    public String getResetPasswordToken() {
+        return resetPasswordToken;
+    }
 
+    public void setResetPasswordToken(String resetPasswordToken) {
+        this.resetPasswordToken = resetPasswordToken;
+    }
 }
