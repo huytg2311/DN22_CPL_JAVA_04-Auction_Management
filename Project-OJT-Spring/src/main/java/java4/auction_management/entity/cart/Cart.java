@@ -21,18 +21,20 @@ import java.util.List;
 public class Cart {
 
     @Id
-    private String id;
-
-    @ManyToOne
-    private User user;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long cardId;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     @JoinTable(name = "cartDetail",
-            joinColumns = @JoinColumn(name = "cart_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
+            joinColumns = @JoinColumn(name = "cardId"),
+            inverseJoinColumns = @JoinColumn(name = "productId")
     )
     private List<Product> productList;
+
+    @JoinColumn(name = "userId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
 
 

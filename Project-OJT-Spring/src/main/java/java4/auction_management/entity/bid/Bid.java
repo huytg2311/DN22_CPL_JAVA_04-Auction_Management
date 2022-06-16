@@ -19,16 +19,19 @@ import java.time.LocalTime;
 public class Bid {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long bidId;
 
     private LocalTime bidTime;
 
     private double bidPrice;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "productId")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Product product;
 
-    @ManyToOne
+    @JoinColumn(name = "userId")
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
 

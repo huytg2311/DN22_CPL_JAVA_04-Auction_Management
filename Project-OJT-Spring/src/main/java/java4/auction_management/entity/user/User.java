@@ -45,16 +45,17 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Provider provider;
 
+
     @OneToOne(cascade = CascadeType.ALL)
     private Account account;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Bid> bidList;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
     private  List<Cart> cartList;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private  List<Bill> billLlist;
 
     @Column(name = "reset_password_token")
@@ -75,4 +76,8 @@ public class User {
     public void setResetPasswordToken(String resetPasswordToken) {
         this.resetPasswordToken = resetPasswordToken;
     }
+
+
+
+
 }

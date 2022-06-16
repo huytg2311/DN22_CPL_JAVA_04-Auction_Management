@@ -1,5 +1,4 @@
 package java4.auction_management.controller;
-import org.springframework.security.core.Authentication;
 import java4.auction_management.entity.user.User;
 import java4.auction_management.service.IAccountService;
 import java4.auction_management.service.IUserService;
@@ -9,10 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.util.WebUtils;
 
-
-import java.security.Principal;
 
 @Controller
 public class LoginController {

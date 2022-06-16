@@ -104,16 +104,14 @@
 								<th>UserName</th>
 								<th class="d-none d-md-table-cell">Email</th>
 								<th class="d-none d-md-table-cell">FullName</th>
-								<th class="d-none d-md-table-cell">Gender</th>
 								<th class="d-none d-md-table-cell">&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;Action</th>
 							</tr>
 							</thead>
 							<tbody>
-							<tr th:each="user : ${listUsers}">
+							<tr th:each="user : ${users}">
 								<td th:text="${user.account.username}"></td>
 								<td th:text="${user.email}"></td>
 								<td th:text="${user.fullname}"></td>
-								<td th:text="${user.gender}"></td>
 
 								<td>
 <!--									<a th:href="@{/user/edit/{id}(id = ${user.id})}">-->

@@ -2,7 +2,6 @@ package java4.auction_management.repository;
 
 
 import java4.auction_management.entity.user.Account;
-import java4.auction_management.entity.user.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

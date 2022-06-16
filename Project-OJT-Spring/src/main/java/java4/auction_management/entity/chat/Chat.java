@@ -1,5 +1,6 @@
 package java4.auction_management.entity.chat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java4.auction_management.entity.user.Account;
 import lombok.AllArgsConstructor;
@@ -19,12 +20,14 @@ import java.util.List;
 public class Chat {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long chatId;
 
-    @ManyToOne
+    @JoinColumn(name = "account_username")
+    @ManyToOne(fetch =  FetchType.LAZY)
     private Account account;
 
-    @OneToMany(mappedBy = "chat")
-    @JsonIgnore
+    @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<ChatDetail> chatDetails;
 }

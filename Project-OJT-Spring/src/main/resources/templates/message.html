@@ -45,7 +45,7 @@
     <div class="row gx-0 align-items-center d-none d-lg-flex">
         <div class="col-lg-6 px-5 text-start">
             <ol class="breadcrumb mb-0">
-                <li class="breadcrumb-item"><a class="small text-light" href="#">Home</a></li>
+                <li class="breadcrumb-item"><a class="small text-light" th:href="@{/welcome}">Home</a></li>
                 <li class="breadcrumb-item"><a class="small text-light" href="#">Career</a></li>
                 <li class="breadcrumb-item"><a class="small text-light" href="#">Terms</a></li>
                 <li class="breadcrumb-item"><a class="small text-light" href="#">Privacy</a></li>
@@ -94,9 +94,10 @@
             <div class="flex-shrink-0 btn-lg-square border border-light rounded-circle">
                 <i class="fa fa-phone text-primary"></i>
             </div>
-            <div class="ps-3">
-                <small class="text-primary mb-0">Call Us</small>
-                <p class="text-light fs-5 mb-0">+012 345 6789</p>
+            <div class="ps-3" style="margin-top: 10px" >
+                <a class="text-primary mb-0" th:href="@{/login}">Login</a>
+
+                <!--                        <p class="text-light fs-5 mb-0">+012 345 6789</p>-->
             </div>
         </div>
     </div>

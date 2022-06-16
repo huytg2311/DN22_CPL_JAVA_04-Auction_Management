@@ -9,7 +9,7 @@ public interface IService<T, K> {
 
     Optional<T> getById(K id);
 
-    T save(T entity);
+    void save(T entity);
 
     void deleteById(K id);
 }

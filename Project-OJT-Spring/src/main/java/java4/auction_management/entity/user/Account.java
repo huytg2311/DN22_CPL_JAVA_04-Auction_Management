@@ -1,5 +1,6 @@
 package java4.auction_management.entity.user;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java4.auction_management.entity.chat.Chat;
 import lombok.AllArgsConstructor;
@@ -18,6 +19,7 @@ import java.util.List;
 public class Account {
 
     @Id
+//    @Column(name = "username", nullable = false)
     private String username;
 
     private String password;
@@ -32,13 +34,12 @@ public class Account {
     @OneToOne(mappedBy = "account")
     private User user;
 
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    private List<Chat> chatList;
+
     public boolean getEnable() {
         return this.enable;
     }
-
-    @OneToMany(mappedBy = "account")
-    @JsonIgnore
-    private List<Chat> chatList;
 
     public boolean isEnable() {
         return enable;

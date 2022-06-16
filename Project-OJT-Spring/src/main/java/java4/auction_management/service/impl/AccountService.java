@@ -5,12 +5,9 @@ import java4.auction_management.entity.user.Account;
 import java4.auction_management.repository.IAccountRepository;
 import java4.auction_management.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.mail.internet.MimeMessage;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,8 +55,8 @@ public class AccountService implements IAccountService {
     }
 
     @Override
-    public Account save(Account account) {
-        return this.accountRepository.save(account);
+    public void save(Account account) {
+        this.accountRepository.save(account);
     }
 
     @Override

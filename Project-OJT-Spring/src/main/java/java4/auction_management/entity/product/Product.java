@@ -1,5 +1,6 @@
 package java4.auction_management.entity.product;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java4.auction_management.entity.bid.Bid;
 import java4.auction_management.entity.category.Category;
@@ -19,7 +20,8 @@ import java.time.LocalTime;
 @AllArgsConstructor
 public class Product {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long producId;
 
     private String name;
 
@@ -42,11 +44,12 @@ public class Product {
 
     private String productStatus;
 
-    @ManyToOne
+    @JoinColumn(name = "categoryId")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 
-    @OneToOne(mappedBy = "product")
-    @JsonIgnore
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+    @JsonBackReference
     private Bid bid;
 
 

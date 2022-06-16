@@ -93,8 +93,9 @@
                         Get more form examples
                     </a>
                 </div>
-                <form th:action="@{admin/edit}" th:object="${user}" method="post">
-
+                <form th:action="@{/admin/edit}" th:object="${users}" method="post">
+                    <input type="hidden" th:field="*{id}">
+                    <input type="hidden" th:field="*{account.password}">
                     <div class="row">
                         <div class="col-12 col-lg-6">
                             <div class="card">
@@ -102,7 +103,7 @@
                                     <h5 class="card-title mb-0">User Name</h5>
                                 </div>
                                 <div class="card-body">
-                                    <input type="text" class="form-control" th:field="*{account.username}" disabled>
+                                    <input type="text" class="form-control" th:field="*{account.username}" readonly>
                                 </div>
                             </div>
 
@@ -112,15 +113,6 @@
                                 </div>
                                 <div class="card-body">
                                     <input type="text" class="form-control" id="fullname" th:field="*{fullname}">
-                                </div>
-                            </div>
-
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title mb-0">Day Of Birth</h5>
-                                </div>
-                                <div class="card-body">
-                                    <input type="text" class="form-control" id="dayOfBirth" name="dayOfBirth" th:field="*{dayOfBirth}">
                                 </div>
                             </div>
 
@@ -157,7 +149,7 @@
                                         <option th:value="'FEMALE'">Female</option>
                                         <option th:value="'OTHER'">Other</option>
                                     </select>
-                                    </div>
+                                </div>
                             </div>
 
                             <div class="card">
@@ -170,6 +162,7 @@
                             </div>
                         </div>
                     </div>
+                    <button class="btn-primary" type="submit">Save</button>
                 </form>
             </div>
         </main>

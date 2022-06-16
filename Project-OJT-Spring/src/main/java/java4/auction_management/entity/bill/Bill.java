@@ -8,10 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -22,7 +19,8 @@ import java.time.LocalDateTime;
 public class Bill {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long billId;
 
     private LocalDateTime timeBill;
 
@@ -32,7 +30,8 @@ public class Bill {
 
     private String shippingMethod;
 
-    @ManyToOne
+    @JoinColumn(name = "userId")
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
 
