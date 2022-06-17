@@ -15,7 +15,7 @@ import java.nio.file.Paths;
 import java.util.Properties;
 
 @Configuration
-public class BeanConfig {
+public class BeanConfig implements WebMvcConfigurer{
 
     @Bean
     public SpringSecurityDialect springSecurityDialect(){
@@ -27,6 +27,13 @@ public class BeanConfig {
         return new BCryptPasswordEncoder();
     }
 
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        Path brandUploadDir = Paths.get("./images");
+        String brandUpLoadPath = brandUploadDir.toFile().getAbsolutePath();
+
+        registry.addResourceHandler("/images/**").addResourceLocations("file:/" + brandUpLoadPath + "/");
+    }
 
 //    @Bean
 //    public JavaMailSender javaMailSender() {

@@ -19,6 +19,7 @@
 
     <link th:href="@{/admin/css/app.css}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 </head>
 
@@ -93,7 +94,7 @@
                         Get more form examples
                     </a>
                 </div>
-                <form th:action="@{/admin/edit}" th:object="${users}" method="post">
+                <form th:action="@{/admin/edit}" th:object="${users}" method="post" enctype="multipart/form-data">
                     <input type="hidden" th:field="*{id}">
                     <input type="hidden" th:field="*{account.password}">
                     <div class="row">
@@ -162,8 +163,19 @@
                             </div>
                         </div>
                     </div>
-                    <button class="btn-primary" type="submit">Save</button>
+                    <p>
+                        <label>Image</label>
+                        <input type="file" name="fileImage" id="fileImage" accept="image/png, image/jpeg">
+                    </p>
+                    <p>
+                        <img style="width: 200px" id="thumbnail" alt="Image Preview" th:src="@{${users.getImagePath}}"/>
+                    </p>
+\
+
+                    <button style="margin-left: 65px" class="btn btn-success" type="submit">Save</button>
                 </form>
+                <a style="margin-top: -56px" class="btn btn-danger" type="button" th:href="@{/admin}">Back</a>
+
             </div>
         </main>
 
@@ -382,17 +394,34 @@
         });
     });
 </script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var date = new Date(Date.now() - 5 * 24 * 60 * 60 * 1000);
-        var defaultDate = date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
-        document.getElementById("datetimepicker-dashboard").flatpickr({
-            inline: true,
-            prevArrow: "<span title=\"Previous month\">&laquo;</span>",
-            nextArrow: "<span title=\"Next month\">&raquo;</span>",
-            defaultDate: defaultDate
-        });
+<!--<script>-->
+<!--    document.addEventListener("DOMContentLoaded", function() {-->
+<!--        var date = new Date(Date.now() - 5 * 24 * 60 * 60 * 1000);-->
+<!--        var defaultDate = date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();-->
+<!--        document.getElementById("datetimepicker-dashboard").flatpickr({-->
+<!--            inline: true,-->
+<!--            prevArrow: "<span title=\"Previous month\">&laquo;</span>",-->
+<!--            nextArrow: "<span title=\"Next month\">&raquo;</span>",-->
+<!--            defaultDate: defaultDate-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#fileImage').change(function () {
+            showImageThumbnail(this);
+        })
     });
+
+    function showImageThumbnail(fileInput) {
+        file = fileInput.files[0];
+        reader = new FileReader();
+        reader.onload = function (e) {
+            $('#thumbnail').attr('src', e.target.result);
+        };
+        reader.readAsDataURL(file);
+    }
 </script>
 
 </body>

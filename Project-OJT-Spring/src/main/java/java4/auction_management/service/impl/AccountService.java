@@ -2,6 +2,7 @@ package java4.auction_management.service.impl;
 
 import java4.auction_management.dto.user.ChangePasswordRequest;
 import java4.auction_management.entity.user.Account;
+import java4.auction_management.entity.user.User;
 import java4.auction_management.repository.IAccountRepository;
 import java4.auction_management.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,8 +56,8 @@ public class AccountService implements IAccountService {
     }
 
     @Override
-    public void save(Account account) {
-        this.accountRepository.save(account);
+    public Account save(Account account) {
+        return this.accountRepository.save(account);
     }
 
     @Override

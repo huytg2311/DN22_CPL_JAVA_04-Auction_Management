@@ -56,9 +56,9 @@ public class UserService implements IUserService {
 
 
     @Override
-    public void save(User user) {
+    public User save(User user) {
         user.getAccount().setPassword(passwordEncoder.encode(user.getAccount().getPassword()));
-        iUserRepository.save(user);
+        return iUserRepository.save(user);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package java4.auction_management.service;
 
+import java4.auction_management.entity.user.User;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -9,7 +11,7 @@ public interface IService<T, K> {
 
     Optional<T> getById(K id);
 
-    void save(T entity);
+    T save(T entity);
 
     void deleteById(K id);
 }

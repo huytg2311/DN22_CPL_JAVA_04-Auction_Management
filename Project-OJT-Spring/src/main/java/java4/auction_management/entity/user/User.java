@@ -77,7 +77,17 @@ public class User {
         this.resetPasswordToken = resetPasswordToken;
     }
 
+    public String getImage() {
+        return image;
+    }
 
+    public void setImage(String image) {
+        this.image = image;
+    }
 
-
+    @Transient
+    public String getImagePath() {
+        if (image == null || id == null) return null;
+        return "/images/" + id + "/" + image;
+    }
 }
