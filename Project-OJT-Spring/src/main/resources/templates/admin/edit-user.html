@@ -114,6 +114,8 @@
                                 </div>
                                 <div class="card-body">
                                     <input type="text" class="form-control" id="fullname" th:field="*{fullname}">
+                                    <p th:if="${#fields.hasErrors('fullname')}" class="text-danger"
+                                       th:errors="*{fullname}"></p>
                                 </div>
                             </div>
 
@@ -135,8 +137,6 @@
                                 <div class="card-body">
                                     <input type="text" class="form-control"  name="idCard" th:field="*{idCard}">
                                 </div>
-
-
                             </div>
 
                             <div class="card">
@@ -165,12 +165,11 @@
                     </div>
                     <p>
                         <label>Image</label>
-                        <input type="file" name="fileImage" id="fileImage" accept="image/png, image/jpeg">
+                        <input type="file" name="file"  id="file"/>
+                        <input type="hidden" th:field="*{image}"/>
                     </p>
-                    <p>
-                        <img style="width: 200px" id="thumbnail" alt="Image Preview" th:src="@{${users.getImagePath}}"/>
-                    </p>
-\
+
+
 
                     <button style="margin-left: 65px" class="btn btn-success" type="submit">Save</button>
                 </form>

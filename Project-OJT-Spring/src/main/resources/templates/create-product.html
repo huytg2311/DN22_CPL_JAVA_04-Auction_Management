@@ -31,7 +31,9 @@
     <!-- Template Stylesheet -->
     <link th:href="@{css/style.css}" rel="stylesheet">
 </head>
+
 <body>
+
 <!-- Spinner Start -->
 <div id="spinner"
      class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -45,7 +47,7 @@
     <div class="row gx-0 align-items-center d-none d-lg-flex">
         <div class="col-lg-6 px-5 text-start">
             <ol class="breadcrumb mb-0">
-                <li class="breadcrumb-item"><a class="small text-light" th:href="@{/welcome}">Home</a></li>
+                <li class="breadcrumb-item"><a class="small text-light" href="#">Home</a></li>
                 <li class="breadcrumb-item"><a class="small text-light" href="#">Career</a></li>
                 <li class="breadcrumb-item"><a class="small text-light" href="#">Terms</a></li>
                 <li class="breadcrumb-item"><a class="small text-light" href="#">Privacy</a></li>
@@ -76,7 +78,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav mx-auto p-4 p-lg-0">
-            <a th:href="@{/welcome}" class="nav-item nav-link active">Home</a>
+            <a href="index.html" class="nav-item nav-link active">Home</a>
             <a href="about.html" class="nav-item nav-link">About</a>
             <a href="products/service.html" class="nav-item nav-link">Services</a>
             <a href="product.html" class="nav-item nav-link">Products</a>
@@ -94,31 +96,125 @@
             <div class="flex-shrink-0 btn-lg-square border border-light rounded-circle">
                 <i class="fa fa-phone text-primary"></i>
             </div>
-            <div class="ps-3" style="margin-top: 10px" >
-                <a class="text-primary mb-0" th:href="@{/login}">Login</a>
-
-                <!--                        <p class="text-light fs-5 mb-0">+012 345 6789</p>-->
+            <div class="ps-3">
+                <small class="text-primary mb-0">Call Us</small>
+                <p class="text-light fs-5 mb-0">+012 345 6789</p>
             </div>
         </div>
     </div>
 </nav>
 <!-- Navbar End -->
+
 <!-- Page Header Start -->
-<div class="container-fluid page-header1 py-6 wow fadeIn" data-wow-delay="0.1s">
+<div style="height: 1500px" class="container-fluid page-header2 py-6 wow fadeIn" data-wow-delay="0.1s">
     <div class="container text-center pt-5 pb-3">
-        <h1 class="display-4 text-white animated slideInDown mb-3">Reset Password !</h1>
+        <h1 class="display-4 text-white animated slideInDown mb-3">Sign Up Now !</h1>
         <nav aria-label="breadcrumb animated slideInDown">
             <ol class="breadcrumb justify-content-center mb-0">
-                <li class="breadcrumb-item"><a class="text-white" th:href="@{/welcome}">Home</a></li>
+                <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
                 <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
                 <li class="breadcrumb-item text-primary active" aria-current="page">Contact</li>
             </ol>
         </nav>
+
+
     </div>
 </div>
 <!-- Page Header End -->
 
-<h1 class="text-danger" style="text-align: center">[[${message}]]</h1>
+
+<!-- Contact Start -->
+<div class="container-xxl py-6">
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s">
+            <p class="text-primary text-uppercase mb-2">~ Get Account Now ~</p>
+            <h1 class="display-6 mb-4">Product Auction</h1>
+        </div>
+        <div class="row g-0 justify-content-center">
+            <div class="col-lg-8 wow fadeInUp" data-wow-delay="0.1s">
+                <form>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="name" placeholder="Enter Product Name">
+
+                                <label for="name">Product Name</label>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="male"
+                                       th:value="'MALE'"
+                                >
+                                <label class="form-check-label" for="male">Technological</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="female"
+                                       th:value="'FEMALE'"
+                                >
+                                <label class="form-check-label" for="female">ArtWork</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="other"
+                                       th:value="'OTHER'"
+                                >
+                                <label class="form-check-label" for="other">Housewares</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="other2"
+                                       th:value="'OTHER'"
+                                >
+                                <label class="form-check-label" for="other2">Other</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="phone" placeholder="Your Email">
+                                <label for="phone">Price Product</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="id-card" placeholder="Your Email">
+                                <label for="id-card">Price Step</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="address" placeholder="Your Address">
+
+                                <label for="address">Time Auction</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <label for="exampleFormControlTextarea1">Product Information</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <label for="exampleFormControlFile1">Product Image</label>
+                                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                            </div>
+                        </div>
+                        <div class="col-12 text-center">
+                            <button class="btn btn-primary rounded-pill py-3 px-5" type="submit"
+                                    style="margin-top: 10px; margin-bottom: 20px">Sign up
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact End -->
+
+
 <!-- Google Map Start -->
 <div class="container-xxl py-6 px-0 wow fadeInUp" data-wow-delay="0.1s">
     <iframe class="w-100 mb-n2" style="height: 450px;"
@@ -227,8 +323,6 @@
 
 <!-- Template Javascript -->
 <script th:src="@{js/main.js}"></script>
-
-
 </body>
-</html>
 
+</html>

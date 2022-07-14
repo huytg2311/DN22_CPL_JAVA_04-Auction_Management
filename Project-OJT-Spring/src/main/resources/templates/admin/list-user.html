@@ -111,7 +111,7 @@
 							<tbody>
 							<tr th:each="user : ${users}">
 								<td>
-									<img style="width: 60px; border-radius: 100%" th:src="@{${user.getImagePath}}">
+									<img style="width: 60px; border-radius: 100%" th:src="@{${user.image}}">
 								</td>
 								<td th:text="${user.account.username}"></td>
 								<td th:text="${user.email}"></td>

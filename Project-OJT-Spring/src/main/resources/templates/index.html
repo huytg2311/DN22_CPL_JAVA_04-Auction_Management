@@ -3,18 +3,19 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Baker - Bakery Website Template</title>
+    <title>F.Auction - F.Auction Website Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <!--    <link href="img/favicon.ico" rel="icon">-->
+    <link href="https://cdn2.iconfinder.com/data/icons/content-design-production-1/66/36-512.png" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -26,6 +27,7 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link th:href="@{css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{button/styles/buttons.css}" rel="stylesheet">
 
     <!-- Template Stylesheet -->
     <link th:href="@{css/style.css}" rel="stylesheet">
@@ -79,238 +81,50 @@
 <!--search-->
 
 <!-- Product Start -->
-<div class="container-xxl bg-light my-6 py-6 pt-0">
+<div class="container-xxl bg-light my-6 py-6 pt-0" style="padding-bottom: 15px">
     <div class="container">
 
         <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
             <p class="text-primary text-uppercase mb-2">// Auction Products</p>
             <h1 class="display-6 mb-4">Explore The Categories Of Our Products</h1>
         </div>
-<!--        Trang1-->
+        <!--        Trang1-->
         <div class="row g-h">
-            <div class="col-lg-4 col-md-6 wow2 fadeInUp" data-wow-delay="0.1s">
-                <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
-                    <div class="text-center p-4">
-                        <div class="d-inline-block border border-primary rounded-pill px-3 mb-3">$11 - $99</div>
-                        <h3 class="mb-3">Trong Dong Viet Nam</h3>
-                        <span>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</span>
-                    </div>
-                    <div class="position-relative mt-auto">
-                        <img class="img-fluid" th:src="@{img/trongdongg.jpg}" alt="">
-                        <div class="product-overlay">
-                            <a class="btn btn-lg-square btn-outline-light rounded-circle" href=""><i
-                                    class="fa fa-eye text-primary"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 wow2 fadeInUp" data-wow-delay="0.3s">
-                <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
-                    <div class="text-center p-4">
-                        <div class="d-inline-block border border-primary rounded-pill pt-1 px-3 mb-3">$11 - $99</div>
-                        <h3 class="mb-3">Gom Bat Trang Thang Long</h3>
-                        <span>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</span>
-                    </div>
-                    <div class="position-relative mt-auto">
-                        <img class="img-fluid" th:src="@{img/binhbattrang.jpg}" alt="">
-                        <div class="product-overlay">
-                            <a class="btn btn-lg-square btn-outline-light rounded-circle" href=""><i
-                                    class="fa fa-eye text-primary"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 wow2 fadeInUp" data-wow-delay="0.5s">
-                <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
-                    <div class="text-center p-4">
-                        <div class="d-inline-block border border-primary rounded-pill pt-1 px-3 mb-3">$11 - $99</div>
-                        <h3 class="mb-3">Tranh Dong Ho</h3>
-                        <span>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</span>
-                    </div>
-                    <div class="position-relative mt-auto">
-                        <img class="img-fluid" th:src="@{img/damcuoichuot.jpg}" alt="">
-                        <div class="product-overlay">
-                            <a class="btn btn-lg-square btn-outline-light rounded-circle" href=""><i
-                                    class="fa fa-eye text-primary"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--            &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+                <div class="col-lg-4 col-md-6 wow2 " data-wow-delay="0.1s" th:each="product : ${products}" style="--bs-gutter-y: 30px">
+                    <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
+                        <div class="text-center p-4">
+                            <div class="d-inline-block border border-primary rounded-pill px-3 mb-3" style="color: #3cd070"><p th:text="${product.currentPrice} + ' VND'"></p></div>
+                            <h3 class="mb-3" th:text="${product.name}"></h3>
+                            <div>
+                                <span>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</span><br>
 
+                                <div class="getTime" style="color: red"></div>
 
-        </div><br><br>
-        <div class="row g-h">
-            <div class="col-lg-4 col-md-6 wow2 fadeInUp" data-wow-delay="0.1s">
-                <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
-                    <div class="text-center p-4">
-                        <div class="d-inline-block border border-primary rounded-pill px-3 mb-3">$11 - $99</div>
-                        <h3 class="mb-3">Cake</h3>
-                        <span>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</span>
-                    </div>
-                    <div class="position-relative mt-auto">
-                        <img class="img-fluid" th:src="@{img/iphone.jpg}" alt="">
-                        <div class="product-overlay">
-                            <a class="btn btn-lg-square btn-outline-light rounded-circle" href=""><i
-                                    class="fa fa-eye text-primary"></i></a>
+                            </div>
+                            <br>
+                            <button type="button" class="btn2 btn-primary2 btn-sm btn-radius2" style="color: #FFFFFF">Auction Now !</button>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 wow2 fadeInUp" data-wow-delay="0.3s">
-                <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
-                    <div class="text-center p-4">
-                        <div class="d-inline-block border border-primary rounded-pill pt-1 px-3 mb-3">$11 - $99</div>
-                        <h3 class="mb-3">Bread</h3>
-                        <span>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</span>
-                    </div>
-                    <div class="position-relative mt-auto">
-                        <img class="img-fluid" th:src="@{img/laptop.jpg}" alt="">
-                        <div class="product-overlay">
-                            <a class="btn btn-lg-square btn-outline-light rounded-circle" href=""><i
-                                    class="fa fa-eye text-primary"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 wow2 fadeInUp" data-wow-delay="0.5s">
-                <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
-                    <div class="text-center p-4">
-                        <div class="d-inline-block border border-primary rounded-pill pt-1 px-3 mb-3">$11 - $99</div>
-                        <h4 class="mb-3">Cookies</h4>
-                        <span>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</span>
-                    </div>
-                    <div class="position-relative mt-auto">
-                        <img class="img-fluid" th:src="@{img/camera.jpg}" alt="">
-                        <div class="product-overlay">
-                            <a class="btn btn-lg-square btn-outline-light rounded-circle" href=""><i
-                                    class="fa fa-eye text-primary"></i></a>
+                        <div class="position-relative mt-auto">
+                            <img class="img-fluid" th:src="@{${product.getImagePath}}" alt="">
+                            <div class="product-overlay">
+                                <a class="btn btn-lg-square btn-outline-light rounded-circle" href=""><i
+                                        class="fa fa-eye text-primary"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-<!--  Trang2-->
-        <div class="row g-h">
-            <div class="col-lg-4 col-md-6 wow2 fadeInUp" data-wow-delay="0.1s">
-                <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
-                    <div class="text-center p-4">
-                        <div class="d-inline-block border border-primary rounded-pill px-3 mb-3">$11 - $99</div>
-                        <h3 class="mb-3">Trong Dong Viet Nam</h3>
-                        <span>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</span>
-                    </div>
-                    <div class="position-relative mt-auto">
-                        <img class="img-fluid" th:src="@{img/trongdongg.jpg}" alt="">
-                        <div class="product-overlay">
-                            <a class="btn btn-lg-square btn-outline-light rounded-circle" href=""><i
-                                    class="fa fa-eye text-primary"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 wow2 fadeInUp" data-wow-delay="0.3s">
-                <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
-                    <div class="text-center p-4">
-                        <div class="d-inline-block border border-primary rounded-pill pt-1 px-3 mb-3">$11 - $99</div>
-                        <h3 class="mb-3">Gom Bat Trang Thang Long</h3>
-                        <span>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</span>
-                    </div>
-                    <div class="position-relative mt-auto">
-                        <img class="img-fluid" th:src="@{img/binhbattrang.jpg}" alt="">
-                        <div class="product-overlay">
-                            <a class="btn btn-lg-square btn-outline-light rounded-circle" href=""><i
-                                    class="fa fa-eye text-primary"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 wow2 fadeInUp" data-wow-delay="0.5s">
-                <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
-                    <div class="text-center p-4">
-                        <div class="d-inline-block border border-primary rounded-pill pt-1 px-3 mb-3">$11 - $99</div>
-                        <h3 class="mb-3">Tranh Dong Ho</h3>
-                        <span>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</span>
-                    </div>
-                    <div class="position-relative mt-auto">
-                        <img class="img-fluid" th:src="@{img/damcuoichuot.jpg}" alt="">
-                        <div class="product-overlay">
-                            <a class="btn btn-lg-square btn-outline-light rounded-circle" href=""><i
-                                    class="fa fa-eye text-primary"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--            &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
-
-
-        </div><br><br>
-        <div class="row g-h">
-            <div class="col-lg-4 col-md-6 wow2 fadeInUp" data-wow-delay="0.1s">
-                <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
-                    <div class="text-center p-4">
-                        <div class="d-inline-block border border-primary rounded-pill px-3 mb-3">$11 - $99</div>
-                        <h3 class="mb-3">Cake</h3>
-                        <span>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</span>
-                    </div>
-                    <div class="position-relative mt-auto">
-                        <img class="img-fluid" th:src="@{img/iphone.jpg}" alt="">
-                        <div class="product-overlay">
-                            <a class="btn btn-lg-square btn-outline-light rounded-circle" href=""><i
-                                    class="fa fa-eye text-primary"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 wow2 fadeInUp" data-wow-delay="0.5s">
-                <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
-                    <div class="text-center p-4">
-                        <div class="d-inline-block border border-primary rounded-pill pt-1 px-3 mb-3">$11 - $99</div>
-                        <h4 class="mb-3">Cookies</h4>
-                        <span>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</span>
-                    </div>
-                    <div class="position-relative mt-auto">
-                        <img class="img-fluid" th:src="@{img/camera.jpg}" alt="">
-                        <div class="product-overlay">
-                            <a class="btn btn-lg-square btn-outline-light rounded-circle" href=""><i
-                                    class="fa fa-eye text-primary"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 wow2 fadeInUp" data-wow-delay="0.3s">
-                <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
-                    <div class="text-center p-4">
-                        <div class="d-inline-block border border-primary rounded-pill pt-1 px-3 mb-3">$11 - $99</div>
-                        <h3 class="mb-3">Bread</h3>
-                        <span>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</span>
-                    </div>
-                    <div class="position-relative mt-auto">
-                        <img class="img-fluid" th:src="@{img/laptop.jpg}" alt="">
-                        <div class="product-overlay">
-                            <a class="btn btn-lg-square btn-outline-light rounded-circle" href=""><i
-                                    class="fa fa-eye text-primary"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-
-    </div>
 </div>
 
 
 <!-- Product End -->
 
-<div class="pagination" style="margin-left: 42%; margin-top: -60px">
-    <li class="page-item previous-page disabled"><a class="page-link" >Prev</a></li>
-    <li class="page-item current-page active"><a class="page-link" >1</a></li>
-    <li class="page-item current-page"><a class="page-link" >2</a></li>
-    <li class="page-item current-page" ><a class="page-link" >3</a></li>
-    <li class="page-item next-page"><a class="page-link" >Next</a></li>
-</div>
-
+<!--<div>-->
+<!--    <a th:href="@{'/'(page=${products.number - 1})}" th:if="${products.hasPrevious()}">Previous</a>-->
+<!--    <span th:text="${products.number + 1}"></span>/<span th:text="${products.totalPages}"></span>-->
+<!--    <a th:href="@{'/'(page=${products.number + 1})}" th:if="${products.hasNext()}">Next</a>-->
+<!--</div>-->
 
 <!-- Service Start -->
 <div class="container-xxl py-6">
@@ -319,7 +133,8 @@
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                 <p class="text-primary text-uppercase mb-2">// Our Services</p>
                 <h1 class="display-6 mb-4">What Do We Offer For You?</h1>
-                <p class="mb-5">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                <p class="mb-5">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et
+                    eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
                 <div class="row gy-5 gx-4">
                     <div class="col-sm-6 wow fadeIn" data-wow-delay="0.1s">
                         <div class="d-flex align-items-center mb-3">
@@ -393,7 +208,8 @@
                         </div>
                         <div class="team-social">
                             <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square btn-light rounded-circle" href=""><i
+                                    class="fab fa-twitter"></i></a>
                             <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
@@ -409,7 +225,8 @@
                         </div>
                         <div class="team-social">
                             <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square btn-light rounded-circle" href=""><i
+                                    class="fab fa-twitter"></i></a>
                             <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
@@ -425,7 +242,8 @@
                         </div>
                         <div class="team-social">
                             <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square btn-light rounded-circle" href=""><i
+                                    class="fab fa-twitter"></i></a>
                             <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
@@ -441,7 +259,8 @@
                         </div>
                         <div class="team-social">
                             <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square btn-light rounded-circle" href=""><i
+                                    class="fab fa-twitter"></i></a>
                             <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
@@ -469,7 +288,8 @@
                         <span>Profession</span>
                     </div>
                 </div>
-                <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+                <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita
+                    erat ipsum et lorem et sit.</p>
             </div>
             <div class="testimonial-item bg-white rounded p-4">
                 <div class="d-flex align-items-center mb-4">
@@ -479,7 +299,8 @@
                         <span>Profession</span>
                     </div>
                 </div>
-                <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+                <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita
+                    erat ipsum et lorem et sit.</p>
             </div>
             <div class="testimonial-item bg-white rounded p-4">
                 <div class="d-flex align-items-center mb-4">
@@ -489,7 +310,8 @@
                         <span>Profession</span>
                     </div>
                 </div>
-                <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+                <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita
+                    erat ipsum et lorem et sit.</p>
             </div>
             <div class="testimonial-item bg-white rounded p-4">
                 <div class="d-flex align-items-center mb-4">
@@ -499,7 +321,8 @@
                         <span>Profession</span>
                     </div>
                 </div>
-                <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+                <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita
+                    erat ipsum et lorem et sit.</p>
             </div>
         </div>
         <div class="bg-primary text-light rounded-top p-5 my-6 mb-0 wow fadeInUp" data-wow-delay="0.1s">
@@ -509,8 +332,11 @@
                 </div>
                 <div class="col-md-6 text-md-end">
                     <div class="position-relative">
-                        <input class="form-control bg-transparent border-light w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email"/>
-                        <button type="button" class="btn btn-dark py-2 px-3 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        <input class="form-control bg-transparent border-light w-100 py-3 ps-4 pe-5" type="text"
+                               placeholder="Your email"/>
+                        <button type="button" class="btn btn-dark py-2 px-3 position-absolute top-0 end-0 mt-2 me-2">
+                            SignUp
+                        </button>
                     </div>
                 </div>
             </div>
@@ -530,10 +356,14 @@
                 <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
                 <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
                 <div class="d-flex pt-2">
-                    <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i class="fab fa-youtube"></i></a>
-                    <a class="btn btn-square btn-outline-light rounded-circle me-0" href=""><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
+                            class="fab fa-twitter"></i></a>
+                    <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
+                            class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
+                            class="fab fa-youtube"></i></a>
+                    <a class="btn btn-square btn-outline-light rounded-circle me-0" href=""><i
+                            class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
@@ -591,7 +421,8 @@
             <div class="col-md-6 text-center text-md-end">
                 <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
                 Designed By <a href="https://htmlcodex.com">HTML Codex</a>
-                <br>Distributed By: <a class="border-bottom" href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                <br>Distributed By: <a class="border-bottom" href="https://themewagon.com"
+                                       target="_blank">ThemeWagon</a>
             </div>
         </div>
     </div>
@@ -614,80 +445,40 @@
 
 <!-- Template Javascript -->
 <script th:src="@{js/main.js}"></script>
+<script>
+    // Set the date we're counting down to
+    var countDownDate = new Date("July 4, 2022 09:59:00").getTime();
 
-<script type="text/javascript">
-    function getPageList(totalPages, page, maxLength){
-        function range(start, end){
-            return Array.from(Array(end - start + 1), (_, i) => i + start);
-        }
+    // Update the count down every 1 second
+    var x = setInterval(function() {
 
-        var sideWidth = maxLength < 9 ? 1 : 2;
-        var leftWidth = (maxLength - sideWidth * 2 - 3) >> 1;
-        var rightWidth = (maxLength - sideWidth * 2 - 3) >> 1;
+        // Get today's date and time
+        var now = new Date().getTime();
 
-        if(totalPages <= maxLength){
-            return range(1, totalPages);
-        }
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
 
-        if(page <= maxLength - sideWidth - 1 - rightWidth){
-            return range(1, maxLength - sideWidth - 1).concat(0, range(totalPages - sideWidth + 1, totalPages));
-        }
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        if(page >= totalPages - sideWidth - 1 - rightWidth){
-            return range(1, sideWidth).concat(0, range(totalPages- sideWidth - 1 - rightWidth - leftWidth, totalPages));
-        }
+        // Output the result in an element with id="demo"
+        for (let i = 0; i < 20; i++) {
+            document.getElementsByClassName("getTime")[i].innerHTML = days + "d " + hours + "h "
+                + minutes + "m " + seconds + "s ";
 
-        return range(1, sideWidth).concat(0, range(page - leftWidth, page + rightWidth), 0, range(totalPages - sideWidth + 1, totalPages));
-    }
 
-    $(function(){
-        var numberOfItems = $(".g-h .wow2").length;
-        var limitPerPage = 6; //How many card items visible per a page
-        var totalPages = Math.ceil(numberOfItems / limitPerPage);
-        var paginationSize = 7; //How many page elements visible in the pagination
-        var currentPage;
-
-        function showPage(whichPage){
-            if(whichPage < 1 || whichPage > totalPages) return false;
-
-            currentPage = whichPage;
-
-            $(".g-h .wow2").hide().slice((currentPage - 1) * limitPerPage, currentPage * limitPerPage).show();
-
-            $(".pagination li").slice(1, -1).remove();
-
-            getPageList(totalPages, currentPage, paginationSize).forEach(item => {
-                $("<li>").addClass("page-item").addClass(item ? "current-page" : "dots")
-                    .toggleClass("active", item === currentPage).append($("<a>").addClass("page-link")
-                    .attr({href: "javascript:void(0)"}).text(item || "...")).insertBefore(".next-page");
-            });
-
-            $(".previous-page").toggleClass("disable", currentPage === 1);
-            $(".next-page").toggleClass("disable", currentPage === totalPages);
-            return true;
-        }
-
-        $(".pagination").append(
-            $("<li>").addClass("page-item").addClass("previous-page").append($("<a>").addClass("page-link").attr({href: "javascript:void(0)"}).text("Prev")),
-            $("<li>").addClass("page-item").addClass("next-page").append($("<a>").addClass("page-link").attr({href: "javascript:void(0)"}).text("Next"))
-        );
-
-        $(".g-h").show();
-        showPage(1);
-
-        $(document).on("click", ".pagination li.current-page:not(.active)", function(){
-            return showPage(+$(this).text());
-        });
-
-        $(".next-page").on("click", function(){
-            return showPage(currentPage + 1);
-        });
-
-        $(".previous-page").on("click", function(){
-            return showPage(currentPage - 1);
-        });
-    });
+        // If the count down is over, write some text
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementsByClassName("getTime")[i].innerHTML = "Time Off !";
+        }}
+    }, 1000);
 </script>
+
+
 </body>
 
 </html>

@@ -1,17 +1,19 @@
 package java4.auction_management.controller;
 
+import java4.auction_management.entity.product.Product;
 import java4.auction_management.entity.user.Account;
-import java4.auction_management.entity.user.User;
 import java4.auction_management.repository.IUserRepository;
 import java4.auction_management.service.IAccountService;
 import java4.auction_management.service.IUserService;
+import java4.auction_management.service.impl.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
-import java.util.Optional;
 
 @Controller
 public class HomeController {
@@ -24,9 +26,14 @@ public class HomeController {
     @Autowired
     private IAccountService accountService;
 
+    @Autowired
+    private ProductService productService;
+
     @GetMapping(value = {"/","/welcome"})
-    public String welcomePage(Model model) {
+    public String welcomePage(Model model,@PageableDefault(size = 6) Pageable pageable) {
 //        model.addAttribute("nameAccount", accountService.getAll());
+        Page<Product> products = productService.findAllProduct(pageable);
+        model.addAttribute("products", products);
         model.addAttribute("account", new Account());
         return "index";
     }

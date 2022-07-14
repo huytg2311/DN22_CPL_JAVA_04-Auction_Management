@@ -4,13 +4,19 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java4.auction_management.entity.bid.Bid;
 import java4.auction_management.entity.category.Category;
+import java4.auction_management.validate.DateTimeBeforeCurrent;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
@@ -23,17 +29,18 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long producId;
 
+    @NotEmpty(message = "Name not empty")
     private String name;
 
-    private double reservePrice;
+    private int reservePrice;
 
-    private LocalTime timeAuction;
+    private int timeAuction;
 
-    private LocalTime timeFinish;
+    private LocalDateTime timeFinish;
 
     private int stepPrice;
 
-    private double currentPrice;
+    private int currentPrice;
 
     private String productInfo;
 
@@ -52,5 +59,10 @@ public class Product {
     @JsonBackReference
     private Bid bid;
 
+    @Transient
+    public String getImagePath() {
+        if (productImage == null || producId == null) return null;
+        return "/images/products/" + producId + "/" + productImage;
+    }
 
 }

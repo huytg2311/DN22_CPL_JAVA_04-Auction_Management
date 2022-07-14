@@ -9,6 +9,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
+
 
 @Controller
 public class LoginController {
@@ -31,7 +33,7 @@ public class LoginController {
     }
 
     @PostMapping("/signUp")
-    public String addUser(@ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String addUser(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         userService.save(user);
         redirectAttributes.addFlashAttribute("message", "Add successful");
         return "redirect:/success";

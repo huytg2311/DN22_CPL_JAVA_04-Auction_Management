@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -19,9 +20,11 @@ import java.util.List;
 public class Account {
 
     @Id
+//    @NotBlank(message = "Username is required")
 //    @Column(name = "username", nullable = false)
     private String username;
 
+//    @NotBlank(message = "Password is required")
     private String password;
 
     @Column(columnDefinition = "default 'ROLE_USER'")

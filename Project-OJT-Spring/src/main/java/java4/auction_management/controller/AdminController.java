@@ -1,5 +1,7 @@
 package java4.auction_management.controller;
 
+import com.cloudinary.utils.ObjectUtils;
+import java4.auction_management.config.CloudinaryConfig;
 import java4.auction_management.entity.user.User;
 import java4.auction_management.service.IAccountService;
 import java4.auction_management.service.IUserService;
@@ -13,17 +15,22 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+
+    @Autowired
+    CloudinaryConfig cloudc;
 
     @Autowired
     IAccountService accountService;
@@ -47,39 +54,32 @@ public class AdminController {
         return "admin/edit-user";
     }
 
+
     @PostMapping("/edit")
-    public String editUser(@ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                           @RequestParam("fileImage") MultipartFile multipartFile) throws IOException {
+    public String editUser(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes,
+                           @RequestParam("file") MultipartFile file) throws IOException {
         Optional<User> currentUser = userService.getById(user.getId());
+        System.out.println(currentUser);
 
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        user.setImage(fileName);
-        User saveUser = userService.save(user);
-
-        String upLoadDir = "./images/" + saveUser.getId();
-        Path uploadPath = Paths.get(upLoadDir);
-
-        if (!Files.exists(uploadPath)) {
-            Files.createDirectories(uploadPath);
+        if (file.isEmpty()) {
+            return "redirect:/edit/{id}";
         }
-
-        try(InputStream inputStream = multipartFile.getInputStream()) {
-            Path filePath = uploadPath.resolve(fileName);
-            System.out.println(filePath.toFile().getAbsolutePath());
-            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+        try {
+            Map uploadResult = cloudc.upload(file.getBytes(),
+                    ObjectUtils.asMap("resourcetype", "auto"));
+            user.setImage(uploadResult.get("url").toString());
+            userService.save(user);
         } catch (IOException e) {
-            throw new IOException("Could not save uploaded file: " + fileName);
+            e.printStackTrace();
+            return "redirect:/edit/{id}";
         }
-
-
-        if (bindingResult.hasErrors()) {
-            return "admin/edit-user";
+            redirectAttributes.addFlashAttribute("message", "Edit successful");
+            return "redirect:/admin";
         }
-        userService.save(user);
-        redirectAttributes.addFlashAttribute("message", "Edit successful");
-        return "redirect:/admin";
     }
 
 
 
-}
+
+
+
