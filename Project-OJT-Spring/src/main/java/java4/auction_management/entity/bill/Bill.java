@@ -31,7 +31,7 @@ public class Bill {
     private String shippingMethod;
 
     @JoinColumn(name = "userId")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
 

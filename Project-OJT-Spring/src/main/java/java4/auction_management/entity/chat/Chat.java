@@ -24,7 +24,7 @@ public class Chat {
     private Long chatId;
 
     @JoinColumn(name = "account_username")
-    @ManyToOne(fetch =  FetchType.LAZY)
+    @ManyToOne(fetch =  FetchType.EAGER)
     private Account account;
 
     @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL)

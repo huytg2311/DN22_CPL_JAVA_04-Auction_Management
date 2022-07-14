@@ -22,6 +22,6 @@ public class ChatDetail {
     private String content;
 
     @JoinColumn(name = "chatId")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Chat chat;
 }

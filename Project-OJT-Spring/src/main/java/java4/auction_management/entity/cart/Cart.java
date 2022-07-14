@@ -33,7 +33,7 @@ public class Cart {
     private List<Product> productList;
 
     @JoinColumn(name = "userId")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
 

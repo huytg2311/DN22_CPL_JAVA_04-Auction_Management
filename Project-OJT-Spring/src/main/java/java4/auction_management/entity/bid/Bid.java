@@ -31,7 +31,7 @@ public class Bid {
     private Product product;
 
     @JoinColumn(name = "userId")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
 
