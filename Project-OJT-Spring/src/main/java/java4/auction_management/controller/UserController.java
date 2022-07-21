@@ -11,7 +11,6 @@ import java4.auction_management.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,17 +18,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.Map;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/admin")
-public class AdminController {
+@RequestMapping("/user")
+public class UserController {
 
     @Autowired
     CloudinaryConfig cloudc;
@@ -48,11 +42,11 @@ public class AdminController {
 
     @Autowired
     CategoryService categoryService;
-    @GetMapping
-    public String showAllUser(Model model) {
-        model.addAttribute("users", userService.getAllUser());
-        return "admin/list-user";
-    }
+//    @GetMapping
+//    public String showAllUser(Model model) {
+//        model.addAttribute("users", userService.getAllUser());
+//        return "admin/list-user";
+//    }
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") User user, Model model) {
@@ -79,9 +73,6 @@ public class AdminController {
                 Map uploadResult = cloudc.upload(file.getBytes(),
                         ObjectUtils.asMap("resourcetype", "auto"));
                 user.setImage(uploadResult.get("url").toString());
-                if (bindingResult.hasErrors()) {
-                    return "redirect:/edit/{id}";
-                }
                 userService.save(user);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -100,7 +91,7 @@ public class AdminController {
     public String showDetailUser(@PathVariable("id") User user, Model model) {
 //                Optional<User> users = userService.getById(user.getId());
         model.addAttribute("users", user );
-        return "admin/detail-user";
+        return "user/edit-profile";
     }
 
     }

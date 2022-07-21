@@ -26,7 +26,8 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
-    public Category save(Category entity) {
+    public Category save(Category category) {
+
         return null;
     }
 
@@ -34,4 +35,6 @@ public class CategoryService implements ICategoryService {
     public void deleteById(Long id) {
 
     }
+
+
 }

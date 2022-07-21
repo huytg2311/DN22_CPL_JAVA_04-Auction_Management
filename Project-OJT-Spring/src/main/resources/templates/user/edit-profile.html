@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Pay.Picker</title>
+    <title>Editprofile</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -90,31 +90,31 @@
         </div>
         <!--        Trang1-->
         <div class="row g-h">
-                <div class="col-lg-4 col-md-6 wow2 " data-wow-delay="0.1s" th:each="product : ${products}" style="--bs-gutter-y: 30px">
-                    <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
-                        <div class="text-center p-4">
-                            <div class="d-inline-block border border-primary rounded-pill px-3 mb-3" style="color: #3cd070"><p th:text="${product.currentPrice} + ' VND'"></p></div>
-                            <h3 class="mb-3" th:text="${product.name}"></h3>
-                            <div>
-                                <span>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</span><br>
+            <div class="col-lg-4 col-md-6 wow2 " data-wow-delay="0.1s" th:each="product : ${products}" style="--bs-gutter-y: 30px">
+                <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
+                    <div class="text-center p-4">
+                        <div class="d-inline-block border border-primary rounded-pill px-3 mb-3" style="color: #3cd070"><p th:text="${product.currentPrice} + ' VND'"></p></div>
+                        <h3 class="mb-3" th:text="${product.name}"></h3>
+                        <div>
+                            <span>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</span><br>
 
-                                <div class="getTime" style="color: red"></div>
+                            <div class="getTime" style="color: red"></div>
 
-                            </div>
-                            <br>
-                            <button type="button" class="btn2 btn-primary2 btn-sm btn-radius2" style="color: #FFFFFF">Auction Now !</button>
                         </div>
-                        <div class="position-relative mt-auto">
-                            <img class="img-fluid" th:src="@{${product.getImagePath}}" alt="">
-                            <div class="product-overlay">
-                                <a class="btn btn-lg-square btn-outline-light rounded-circle" href=""><i
-                                        class="fa fa-eye text-primary"></i></a>
-                            </div>
+                        <br>
+                        <button type="button" class="btn2 btn-primary2 btn-sm btn-radius2" style="color: #FFFFFF">Auction Now !</button>
+                    </div>
+                    <div class="position-relative mt-auto">
+                        <img class="img-fluid" th:src="@{${product.getImagePath}}" alt="">
+                        <div class="product-overlay">
+                            <a class="btn btn-lg-square btn-outline-light rounded-circle" href=""><i
+                                    class="fa fa-eye text-primary"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </div>
 
 
@@ -470,11 +470,11 @@
                 + minutes + "m " + seconds + "s ";
 
 
-        // If the count down is over, write some text
-        if (distance < 0) {
-            clearInterval(x);
-            document.getElementsByClassName("getTime")[i].innerHTML = "Time Off !";
-        }}
+            // If the count down is over, write some text
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementsByClassName("getTime")[i].innerHTML = "Time Off !";
+            }}
     }, 1000);
 </script>
 

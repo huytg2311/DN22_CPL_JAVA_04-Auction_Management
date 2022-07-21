@@ -2,6 +2,7 @@ package java4.auction_management.controller;
 
 import java4.auction_management.entity.product.Product;
 import java4.auction_management.entity.user.Account;
+import java4.auction_management.entity.user.User;
 import java4.auction_management.repository.IUserRepository;
 import java4.auction_management.service.IAccountService;
 import java4.auction_management.service.IUserService;
@@ -13,6 +14,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.Optional;
 
 
 @Controller
@@ -39,13 +42,15 @@ public class HomeController {
     }
 
     @GetMapping(value = {"/index2"})
-    public String welcomePage2(Model model) {
+    public String welcomePage2(Model model, User user) {
 //        model.addAttribute("nameAccount", accountService.getAll());
 //        User userImage = iUserRepository.findImageUser(user.getAccount().getUsername());
 //        System.out.println(userImage);
 //        model.addAttribute("account", new Account());
 //        model.addAttribute("users", userService.getById(id));
-//        model.addAttribute("user", new User());
+//          Optional<User> users = userService.getById(user.getId());
+//
+//        model.addAttribute("users", users);
 //        System.out.println(id);
         return "index2";
     }

@@ -41,7 +41,7 @@ public class ProductController {
     @GetMapping("/create")
     public String createFormProduct(Model model) {
         model.addAttribute("product", new Product());
-        return "/products/service";
+        return "/products/post";
     }
 
     @PostMapping("/create")

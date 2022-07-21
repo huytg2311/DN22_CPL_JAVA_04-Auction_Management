@@ -1,5 +1,6 @@
 package java4.auction_management.service;
 
+import java4.auction_management.entity.category.Category;
 import java4.auction_management.entity.user.User;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface IService<T, K> {
     T save(T entity);
 
     void deleteById(K id);
+
+
 }

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java4.auction_management.entity.bid.Bid;
 import java4.auction_management.entity.category.Category;
-import java4.auction_management.validate.DateTimeBeforeCurrent;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

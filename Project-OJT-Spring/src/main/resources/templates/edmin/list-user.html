@@ -1,0 +1,261 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Edmin</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<link type="text/css" th:href="@{edmin/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+	<link type="text/css" th:href="@{edmin/bootstrap/css/bootstrap-responsive.min.css}" rel="stylesheet">
+	<link type="text/css" th:href="@{edmin/css/theme.css}" rel="stylesheet">
+	<link type="text/css" th:href="@{edmin/css/button.css}" rel="stylesheet">
+	<link type="text/css" th:href="@{edmin/images/icons/css/font-awesome.css}" rel="stylesheet">
+
+	<link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' rel='stylesheet'>
+
+</head>
+<body>
+
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<!--			<a class="sidebar-toggle js-sidebar-toggle">-->
+				<!--				<i class="hamburger align-self-center"></i>-->
+				<!--			</a>-->
+				<!--			<h4 style="margin-left: 850px">Welcome :-->
+				<!--				<span th:utext="${#request.userPrincipal.name}"></span>-->
+				<!--			</h4>-->
+				<!--			<a th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a>-->
+				<div class="navbar-nav mx-auto p-4 p-lg-0">
+					<a href="#" class="nav-item nav-link active">Home</a>
+					<a href="about.html" class="nav-item nav-link">About</a>
+					<a href="products/service.html" class="nav-item nav-link">Services</a>
+					<a href="product.html" class="nav-item nav-link">Products</a>
+					<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+						<div class="dropdown-menu m-0">
+							<a href="team.html" class="dropdown-item">Our Team</a>
+							<a href="testimonial.html" class="dropdown-item">Testimonial</a>
+							<a href="success.html" class="dropdown-item">404 Page</a>
+						</div>
+					</div>
+					<a href="contact.html" class="nav-item nav-link">Contact</a>
+				</div>
+				<div class=" d-none d-lg-flex">
+					<div class="flex-shrink-0 btn-lg-square border border-light rounded-circle">
+						<i class="fa fa-user text-primary"></i>
+					</div>
+
+					<!--<div th:each="user : ${users}">-->
+					<!--    <div th:text="${user.id(id == ${user.id})}">-->
+
+					<!--    </div>-->
+					<!--</div>-->
+
+
+					<div class="ps-3"><a class="text-primary mb-0" th:utext="${#request.userPrincipal.name}">Login</a><br>
+						<a class="text-light mb-0" th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a>
+					</div>
+				</div>
+
+			</nav>
+			</div>
+		</div><!-- /navbar-inner -->
+	</div><!-- /navbar -->
+
+
+
+	<div class="wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="span3">
+					<div class="sidebar">
+
+						<ul class="widget widget-menu unstyled">
+							<li class="active">
+								<a href="index.html">
+									<i class="menu-icon icon-dashboard"></i>
+									Dashboard
+								</a>
+							</li>
+							<li>
+								<a href="list-user.html">
+									<i class="menu-icon icon-bullhorn"></i>
+									News Feed
+								</a>
+							</li>
+							<li>
+								<a href="message.html">
+									<i class="menu-icon icon-inbox"></i>
+									Inbox
+									<b class="label green pull-right">11</b>
+								</a>
+							</li>
+							
+							<li>
+								<a href="task.html">
+									<i class="menu-icon icon-tasks"></i>
+									Tasks
+									<b class="label orange pull-right">19</b>
+								</a>
+							</li>
+						</ul><!--/.widget-nav-->
+
+						<ul class="widget widget-menu unstyled">
+                                <li><a href="ui-button-icon.html"><i class="menu-icon icon-bold"></i> Buttons </a></li>
+                                <li><a href="ui-typography.html"><i class="menu-icon icon-book"></i>Typography </a></li>
+                                <li><a href="form.html"><i class="menu-icon icon-paste"></i>Forms </a></li>
+                                <li><a href="table.html"><i class="menu-icon icon-table"></i>Tables </a></li>
+                                <li><a href="charts.html"><i class="menu-icon icon-bar-chart"></i>Charts </a></li>
+                            </ul><!--/.widget-nav-->
+
+						<ul class="widget widget-menu unstyled">
+							<li>
+								<a class="collapsed" data-toggle="collapse" href="#togglePages">
+									<i class="menu-icon icon-cog"></i>
+									<i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right"></i>
+									More Pages
+								</a>
+								<ul id="togglePages" class="collapse unstyled">
+									<li>
+										<a href="other-login.html">
+											<i class="icon-inbox"></i>
+											Login
+										</a>
+									</li>
+									<li>
+										<a href="other-user-profile.html">
+											<i class="icon-inbox"></i>
+											Profile
+										</a>
+									</li>
+									<li>
+										<a href="other-user-listing.html">
+											<i class="icon-inbox"></i>
+											All Users
+										</a>
+									</li>
+									<li>
+										<a href="other-faq.html">
+											<i class="icon-inbox"></i>
+											Frequently Asked Questions
+										</a>
+									</li>
+									<li>
+										<a href="other-404.html">
+											<i class="icon-inbox"></i>
+											Error Page (404)
+										</a>
+									</li>
+								</ul>
+							</li>
+							
+							<li>
+								<a href="#">
+									<i class="menu-icon icon-signout"></i>
+									Logout
+								</a>
+							</li>
+						</ul>
+
+						
+
+					
+					</div><!--/.sidebar-->
+				</div><!--/.span3-->
+
+
+				<div class="span9">
+					<div class="content">
+						<div class="main">
+
+
+							<main class="content">
+								<div class="row">
+									<div class="col-12 col-lg-8 col-xxl-9 d-flex" style="margin-left: 140px; margin-top: 35px">
+										<div class="card flex-fill">
+											<div class="card-header">
+
+												<h5 class="card-title mb-0">List Users</h5>
+											</div>
+											<table class="table table-hover my-0">
+												<thead>
+												<tr>
+													<th>Image</th>
+													<th>UserName</th>
+													<th class="d-none d-md-table-cell">Email</th>
+													<th class="d-none d-md-table-cell">FullName</th>
+													<th class="d-none d-md-table-cell">Enable</th>
+													<th class="d-none d-md-table-cell">Action</th>
+												</tr>
+												</thead>
+												<tbody>
+												<tr th:each="user : ${users}">
+													<td>
+														<img style="width: 60px; border-radius: 100%" th:src="@{${user.image}}">
+													</td>
+													<td th:text="${user.account.username}"></td>
+													<td th:text="${user.email}"></td>
+													<td th:text="${user.fullname}"></td>
+													<td>
+														<label class="switch">
+															<input type="checkbox" >
+<!--																   id="enable-${user.account.id}" -->
+<!--																   onclick="changeActivateUser(${user.account.id})" -->
+<!--																   ${user.account.enable == true? "checked":""}>-->
+<!--															<span class="slider round"></span>-->
+														</label>
+													</td>
+<!--													<td class="total">-->
+<!--														<label class="switch">-->
+<!--															<input type="checkbox" id="isactivate-${account.id}" onclick="changeActivateUser(${x.id})" ${account.enable == true?"checked":""}>-->
+<!--															<span class="slider round"></span>-->
+<!--														</label>-->
+<!--													</td>-->
+
+
+													<td>
+														<!--									<a th:href="@{/user/edit/{id}(id = ${user.id})}">-->
+														<!--										<i class="material-icons" title="Edit">&#xE254;</i></a>-->
+														<!--									<a th:href="@{/user/delete/{id}(id = ${user.id})}" class="delBtn">-->
+														<!--										<i class="material-icons" title="Delete">&#xE872;</i></a>-->
+														<button type="button" class="btn btn-outline-info">Detail</button>
+														<button type="button" class="btn btn-outline-success">
+															<a  style="text-decoration: none;" th:href="@{/admin/edit/{id}(id = ${user.id})}">Edit</a></button>
+														<button type="button" class="btn btn-outline-danger">
+															Lock
+														</button>
+													</td>
+												</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+
+								</div>
+
+							</main>
+
+
+						</div>
+
+						
+					</div><!--/.content-->
+				</div><!--/.span9-->
+			</div>
+		</div><!--/.container-->
+	</div><!--/.wrapper-->
+
+	<div class="footer">
+		<div class="container">
+			 
+
+			<b class="copyright">&copy; 2014 Edmin - EGrappler.com </b> All rights reserved.
+		</div>
+	</div>
+
+	<script src="scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
+	<script src="scripts/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
+	<script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+</body>

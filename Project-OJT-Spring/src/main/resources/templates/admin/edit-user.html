@@ -14,17 +14,37 @@
 
     <link rel="canonical" href="https://demo-basic.adminkit.io/" />
 
-    <title>AdminKit Demo - Bootstrap 5 Admin Template</title>
+    <title>Admin Edit User</title>
 
 
     <link th:href="@{/admin/css/app.css}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link th:href="@{lib/animate/animate.min.css}" rel="stylesheet">
+    <link th:href="@{lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link th:href="@{css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link th:href="@{css/style.css}" rel="stylesheet">
 </head>
 
 <body>
+
 <div class="wrapper">
+
     <nav id="sidebar" class="sidebar js-sidebar">
         <div class="sidebar-content js-simplebar">
             <a class="sidebar-brand" href="home-admin.html">
@@ -37,7 +57,7 @@
                 </li>
 
                 <li class="sidebar-item active">
-                    <a class="sidebar-link" href="home-admin.html">
+                    <a class="sidebar-link" th:href="@{/index2}">
                         <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Transaction Management</span>
                     </a>
                 </li>
@@ -78,101 +98,115 @@
     </nav>
 
     <div class="main">
-        <nav class="navbar navbar-expand navbar-light navbar-bg">
-            <a class="sidebar-toggle js-sidebar-toggle">
-                <i class="hamburger align-self-center"></i>
-            </a>
 
-        </nav>
 
-        <main class="content">
+
+        <main class="content" style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg'); ">
             <div class="container-fluid p-0">
 
-                <div class="mb-3">
-                    <h1 class="h3 d-inline align-middle">Forms</h1>
-                    <a class="badge bg-dark text-white ms-2" href="upgrade-to-pro.html">
-                        Get more form examples
-                    </a>
-                </div>
-                <form th:action="@{/admin/edit}" th:object="${users}" method="post" enctype="multipart/form-data">
-                    <input type="hidden" th:field="*{id}">
-                    <input type="hidden" th:field="*{account.password}">
-                    <div class="row">
-                        <div class="col-12 col-lg-6">
-                            <div class="card">
+                    <div class="mb-3">
+                        <h1 class="h3 d-inline align-middle">Edit User Information</h1>
+
+
+                    </div>
+                    <form th:action="@{/admin/edit}" th:object="${users}" method="post" enctype="multipart/form-data">
+                        <input type="hidden" th:field="*{id}">
+                        <input type="hidden" th:field="*{account.password}">
+                        <div class="row">
+                            <div class="col-12 col-lg-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0">User Name</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <input type="text" class="form-control" th:field="*{account.username}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0">Full Name</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <input type="text" class="form-control" id="fullname" th:field="*{fullname}">
+                                        <p th:if="${#fields.hasErrors('fullname')}" class="text-danger"
+                                           th:errors="*{fullname}"></p>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0">Email</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <input type="text" class="form-control" id="email" th:field="*{email}">
+                                    </div>
+                                </div>
                                 <div class="card-header">
-                                    <h5 class="card-title mb-0">User Name</h5>
+                                    <h5 class="card-title mb-0">Enable</h5>
                                 </div>
                                 <div class="card-body">
-                                    <input type="text" class="form-control" th:field="*{account.username}" readonly>
-                                </div>
-                            </div>
+                                    <select th:field="*{account.enable}" class="form-select mb-3">
 
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title mb-0">Full Name</h5>
-                                </div>
-                                <div class="card-body">
-                                    <input type="text" class="form-control" id="fullname" th:field="*{fullname}">
-                                    <p th:if="${#fields.hasErrors('fullname')}" class="text-danger"
-                                       th:errors="*{fullname}"></p>
-                                </div>
-                            </div>
+                                        <option th:value="'1'">Enable</option>
+                                        <option th:value="'0'">Ban</option>
 
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title mb-0">Email</h5>
-                                </div>
-                                <div class="card-body">
-                                    <input type="text" class="form-control" id="email" th:field="*{email}">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-lg-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title mb-0">ID Card</h5>
-                                </div>
-                                <div class="card-body">
-                                    <input type="text" class="form-control"  name="idCard" th:field="*{idCard}">
-                                </div>
-                            </div>
-
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title mb-0">Gender</h5>
-                                </div>
-                                <div class="card-body">
-                                    <select th:field="*{gender}" class="form-select mb-3">
-
-                                        <option th:value="'MALE'">Male</option>
-                                        <option th:value="'FEMALE'">Female</option>
-                                        <option th:value="'OTHER'">Other</option>
                                     </select>
                                 </div>
                             </div>
 
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title mb-0">Phone Number</h5>
+                            <div class="col-12 col-lg-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0">ID Card</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <input type="text" class="form-control"  name="idCard" th:field="*{idCard}">
+                                    </div>
                                 </div>
-                                <div class="card-body">
-                                    <input type="text" class="form-control" id="phoneNumber" th:field="*{phoneNumber}">
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0">Gender</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <select th:field="*{gender}" class="form-select mb-3">
+
+                                            <option th:value="'MALE'">Male</option>
+                                            <option th:value="'FEMALE'">Female</option>
+                                            <option th:value="'OTHER'">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0">Phone Number</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <input type="text" class="form-control" id="phoneNumber" th:field="*{phoneNumber}">
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0">Birth Day</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <input type="text" class="form-control" id="birthDay" th:field="*{dayOfBirth}">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <p>
-                        <label>Image</label>
-                        <input type="file" name="file"  id="file"/>
-                        <input type="hidden" th:field="*{image}"/>
-                    </p>
+                        <p>
+                            <label>Image</label>
+                            <input type="file" name="file"  id="file"/>
+                            <input type="hidden" th:field="*{image}"/>
+                        </p>
 
 
 
-                    <button style="margin-left: 65px" class="btn btn-success" type="submit">Save</button>
-                </form>
+                        <button style="margin-left: 65px" class="btn btn-success" type="submit">Save</button>
+                    </form>
                 <a style="margin-top: -56px" class="btn btn-danger" type="button" th:href="@{/admin}">Back</a>
 
             </div>

@@ -10,6 +10,7 @@ import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -53,6 +54,7 @@ public class User {
     private String idCard;
 
 //    @Column(length = 500)
+@Size(min=0, max=500)
     private String image;
 
     @Enumerated(EnumType.STRING)

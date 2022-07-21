@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="AdminKit">
+	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" th:href="@{admin/img/icons/icon-48x48.png}" />
+
+	<link rel="canonical" href="https://demo-basic.adminkit.io/" />
+
+	<title>Admin List Categories</title>
+<!--	<link type="text/css" th:href="@{edmin/css/button.css}" rel="stylesheet">-->
+
+
+	<link th:href="@{css/app.css}" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<!-- Google Web Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Playfair+Display:wght@600;700&display=swap"
+		  rel="stylesheet">
+
+	<!-- Icon Font Stylesheet -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+	<!-- Libraries Stylesheet -->
+	<link th:href="@{lib/animate/animate.min.css}" rel="stylesheet">
+	<link th:href="@{lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+
+	<!-- Customized Bootstrap Stylesheet -->
+	<link th:href="@{css/bootstrap.min.css}" rel="stylesheet">
+
+	<!-- Template Stylesheet -->
+	<link th:href="@{css/style.css}" rel="stylesheet">
+
+</head>
+
+<body>
+<div>
+
+
+<div class="wrapper">
+	<nav id="sidebar" class="sidebar js-sidebar">
+		<div class="sidebar-content js-simplebar">
+			<a class="sidebar-brand" th:href="index2">
+				<span class="align-middle">Admin Pay.Picker</span>
+			</a>
+
+			<ul class="sidebar-nav">
+				<li class="sidebar-header">
+					Pages
+				</li>
+
+
+
+				<li class="sidebar-item active">
+					<a class="sidebar-link" th:href="@{/admin}">
+						<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Management Users</span>
+					</a>
+				</li>
+
+				<li class="sidebar-item">
+					<a class="sidebar-link" th:href="@{/admin/categories}">
+						<i class="align-middle" data-feather="user"></i> <span class="align-middle">Management Categories</span>
+					</a>
+				</li>
+
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="pages-sign-in.html">
+						<i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Consulting</span>
+					</a>
+				</li>
+
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="pages-sign-up.html">
+						<i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Member Access</span>
+					</a>
+				</li>
+
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="pages-blank.html">
+						<i class="align-middle" data-feather="book"></i> <span class="align-middle">Manage Member</span>
+					</a>
+				</li>
+
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="pages-blank.html">
+						<i class="align-middle" data-feather="book"></i> <span class="align-middle">List Product</span>
+					</a>
+				</li>
+
+			</ul>
+
+		</div>
+	</nav>
+
+	<div class="main">
+
+
+		<main class="content">
+			<div class="row">
+				<div class="col-12 col-lg-8 col-xxl-9 d-flex" style="margin-left: 140px; margin-top: 35px">
+					<div class="card flex-fill">
+						<div class="card-header">
+
+							<h5 class="card-title mb-0">List Catelories</h5>
+						</div>
+						<table class="table table-hover my-0">
+							<thead>
+							<tr>
+
+								<th class="d-none d-md-table-cell">ID</th>
+								<th class="d-none d-md-table-cell">CategoryName</th>
+
+							</tr>
+							</thead>
+							<tbody>
+							<tr th:each="category : ${categories}">
+
+
+								<td th:text="${category.categoryId}"></td>
+								<td th:text="${category.name}"></td>
+
+								<td>
+									<button type="button" class="btn btn-outline-info">Detail</button>
+									<button type="button" class="btn btn-outline-info">Edit</button>
+
+<!--									<a  style="text-decoration: none;" th:href="@{/admin/edit/{id}(id = ${user.id})}"><button type="button" class="btn btn-outline-success" >Edit</button></a>-->
+
+								</td>
+
+							</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+			</div>
+
+		</main>
+
+
+	</div>
+</div>
+
+<script th:src="@{admin/js/app.js}"></script>
+<script>
+	function changeActivateUser(idU) {
+
+		var check = document.getElementById('enable-' + idU);
+		var st = 0
+		if (check.checked != true) {
+		} else {
+			st = 1;
+		}
+		$.ajax({
+			url: "/list-user",
+			type: "post",
+
+			data: {
+				idUser: idU,
+				status: st,
+				which: 'a'
+			},
+			success: function (data) {
+
+			}
+		});
+	}
+</script>
+</div>
+</body>
+
+</html>
