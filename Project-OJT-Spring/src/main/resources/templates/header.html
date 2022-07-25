@@ -100,7 +100,7 @@
                         <a class="text-primary mb-0" th:href="@{/login}" >Login</a>
 <!--                        <p class="text-light fs-5 mb-0">+012 345 6789</p>-->
                     </div>
-
+<!--sao khong up-->
                     <div class="ps-3" th:if="${#request.userPrincipal != null}">
                         <a class="text-primary mb-0" th:utext="${#request.userPrincipal.name}" th:href="'/edit-profile/' + ${#request.userPrincipal.name}"></a><br>
                         <a class="text-light mb-0" th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a>
