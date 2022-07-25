@@ -23,6 +23,9 @@ public interface IUserRepository extends JpaRepository<User, Long>, JpaSpecifica
 
     User findByResetPasswordToken(String token);
 
+    @Query(value = "select * from user as u where u.account_username = ?1", nativeQuery = true)
+    User findUserByUserName(String username);
+
 //    @Query(value = "select u from User u where u.account.username = ?1")
 //    User findImageUser(String account_username);
 

@@ -20,11 +20,12 @@ import java.util.List;
 public class Account {
 
     @Id
-//    @NotBlank(message = "Username is required")
 //    @Column(name = "username", nullable = false)
+    @NotBlank(message = "Username is required")
     private String username;
 
-//    @NotBlank(message = "Password is required")
+
+    @NotBlank(message = "Password is required")
     private String password;
 
     @Column(columnDefinition = "default 'ROLE_USER'")
