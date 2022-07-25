@@ -1,5 +1,6 @@
 package java4.auction_management.config;
 
+import java4.auction_management.service.impl.UserService;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,9 +34,6 @@ public class BeanConfig implements WebMvcConfigurer{
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-
-
 
 
 }

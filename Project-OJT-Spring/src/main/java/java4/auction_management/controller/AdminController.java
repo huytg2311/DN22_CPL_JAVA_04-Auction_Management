@@ -9,7 +9,6 @@ import java4.auction_management.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,11 +16,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.Map;
 import java.util.Optional;
 
@@ -56,7 +50,7 @@ public class AdminController {
 
 
     @PostMapping("/edit")
-    public String editUser(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes,
+    public String editUser( @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes,
                            @RequestParam("file") MultipartFile file) throws IOException {
         Optional<User> currentUser = userService.getById(user.getId());
         System.out.println(currentUser);

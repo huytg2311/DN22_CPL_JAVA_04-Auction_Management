@@ -114,8 +114,8 @@
                                 </div>
                                 <div class="card-body">
                                     <input type="text" class="form-control" id="fullname" th:field="*{fullname}">
-                                    <p th:if="${#fields.hasErrors('fullname')}" class="text-danger"
-                                       th:errors="*{fullname}"></p>
+<!--                                    <p th:if="${#fields.hasErrors('fullname')}" class="text-danger"-->
+<!--                                       th:errors="*{fullname}"></p>-->
                                 </div>
                             </div>
 
@@ -138,6 +138,16 @@
                                     <input type="text" class="form-control"  name="idCard" th:field="*{idCard}">
                                 </div>
                             </div>
+
+                            <div class="col-12 col-lg-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0">Birthday</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <input type="date" class="form-control"  name="birthday" th:field="*{dayOfBirth}">
+                                    </div>
+                                </div>
 
                             <div class="card">
                                 <div class="card-header">
@@ -172,6 +182,7 @@
 
 
                     <button style="margin-left: 65px" class="btn btn-success" type="submit">Save</button>
+                    </div>
                 </form>
                 <a style="margin-top: -56px" class="btn btn-danger" type="button" th:href="@{/admin}">Back</a>
 
