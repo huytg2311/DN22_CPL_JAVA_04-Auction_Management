@@ -12,7 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,16 +39,10 @@ public class HomeController {
 
     @GetMapping(value = {"/","/welcome"})
     public String welcomePage(Model model,@PageableDefault(size = 6) Pageable pageable, User user) {
-//        model.addAttribute("nameAccount", accountService.getAll());
         Page<Product> products = productService.findAllProduct(pageable);
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String currentPrincipalName = authentication.getName();
-//        System.out.println(currentPrincipalName);
-//        User user1 = userService.getUserByUsername(currentPrincipalName);
+
         model.addAttribute("products", products);
         model.addAttribute("account", new Account());
-//        model.addAttribute("user", user1);
-//        System.out.println(user1.toString());
         return "index";
     }
 
@@ -87,6 +80,6 @@ public class HomeController {
     public String registerForm() {
         return "register";
     }
-
-
+    @GetMapping(value = "/about")
+    public String about(){ return "about";}
 }

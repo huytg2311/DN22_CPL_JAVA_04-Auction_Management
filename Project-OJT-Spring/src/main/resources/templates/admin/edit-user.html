@@ -57,7 +57,7 @@
                 </li>
 
                 <li class="sidebar-item active">
-                    <a class="sidebar-link" th:href="@{/index2}">
+                    <a class="sidebar-link" th:href="@{/index}">
                         <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Transaction Management</span>
                     </a>
                 </li>
@@ -197,16 +197,17 @@
                                         <h5 class="card-title mb-0">Birth Day</h5>
                                     </div>
                                     <div class="card-body">
-                                        <input type="text" class="form-control" id="birthDay" th:field="*{dayOfBirth}">
+                                        <input type="date" class="form-control" id="birthDay" th:field="*{dayOfBirth}" >
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <p>
                             <label>Image</label>
-                            <input type="file" name="file"  id="file"/>
+                            <input type="file" name="file"  id="file" maxlength="254"/>
                             <input type="hidden" th:field="*{image}"/>
                         </p>
+
 
 
 

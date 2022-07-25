@@ -159,38 +159,38 @@
                                     <th>UserName</th>
                                     <th class="d-none d-md-table-cell">Email</th>
                                     <th class="d-none d-md-table-cell">FullName</th>
-<!--                                    <th class="d-none d-md-table-cell">Enable</th>-->
+                                    <th class="d-none d-md-table-cell">Enable</th>
                                     <th class="d-none d-md-table-cell">&emsp;&emsp;&emsp;&emsp;Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr th:each="user : ${users}">
                                     <td>
-                                        <img style="width: 60px; border-radius: 100%" th:src="@{${user.image}}">
+                                        <img style="width: 60px ; height: 60px; border-radius: 100%" th:src="@{${user.image}}">
                                     </td>
                                     <td th:text="${user.account.username}"></td>
                                     <td th:text="${user.email}"></td>
                                     <td th:text="${user.fullname}"></td>
-<!--                                    <td class="total">-->
+                                    <td class="total">
 
-<!--                                        <div th:if="${user.account.enable} == true">-->
-<!--                                            <label class="switch">-->
-<!--                                                <input type="checkbox"-->
-<!--                                                       th:id="'enable-'+${user.account.enable}"-->
-<!--                                                       th:onclick="'changeActivateUser(' + ${user.account.enable} + ');'" checked>-->
-<!--                                                <span class="slider round"></span>-->
-<!--                                            </label>-->
-<!--                                        </div>-->
-<!--                                        <div th:if="${user.account.enable} == false">-->
-<!--                                            <label class="switch">-->
-<!--                                                <input type="checkbox"-->
-<!--                                                       th:id="'enable-'+${user.account.enable}"-->
-<!--                                                       th:onclick="'changeActivateUser(' + ${user.account.enable} + ');'" >-->
-<!--                                                <span class="slider round"></span>-->
-<!--                                            </label>-->
-<!--                                        </div>-->
+                                        <div th:if="${user.account.enable} == true">
+                                            <label class="switch">
+                                                <input type="checkbox"
+                                                       th:id="'enable-'+${user.account.enable}"
+                                                       th:onclick="'changeActivateUser(' + ${user.account.enable} + ');'" checked>
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                        <div th:if="${user.account.enable} == false">
+                                            <label class="switch">
+                                                <input type="checkbox"
+                                                       th:id="'enable-'+${user.account.enable}"
+                                                       th:onclick="'changeActivateUser(' + ${user.account.enable} + ');'" >
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
 
-<!--                                    </td>-->
+                                    </td>
 
                                     <td>
                                         <!--									<a th:href="@{/user/edit/{id}(id = ${user.id})}">-->
@@ -236,11 +236,11 @@
                 url: "/list-user",
                 type: "post",
 
-                data: {
-                    id: idU,
-                    status: st,
-                    which: 'a'
-                },
+                // data: {
+                //     id: idU,
+                //     status: st,
+                //     which: 'a'
+                // },
                 success: function (data) {
 
                 }
