@@ -11,9 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
 
@@ -42,17 +47,30 @@ public class HomeController {
     }
 
     @GetMapping(value = {"/index2"})
-    public String welcomePage2(Model model, User user) {
+    public String welcomePage2(Model model) {
 //        model.addAttribute("nameAccount", accountService.getAll());
 //        User userImage = iUserRepository.findImageUser(user.getAccount().getUsername());
 //        System.out.println(userImage);
 //        model.addAttribute("account", new Account());
 //        model.addAttribute("users", userService.getById(id));
-//          Optional<User> users = userService.getById(user.getId());
-//
-//        model.addAttribute("users", users);
+//        model.addAttribute("user", new User());
 //        System.out.println(id);
         return "index2";
+    }
+// moi ne
+    @GetMapping("/edit-profile/{username}")
+    public String editProfile(@PathVariable("username") String username, Model model) {
+        User user = userService.getUserByUsername(username);
+        System.out.println(username);
+        model.addAttribute("user", user);
+        return "user-form";
+    }
+
+    @PostMapping("/edit-profile")
+    public String editProfile(@ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        userService.save(user);
+        redirectAttributes.addFlashAttribute("message", "Edit Successfully");
+        return "redirect:/user-form";
     }
 
     @GetMapping(value = {"/403"})
