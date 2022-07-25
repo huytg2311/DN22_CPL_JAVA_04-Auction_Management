@@ -62,7 +62,7 @@ public class HomeController {
         System.out.println(user1.toString());
         return "index2";
     }
-
+// moi ne
     @GetMapping("/edit-profile/{username}")
     public String editProfile(@PathVariable("username") String username, Model model) {
         User user = userService.getUserByUsername(username);
