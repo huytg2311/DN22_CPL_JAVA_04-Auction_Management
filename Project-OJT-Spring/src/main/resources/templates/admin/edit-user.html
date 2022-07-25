@@ -2,224 +2,236 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
-    <meta name="author" content="AdminKit">
-    <meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="AdminKit">
+	<meta name="keywords"
+		  content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="shortcut icon" th:href="@{admin/img/icons/icon-48x48.png}" />
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" th:href="@{admin/img/icons/icon-48x48.png}"/>
 
-    <link rel="canonical" href="https://demo-basic.adminkit.io/" />
+	<title>Admin Edit User</title>
 
-    <title>Admin Edit User</title>
+	<!-- Icon Font Stylesheet -->
+	<script src="https://kit.fontawesome.com/091e570025.js" crossorigin="anonymous"></script>
 
-
-    <link th:href="@{/admin/css/app.css}" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Playfair+Display:wght@600;700&display=swap"
-          rel="stylesheet">
-
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link th:href="@{lib/animate/animate.min.css}" rel="stylesheet">
-    <link th:href="@{lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link th:href="@{css/bootstrap.min.css}" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link th:href="@{css/style.css}" rel="stylesheet">
+	<link th:href="@{/admin/css/app.css}" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
 <div class="wrapper">
 
-    <nav id="sidebar" class="sidebar js-sidebar">
-        <div class="sidebar-content js-simplebar">
-            <a class="sidebar-brand" href="home-admin.html">
-                <span class="align-middle">AdminKit</span>
-            </a>
-
-            <ul class="sidebar-nav">
-                <li class="sidebar-header">
-                    Pages
-                </li>
-
-                <li class="sidebar-item active">
-                    <a class="sidebar-link" th:href="@{/index2}">
-                        <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Transaction Management</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="pages-profile.html">
-                        <i class="align-middle" data-feather="user"></i> <span class="align-middle">Product Statistics</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="pages-sign-in.html">
-                        <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Consulting</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="pages-sign-up.html">
-                        <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Member Access</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="pages-blank.html">
-                        <i class="align-middle" data-feather="book"></i> <span class="align-middle">Manage Member</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="pages-blank.html">
-                        <i class="align-middle" data-feather="book"></i> <span class="align-middle">List Product</span>
-                    </a>
-                </li>
-
-            </ul>
-
-        </div>
-    </nav>
-
-    <div class="main">
+	<nav id="sidebar" class="sidebar js-sidebar">
+		<div class="sidebar-content js-simplebar">
+			<a class="sidebar-brand" th:href="@{/index2}">
+					<span class="align-middle text-primary">
+						<i class="fa-solid fa-gavel"></i>   Pay.Picker
+					</span>
+			</a>
+			<ul class="sidebar-nav">
+				<li class="sidebar-header">
+					Pages
+				</li>
 
 
+				<li class="sidebar-item active">
+					<a class="sidebar-link" th:href="@{/admin}">
+						<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Management User</span>
+					</a>
+				</li>
 
-        <main class="content" style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg'); ">
-            <div class="container-fluid p-0">
+				<li class="sidebar-item">
+					<a class="sidebar-link" th:href="@{/admin/categories}">
+						<i class="align-middle" data-feather="user"></i> <span class="align-middle">Management Category</span>
+					</a>
+				</li>
 
-                    <div class="mb-3">
-                        <h1 class="h3 d-inline align-middle">Edit User Information</h1>
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="pages-sign-in.html">
+						<i class="align-middle" data-feather="log-in"></i> <span
+							class="align-middle">Consulting</span>
+					</a>
+				</li>
 
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="pages-sign-up.html">
+						<i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Member Access</span>
+					</a>
+				</li>
 
-                    </div>
-                    <form th:action="@{/admin/edit}" th:object="${users}" method="post" enctype="multipart/form-data">
-                        <input type="hidden" th:field="*{id}">
-                        <input type="hidden" th:field="*{account.password}">
-                        <div class="row">
-                            <div class="col-12 col-lg-6">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h5 class="card-title mb-0">User Name</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <input type="text" class="form-control" th:field="*{account.username}" readonly>
-                                    </div>
-                                </div>
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="pages-blank.html">
+						<i class="align-middle" data-feather="book"></i> <span
+							class="align-middle">Manage Member</span>
+					</a>
+				</li>
 
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h5 class="card-title mb-0">Full Name</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <input type="text" class="form-control" id="fullname" th:field="*{fullname}">
-                                        <p th:if="${#fields.hasErrors('fullname')}" class="text-danger"
-                                           th:errors="*{fullname}"></p>
-                                    </div>
-                                </div>
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="pages-blank.html">
+						<i class="align-middle" data-feather="book"></i> <span
+							class="align-middle">List Product</span>
+					</a>
+				</li>
 
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h5 class="card-title mb-0">Email</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <input type="text" class="form-control" id="email" th:field="*{email}">
-                                    </div>
-                                </div>
+			</ul>
+
+		</div>
+	</nav>
+
+	<div class="main">
+		<nav class="navbar navbar-expand navbar-light navbar-bg">
+
+			<div class="navbar-collapse collapse">
+				<ul class="navbar-nav navbar-align">
+					<li class="nav-item dropdown">
+						<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+							<i class="align-middle" data-feather="settings"></i>
+						</a>
+
+						<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+							<img src="/img/product-1.jpg" class="avatar img-fluid rounded me-1" alt=""/> <span class="text-primary bold">Charles Hall</span>
+						</a>
+						<div class="dropdown-menu dropdown-menu-end">
+							<a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+							<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
+							<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#">Log out</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+		<main class="content">
+			<div class="container-fluid p-0">
+				<h1 class="h3 mb-3">Edit user information</h1>
+				<form th:action="@{/admin/edit}" th:object="${users}" method="post" enctype="multipart/form-data">
+					<input type="hidden" th:field="*{id}">
+					<input type="hidden" th:field="*{account.password}">
+					<div class="row">
+						<div class="col-12 col-lg-6">
+                            <div class="card">
                                 <div class="card-header">
-                                    <h5 class="card-title mb-0">Enable</h5>
+                                    <h5 class="card-title mb-0" th:text="*{account.username}"></h5>
                                 </div>
                                 <div class="card-body">
-                                    <select th:field="*{account.enable}" class="form-select mb-3">
+                                    <img src="../../static/img/default-user-avatar.png" alt="" class="card-img-top">
+									<input type="file" name="file" id="file"/>
+									<input type="hidden" th:field="*{image}">
+                                </div>
+                            </div>
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title mb-0">User Name</h5>
+								</div>
+								<div class="card-body">
+									<input type="text" class="form-control" th:field="*{account.username}" readonly>
+								</div>
+							</div>
 
-                                        <option th:value="'1'">Enable</option>
-                                        <option th:value="'0'">Ban</option>
-
-                                    </select>
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Email</h5>
+                                </div>
+                                <div class="card-body">
+                                    <input type="text" class="form-control" id="email" th:field="*{email}">
                                 </div>
                             </div>
 
-                            <div class="col-12 col-lg-6">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h5 class="card-title mb-0">ID Card</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <input type="text" class="form-control"  name="idCard" th:field="*{idCard}">
-                                    </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Day of birth</h5>
                                 </div>
-
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h5 class="card-title mb-0">Gender</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <select th:field="*{gender}" class="form-select mb-3">
-
-                                            <option th:value="'MALE'">Male</option>
-                                            <option th:value="'FEMALE'">Female</option>
-                                            <option th:value="'OTHER'">Other</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h5 class="card-title mb-0">Phone Number</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <input type="text" class="form-control" id="phoneNumber" th:field="*{phoneNumber}">
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h5 class="card-title mb-0">Birth Day</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <input type="text" class="form-control" id="birthDay" th:field="*{dayOfBirth}">
-                                    </div>
+                                <div class="card-body">
+                                    <input type="date" class="form-control" id="birthDay" th:field="*{dayOfBirth}">
                                 </div>
                             </div>
-                        </div>
-                        <p>
-                            <label>Image</label>
-                            <input type="file" name="file"  id="file"/>
-                            <input type="hidden" th:field="*{image}"/>
-                        </p>
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">ID Card</h5>
+                                </div>
+                                <div class="card-body">
+                                    <input type="text" class="form-control" name="idCard" th:field="*{idCard}">
+                                </div>
+                            </div>
+
+						</div>
+
+						<div class="col-12 col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Full Name</h5>
+                                </div>
+                                <div class="card-body">
+                                    <input type="text" class="form-control" id="fullname" th:field="*{fullname}">
+                                    <p th:if="${#fields.hasErrors('fullname')}" class="text-danger"
+                                       th:errors="*{fullname}"></p>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Address</h5>
+                                </div>
+                                <div class="card-body">
+                                    <input type="text" class="form-control" id="address" th:field="*{address}">
+                                </div>
+                            </div>
+
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title mb-0">Gender</h5>
+								</div>
+								<div class="card-body">
+									<select th:field="*{gender}" id="gender" class="form-select mb-3">
+										<option th:value="'MALE'">Male</option>
+										<option th:value="'FEMALE'">Female</option>
+										<option th:value="'OTHER'">Other</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title mb-0">Phone Number</h5>
+								</div>
+								<div class="card-body">
+									<input type="text" class="form-control" id="phoneNumber" th:field="*{phoneNumber}">
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<p>
+						<label>Image</label>
+
+					</p>
 
 
+					<button style="margin-left: 65px" class="btn btn-success" type="submit">Save</button>
+				</form>
+				<a style="margin-top: -56px" class="btn btn-danger" type="button" th:href="@{/admin}">Back</a>
 
-                        <button style="margin-left: 65px" class="btn btn-success" type="submit">Save</button>
-                    </form>
-                <a style="margin-top: -56px" class="btn btn-danger" type="button" th:href="@{/admin}">Back</a>
-
-            </div>
-        </main>
+			</div>
+		</main>
 
 
-    </div>
+	</div>
 </div>
 
 <script th:src="@{/admin/js/app.js}"></script>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
         var gradient = ctx.createLinearGradient(0, 0, 0, 225);
         gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
@@ -289,7 +301,7 @@
     });
 </script>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         // Pie chart
         new Chart(document.getElementById("chartjs-dashboard-pie"), {
             type: "pie",
@@ -317,7 +329,7 @@
     });
 </script>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         // Bar chart
         new Chart(document.getElementById("chartjs-dashboard-bar"), {
             type: "bar",
@@ -361,7 +373,7 @@
     });
 </script>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         var markers = [{
             coords: [31.230391, 121.473701],
             name: "Shanghai"
