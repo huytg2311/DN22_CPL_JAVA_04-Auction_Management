@@ -13,10 +13,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link rel="shortcut icon" th:href="@{admin/img/icons/icon-48x48.png}"/>
 
-	<link rel="canonical" href="https://demo-basic.adminkit.io/"/>
-
 	<title>Admin List User</title>
-	<link type="text/css" th:href="@{edmin/css/button.css}" rel="stylesheet">
 
 
 	<link th:href="@{admin/css/app.css}" rel="stylesheet">
@@ -24,8 +21,7 @@
 	<!-- Google Web Fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Playfair+Display:wght@600;700&display=swap"
-		  rel="stylesheet">
+
 
 	<!-- Icon Font Stylesheet -->
 	<script src="https://kit.fontawesome.com/091e570025.js" crossorigin="anonymous"></script>
@@ -36,7 +32,6 @@
 <body>
 <div>
 
-	<div class="" th:insert="header :: my-header"></div>
 	<div class="wrapper">
 
 		<nav id="sidebar" class="sidebar js-sidebar">
@@ -124,7 +119,7 @@
 									<tbody>
 									<tr th:each="user : ${users}">
 										<td>
-											<img class="avatar img-fluid rounded me-1" th:src="@{${user.image}}">
+											<img class="avatar-lg img-fluid rounded-1" th:src="@{${user.image}}">
 										</td>
 										<td th:text="${user.account.username}"></td>
 										<td th:text="${user.fullname}"></td>
@@ -178,6 +173,7 @@
         }
 	</script>
 </div>
+
 </body>
 
 </html>

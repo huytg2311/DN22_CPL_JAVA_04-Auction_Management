@@ -88,7 +88,7 @@ h6,
 /*** Navbar ***/
 .navbar .dropdown-toggle::after {
     border: none;
-    content: "\f107";
+    content: "\f0d7";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     vertical-align: middle;
@@ -96,7 +96,8 @@ h6,
 }
 
 .navbar .navbar-nav .nav-link {
-    padding: 35px 15px;
+    font-size: 1.2rem;
+    padding: 30px 15px;
     color: var(--light);
     outline: none;
 }
