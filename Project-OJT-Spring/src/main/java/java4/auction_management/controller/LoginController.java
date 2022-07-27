@@ -1,6 +1,8 @@
 package java4.auction_management.controller;
 import com.cloudinary.utils.ObjectUtils;
 import java4.auction_management.config.CloudinaryConfig;
+import java4.auction_management.entity.product.Product;
+import java4.auction_management.entity.user.Account;
 import java4.auction_management.entity.user.User;
 import java4.auction_management.service.IAccountService;
 import java4.auction_management.service.IUserService;
@@ -15,6 +17,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 
@@ -43,7 +48,7 @@ public class LoginController {
 
     @PostMapping("/signUp")
     public String addUser(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes,
-    @RequestParam("file") MultipartFile file) {
+                          @RequestParam("file") MultipartFile file) throws IOException {
         if (bindingResult.hasErrors()) {
             return "create-user";
         }

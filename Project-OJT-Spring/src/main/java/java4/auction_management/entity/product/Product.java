@@ -1,23 +1,20 @@
 package java4.auction_management.entity.product;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java4.auction_management.entity.bid.Bid;
 import java4.auction_management.entity.category.Category;
 
+import java4.auction_management.entity.user.Account;
+import java4.auction_management.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -44,12 +41,13 @@ public class Product {
 
     private String productInfo;
 
-    @Column(length = 500)
-    private String productImage;
+    private String listImage;
 
     private boolean isApprove;
 
-    private String productStatus;
+    @Column(columnDefinition = "default 'WAITING'")
+    @Enumerated(EnumType.STRING)
+    private EStatus productStatus = EStatus.WAITING;
 
     @JoinColumn(name = "categoryId")
     @ManyToOne(fetch = FetchType.LAZY)
@@ -59,10 +57,11 @@ public class Product {
     @JsonBackReference
     private Bid bid;
 
-    @Transient
-    public String getImagePath() {
-        if (productImage == null || producId == null) return null;
-        return "/images/products/" + producId + "/" + productImage;
-    }
+    @JoinColumn(name = "username")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Account account;
+
+//    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+//    private List<Image> imageList;
 
 }

@@ -18,5 +18,5 @@ public interface IUserService extends IService<User, Long>{
 
     User findByEmail(String email);
 
-
+    User findByPhone(String phone);
 }

@@ -12,12 +12,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Optional;
 
 import java.util.Optional;
 
@@ -39,20 +42,28 @@ public class HomeController {
 
     @GetMapping(value = {"/","/welcome"})
     public String welcomePage(Model model,@PageableDefault(size = 6) Pageable pageable, User user) {
+//        model.addAttribute("nameAccount", accountService.getAll());
         Page<Product> products = productService.findAllProduct(pageable);
-
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String currentPrincipalName = authentication.getName();
+//        System.out.println(currentPrincipalName);
+//        User user1 = userService.getUserByUsername(currentPrincipalName);
         model.addAttribute("products", products);
         model.addAttribute("account", new Account());
+//        model.addAttribute("user", user1);
+//        System.out.println(user1.toString());
         return "index";
     }
 
     @GetMapping(value = {"/index2"})
     public String welcomePage2(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentPrincipalName = authentication.getName();
-        System.out.println(currentPrincipalName);
-        User user1 = userService.getUserByUsername(currentPrincipalName);
-        System.out.println(user1.toString());
+//        model.addAttribute("nameAccount", accountService.getAll());
+//        User userImage = iUserRepository.findImageUser(user.getAccount().getUsername());
+//        System.out.println(userImage);
+//        model.addAttribute("account", new Account());
+//        model.addAttribute("users", userService.getById(id));
+//        model.addAttribute("user", new User());
+//        System.out.println(id);
         return "index2";
     }
 // moi ne
