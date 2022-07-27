@@ -80,4 +80,9 @@ public class UserService implements IUserService {
     public User findByEmail(String email) {
         return iUserRepository.findByEmail(email);
     }
+
+    @Override
+    public User findByPhone(String phone) {
+        return iUserRepository.findByPhone(phone);
+    }
 }

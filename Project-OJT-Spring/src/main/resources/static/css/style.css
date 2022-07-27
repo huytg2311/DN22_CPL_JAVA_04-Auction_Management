@@ -243,6 +243,12 @@ h6,
     background-size: cover;
 }
 
+.page-header6 {
+    margin-bottom: 6rem;
+    background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(../img/money2.jpg) center center no-repeat;
+    background-size: cover;
+}
+
 
 .breadcrumb-item+.breadcrumb-item::before {
     color: var(--light);

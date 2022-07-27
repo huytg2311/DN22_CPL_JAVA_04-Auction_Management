@@ -87,6 +87,11 @@ public class AccountService implements IAccountService {
         return false;
     }
 
+    @Override
+    public Account getUserByUsername(String username) {
+        return accountRepository.getUserByUsername(username);
+    }
+
     public void processOAuthPostLogin(String username) {
         Account existUser = accountRepository.getUserByUsername(username);
 

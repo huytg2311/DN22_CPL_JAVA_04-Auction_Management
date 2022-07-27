@@ -16,9 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.awt.*;
 import java.io.IOException;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/products")
@@ -41,27 +42,51 @@ public class ProductController {
     @GetMapping("/create")
     public String createFormProduct(Model model) {
         model.addAttribute("product", new Product());
-        return "/products/post";
+        return "/products/create-product";
     }
 
     @PostMapping("/create")
     public String createProduct(@Valid @ModelAttribute Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                                @RequestParam("file")MultipartFile file) throws IOException {
+                                @RequestParam("file")MultipartFile[] files) throws IOException {
 
-        if (file.isEmpty() && bindingResult.hasErrors()) {
-
-            return "redirect:/create";
-        }
+//        if (file.isEmpty()) {
+//
+//            return "redirect:/create";
+//        }
         try {
-            Map uploadResult = cloudc.upload(file.getBytes(),
-                    ObjectUtils.asMap("resourcetype", "auto"));
-            product.setProductImage(uploadResult.get("url").toString());
+            StringBuilder listImage = new StringBuilder();
+            for (MultipartFile file: files) {
+
+                Map uploadResult = cloudc.upload(file.getBytes(),
+                        ObjectUtils.asMap("resourcetype", "auto"));
+                System.out.println("2" + (uploadResult.get("url").toString()));
+                listImage.append(uploadResult.get("url").toString()).append(" ");
+            }
+            product.setListImage(listImage.toString());
             productService.save(product);
+
         } catch (IOException e) {
             e.printStackTrace();
             return "redirect:/create";
         }
+
         redirectAttributes.addFlashAttribute("message", "Edit successful");
         return "redirect:/index2";
+    }
+
+    @GetMapping("/load/{id}")
+    public String load(@PathVariable("id") Product product, Model model){
+
+        model.addAttribute("products", product);
+
+        String[] listImage = product.getListImage().split(" ");
+        for (String image: listImage
+             ) {
+            System.out.println(image);
+        }
+
+        model.addAttribute("listImages", listImage);
+        return "/products/post";
+
     }
 }
