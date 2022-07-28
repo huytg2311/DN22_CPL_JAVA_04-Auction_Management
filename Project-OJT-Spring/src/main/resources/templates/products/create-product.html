@@ -8,18 +8,16 @@
     <meta content="" name="keywords">
     <meta content="" name="description">
 
-    <!-- Favicon -->
-    <!--    <link href="img/favicon.ico" rel="icon">-->
+    <link href="https://cdn1.iconfinder.com/data/icons/real-estate-2-12/128/56-512.png" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Playfair+Display:wght@600;700&display=swap"
-          rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/091e570025.js" crossorigin="anonymous"></script>
+
 
     <!-- Libraries Stylesheet -->
     <link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
@@ -30,291 +28,181 @@
 
     <!-- Template Stylesheet -->
     <link th:href="@{/css/style.css}" rel="stylesheet">
+
     <style>
-        input:-webkit-autofill,
-        input:-webkit-autofill:hover,
-        input:-webkit-autofill:focus,
-        textarea:-webkit-autofill,
-        textarea:-webkit-autofill:hover,
-        textarea:-webkit-autofill:focus,
-        select:-webkit-autofill,
-        select:-webkit-autofill:hover,
-        select:-webkit-autofill:focus {
-            border: 1px solid black;
-            -webkit-text-fill-color: black;
-            -webkit-box-shadow: none;
+        input {
+            height: 50px;
         }
+        label {
+            font-weight: bold;
+        }
+
+        textarea {
+            font-size: .8rem;
+            letter-spacing: 1px;
+        }
+        textarea {
+            padding: 10px;
+            max-width: 100%;
+            border-radius: 6px;
+            border: 1px solid black;
+            box-shadow: 1px 1px 1px #999;
+        }
+
+
     </style>
 </head>
 
 <body>
 
-<!-- Spinner Start -->
-<div id="spinner"
-     class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-    <div class="spinner-grow text-primary" role="status"></div>
-</div>
-<!-- Spinner End -->
-
-
-<!-- Topbar Start -->
-<div class="container-fluid top-bar bg-dark text-light px-0 wow fadeIn" data-wow-delay="0.1s">
-    <div class="row gx-0 align-items-center d-none d-lg-flex">
-        <div class="col-lg-6 px-5 text-start">
-            <ol class="breadcrumb mb-0">
-                <li class="breadcrumb-item"><a class="small text-light" href="#">Home</a></li>
-                <li class="breadcrumb-item"><a class="small text-light" href="#">Career</a></li>
-                <li class="breadcrumb-item"><a class="small text-light" href="#">Terms</a></li>
-                <li class="breadcrumb-item"><a class="small text-light" href="#">Privacy</a></li>
-            </ol>
-        </div>
-        <div class="col-lg-6 px-5 text-end">
-            <small>Follow us:</small>
-            <div class="h-100 d-inline-flex align-items-center">
-                <a class="btn-lg-square text-primary border-end rounded-0" href=""><i class="fab fa-facebook-f"></i></a>
-                <a class="btn-lg-square text-primary border-end rounded-0" href=""><i class="fab fa-twitter"></i></a>
-                <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
-                        class="fab fa-linkedin-in"></i></a>
-                <a class="btn-lg-square text-primary pe-0" href=""><i class="fab fa-instagram"></i></a>
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s" style="background-color: #1E1916">
+    <a href="index.html" class="navbar-brand ms-4 ms-lg-0">
+        <!--logo-->
+        <h2 class="text-primary m-0 d-flex align-items-center">
+            <div class="bg-primary rounded-circle btn-lg-square me-2">
+                <i class="fa fa-gavel text-light fs-3 "></i>
             </div>
-        </div>
-    </div>
-</div>
-<!-- Topbar End -->
+            Pay.Picker
+        </h2>
 
-
-<!-- Navbar Start -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
-    <a href="../index.html" class="navbar-brand ms-4 ms-lg-0">
-        <h1 class="text-primary m-0">Pay.Picker</h1>
     </a>
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav mx-auto p-4 p-lg-0">
-            <a href="../index.html" class="nav-item nav-link active">Home</a>
-            <a href="../about.html" class="nav-item nav-link">About</a>
-            <a href="service.html" class="nav-item nav-link">Services</a>
-            <a href="../product.html" class="nav-item nav-link">Products</a>
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                <div class="dropdown-menu m-0">
-                    <a href="../team.html" class="dropdown-item">Our Team</a>
-                    <a href="../testimonial.html" class="dropdown-item">Testimonial</a>
-                    <a href="../success.html" class="dropdown-item">404 Page</a>
+            <a href="#" class="nav-item nav-link active">Home</a>
+            <a href="product.html" class="nav-item nav-link">Bidding</a>
+            <a href="product.html" class="nav-item nav-link">Auction</a>
+            <a href="about.html" class="nav-item nav-link">Guide</a>
+            <a href="about.html" class="nav-item nav-link">About</a>
+
+        </div>
+        <div class=" d-none d-lg-flex align-items-center">
+            <div class="ps-3" th:if="${#request.userPrincipal == null}">
+                <div class="btn-primary rounded-3 p-2 ps-4 pe-4">
+                    <i class="align-middle text-light me-1" data-feather="log-in"></i>
+                    <a class="text-light align-middle fs-5 mb-0" th:href="@{/login}">Login</a>
                 </div>
             </div>
-            <a href="../contact.html" class="nav-item nav-link">Contact</a>
-        </div>
-        <div class=" d-none d-lg-flex">
-            <div class="flex-shrink-0 btn-lg-square border border-light rounded-circle">
-                <i class="fa fa-phone text-primary"></i>
+            <div class="ps-3 d-flex align-items-center" th:if="${#request.userPrincipal != null}">
+                <div class="flex-shrink-0 btn-lg-square border border-light rounded-circle me-2">
+                    <i class="fa fa-user text-primary"></i>
+                </div>
+                <a class="text-primary align-middle fs-5 p-0 mb-0 nav-link dropdown-toggle"
+                   data-bs-toggle="dropdown" th:utext="${#request.userPrincipal.name}"
+                   th:href="'/edit-profile/' + ${#request.userPrincipal.name}"></a><br>
+                <div class="dropdown-menu dropdown-menu-end m-0 me-5">
+                    <a href="team.html" class="dropdown-item align-middle">
+                        <i class="me-2 " data-feather="user"></i>
+                        View your profile
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="team.html" class="dropdown-item align-middle">
+                        <i class="me-2" data-feather="archive"></i>
+                        Auction winning item
+                    </a>
+                    <a href="testimonial.html" class="dropdown-item align-middle">
+                        <i class="me-2" data-feather="dollar-sign"></i>
+                        E-wallet
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a th:href="@{/logout}" class="dropdown-item align-middle">
+                        <i class="me-2" data-feather="log-out"></i>
+                        Log Out
+                    </a>
+                </div>
             </div>
-            <div class="ps-3">
-                <small class="text-primary mb-0">Call Us</small>
-                <p class="text-light fs-5 mb-0">+012 345 6789</p>
-            </div>
         </div>
+
     </div>
 </nav>
-<!-- Navbar End -->
 
-<!-- Page Header Start -->
-<div style="height: 1500px" class="container-fluid page-header2 py-6 wow fadeIn" data-wow-delay="0.1s">
-    <div class="container text-center pt-5 pb-3">
-        <h1 class="display-4 text-white animated slideInDown mb-3">Upload Product Now!</h1>
-        <nav aria-label="breadcrumb animated slideInDown">
-            <!--            <ol class="breadcrumb justify-content-center mb-0">-->
-            <!--                <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>-->
-            <!--                <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>-->
-            <!--                <li class="breadcrumb-item text-primary active" aria-current="page">Contact</li>-->
-            <!--            </ol>-->
-        </nav>
+<!--dau gia-->
 
+<div class="d-lg-flex half" style="margin-top: 95px;background-color: #F6F7FC; height: 1000px" >
+    <div class="contents order-2 order-md-1">
 
-    </div>
-    <!-- Contact Start -->
-    <div class="container-xxl py-6" >
-        <div class="container" >
-            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s">
-                <p class="text-primary text-uppercase mb-2"></p>
-                <h1 class="display-6 mb-4" >Product Auction</h1>
-            </div>
-            <div class="row g-0 justify-content-center">
-                <!--                <img id="img-main" th:src="@{img/auction.png}">-->
-                <!--                <h5 style="position: absolute;margin-right: -350px;margin-top: 250px;color: coral">Hello</h5>-->
-                <!--                <label style="width: 305px;position: absolute;margin-left: -1100px;margin-top: 325px;color: coral;">Your products after being registered will be censored and auctioned at the website !</label>-->
-                <div class="col-lg-8 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-md-7 py-5" style="margin-left: 500px">
+                    <h3 style="color: #EAA636">Product Auction</h3>
+                    <br><br>
                     <form th:action="@{/products/create}" th:object="${product}" method="post" enctype="multipart/form-data">
-                        <div class="row g-4">
-                            <input type="hidden" th:field="*{producId}">
+                        <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="name">Product Name</label>
-                                    <input th:field="*{name}" type="text" class="form-control" id="name" placeholder="Enter Product Name" required>
-<!--                                    <p class="text-danger" th:errors="*{name}"></p>-->
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label>Category Name</label>
-                                <select class="form-control" th:field="*{category}">
-                                    <option th:each="cate : ${categories}"
-                                            th:value="${cate.categoryId}"
-                                            th:text="${cate.name}"></option>
-
-                                </select>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="phone">Price Product</label>
-
-                                    <input type="text" th:field="*{currentPrice}" class="form-control" id="phone" placeholder="Your Email" style="  background: rgba(255,255,255,0.4);">
+                                <div class="form-group first">
+                                    <label for="name">Product Name: </label>
+                                    <input type="text" th:field="*{name}"  class="form-control" placeholder="Enter your name" id="name">
+<!--                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}"></p>-->
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="id-card">Price Step</label>
+                                <div class="form-group first">
+                                    <label>Category: </label>
+                                    <select class="form-control" th:field="*{category}" style="height: 50px">
+                                        <option th:each="cate : ${categories}"
+                                                th:value="${cate.categoryId}"
+                                                th:text="${cate.name}"></option>
 
-                                    <input type="text" th:field="*{stepPrice}" class="form-control" id="id-card" placeholder="Your Email">
+                                    </select>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="address">Time Auction</label>
-
-                                    <input type="datetime-local" th:field="*{timeAuction}" class="form-control" id="address" placeholder="Your Address">
-<!--                                    <p th:errors="*{timeAuction}" class="text-danger"></p>-->
-                                </div>
-                            </div>
-
-                            <p>
-                                <label>Image</label>
-                                <input type="file" multiple="multiple" name="file"  id="file"/>
-                                <input type="hidden" th:field="*{listImage}"/>
-                            </p>
-                            <!--                        <div class="col-md-6">-->
-                            <!--                            <div class="form-group">-->
-                            <!--                                <label for="exampleFormControlTextarea1">Product Information</label>-->
-                            <!--                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>-->
-                            <!--                            </div>-->
-                            <!--                        </div>-->
-                            <div class="col-12 text-center">
-                                <button class="btn btn-primary rounded-pill py-3 px-5" type="submit"
-                                        style="margin-top: 10px; margin-bottom: 20px">Post
-                                </button>
                             </div>
                         </div>
+                        <div class="row" style="margin-top: 1px">
+                            <div class="col-md-6">
+                                <div class="form-group first">
+                                    <label for="reservePrice">Product Price</label>
+                                    <input type="text" th:field="*{reservePrice}" class="form-control" placeholder="Enter your email" id="reservePrice">
+<!--                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>-->
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group first">
+                                    <label for="phoneNumber">Step Price</label>
+                                    <input type="text" class="form-control" placeholder="Enter your number" id="phoneNumber">
+                                    <!--                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></p>-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 1px">
+
+                            <div class="col-md-6">
+                                <div class="form-group first">
+                                    <label for="password">Product Information</label>
+                                    <textarea rows="5" cols="33" th:field="*{productInfo}"  class="form-control" placeholder="Enter your password" id="password"></textarea>
+                                    <!--                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('account.password')}" th:errors="*{account.password}"></p>-->
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group first">
+                                    <label for="dayOfBirth">Time Auction: </label>
+                                    <input type="text" th:field="*{timeAuction}" class="form-control" id="dayOfBirth">
+<!--                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('dayOfBirth')}" th:errors="*{dayOfBirth}"></p>-->
+                                </div>
+                                <div class="form-group first">
+                                    <label style="margin-top: 20px" for="image" >Upload Image</label>
+                                    <input style="height: 40px" multiple="multiple" type="file" name="file" id="file" class="form-control"/>
+                                    <input type="hidden" th:field="*{listImage}" class="form-control" id="image">
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <input style="margin-top: 30px" type="submit" value="Register" class="btn px-5 btn-primary">
+
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
-<!-- Page Header End -->
 
-
-
-<!-- Contact End -->
-
-
-<!-- Google Map Start -->
-<div class="container-xxl py-6 px-0 wow fadeInUp" data-wow-delay="0.1s">
-    <iframe class="w-100 mb-n2" style="height: 450px;"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
-            frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-</div>
-<!-- Google Map End -->
-
-
-<!-- Footer Start -->
-<div class="container-fluid bg-dark text-light footer my-6 mb-0 py-5 wow fadeIn" data-wow-delay="0.1s">
-    <div class="container py-5">
-        <div class="row g-5">
-            <div class="col-lg-3 col-md-6">
-                <h4 class="text-light mb-4">Office Address</h4>
-                <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
-                <div class="d-flex pt-2">
-                    <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
-                            class="fab fa-twitter"></i></a>
-                    <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
-                            class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
-                            class="fab fa-youtube"></i></a>
-                    <a class="btn btn-square btn-outline-light rounded-circle me-0" href=""><i
-                            class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <h4 class="text-light mb-4">Quick Links</h4>
-                <a class="btn btn-link" href="">About Us</a>
-                <a class="btn btn-link" href="">Contact Us</a>
-                <a class="btn btn-link" href="">Our Services</a>
-                <a class="btn btn-link" href="">Terms & Condition</a>
-                <a class="btn btn-link" href="">Support</a>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <h4 class="text-light mb-4">Quick Links</h4>
-                <a class="btn btn-link" href="">About Us</a>
-                <a class="btn btn-link" href="">Contact Us</a>
-                <a class="btn btn-link" href="">Our Services</a>
-                <a class="btn btn-link" href="">Terms & Condition</a>
-                <a class="btn btn-link" href="">Support</a>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <h4 class="text-light mb-4">Photo Gallery</h4>
-                <div class="row g-2">
-                    <div class="col-4">
-                        <img class="img-fluid bg-light rounded p-1" th:src="@{img/product-1.jpg}" alt="Image">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid bg-light rounded p-1" th:src="@{img/product-2.jpg}" alt="Image">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid bg-light rounded p-1" th:src="@{img/product-3.jpg}" alt="Image">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid bg-light rounded p-1" th:src="@{img/product-2.jpg}" alt="Image">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid bg-light rounded p-1" th:src="@{img/product-3.jpg}" alt="Image">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid bg-light rounded p-1" th:src="@{img/product-1.jpg}" alt="Image">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Footer End -->
-
-
-<!-- Copyright Start -->
-<div class="container-fluid copyright text-light py-4 wow fadeIn" data-wow-delay="0.1s">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                &copy; <a href="#">Your Site Name</a>, All Right Reserved.
-            </div>
-            <div class="col-md-6 text-center text-md-end">
-                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                Designed By <a href="https://htmlcodex.com">HTML Codex</a>
-                <br>Distributed By: <a class="border-bottom" href="https://themewagon.com"
-                                       target="_blank">ThemeWagon</a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Copyright End -->
-
-
-<!-- Back to Top -->
-<a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 
 <!-- JavaScript Libraries -->
@@ -328,6 +216,7 @@
 
 <!-- Template Javascript -->
 <script th:src="@{/js/main.js}"></script>
+
 </body>
 
 </html>

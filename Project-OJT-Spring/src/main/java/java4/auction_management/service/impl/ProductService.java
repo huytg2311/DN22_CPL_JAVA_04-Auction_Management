@@ -43,8 +43,8 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public List<Product> getAllProducts() {
-        return iProductRepository.findAll();
+    public List<Product> findProductStatus() {
+        return iProductRepository.findByProductStatus();
     }
 
     @Override

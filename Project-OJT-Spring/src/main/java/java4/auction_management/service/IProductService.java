@@ -12,7 +12,7 @@ public interface IProductService extends IService<Product, Long>{
 
     Page<Product> findAllProduct(Pageable pageable);
 
-    List<Product> getAllProducts();
+    List<Product> findProductStatus();
 
     void saveAllProductList(List<Product> productList);
 }
