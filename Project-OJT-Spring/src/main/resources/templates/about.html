@@ -143,17 +143,17 @@
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="row img-twice position-relative h-100">
                         <div class="col-6">
-                            <img class="img-fluid rounded" src="../static/img/about-1.jpg" alt="">
+                            <img class="img-fluid rounded" th:src="@{img/all.jpg}" alt="">
                         </div>
                         <div class="col-6 align-self-end">
-                            <img class="img-fluid rounded" src="../static/img/about-2.jpg" alt="">
+                            <img class="img-fluid rounded" th:src="@{img/all.jpg}" alt="">
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="h-100">
                         <p class="text-primary text-uppercase mb-2">// About Us</p>
-                        <h1 class="display-6 mb-4">We Bake Every Item From The Core Of Our Hearts</h1>
+                        <h1 class="display-6 mb-4">We Auction Every Item From The Core Of Our Hearts</h1>
                         <p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
                         <p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
                         <div class="row g-2 mb-4">
@@ -180,20 +180,20 @@
 
 
     <!-- Team Start -->
-    <div class="container-xxl py-6">
+    <div class="container-sm py-6">
         <div class="container">
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
                 <p class="text-primary text-uppercase mb-2">// Our Team</p>
                 <h1 class="display-6 mb-4">We're Super Professional At Our Skills</h1>
             </div>
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="row g-7">
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="team-item text-center rounded overflow-hidden">
-                        <img class="img-fluid" src="../static/img/team-1.jpg" alt="">
+                        <img class="img-fluid" th:src="@{img/hieu1.jpg}" alt="" style="height: 450px">
                         <div class="team-text">
                             <div class="team-title">
-                                <h5>Full Name</h5>
-                                <span>Designation</span>
+                                <h5> Nguyễn Văn Hiếu</h5>
+                                <span>Developer</span>
                             </div>
                             <div class="team-social">
                                 <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
@@ -203,13 +203,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="team-item text-center rounded overflow-hidden">
-                        <img class="img-fluid" src="../static/img/team-2.jpg" alt="">
+                        <img class="img-fluid" th:src="@{img/huy.jpg}" alt="" style="height: 450px">
                         <div class="team-text">
                             <div class="team-title">
-                                <h5>Full Name</h5>
-                                <span>Designation</span>
+                                <h5>Trương Gia Huy</h5>
+                                <span>Developer</span>
                             </div>
                             <div class="team-social">
                                 <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
@@ -219,13 +219,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="team-item text-center rounded overflow-hidden">
-                        <img class="img-fluid" src="../static/img/team-3.jpg" alt="">
+                        <img class="img-fluid" th:src="@{img/truong.jpg}" alt="" style="height: 450px">
                         <div class="team-text">
                             <div class="team-title">
-                                <h5>Full Name</h5>
-                                <span>Designation</span>
+                                <h5>Đào Xuân Nhật Trường</h5>
+                                <span>Developer</span>
                             </div>
                             <div class="team-social">
                                 <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
@@ -235,13 +235,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="team-item text-center rounded overflow-hidden">
-                        <img class="img-fluid" src="../static/img/team-4.jpg" alt="">
+                        <img class="img-fluid" th:src="@{img/khoi.jpg}" alt="" style="height: 450px">
                         <div class="team-text">
                             <div class="team-title">
-                                <h5>Full Name</h5>
-                                <span>Designation</span>
+                                <h5>Lê Ngọc Khôi</h5>
+                                <span>Developer-Leader</span>
                             </div>
                             <div class="team-social">
                                 <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
@@ -251,6 +251,39 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="team-item text-center rounded overflow-hidden">
+                        <img class="img-fluid" th:src="@{img/baoHuy.jpg}" alt="" style="height: 450px">
+                        <div class="team-text">
+                            <div class="team-title">
+                                <h5>Hồ Quốc Bảo Huy</h5>
+                                <span>Developer</span>
+                            </div>
+                            <div class="team-social">
+                                <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="team-item text-center rounded overflow-hidden">
+                        <img class="img-fluid" th:src="@{img/tung.jpg}" alt="" style="height: 450px">
+                        <div class="team-text">
+                            <div class="team-title">
+                                <h5>Nguyễn Hữu Tùng</h5>
+                                <span>Developer</span>
+                            </div>
+                            <div class="team-social">
+                                <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

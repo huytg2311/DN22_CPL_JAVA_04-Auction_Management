@@ -55,7 +55,7 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping(value = {"/index2"})
+    @GetMapping(value = {"/index"})
     public String welcomePage2(Model model) {
 //        model.addAttribute("nameAccount", accountService.getAll());
 //        User userImage = iUserRepository.findImageUser(user.getAccount().getUsername());
@@ -64,7 +64,7 @@ public class HomeController {
 //        model.addAttribute("users", userService.getById(id));
 //        model.addAttribute("user", new User());
 //        System.out.println(id);
-        return "index2";
+        return "index";
     }
 // moi ne
     @GetMapping("/edit-profile/{username}")
@@ -93,4 +93,9 @@ public class HomeController {
     }
     @GetMapping(value = "/about")
     public String about(){ return "about";}
+    @GetMapping(value = "/guide")
+    public String guide(){ return "guide";}
+
+    @GetMapping(value = "/productDetail")
+    public String productDetail(){ return "product-detail";}
 }

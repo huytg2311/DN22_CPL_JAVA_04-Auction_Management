@@ -10,13 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.awt.*;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
@@ -43,6 +41,11 @@ public class ProductController {
     public String createFormProduct(Model model) {
         model.addAttribute("product", new Product());
         return "/products/create-product";
+    }
+    @GetMapping("/auction")
+    public String showAllProductPosted(Model model) {
+        model.addAttribute("products", productService.getAll());
+        return "/user/auction";
     }
 
     @PostMapping("/create")
@@ -71,7 +74,7 @@ public class ProductController {
         }
 
         redirectAttributes.addFlashAttribute("message", "Edit successful");
-        return "redirect:/index2";
+        return "redirect:/index";
     }
 
     @GetMapping("/load/{id}")
@@ -85,8 +88,18 @@ public class ProductController {
             System.out.println(image);
         }
 
-        model.addAttribute("listImages", listImage);
+
         return "/products/post";
 
     }
+
+
+    @GetMapping("/auction/{username}")
+    public String loadAuction(@PathVariable("username") String username, Model model){
+        List<Product> products = productService.findProductByUsername(username);
+        model.addAttribute("products", products);
+
+        return "user/auction";
+    }
+
 }

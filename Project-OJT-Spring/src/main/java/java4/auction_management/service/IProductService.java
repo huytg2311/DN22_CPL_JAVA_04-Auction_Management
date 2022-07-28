@@ -15,4 +15,6 @@ public interface IProductService extends IService<Product, Long>{
     List<Product> getAllProducts();
 
     void saveAllProductList(List<Product> productList);
+
+    List<Product> findProductByUsername(String username);
 }

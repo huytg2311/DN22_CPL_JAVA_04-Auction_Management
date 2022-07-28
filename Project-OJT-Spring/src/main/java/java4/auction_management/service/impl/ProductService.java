@@ -53,4 +53,9 @@ public class ProductService implements IProductService {
             iProductRepository.save(product);
         }
     }
+
+    @Override
+    public List<Product> findProductByUsername(String username) {
+        return iProductRepository.getProductByUsername(username);
+    }
 }
