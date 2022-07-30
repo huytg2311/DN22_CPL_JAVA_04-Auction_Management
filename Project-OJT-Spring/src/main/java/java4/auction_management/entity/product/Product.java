@@ -24,7 +24,7 @@ import java.util.List;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long producId;
+    private Long productId;
 
     @NotEmpty(message = "Name not empty")
     private String name;

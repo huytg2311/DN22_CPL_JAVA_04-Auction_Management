@@ -31,7 +31,7 @@
 
     <style>
         input {
-            height: 50px;
+            height: calc(1.5em + .75rem + 2px);
         }
         label {
             font-weight: bold;
@@ -53,7 +53,7 @@
     </style>
 </head>
 
-<body>
+<body >
 
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s" style="background-color: #1E1916">
     <a href="index.html" class="navbar-brand ms-4 ms-lg-0">
@@ -124,23 +124,25 @@
     <div class="contents order-2 order-md-1">
 
         <div class="container">
-            <div class="row align-items-center justify-content-center">
-                <div class="col-md-7 py-5" style="margin-left: 500px">
-                    <h3 style="color: #EAA636">Product Auction</h3>
+            <div class="row align-items-center justify-content-center"  style="height: 700px">
+                <img th:src="@{/img/online-shopping.png}" style="width: 300px; height: 300px; position: absolute;margin-left: -370px;margin-top: -5px;" >
+                <div class="col-md-7 py-5" style="margin-left: 500px;background: #f5f6fa;padding-left: 550px;margin-right: 480px;width: 100%; border-radius: 30px; padding-right: 50px; margin-top: -30px">
+                    <h3 style="color: #EAA636;">Upload Product Auction</h3>
                     <br><br>
                     <form th:action="@{/products/create}" th:object="${product}" method="post" enctype="multipart/form-data">
                         <div class="row">
+                            <input type="hidden" th:field="*{productId}">
                             <div class="col-md-6">
                                 <div class="form-group first">
-                                    <label for="name">Product Name: </label>
+                                    <label for="name">Product Name: </label><i style="color: red">(*)</i>
                                     <input type="text" th:field="*{name}"  class="form-control" placeholder="Enter your name" id="name">
-<!--                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}"></p>-->
+                                    <!--                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}"></p>-->
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group first">
                                     <label>Category: </label>
-                                    <select class="form-control" th:field="*{category}" style="height: 50px">
+                                    <select class="form-control" th:field="*{category}" style="height: calc(1.5em + .75rem + 2px)">
                                         <option th:each="cate : ${categories}"
                                                 th:value="${cate.categoryId}"
                                                 th:text="${cate.name}"></option>
@@ -152,14 +154,14 @@
                         <div class="row" style="margin-top: 1px">
                             <div class="col-md-6">
                                 <div class="form-group first">
-                                    <label for="reservePrice">Product Price</label>
+                                    <label for="reservePrice">Product Price</label><i style="color: red">(*)</i>
                                     <input type="text" th:field="*{reservePrice}" class="form-control" placeholder="Enter your email" id="reservePrice">
-<!--                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>-->
+                                    <!--                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>-->
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group first">
-                                    <label for="phoneNumber">Step Price</label>
+                                    <label for="phoneNumber">Step Price</label><i style="color: red">(*)</i>
                                     <input type="text" class="form-control" placeholder="Enter your number" id="phoneNumber">
                                     <!--                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></p>-->
                                 </div>
@@ -169,21 +171,21 @@
 
                             <div class="col-md-6">
                                 <div class="form-group first">
-                                    <label for="password">Product Information</label>
-                                    <textarea rows="5" cols="33" th:field="*{productInfo}"  class="form-control" placeholder="Enter your password" id="password"></textarea>
+                                    <label for="password">Product Information</label><i style="color: red">(*)</i>
+                                    <textarea rows="5" cols="33" th:field="*{productInfo}"  class="form-control" placeholder="Input your information" id="password"></textarea>
                                     <!--                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('account.password')}" th:errors="*{account.password}"></p>-->
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group first">
-                                    <label for="dayOfBirth">Time Auction: </label>
+                                    <label for="dayOfBirth">Time Auction: </label><i style="color: red">(*)</i>
                                     <input type="text" th:field="*{timeAuction}" class="form-control" id="dayOfBirth">
-<!--                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('dayOfBirth')}" th:errors="*{dayOfBirth}"></p>-->
+                                    <!--                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('dayOfBirth')}" th:errors="*{dayOfBirth}"></p>-->
                                 </div>
                                 <div class="form-group first">
                                     <label style="margin-top: 20px" for="image" >Upload Image</label>
-                                    <input style="height: 40px" multiple="multiple" type="file" name="file" id="file" class="form-control"/>
+                                    <input style="height: calc(1.5em + .75rem + 2px)" multiple="multiple" type="file" name="file" id="file" class="form-control"/>
                                     <input type="hidden" th:field="*{listImage}" class="form-control" id="image">
                                 </div>
 
@@ -192,12 +194,16 @@
 
                         </div>
 
+                        <div>
+                            <input style="margin-top: 30px" type="submit" value="Back" class="btn px-5 btn-secondary">
+                            <input style="margin-top: 30px; margin-left: 40px" type="submit" value="Upload" class="btn px-5 btn-primary">
 
-                        <input style="margin-top: 30px" type="submit" value="Register" class="btn px-5 btn-primary">
+                        </div>
 
                     </form>
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -205,17 +211,21 @@
 
 
 
-<!-- JavaScript Libraries -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script th:src="@{/lib/wow/wow.min.js}"></script>
-<script th:src="@{/lib/easing/easing.min.js}"></script>
-<script th:src="@{/lib/waypoints/waypoints.min.js}"></script>
-<script th:src="@{/lib/counterup/counterup.min.js}"></script>
-<script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
+<div style="margin-top: -450px" th:insert="footer :: my-footer">
 
-<!-- Template Javascript -->
-<script th:src="@{/js/main.js}"></script>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/lib/wow/wow.min.js}"></script>
+    <script th:src="@{/lib/easing/easing.min.js}"></script>
+    <script th:src="@{/lib/waypoints/waypoints.min.js}"></script>
+    <script th:src="@{/lib/counterup/counterup.min.js}"></script>
+    <script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
+
+    <!-- Template Javascript -->
+    <script th:src="@{/js/main.js}"></script>
 
 </body>
 

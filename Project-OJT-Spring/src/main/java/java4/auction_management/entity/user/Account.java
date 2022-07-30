@@ -24,7 +24,7 @@ public class Account {
     @Id
 //    @Column(name = "username", nullable = false)
     @NotBlank(message = "Username is required")
-    @UniqueUsername
+//    @UniqueUsername
     private String username;
 
     @NotBlank(message = "Password is required")
@@ -58,11 +58,4 @@ public class Account {
         this.enable = enable;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

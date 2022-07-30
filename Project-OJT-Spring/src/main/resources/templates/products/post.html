@@ -80,6 +80,7 @@
 
 <!-- Page Header Start -->
 <div class="container-fluid bg-light py-6 wow fadeIn" data-wow-delay="0.1s" style="height: 900px" th:object="${products}">
+    <input type="hidden" th:field="*{productId}">
     <div class="container text-center pt-5 pb-3">
         <div class="container">
             <div class="card">
