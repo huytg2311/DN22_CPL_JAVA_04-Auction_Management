@@ -74,6 +74,11 @@ h6,
     height: 48px;
 }
 
+.btn-xl-square {
+    width: 58px;
+    height: 58px;
+}
+
 .btn-square,
 .btn-sm-square,
 .btn-lg-square {
@@ -97,10 +102,12 @@ h6,
 }
 
 .navbar .navbar-nav .nav-link {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     padding: 30px 15px;
-    color: var(--light);
+    color: var(--secondary);
     outline: none;
+    font-weight: 300;
+    font-family: var(--bs-font-sans-serif);
 }
 
 .navbar .navbar-nav .nav-link:hover,
@@ -108,15 +115,21 @@ h6,
     color: var(--primary);
 }
 
+.navbar .navbar-nav .nav-link.active{
+    font-weight: 500;
+}
+
 .navbar.fixed-top {
     transition: .5s;
 }
 
-@media (max-width: 991.98px) {
+
+
+@media (max-width: 992px) {
     .navbar .navbar-nav {
         margin-top: 10px;
         border-top: 1px solid rgba(255, 255, 255, .3);
-        background: var(--dark);
+        background: var(--white);
     }
 
     .navbar .navbar-nav .nav-link {
@@ -241,6 +254,12 @@ h6,
 .page-header5 {
     margin-bottom: 6rem;
     background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(../img/profile.jpg) center center no-repeat;
+    background-size: cover;
+}
+
+.page-header6 {
+    margin-bottom: 6rem;
+    background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(../img/money2.jpg) center center no-repeat;
     background-size: cover;
 }
 
@@ -462,9 +481,8 @@ h6,
 }
 
 /**** ****/
-.avatar-img{
-    object-fit: cover;
-    object-position: center;
+.indicator-img{
+    width: 25%;
 }
 
 .sidebar-toggle-btn{
@@ -488,3 +506,75 @@ h6,
     color: var(--secondary);
 }
 
+
+/*  */
+.timer-box{
+    width: 55px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #dee2e6;
+    font-family: Inter,sans-serif;
+    font-weight: bold;
+
+}
+
+.mw-1200px{
+    max-width: 1200px !important;
+}
+
+.divider{border-top:1px solid rgba(0,0,0,.15);height:0;margin:.5rem 0;overflow:hidden}
+
+.price-box{
+    height: auto;
+    width: 150px;
+    border: 1px solid var(--primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fs-7{
+    font-size: calc(0.7rem + 0.5vw) !important;
+}
+
+
+.customNav{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.customNextBtn{
+    right: 0;
+}
+
+.customPrevBtn{
+    left: 0;
+}
+
+.customNextBtn, .customPrevBtn{
+    width: 15%;
+    font-size: 1.8rem;
+    color: var(--primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top:0;
+    bottom: 0;
+
+}
+
+.main-wrapper{
+    min-height: 100vh;
+    position: relative;
+}
+
+.header

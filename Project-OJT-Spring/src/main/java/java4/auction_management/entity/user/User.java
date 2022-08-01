@@ -3,15 +3,20 @@ package java4.auction_management.entity.user;
 import java4.auction_management.entity.bid.Bid;
 import java4.auction_management.entity.bill.Bill;
 import java4.auction_management.entity.cart.Cart;
+import java4.auction_management.entity.product.Product;
 import java4.auction_management.validate.DateTimeBeforeCurrent;
+import java4.auction_management.validate.UniqueEmail;
+import java4.auction_management.validate.UniquePhone;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
@@ -37,11 +42,13 @@ public class User {
     @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",
              message = "Email Invalid !")
     @NotBlank(message = "Email is required")
+    @UniqueEmail
     private String email;
 
     //    @NotEmpty(message = "Phone Number Not Empty")
     @Pattern(regexp = "^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$", message = "Phone Number Invalid !")
     @NotBlank(message = "Phone Number is required")
+    @UniquePhone
     private String phoneNumber;
 
     @Enumerated(EnumType.STRING)
@@ -61,12 +68,13 @@ public class User {
     private String idCard;
 
     @Column(length = 500)
-    @NotBlank(message = "Image is required")
+//    @NotBlank(message = "Image is required")
     private String image;
 
     @Enumerated(EnumType.STRING)
     private Provider provider;
 
+    @Valid
     @OneToOne(cascade = CascadeType.ALL)
     private Account account;
 
@@ -81,6 +89,7 @@ public class User {
 
     @Column(name = "reset_password_token")
     private String resetPasswordToken;
+
 
     public Provider getProvider() {
         return provider;

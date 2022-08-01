@@ -58,21 +58,28 @@ public class UserController {
 
     @PostMapping("/edit")
     public String editUser(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                           @RequestParam("file") MultipartFile file) throws IOException {
+                           @RequestParam("file") MultipartFile[] files) throws IOException {
         if (bindingResult.hasErrors()) {
             return "admin/edit-user";
         }
         Optional<User> currentUser = userService.getById(user.getId());
         System.out.println(currentUser);
 
-        if (file.isEmpty()) {
-            userService.save(user);
-            return "redirect:/admin";
-        } else {
+//        if (files.isEmpty()) {
+//            userService.save(user);
+//            return "redirect:/admin";
+//        } else {
             try {
-                Map uploadResult = cloudc.upload(file.getBytes(),
-                        ObjectUtils.asMap("resourcetype", "auto"));
-                user.setImage(uploadResult.get("url").toString());
+                System.out.println(user.getImage());
+                System.out.println(files+"aaaaa");
+                for (MultipartFile file: files
+                     ) {
+                    Map uploadResult = cloudc.upload(file.getBytes(),
+                            ObjectUtils.asMap("resourcetype", "auto"));
+                    System.out.println(uploadResult.get("url").toString());
+                }
+
+                System.out.println(files);
                 userService.save(user);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -80,7 +87,7 @@ public class UserController {
             }
             redirectAttributes.addFlashAttribute("message", "Edit successful");
             return "redirect:/admin";
-        }
+//        }
     }
     @GetMapping("/categories")
     public String showAllCategories(Model model) {

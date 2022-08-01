@@ -18,7 +18,6 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
 
 
 	<!-- Icon Font Stylesheet -->
@@ -121,16 +120,7 @@
 <script>
     feather.replace()
 </script>
-<script>
-    let headerHeight = document.getElementById("header").getElementsByClassName("navbar")[0]
 
-    let headerSpacers = document.getElementsByClassName("header-spacer")
-    for (const headerSpacer of headerSpacers ){
-		headerSpacer.setAttribute("style", "height:" + headerHeight.clientHeight + "px")
-    }
-    // document.getElementById("sidebar").setAttribute("style", "height:calc(100vh - " + headerHeight.clientHeight + "px)")
-    document.getElementsByClassName("sidebar-content")[0].setAttribute("style", "height:calc(100vh - " + headerHeight.clientHeight + "px)")
-</script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"

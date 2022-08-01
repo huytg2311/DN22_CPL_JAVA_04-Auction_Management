@@ -24,7 +24,7 @@ public class ProductService implements IProductService {
 
     @Override
     public Optional<Product> getById(Long id) {
-        return Optional.empty();
+        return Optional.of(iProductRepository.getById(id));
     }
 
     @Override
@@ -40,5 +40,17 @@ public class ProductService implements IProductService {
     @Override
     public Page<Product> findAllProduct(Pageable pageable) {
         return iProductRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<Product> findProductStatus() {
+        return iProductRepository.findByProductStatus();
+    }
+
+    @Override
+    public void saveAllProductList(List<Product> productList) {
+        for (Product product : productList) {
+            iProductRepository.save(product);
+        }
     }
 }

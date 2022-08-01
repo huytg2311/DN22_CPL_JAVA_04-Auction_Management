@@ -17,14 +17,14 @@
 
 
     // Fixed Navbar
-    $('.fixed-top').css('top', $('.top-bar').height());
-    $(window).scroll(function () {
-        if ($(this).scrollTop()) {
-            $('.fixed-top').addClass('bg-dark').css('top', 0);
-        } else {
-            $('.fixed-top').removeClass('bg-dark').css('top', $('.top-bar').height());
-        }
-    });
+    // $('.fixed-top').css('top', $('.top-bar').height());
+    // $(window).scroll(function () {
+    //     if ($(this).scrollTop()) {
+    //         $('.fixed-top').addClass('bg-white').css('top', 0);
+    //     } else {
+    //         $('.fixed-top').removeClass('bg-white').css('top', $('.top-bar').height());
+    //     }
+    // });
     
     
     // Back to top button
@@ -91,4 +91,15 @@
 
     
 })(jQuery);
+
+
+    let headerHeight = document.getElementById("header").getElementsByClassName("navbar")[0]
+
+    let headerSpacers = document.getElementsByClassName("header-spacer")
+    for (const headerSpacer of headerSpacers ){
+    headerSpacer.setAttribute("style", "height:" + headerHeight.clientHeight + "px")
+}
+    // document.getElementById("sidebar").setAttribute("style", "height:calc(100vh - " + headerHeight.clientHeight + "px)")
+    document.getElementsByClassName("sidebar-content")[0].setAttribute("style", "height:calc(100vh - " + headerHeight.clientHeight + "px)")
+
 
