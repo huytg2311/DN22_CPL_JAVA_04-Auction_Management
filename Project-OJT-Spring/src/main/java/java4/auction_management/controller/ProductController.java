@@ -85,9 +85,7 @@ public class ProductController {
             throw new IllegalStateException("No product was found by id:" + productId);
         });
         model.addAttribute("product", product);
-        System.out.println(product.getProductInfo());
-        List<Bid> bidList= iBidService.getBidsByProductId(product);
-        model.addAttribute("bidList", bidList);
+
 
         String[] listImages = product.getListImage().split(" ");
         model.addAttribute("listImages", listImages);

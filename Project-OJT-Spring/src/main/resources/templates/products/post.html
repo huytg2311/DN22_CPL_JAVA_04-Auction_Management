@@ -151,7 +151,7 @@
 									<div class="">
 										<i class="bi bi-trophy fs-4"></i>
 										<span class=" fs-5 text-primary fw-bold"
-											  th:text="${bidList[0].user.account.username}"></span>
+											  th:text="${product.bid.get(0).user.account.username}"></span>
 									</div>
 								</div>
 							</div>
@@ -198,8 +198,8 @@
 								</tr>
 								</thead>
 								<tbody>
-								<tr th:each="bid, bidState : ${bidList}"
-									th:class="${bidState.index==(#lists.size(bidList)-1)} ? ${'border-primary'} : ${'border-light'}">
+								<tr th:each="bid, bidState : ${product.bid}"
+									th:class="${bidState.index==(#lists.size(product.bid)-1)} ? ${'border-primary'} : ${'border-light'}">
 									<td><span th:text="${bidState.index+1}"></span><i
 											class="bi bi-trophy-fill text-primary ms-2"
 											th:if="${bidState.index==0}"></i>
