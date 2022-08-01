@@ -54,9 +54,9 @@ public class Product {
     @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 
-    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @JsonBackReference
-    private Bid bid;
+    private List<Bid> bid;
 
     @JoinColumn(name = "username")
     @ManyToOne(fetch = FetchType.LAZY)

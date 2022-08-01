@@ -174,6 +174,11 @@
             <artifactId>rest-api-sdk</artifactId>
             <version>1.14.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.bufferings</groupId>
+            <artifactId>thymeleaf-extras-nl2br</artifactId>
+            <version>1.0.2</version>
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
         <dependency>
@@ -189,11 +194,13 @@
             <version>2.13.3</version>
         </dependency>
 
+=========
         <dependency>
             <groupId>com.github.bufferings</groupId>
             <artifactId>thymeleaf-extras-nl2br</artifactId>
             <version>1.0.2</version>
         </dependency>
+>>>>>>>>> Temporary merge branch 2
 
 
     </dependencies>
