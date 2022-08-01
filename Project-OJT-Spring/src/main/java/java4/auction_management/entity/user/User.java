@@ -42,13 +42,13 @@ public class User {
     @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",
              message = "Email Invalid !")
     @NotBlank(message = "Email is required")
-    @UniqueEmail
+//    @UniqueEmail
     private String email;
 
     //    @NotEmpty(message = "Phone Number Not Empty")
     @Pattern(regexp = "^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$", message = "Phone Number Invalid !")
     @NotBlank(message = "Phone Number is required")
-    @UniquePhone
+//    @UniquePhone
     private String phoneNumber;
 
     @Enumerated(EnumType.STRING)
@@ -121,5 +121,13 @@ public class User {
 
     public void setFullname(String fullname) {
         this.fullname = fullname;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }

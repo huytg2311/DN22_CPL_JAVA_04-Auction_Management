@@ -6,6 +6,8 @@ import java4.auction_management.entity.user.Account;
 import java4.auction_management.entity.user.User;
 import java4.auction_management.service.IAccountService;
 import java4.auction_management.service.IUserService;
+import java4.auction_management.validate.AccountValidator;
+import java4.auction_management.validate.LoginValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,8 +37,15 @@ public class LoginController {
     @Autowired
     CloudinaryConfig cloudc;
 
+    @Autowired
+    AccountValidator accountValidator;
+
+    @Autowired
+    LoginValidator loginValidator;
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginPage(Model model) {
+    public String loginPage(Model model, Account account) {
+        model.addAttribute("account", account);
         return "login";
     }
 
@@ -49,18 +58,23 @@ public class LoginController {
     @PostMapping("/signUp")
     public String addUser(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes,
                           @RequestParam("file") MultipartFile file) throws IOException {
+        accountValidator.validate(user, bindingResult);
         if (bindingResult.hasErrors()) {
             return "create-user";
         }
-        try {
-            Map uploadResult = cloudc.upload(file.getBytes(),
-                    ObjectUtils.asMap("resourcetype", "auto"));
-            user.setImage(uploadResult.get("url").toString());
-            userService.save(user);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "redirect:/edit/{id}";
+        if (!file.isEmpty()) {
+            try {
+                Map uploadResult = cloudc.upload(file.getBytes(),
+                        ObjectUtils.asMap("resourcetype", "auto"));
+                user.setImage(uploadResult.get("url").toString());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "redirect:/edit/{id}";
+            }
         }
+
+        userService.save(user);
 //        userService.save(user);
         redirectAttributes.addFlashAttribute("message", "Add successful");
         return "redirect:/success";

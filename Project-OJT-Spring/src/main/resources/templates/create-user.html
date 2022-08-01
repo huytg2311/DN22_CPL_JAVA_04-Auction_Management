@@ -41,10 +41,15 @@
 
     <style>
         input {
-            height: 50px;
+            height: calc(1.5em + .75rem + 2px);
         }
+
         label {
             font-weight: bold;
+        }
+
+        .row {
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -83,56 +88,57 @@
 
         <div class="container">
             <div class="row align-items-center justify-content-center">
-                <div class="col-md-7 py-5" style="margin-left: 500px">
+                <img th:src="@{/img/businessman-waiving-hand.png}" style="width: 500px; height: 500px; position: absolute;margin-left: -250px;">
+                <div class="col-md-7 py-5" style="margin-left: 758px;margin-top: -1px;width: 50%;">
                     <h3 style="color: #EAA636">Sign Up Now !</h3>
                     <br><br>
                     <form th:action="@{/signUp}" th:object="${user}" method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group first">
-                                    <label for="name">Full Name</label>
+                                    <label for="name">Full Name</label><i style="color: red">(*)</i>
                                     <input type="text" th:field="*{fullname}" class="form-control" placeholder="Enter your name" id="name">
                                     <p class="form-message" style="color: red" th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}"></p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group first">
-                                    <label for="account.username">Username</label>
+                                    <label for="account.username">Username</label><i style="color: red">(*)</i>
                                     <input type="text" th:field="*{account.username}" class="form-control" placeholder="Enter username" id="account.username">
                                     <p class="form-message" style="color: red" th:if="${#fields.hasErrors('account.username')}" th:errors="*{account.username}"></p>
                                 </div>
                             </div>
                         </div>
-                        <div class="row" style="margin-top: 1px">
+                        <div class="row" >
                             <div class="col-md-12">
                                 <div class="form-group first">
-                                    <label for="email">Email Address</label>
+                                    <label for="email">Email Address</label><i style="color: red">(*)</i>
                                     <input type="email" th:field="*{email}" class="form-control" placeholder="Enter your email" id="email">
                                     <p class="form-message" style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
                                 </div>
                             </div>
                         </div>
-                        <div class="row" style="margin-top: 1px">
+                        <div class="row" >
                             <div class="col-md-6">
                                 <div class="form-group first">
-                                    <label for="phoneNumber">Phone Number</label>
+                                    <label for="phoneNumber">Phone Number</label><i style="color: red">(*)</i>
                                     <input type="text" th:field="*{phoneNumber}" class="form-control" placeholder="Enter your number" id="phoneNumber">
                                     <p class="form-message" style="color: red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group first">
-                                    <label for="dayOfBirth">Birthday</label>
+                                    <label for="dayOfBirth">Birthday</label><i style="color: red">(*)</i>
                                     <input type="date" th:field="*{dayOfBirth}" class="form-control" id="dayOfBirth">
                                     <p class="form-message" style="color: red" th:if="${#fields.hasErrors('dayOfBirth')}" th:errors="*{dayOfBirth}"></p>
                                 </div>
                             </div>
                         </div>
-                        <div class="row" style="margin-top: 1px">
+                        <div class="row" >
                             <div class="col-md-6">
                                 <div class="form-group first">
                                     <label>Gender</label>
-                                    <select th:field="*{gender}" class="form-control" style="height: 50px">
+                                    <select th:field="*{gender}" class="form-control">
                                         <option th:value="'MALE'">Male</option>
                                         <option th:value="'FEMALE'">Female</option>
                                         <option th:value="'OTHER'">Other</option>
@@ -141,17 +147,17 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group first">
-                                    <label for="idCard">ID Card</label>
+                                    <label for="idCard">ID Card</label><i style="color: red">(*)</i>
                                     <input type="text" th:field="*{idCard}" class="form-control" placeholder="Enter your id card" id="idCard">
                                     <p class="form-message" style="color: red" th:if="${#fields.hasErrors('idCard')}" th:errors="*{idCard}"></p>
                                 </div>
                             </div>
                         </div>
-                        <div class="row" style="margin-top: 1px">
+                        <div class="row" >
                             <div class="col-md-6">
 
                                 <div class="form-group last mb-3">
-                                    <label for="password">Password</label>
+                                    <label for="password">Password</label><i style="color: red">(*)</i>
                                     <input type="password" th:field="*{account.password}" class="form-control" placeholder="Enter your password" id="password">
                                     <p class="form-message" style="color: red" th:if="${#fields.hasErrors('account.password')}" th:errors="*{account.password}"></p>
                                 </div>
@@ -159,19 +165,19 @@
                             <div class="col-md-6">
 
                                 <div class="form-group last mb-3">
-                                    <label for="address">Address</label>
+                                    <label for="address">Address</label><i style="color: red">(*)</i>
                                     <input type="text" th:field="*{address}" class="form-control" placeholder="Enter your address" id="address">
                                     <p class="form-message" style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row" style="margin-top: 1px">
+                        <div class="row" style="margin-top: -45px">
                             <div class="col-md-6">
 
                                 <div class="form-group last mb-3">
                                     <label for="image" >Upload Image</label>
-                                    <input style="height: 40px" multiple="multiple" type="file" name="file" id="file" class="form-control"/>
+                                    <input multiple="multiple" type="file" name="file" id="file" class="form-control"/>
                                     <input type="hidden" th:field="*{image}" class="form-control" id="image">
                                 </div>
 
