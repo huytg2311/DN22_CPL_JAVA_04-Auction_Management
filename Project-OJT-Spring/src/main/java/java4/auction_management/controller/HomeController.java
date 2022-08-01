@@ -96,6 +96,5 @@ public class HomeController {
     @GetMapping(value = "/guide")
     public String guide(){ return "guide";}
 
-    @GetMapping(value = "/productDetail")
-    public String productDetail(){ return "product-detail";}
+
 }

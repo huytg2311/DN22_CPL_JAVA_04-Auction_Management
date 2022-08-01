@@ -4,6 +4,7 @@ import com.cloudinary.utils.ObjectUtils;
 import java4.auction_management.config.CloudinaryConfig;
 import java4.auction_management.entity.category.Category;
 import java4.auction_management.entity.product.Product;
+import java4.auction_management.entity.user.User;
 import java4.auction_management.service.ICategoryService;
 import java4.auction_management.service.impl.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,6 +101,16 @@ public class ProductController {
         model.addAttribute("products", products);
 
         return "user/auction";
+    }
+
+    @GetMapping(value = "/productDetail")
+    public String productDetail(){ return "product-detail";}
+
+    @GetMapping("/edit/{id}")
+    public String showEditProduct(@PathVariable("id") Product product, Model model) {
+//        Optional<User> user = userService.getById(id);
+        model.addAttribute("products", product );
+        return "/products/edit-product";
     }
 
 }

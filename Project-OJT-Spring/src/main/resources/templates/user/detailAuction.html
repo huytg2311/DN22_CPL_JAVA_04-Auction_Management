@@ -80,6 +80,10 @@
 
                                 <button type="button" class="btn btn-outline-success ">Back</button>
                             </a>
+                            <a style="text-decoration: none;" th:if=" ${#strings.equals(product.productStatus,'REJECTED')} ">
+                                <!--                                               th:href="@{/admin/edit/{id}(id = ${user.id})}">         -->
+                                <button type="button" class="btn btn-outline-success">Edit</button>
+                            </a>
 
                         </div>
 
