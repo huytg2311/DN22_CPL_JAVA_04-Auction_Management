@@ -8,6 +8,7 @@ import java4.auction_management.service.IAccountService;
 import java4.auction_management.service.ICategoryService;
 import java4.auction_management.service.IUserService;
 import java4.auction_management.service.impl.CategoryService;
+import java4.auction_management.service.impl.ProductService;
 import java4.auction_management.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -37,6 +39,9 @@ public class UserController {
 
     @Autowired
     UserService userService2;
+
+    @Autowired
+    ProductService productService;
 
     @Autowired
     ICategoryService iCategoryService;
@@ -103,13 +108,13 @@ public class UserController {
         model.addAttribute("users", user);
         return "user/edit-profile";
     }
-    @GetMapping("/auction/{id}")
-    public String showAuctionUser(@PathVariable("id") User user, Model model) {
+    @GetMapping("/auction/{username}")
+    public String showAuctionUser(@PathVariable("username") String username, Model model) {
 //                Optional<User> users = userService.getById(user.getId());
-        Product product = new Product();
+        List<Product> product = productService.findProductsByUsername(username);
         model.addAttribute("products", product);
 
-        model.addAttribute("users", user );
+//        model.addAttribute("users", user );
         return "user/auction";
     }
     @GetMapping("/detailAuction/{productId}")

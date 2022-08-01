@@ -22,7 +22,7 @@ import java.util.List;
 public class Account {
 
     @Id
-//    @Column(name = "username", nullable = false)
+
     @NotBlank(message = "Username is required")
     @UniqueUsername
     private String username;

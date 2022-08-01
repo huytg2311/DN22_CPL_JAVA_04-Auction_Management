@@ -73,9 +73,9 @@ public class AdminController {
                 Map uploadResult = cloudc.upload(file.getBytes(),
                         ObjectUtils.asMap("resourcetype", "auto"));
                 user.setImage(uploadResult.get("url").toString());
-//                if (bindingResult.hasErrors()) {
-//                    return "redirect:/edit/{id}";
-//                }
+                if (bindingResult.hasErrors()) {
+                    return "redirect:/edit/{id}";
+                }
                 userService.save(user);
             } catch (IOException e) {
                 e.printStackTrace();

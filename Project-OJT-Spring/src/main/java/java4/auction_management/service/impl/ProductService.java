@@ -43,9 +43,10 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public List<Product> getAllProducts() {
-        return iProductRepository.findAll();
+    public List<Product> findProductStatus() {
+        return null;
     }
+
 
     @Override
     public void saveAllProductList(List<Product> productList) {
@@ -55,7 +56,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public List<Product> findProductByUsername(String username) {
-        return iProductRepository.getProductByUsername(username);
+    public List<Product> findProductsByUsername(String username) {
+        return iProductRepository.getProductsByUsername(username);
     }
 }

@@ -7,7 +7,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
-    <link type="text/css" th:href="@{/edmin/css/button.css}" rel="stylesheet">
+
     <!-- Favicon -->
     <link href="https://cdn2.iconfinder.com/data/icons/content-design-production-1/66/36-512.png" rel="icon">
 
@@ -33,54 +33,16 @@
 
     <!-- Template Stylesheet -->
     <link th:href="@{/css/style.css}" rel="stylesheet">
+    <!-- Switch -->
+<!--    <link type="text/css" th:href="@{/edmin/css/button.css}" rel="stylesheet">-->
 
 </head>
 
 <body>
 
 
-<!-- Navbar Start -->
-<nav style="background-color: #1E1916" class="navbar navbar-expand-lg navbar-dark fixed-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
-    <a href="index.html" class="navbar-brand ms-4 ms-lg-0">
-        <h1 class="text-primary m-0">F.Auction</h1>
-    </a>
-    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-        <div class="navbar-nav mx-auto p-4 p-lg-0">
-            <a th:href="@{/welcome}" class="nav-item nav-link active">Home</a>
-            <a th:href="@{/about}" class="nav-item nav-link">About</a>
-            <a th:href="@{/guide}" class="nav-item nav-link">Guide</a>
-            <a th:href="@{/productDetail}" class="nav-item nav-link">Products</a>
 
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                <div class="dropdown-menu m-0">
-                    <a href="team.html" class="dropdown-item">Our Team</a>
-                    <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                    <a href="success.html" class="dropdown-item">404 Page</a>
-                </div>
-            </div>
-            <a href="contact.html" class="nav-item nav-link">Contact</a>
-        </div>
-        <div class=" d-none d-lg-flex">
-            <div class="flex-shrink-0 btn-lg-square border border-light rounded-circle">
-                <i class="fa fa-user text-primary"></i>
-            </div>
-            <div class="ps-3" style="margin-top: 10px" th:if="${#request.userPrincipal == null}">
-                <a class="text-primary mb-0" th:href="@{/login}" >Login</a>
-                <!--                        <p class="text-light fs-5 mb-0">+012 345 6789</p>-->
-            </div>
-            <!--sao khong up-->
-            <div class="ps-3" th:if="${#request.userPrincipal != null}">
-                <a class="text-primary mb-0" th:utext="${#request.userPrincipal.name}" th:href="'/edit-profile/' + ${#request.userPrincipal.name}"></a><br>
-                <a class="text-light mb-0" th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a>
-            </div>
-        </div>
-    </div>
-</nav>
-
+<div th:insert="header :: my-header"></div>
 <!-- Navbar End -->
 
 <!-- Page Header Start -->
@@ -91,18 +53,18 @@
             <div class="main">
 
 
-                <main class="content">
+                <main class="content" >
                     <div class="row">
-                        <div class="col-12 col-lg-8 col-xxl-9 d-flex" style="margin-left: 140px; margin-top: 35px">
-                            <div class="card flex-fill">
-                                <div class="card-header">
+                        <div class="col-12 col-lg-8 col-xxl-9 d-flex" style="margin-left: 140px; margin-top: 35px" th:if="${#lists.size(products)} > 0">
+                            <div class="card flex-fill border-secondary bg-light" >
+                                <div class="card-header " >
 
                                     <h5 class="card-title mb-0">List Product Posted</h5>
                                 </div>
-                                <table class="table table-hover my-0">
+                                <table class="table table-hover my-0" >
                                     <thead>
                                     <tr>
-                                        <th>Image</th>
+<!--                                        <th>Image</th>-->
                                         <th>ProductName</th>
                                         <th class="d-none d-md-table-cell">Current Price</th>
                                         <th class="d-none d-md-table-cell">Time Auction</th>
@@ -113,43 +75,43 @@
                                     </tr>
                                     </thead>
                                     <tbody >
-                                    <tr th:each="product : ${products}" th:object="${product}" >
-                                        <td>
-                                            <img style="width: 60px ; height: 60px; border-radius: 100%" th:src="@{*{listImage}}" alt="">
-                                        </td>
-                                        <td th:text="*{name}"></td>
-                                        <td th:text="*{currentPrice}"></td>
-                                        <td th:text="*{timeAuction}"></td>
+                                    <tr th:each="product : ${products}" >
+<!--                                        <td>-->
+<!--&lt;!&ndash;                                            <img style="width: 60px ; height: 60px; border-radius: 100%" th:src="@{${products.listImage}}" alt="">&ndash;&gt;-->
+<!--                                        </td>-->
+                                        <td th:text="${product.name}"></td>
+                                        <td th:text="${product.currentPrice}"></td>
+                                        <td th:text="${product.timeAuction}"></td>
                                         <td class="total">
 
-                                            <div th:if="*{isApprove}">
-                                                <label class="switch">
+                                            <div th:if="${product.approve} == true">
+                                                <label class="switch ">
                                                     <input type="checkbox"
-                                                           th:id="'enable-'+*{isApprove}"
-                                                           th:onclick="'changeActivateUser(' + *{isApprove} + ');'" checked>
+                                                           th:id="'enable-'+${product.approve}"
+                                                           th:onclick="'changeActivateUser(' + ${product.approve} + ');'" checked>
                                                     <span class="slider round"></span>
                                                 </label>
                                             </div>
-                                            <div th:if="*{isApprove}">
+                                            <div th:if="${product.approve} == false">
                                                 <label class="switch">
                                                     <input type="checkbox"
-                                                           th:id="'enable-'+*{isApprove}"
-                                                           th:onclick="'changeActivateUser(' + *{isApprove} + ');'" >
-                                                    <span class="slider round"></span>
+                                                           th:id="'enable-'+${product.approve}"
+                                                           th:onclick="'changeActivateUser(' + ${product.approve} + ');'" >
+                                                    <span class="slider round warning" ></span>
                                                 </label>
                                             </div>
 
                                         </td>
-                                        <td th:text="*{productStatus}"></td>
+                                        <td th:text="${product.productStatus}"></td>
                                         <td>
 
                                             <a style="text-decoration: none;"
-                                               th:href="@{'/user/detailAuction/' + *{productId}}"
+                                               th:href="@{'/user/detailAuction/' + ${product.productId}}"
                                             >
                                                 <button type="button" class="btn btn-outline-success">Detail</button>
                                             </a>
-                                            <a style="text-decoration: none;">
-<!--                                               th:href="@{/admin/edit/{id}(id = ${user.id})}">-->
+                                            <a style="text-decoration: none;" th:if=" ${product.productStatus == 'REJECTED'} ">
+<!--                                               th:href="@{/admin/edit/{id}(id = ${user.id})}">         -->
                                                 <button type="button" class="btn btn-outline-success">Edit</button>
                                             </a>
 
@@ -161,9 +123,24 @@
                                 <div >
                                     <a style="text-decoration: none; float: left"
                                          th:href="@{/products/create}">
-                                        <button type="button" class="btn btn-outline-success">Add Product Auction</button>
+                                        <button type="button" class="btn btn-outline-success" style="margin-bottom: 10px; margin-left: 10px">Add Product Auction</button>
                                     </a>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-8 col-xxl-9 d-flex" style="margin-left: 140px; margin-top: 35px" th:if="${#lists.size(products)} == 0">
+                            <div class="card flex-fill border-secondary bg-light" >
+                                <div class="card-header " >
+
+                                    <h5 class="card-title mb-0">You have not posted any products yet</h5>
+                                </div>
+                                <div >
+                                    <a style="text-decoration: none; float: left"
+                                       th:href="@{/products/create}">
+                                        <button type="button" class="btn btn-outline-success mt-2" style="margin-bottom: 10px; margin-left: 10px">Add Product Auction</button>
+                                    </a>
+                                </div>
+
                             </div>
                         </div>
 
