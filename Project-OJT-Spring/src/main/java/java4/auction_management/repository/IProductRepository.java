@@ -6,8 +6,9 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface IProductRepository extends JpaRepository<Product, Long> {
+public interface  IProductRepository extends JpaRepository<Product, Long> {
 
-    @Query(value = "select * from product as p where p.product_status = 'WAITING'", nativeQuery = true)
-    List<Product> findByProductStatus();
+    @Query(value = "select * from product as p where p.username = ?1", nativeQuery = true)
+
+    List<Product> getProductsByUsername(String username);
 }

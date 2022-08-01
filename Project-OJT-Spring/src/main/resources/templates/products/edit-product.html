@@ -118,7 +118,7 @@
     </div>
 </nav>
 
-
+<!--dau gia-->
 
 <div class="d-lg-flex half" style="margin-top: 95px;background-color: #F6F7FC; height: 1000px" >
     <div class="contents order-2 order-md-1">
@@ -131,7 +131,7 @@
                     <br><br>
                     <form th:action="@{/products/create}" th:object="${product}" method="post" enctype="multipart/form-data">
                         <div class="row">
-                            <input type="hidden" th:name="account.username" th:value="${#request.userPrincipal.name} ">
+                            <input type="hidden" th:field="*{productId}">
                             <div class="col-md-6">
                                 <div class="form-group first">
                                     <label for="name">Product Name: </label><i style="color: red">(*)</i>
@@ -211,8 +211,7 @@
 
 
 
-
-<div style="margin-top: -450px" th:insert="footer :: my-footer"></div>
+<div style="margin-top: -450px" th:insert="footer :: my-footer">
 
 
 

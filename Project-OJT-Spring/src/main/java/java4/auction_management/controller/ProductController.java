@@ -6,6 +6,7 @@ import java4.auction_management.entity.bid.Bid;
 import java4.auction_management.entity.category.Category;
 import java4.auction_management.entity.product.Product;
 import java4.auction_management.service.IBidService;
+import java4.auction_management.entity.user.User;
 import java4.auction_management.service.ICategoryService;
 import java4.auction_management.service.impl.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +37,6 @@ public class ProductController {
     @Autowired
     private ICategoryService iCategoryService;
 
-    @Autowired
-    private IBidService iBidService;
-
     @ModelAttribute("categories")
     public List<Category> categoryList() {
         return iCategoryService.getAll();
@@ -48,6 +46,11 @@ public class ProductController {
     public String createFormProduct(Model model) {
         model.addAttribute("product", new Product());
         return "/products/create-product";
+    }
+    @GetMapping("/auction")
+    public String showAllProductPosted(Model model) {
+        model.addAttribute("products", productService.getAll());
+        return "/user/auction";
     }
 
     @PostMapping("/create")
@@ -76,7 +79,7 @@ public class ProductController {
         }
 
         redirectAttributes.addFlashAttribute("message", "Edit successful");
-        return "redirect:/index2";
+        return "redirect:/index";
     }
 
     @GetMapping("/load/{id}")
@@ -86,10 +89,31 @@ public class ProductController {
         });
         model.addAttribute("product", product);
 
+        model.addAttribute("products", product);
 
         String[] listImages = product.getListImage().split(" ");
         model.addAttribute("listImages", listImages);
         return "products/post";
 
     }
+
+
+    @GetMapping("/auction/{username}")
+    public String loadAuction(@PathVariable("username") String username, Model model){
+        List<Product> products = productService.findProductsByUsername(username);
+        model.addAttribute("products", products);
+
+        return "user/auction";
+    }
+
+    @GetMapping(value = "/productDetail")
+    public String productDetail(){ return "product-detail";}
+
+    @GetMapping("/edit/{id}")
+    public String showEditProduct(@PathVariable("id") Product product, Model model) {
+//        Optional<User> user = userService.getById(id);
+        model.addAttribute("products", product );
+        return "/products/edit-product";
+    }
+
 }

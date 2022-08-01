@@ -63,11 +63,11 @@ public class AdminController {
 
 
     @PostMapping("/edit")
-    public String editUser( @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes,
+    public String editUser(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes,
                            @RequestParam("file") MultipartFile file) throws IOException {
-        if (bindingResult.hasErrors()) {
-            return "admin/edit-user";
-        }
+//        if (bindingResult.hasErrors()) {
+//            return "admin/edit-user";
+//        }
         Optional<User> currentUser = userService.getById(user.getId());
         System.out.println(currentUser);
 

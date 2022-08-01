@@ -22,6 +22,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
 
+import java.util.Optional;
+
 
 @Controller
 public class HomeController {
@@ -37,16 +39,23 @@ public class HomeController {
     @Autowired
     private ProductService productService;
 
+
     @GetMapping(value = {"/","/welcome"})
-    public String welcomePage(Model model,@PageableDefault(size = 6) Pageable pageable) {
+    public String welcomePage(Model model,@PageableDefault(size = 6) Pageable pageable, User user) {
 //        model.addAttribute("nameAccount", accountService.getAll());
         Page<Product> products = productService.findAllProduct(pageable);
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String currentPrincipalName = authentication.getName();
+//        System.out.println(currentPrincipalName);
+//        User user1 = userService.getUserByUsername(currentPrincipalName);
         model.addAttribute("products", products);
         model.addAttribute("account", new Account());
+//        model.addAttribute("user", user1);
+//        System.out.println(user1.toString());
         return "index";
     }
 
-    @GetMapping(value = {"/index2"})
+    @GetMapping(value = {"/index"})
     public String welcomePage2(Model model) {
 //        model.addAttribute("nameAccount", accountService.getAll());
 //        User userImage = iUserRepository.findImageUser(user.getAccount().getUsername());
@@ -55,7 +64,7 @@ public class HomeController {
 //        model.addAttribute("users", userService.getById(id));
 //        model.addAttribute("user", new User());
 //        System.out.println(id);
-        return "index2";
+        return "index";
     }
 // moi ne
     @GetMapping("/edit-profile/{username}")
@@ -82,6 +91,10 @@ public class HomeController {
     public String registerForm() {
         return "register";
     }
+    @GetMapping(value = "/about")
+    public String about(){ return "about";}
+    @GetMapping(value = "/guide")
+    public String guide(){ return "guide";}
 
 
 }

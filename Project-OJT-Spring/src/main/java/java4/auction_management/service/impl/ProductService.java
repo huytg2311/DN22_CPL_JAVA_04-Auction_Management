@@ -44,13 +44,19 @@ public class ProductService implements IProductService {
 
     @Override
     public List<Product> findProductStatus() {
-        return iProductRepository.findByProductStatus();
+        return null;
     }
+
 
     @Override
     public void saveAllProductList(List<Product> productList) {
         for (Product product : productList) {
             iProductRepository.save(product);
         }
+    }
+
+    @Override
+    public List<Product> findProductsByUsername(String username) {
+        return iProductRepository.getProductsByUsername(username);
     }
 }

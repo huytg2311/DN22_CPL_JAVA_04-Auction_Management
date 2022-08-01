@@ -2,11 +2,13 @@ package java4.auction_management.controller;
 
 import com.cloudinary.utils.ObjectUtils;
 import java4.auction_management.config.CloudinaryConfig;
+import java4.auction_management.entity.product.Product;
 import java4.auction_management.entity.user.User;
 import java4.auction_management.service.IAccountService;
 import java4.auction_management.service.ICategoryService;
 import java4.auction_management.service.IUserService;
 import java4.auction_management.service.impl.CategoryService;
+import java4.auction_management.service.impl.ProductService;
 import java4.auction_management.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -38,6 +41,9 @@ public class UserController {
     UserService userService2;
 
     @Autowired
+    ProductService productService;
+
+    @Autowired
     ICategoryService iCategoryService;
 
     @Autowired
@@ -51,7 +57,7 @@ public class UserController {
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") User user, Model model) {
 //        Optional<User> user = userService.getById(id);
-        model.addAttribute("users", user );
+        model.addAttribute("users", user);
         return "admin/edit-user";
     }
 
@@ -69,39 +75,66 @@ public class UserController {
 //            userService.save(user);
 //            return "redirect:/admin";
 //        } else {
-            try {
-                System.out.println(user.getImage());
-                System.out.println(files+"aaaaa");
-                for (MultipartFile file: files
-                     ) {
-                    Map uploadResult = cloudc.upload(file.getBytes(),
-                            ObjectUtils.asMap("resourcetype", "auto"));
-                    System.out.println(uploadResult.get("url").toString());
-                }
-
-                System.out.println(files);
-                userService.save(user);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return "redirect:/edit/{id}";
+        try {
+            System.out.println(user.getImage());
+            System.out.println(files + "aaaaa");
+            for (MultipartFile file : files
+            ) {
+                Map uploadResult = cloudc.upload(file.getBytes(),
+                        ObjectUtils.asMap("resourcetype", "auto"));
+                System.out.println(uploadResult.get("url").toString());
             }
-            redirectAttributes.addFlashAttribute("message", "Edit successful");
-            return "redirect:/admin";
+
+            System.out.println(files);
+            userService.save(user);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "redirect:/edit/{id}";
+        }
+        redirectAttributes.addFlashAttribute("message", "Edit successful");
+        return "redirect:/admin";
 //        }
     }
+
     @GetMapping("/categories")
     public String showAllCategories(Model model) {
         model.addAttribute("categories", iCategoryService.getAll());
         return "admin/list-categories";
     }
+
     @GetMapping("/detail/{id}")
     public String showDetailUser(@PathVariable("id") User user, Model model) {
 //                Optional<User> users = userService.getById(user.getId());
-        model.addAttribute("users", user );
+        model.addAttribute("users", user);
         return "user/edit-profile";
     }
+    @GetMapping("/auction/{username}")
+    public String showAuctionUser(@PathVariable("username") String username, Model model) {
+//                Optional<User> users = userService.getById(user.getId());
+        List<Product> product = productService.findProductsByUsername(username);
+        model.addAttribute("products", product);
+
+//        model.addAttribute("users", user );
+        return "user/auction";
+    }
+    @GetMapping("/detailAuction/{productId}")
+    public String detailAuction(@PathVariable("productId") Product product, Model model){
+
+        model.addAttribute("products", product);
+
+        String[] listImage = product.getListImage().split(" ");
+        for (String image: listImage
+        ) {
+            System.out.println(image);
+        }
+        model.addAttribute("listImage", listImage);
+
+
+        return "user/detailAuction";
 
     }
+
+}
 
 
 
