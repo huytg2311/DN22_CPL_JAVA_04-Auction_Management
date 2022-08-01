@@ -114,7 +114,7 @@ public class FotgotPasswordController {
         } else {
             userService.updatePassword(user, password);
 
-            model.addAttribute("message", "You have successfully changed your password.");
+            model.addAttribute("message", "Reset Password Successfully !");
         }
 
         return "message";

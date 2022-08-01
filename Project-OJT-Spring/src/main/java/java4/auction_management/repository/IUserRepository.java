@@ -26,8 +26,12 @@ public interface IUserRepository extends JpaRepository<User, Long>, JpaSpecifica
     @Query(value = "select * from user as u where u.account_username = ?1", nativeQuery = true)
     User findUserByUserName(String username);
 
-    @Query(value = "select * from user as u where u.phone_number = ?1", nativeQuery = true)
+    @Query(value = "select u from User u where u.phone_number like :?1", nativeQuery = true)
     User findByPhone(String phone);
+
+    Boolean existsByPhoneNumber(String phoneNumber);
+
+    Boolean existsByEmail(String email);
 
 //    @Query(value = "select u from User u where u.account.username = ?1")
 //    User findImageUser(String account_username);

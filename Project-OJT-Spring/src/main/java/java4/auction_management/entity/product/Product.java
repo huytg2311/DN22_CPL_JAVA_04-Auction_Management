@@ -41,6 +41,7 @@ public class Product {
 
     private String productInfo;
 
+    @Column(length = 1000)
     private String listImage;
 
     private boolean isApprove;

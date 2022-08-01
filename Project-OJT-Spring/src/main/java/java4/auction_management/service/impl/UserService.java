@@ -85,4 +85,14 @@ public class UserService implements IUserService {
     public User findByPhone(String phone) {
         return iUserRepository.findByPhone(phone);
     }
+
+    @Override
+    public Boolean existByPhone_number(String phoneNumber) {
+        return iUserRepository.existsByPhoneNumber(phoneNumber);
+    }
+
+    @Override
+    public Boolean existByEmail(String email) {
+        return iUserRepository.existsByEmail(email);
+    }
 }
