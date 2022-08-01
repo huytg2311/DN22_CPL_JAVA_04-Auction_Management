@@ -42,10 +42,16 @@ public class AdminController {
 
     @Autowired
     CategoryService categoryService;
+//    @GetMapping
+//    public String showAllUser(Model model) {
+//        model.addAttribute("users", userService.getAllUser());
+//        return "admin/list-user";
+//    }
+
     @GetMapping
-    public String showAllUser(Model model) {
+    public String showAll(Model model) {
         model.addAttribute("users", userService.getAllUser());
-        return "admin/list-user";
+        return "admin/user-management";
     }
 
     @GetMapping("/edit/{id}")
@@ -96,6 +102,8 @@ public class AdminController {
         model.addAttribute("users", user );
         return "admin/detail-user";
     }
+
+
 
     }
 

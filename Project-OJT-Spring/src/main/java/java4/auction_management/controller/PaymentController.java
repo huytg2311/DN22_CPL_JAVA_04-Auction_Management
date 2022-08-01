@@ -23,6 +23,7 @@ public class PaymentController {
     private Logger log = LoggerFactory.getLogger(getClass());
     @Autowired
     private PaypalService paypalService;
+
     @GetMapping("/paynow")
     public String index(){
         return "/paypal/index";

@@ -62,7 +62,21 @@ public class Product {
     @ManyToOne(fetch = FetchType.LAZY)
     private Account account;
 
-//    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productId=" + productId +
+                ", name='" + name + '\'' +
+                ", reservePrice=" + reservePrice +
+                ", timeAuction=" + timeAuction +
+                ", timeFinish=" + timeFinish +
+                ", stepPrice=" + stepPrice +
+                ", currentPrice=" + currentPrice +
+                ", productInfo='" + productInfo + '\'' +
+                '}';
+    }
+
+    //    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 //    private List<Image> imageList;
 
 }

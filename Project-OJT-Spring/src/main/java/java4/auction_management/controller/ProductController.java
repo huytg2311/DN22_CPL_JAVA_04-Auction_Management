@@ -2,8 +2,10 @@ package java4.auction_management.controller;
 
 import com.cloudinary.utils.ObjectUtils;
 import java4.auction_management.config.CloudinaryConfig;
+import java4.auction_management.entity.bid.Bid;
 import java4.auction_management.entity.category.Category;
 import java4.auction_management.entity.product.Product;
+import java4.auction_management.service.IBidService;
 import java4.auction_management.service.ICategoryService;
 import java4.auction_management.service.impl.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,9 @@ public class ProductController {
 
     @Autowired
     private ICategoryService iCategoryService;
+
+    @Autowired
+    private IBidService iBidService;
 
     @ModelAttribute("categories")
     public List<Category> categoryList() {
@@ -75,18 +80,18 @@ public class ProductController {
     }
 
     @GetMapping("/load/{id}")
-    public String load(@PathVariable("id") Product product, Model model){
+    public String load(@PathVariable("id") Long productId, Model model){
+        Product product = productService.getById(productId).orElseThrow(() -> {
+            throw new IllegalStateException("No product was found by id:" + productId);
+        });
+        model.addAttribute("product", product);
+        System.out.println(product.getProductInfo());
+        List<Bid> bidList= iBidService.getBidsByProductId(product);
+        model.addAttribute("bidList", bidList);
 
-        model.addAttribute("products", product);
-
-        String[] listImage = product.getListImage().split(" ");
-        for (String image: listImage
-             ) {
-            System.out.println(image);
-        }
-
-        model.addAttribute("listImages", listImage);
-        return "/products/post";
+        String[] listImages = product.getListImage().split(" ");
+        model.addAttribute("listImages", listImages);
+        return "products/post";
 
     }
 }
