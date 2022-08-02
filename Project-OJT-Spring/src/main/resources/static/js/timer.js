@@ -31,10 +31,3 @@ let x = setInterval(function () {
     }
 }, 1000);
 
-/* Currency Formatter*/
-let curValue = document.querySelectorAll(".js-currency-value");
-for (let i = 0, len = curValue.length; i < len; i++) {
-    curValue[i].innerHTML = Number(curValue[i].innerHTML).toLocaleString('en');
-    curValue[i].classList.add("currSign");
-}
-

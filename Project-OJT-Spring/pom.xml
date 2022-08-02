@@ -194,14 +194,12 @@
             <version>2.13.3</version>
         </dependency>
 
-=========
+        <!-- https://mvnrepository.com/artifact/org.webjars/jquery -->
         <dependency>
-            <groupId>com.github.bufferings</groupId>
-            <artifactId>thymeleaf-extras-nl2br</artifactId>
-            <version>1.0.2</version>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>3.5.1</version>
         </dependency>
->>>>>>>>> Temporary merge branch 2
-
 
     </dependencies>
 

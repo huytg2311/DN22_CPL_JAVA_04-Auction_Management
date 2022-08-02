@@ -1,250 +1,296 @@
 <!DOCTYPE html>
+
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:nl2br="https://github.com/bufferings/thymeleaf-extras-nl2br"
-	  lang="en-US" xml:lang="en-US">
-
+      xmlns:nl2br="https://github.com/bufferings/thymeleaf-extras-nl2br"
+      lang="vi_VN" xml:lang="vi_VN">
 <head>
-	<meta charset="utf-8">
-	<title>Pay.Picker</title>
-	<meta content="width=device-width, initial-scale=1.0" name="viewport">
-	<meta content="" name="keywords">
-	<meta content="" name="description">
+    <meta charset="utf-8">
+    <title>Pay.Picker</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
 
-	<!-- Favicon -->
-	<link href="https://cdn2.iconfinder.com/data/icons/content-design-production-1/66/36-512.png" rel="icon">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Playfair+Display:wght@600;700&display=swap"
-		  rel="stylesheet">
+    <!-- Favicon -->
+    <link href="https://cdn2.iconfinder.com/data/icons/content-design-production-1/66/36-512.png" rel="icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
 
-	<!-- Icon Font Stylesheet -->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-	<link rel="stylesheet" th:href="@{/lib/bootstrap-icons/bootstrap-icons.css}">
-
-
-	<!-- Libraries Stylesheet -->
-	<link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
-	<link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
-	<link th:href="@{/lib/owlcarousel/assets/owl.theme.default.css}" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/lib/bootstrap-icons/bootstrap-icons.css}">
 
 
-	<!-- Customized Bootstrap Stylesheet -->
-	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
+    <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+    <link th:href="@{/lib/owlcarousel/assets/owl.theme.default.css}" rel="stylesheet">
 
-	<!-- Template Stylesheet -->
-	<link th:href="@{/css/style.css}" rel="stylesheet">
 
+    <!-- Customized Bootstrap Stylesheet -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 
-	<!--    <link th:href="@{/post/productDetail.css}" rel="stylesheet">-->
-	<!--    <link th:href="@{/post/productloadimage.css}" rel="stylesheet">-->
+    <!-- Template Stylesheet -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <style>
+
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1031; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+    </style>
 
 </head>
 
 <body>
 <div class="main-wrapper bg-light">
-<div class="" th:insert="header :: my-header"></div>
-	<div class="header-spacer"></div>
+    <div class="" th:insert="header :: my-header"></div>
+    <div class="header-spacer"></div>
 
-	<div class="main bg-light">
-		<main class="content px-lg-4 pt-lg-4 pb-lg-3 py-3 p-0">
-			<div class="container-fluid m-0">
-				<div class="card mw-1200px px-lg-5 px-4 pt-5 pb-4 mx-auto my-0" th:object="${product}">
-					<div class="row m-0 flex-lg-row flex-sm-column">
-						<div class="col-lg-4 p-0 m-0 mb-3">
-							<div class="row m-0 justify-content-between">
-								<div class="w-100 p-0 m-0 ">
-									<div id="productImageSlide"
-										 class="carousel slide border-primary border border-2 p-0"
-										 data-ride="carousel">
-										<ol class="carousel-indicators m-0">
-											<li th:each="img, imgState : ${listImages}" th:if="${imgState.index==0}"
-												data-target="#productImageSlide" th:attr="data-slide-to=${imgState.index}"
-												class="bg-primary active"></li>
-											<li th:each="img, imgState : ${listImages}" th:if="${imgState.index>0}"
-												data-target="#productImageSlide" th:attr="data-slide-to=${imgState.index}"
-												class="bg-primary"></li>
-										</ol>
-										<div class="carousel-inner">
-											<div th:each="img, imgState : ${listImages}" th:if="${imgState.index==0}"
-												 class="carousel-item ratio ratio-1x1 active">
-												<img class="d-block of-contain " th:src="@{${img.toString()}}" alt=""
-													 src=""/>
-											</div>
-											<div th:each="img, imgState : ${listImages}" th:if="${imgState.index>0}"
-												 class="carousel-item ratio ratio-1x1 ">
-												<img class="d-block of-contain" th:src="@{${img.toString()}}" alt=""
-													 src=""/>
-											</div>
+    <div class="main bg-light">
+        <main class="content px-lg-4 pt-lg-4 pb-lg-3 py-3 p-0">
+            <div class="container-fluid m-0">
+                <div class="card mw-1200px px-lg-5 px-4 pt-5 pb-4 mx-auto my-0" th:object="${product}">
+                    <div class="row m-0 flex-lg-row flex-sm-column">
+                        <div class="col-lg-4 p-0 m-0 mb-3">
+                            <div class="row m-0 justify-content-between">
+                                <div class="w-100 p-0 m-0 ">
+                                    <div id="productImageSlide"
+                                         class="carousel slide border-primary border border-2 p-0"
+                                         data-ride="carousel">
+                                        <ol class="carousel-indicators m-0">
+                                            <li th:each="img, imgState : ${listImages}" th:if="${imgState.index==0}"
+                                                data-target="#productImageSlide"
+                                                th:attr="data-slide-to=${imgState.index}"
+                                                class="bg-primary active"></li>
+                                            <li th:each="img, imgState : ${listImages}" th:if="${imgState.index>0}"
+                                                data-target="#productImageSlide"
+                                                th:attr="data-slide-to=${imgState.index}"
+                                                class="bg-primary"></li>
+                                        </ol>
+                                        <div class="carousel-inner">
+                                            <div th:each="img, imgState : ${listImages}" th:if="${imgState.index==0}"
+                                                 class="carousel-item ratio ratio-1x1 active">
+                                                <img class="d-block of-contain " th:src="@{${img.toString()}}" alt=""
+                                                     src=""/>
+                                            </div>
+                                            <div th:each="img, imgState : ${listImages}" th:if="${imgState.index>0}"
+                                                 class="carousel-item ratio ratio-1x1 ">
+                                                <img class="d-block of-contain" th:src="@{${img.toString()}}" alt=""
+                                                     src=""/>
+                                            </div>
 
-										</div>
-										<a class="carousel-control-prev " href="#productImageSlide" role="button"
-										   data-slide="prev">
-											<span class="carousel-control-prev-icon bg-primary" aria-hidden="true"></span>
-											<span class="sr-only">Previous</span>
-										</a>
-										<a class="carousel-control-next	" href="#productImageSlide" role="button"
-										   data-slide="next">
-											<span class="carousel-control-next-icon bg-primary" aria-hidden="true"></span>
-											<span class="sr-only">Next</span>
-										</a>
+                                        </div>
+                                        <a class="carousel-control-prev " href="#productImageSlide" role="button"
+                                           data-slide="prev">
+                                            <span class="carousel-control-prev-icon bg-primary"
+                                                  aria-hidden="true"></span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="carousel-control-next	" href="#productImageSlide" role="button"
+                                           data-slide="next">
+                                            <span class="carousel-control-next-icon bg-primary"
+                                                  aria-hidden="true"></span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
 
-									</div>
-								</div>
-								<div class="w-100 p-0 mt-2 d-none d-md-block justify-content-start position-relative">
-									<div class="w-75 mx-auto owl-carousel owl-theme ">
-										<div th:each="img, imgState : ${listImages}" th:if="${imgState.index==0}"
-											 data-target="#productImageSlide" th:attr="data-slide-to=${imgState.index}"
-											 class="item ratio ratio-1x1 border border-1 border-primary active">
-											<img class="m-0 of-cover op-center " th:src="@{${img.toString()}}" alt="" src=""/>
-										</div>
-										<div th:each="img, imgState : ${listImages}" th:if="${imgState.index>0}"
-											 data-target="#productImageSlide" th:attr="data-slide-to=${imgState.index}"
-											 class="item ratio ratio-1x1 border border-1 border-primary">
-											<img class="m-0 of-cover op-center" th:src="@{${img.toString()}}" alt="" src=""/>
-										</div>
-									</div>
-									<div class="customNav">
-										<div class="customNextBtn">
-											<i class="bi bi-caret-right-fill fs-4"></i>
-										</div>
-										<div class="customPrevBtn">
-											<i class="bi bi-caret-left-fill fs-4"></i>
-										</div>
-									</div>
-								</div>
-							</div>
-
-
-						</div>
-						<div class="col-lg-8 m-0 pt-2 ps-md-4 p-0">
-							<h5 class="h4 text-uppercase text-primary" th:text="*{name}"></h5>
-
-							<div class="mt-3">
-								<h5 class="text-secondary fs-7">Time left: </h5>
-								<input type="hidden" th:value="*{timeFinish}" id="timeFinish">
-								<div class="d-flex flex-row fs-3 text-danger">
-									<div class="timer-box">
-										<span id="hour"></span>
-									</div>
-									<span class="my-auto mx-3 font-inter fw-bold">:</span>
-									<div class="timer-box">
-										<span id="minute"></span>
-									</div>
-									<span class="my-auto mx-3 font-inter fw-bold">:</span>
-									<div class="timer-box">
-										<span id="second"></span>
-									</div>
-								</div>
-							</div>
-							<div class="divider"></div>
-							<div class="d-flex mt-3 mx-0">
-								<div class="d-flex flex-column m-0 p-0">
-									<h5 class="text-secondary fs-7">Current bid: </h5>
-									<div class="">
-										<i class="bi bi-currency-dollar fs-4 align-middle"></i>
-										<span class="fs-5 align-middle text-primary fw-bold"
-											  th:text="${#numbers.formatDecimal(product.currentPrice,2,'COMMA',0,'POINT')}"></span>
-									</div>
-								</div>
-								<div class="d-flex flex-column m-0 p-0 ms-5">
-									<h5 class="text-secondary fs-7">Current winner: </h5>
-									<div class="">
-										<i class="bi bi-trophy fs-4"></i>
-										<span class=" fs-5 text-primary fw-bold"
-											  th:text="${product.bid.get(0).user.account.username}"></span>
-									</div>
-								</div>
-							</div>
-							<div class="divider"></div>
-							<div class="d-flex mt-3 mx-0">
-								<div class="d-flex flex-column m-0 p-0">
-									<h5 class="text-secondary fs-7">Reserve price: $<span id="reservePrice"
-																						  th:text="${#numbers.formatDecimal(product.reservePrice,2,'COMMA',0,'POINT')}"></span>
-									</h5>
-									<h5 class="text-secondary fs-7">Step price: $<span id="stepPrice"
-																					   th:text="${#numbers.formatDecimal(product.stepPrice,2,'COMMA',0,'POINT')}"></span>
-									</h5>
-								</div>
-							</div>
-							<div class="d-flex mt-3 mx-0">
-								<div class="btn btn-primary btn-lg-square rounded-0 fs-3 fw-b text-light">-</div>
-								<div class="price-box">
-								<span class="price text-secondary font-inter fw-bold fs-5" id="bid"
-									  th:text="${'$ '+#numbers.formatDecimal(product.currentPrice+product.stepPrice,2,'COMMA',0,'POINT')}"></span>
-								</div>
-								<div class="btn btn-primary btn-lg-square rounded-0 fs-3 fw-b text-light">+</div>
-								<button class="btn btn-primary rounded-0 ms-2 text-light fw-bold fs-7 ">
-									<i class="fa fa-gavel fs-5"></i>
-									Place bid
-								</button>
-							</div>
-
-						</div>
-					</div>
-					<div class="row mx-0 mt-3 flex-lg-row flex-sm-column">
-						<div class="col-lg-4 p-0 m-0 mb-3 order-lg-first">
-							<h5 class="text-secondary fs-7">Product description:</h5>
-							<p nl2br:text="${product.productInfo}" class="text-secondary fs-6"></p>
-						</div>
-						<div class="col-lg-8 m-0 ps-lg-4 p-0 order-first">
-							<h5 class="text-secondary fs-7">Bidding board:</h5>
-							<table class="table ms-0 fs-7 border border-primary">
-								<thead class="bg-primary text-light">
-								<tr>
-									<th>No.</th>
-									<th>Username</th>
-									<th>Bid</th>
-									<th>Time</th>
-								</tr>
-								</thead>
-								<tbody>
-								<tr th:each="bid, bidState : ${product.bid}"
-									th:class="${bidState.index==(#lists.size(product.bid)-1)} ? ${'border-primary'} : ${'border-light'}">
-									<td><span th:text="${bidState.index+1}"></span><i
-											class="bi bi-trophy-fill text-primary ms-2"
-											th:if="${bidState.index==0}"></i>
-									</td>
-									<td th:text="${bid.user.account.username}"></td>
-									<td th:text="${'$ ' + #numbers.formatDecimal(bid.bidPrice,2,'COMMA',0,'POINT')}"></td>
-									<td th:text="${bid.bidTime}"></td>
-								</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-		</main>
-
-	</div>
+                                    </div>
+                                </div>
+                                <div class="w-100 p-0 mt-2 d-none d-md-block justify-content-start position-relative">
+                                    <div class="w-75 mx-auto owl-carousel owl-theme ">
+                                        <div th:each="img, imgState : ${listImages}" th:if="${imgState.index==0}"
+                                             data-target="#productImageSlide" th:attr="data-slide-to=${imgState.index}"
+                                             class="item ratio ratio-1x1 border border-1 border-primary active">
+                                            <img class="m-0 of-cover op-center " th:src="@{${img.toString()}}" alt=""
+                                                 src=""/>
+                                        </div>
+                                        <div th:each="img, imgState : ${listImages}" th:if="${imgState.index>0}"
+                                             data-target="#productImageSlide" th:attr="data-slide-to=${imgState.index}"
+                                             class="item ratio ratio-1x1 border border-1 border-primary">
+                                            <img class="m-0 of-cover op-center" th:src="@{${img.toString()}}" alt=""
+                                                 src=""/>
+                                        </div>
+                                    </div>
+                                    <div class="customNav">
+                                        <div class="customNextBtn">
+                                            <i class="bi bi-caret-right-fill fs-4"></i>
+                                        </div>
+                                        <div class="customPrevBtn">
+                                            <i class="bi bi-caret-left-fill fs-4"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
 
-	<div class="" th:insert="footer :: my-footer"></div>
+                        </div>
+                        <div class="col-lg-8 m-0 pt-2 ps-md-4 p-0">
+                            <h5 class="h4 text-uppercase text-primary" th:text="*{name}"></h5>
+
+                            <div class="mt-3">
+                                <h5 class="text-secondary fs-7">Time left: </h5>
+                                <input type="hidden" th:value="*{timeFinish}" id="timeFinish">
+                                <div class="d-flex flex-row fs-3 text-danger">
+                                    <div class="timer-box">
+                                        <span id="hour"></span>
+                                    </div>
+                                    <span class="my-auto mx-3 font-inter fw-bold">:</span>
+                                    <div class="timer-box">
+                                        <span id="minute"></span>
+                                    </div>
+                                    <span class="my-auto mx-3 font-inter fw-bold">:</span>
+                                    <div class="timer-box">
+                                        <span id="second"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="divider"></div>
+                            <div class="d-flex mt-3 mx-0">
+                                <div class="d-flex flex-column m-0 p-0">
+                                    <h5 class="text-secondary fs-7">Current bid: </h5>
+                                    <div class="">
+                                        <i class="bi bi-currency-dollar fs-4 align-middle"></i>
+                                        <span class="fs-5 align-middle text-primary fw-bold"
+                                              th:text="${product.bid.isEmpty()} ? '0' :${#numbers.formatDecimal(product.currentPrice,2,'COMMA',0,'POINT')}"></span>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column m-0 p-0 ms-5">
+                                    <h5 class="text-secondary fs-7">Current winner: </h5>
+                                    <div class="">
+                                        <i class="bi bi-trophy fs-4"></i>
+                                        <span th:if="${product.bid != null}" class=" fs-5 text-primary fw-bold"
+                                              th:text="${product.bid.get(0).user.account.username}"></span>
+                                        <span th:if="${product.bid.isEmpty()}" class=" fs-5 text-primary fw-bold"
+                                        >Be asgdagsd</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="divider"></div>
+                            <div class="d-flex mt-3 mx-0">
+                                <div class="d-flex flex-column m-0 p-0">
+                                    <h5 class="text-secondary fs-7">Reserve price: $<span id="reservePrice"
+                                                                                          th:text="${#numbers.formatDecimal(product.reservePrice,2,'COMMA',0,'POINT')}"></span>
+                                    </h5>
+                                    <h5 class="text-secondary fs-7">Step price: $<span id="stepPrice"
+                                                                                       th:text="${#numbers.formatDecimal(product.stepPrice,2,'COMMA',0,'POINT')}"></span>
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="d-flex mt-3 mx-0">
+                                <div class="btn btn-primary btn-lg-square rounded-0 fs-3 fw-b text-light">-</div>
+                                <div class="price-box">
+								<span id="price" class="price text-secondary font-inter fw-bold fs-5"
+                                      th:text="${'$ '+#numbers.formatDecimal(product.currentPrice+product.stepPrice,2,'COMMA',0,'POINT')}"></span>
+                                </div>
+                                <div class="btn btn-primary btn-lg-square rounded-0 fs-3 fw-b text-light">+</div>
+                                <button id="btnModalBid" class="btn btn-primary rounded-0 ms-2 text-light fw-bold fs-7 ">
+                                    <i class="fa fa-gavel fs-5"></i>
+                                    Place bid
+                                </button>
+                                <input id="username" type="hidden" th:value="${#request.userPrincipal.name}">
+<!--                                get product id-->
+                                <input id="productId" type="hidden" th:value="${product.productId}">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row mx-0 mt-3 flex-lg-row flex-sm-column">
+                        <div class="col-lg-4 p-0 m-0 mb-3 order-lg-first">
+                            <h5 class="text-secondary fs-7">Product description:</h5>
+                            <p nl2br:text="${product.productInfo}" class="text-secondary fs-6"></p>
+                        </div>
+                        <div class="col-lg-8 m-0 ps-lg-4 p-0 order-first" th:if="${product.bid != null}">
+                            <h5 class="text-secondary fs-7">Bidding board:</h5>
+                            <table class="table ms-0 fs-7 border border-primary">
+                                <thead class="bg-primary text-light">
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Username</th>
+                                    <th>Bid</th>
+                                    <th>Time</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="bid, bidState : ${bids}"
+                                    th:class="${bidState.index==(#lists.size(product.bid)-1)} ? ${'border-primary'} : ${'border-light'}">
+                                    <td><span th:text="${bidState.index+1}"></span><i
+                                            class="bi bi-trophy-fill text-primary ms-2"
+                                            th:if="${bidState.index==0}"></i>
+                                    </td>
+                                    <td th:text="${bid.user.account.username}"></td>
+                                    <td th:text="${'$ ' + #numbers.formatDecimal(bid.bidPrice,2,'COMMA',0,'POINT')}"></td>
+                                    <td th:text="${#strings.replace(bid.bidTime,'T',' ')}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+<!--    modal bid-->
+    <div class="modal" id="confirmBidModal" style="display: none;">
+        <div class="container">
+            <div class="row">
+                <div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3 mx-auto my-auto">
+                    <div class="panel border bg-white" style="min-height: 150px;border-radius: 12px; margin-top: 150px">
+                        <div class="panel-heading" style="border-radius: 12px;text-align: center;">
+                            <h3 class="pt-3 font-weight-bold" style="color: #EAA636">Do you want to confirm ?</h3>
+                        </div>
+                        <div style="margin-left: 26%; margin-top: 5%">
+                            <button type="button" class="btn btn-danger rounded-0 ms-2 text-light fw-bold fs-7 close">Cancel</button>
+                            <button id="bidBtn" class="btn btn-primary rounded-0 ms-2 text-light fw-bold fs-7 " >
+                                <i class="fa fa-gavel fs-5"></i>
+                                Confirm
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="BidFormResponse"></div>
+
+    <div class="" th:insert="footer :: my-footer"></div>
 </div>
 
 
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.bundle.min.js"></script>
 <script th:src="@{/lib/wow/wow.min.js}"></script>
 <script th:src="@{/lib/easing/easing.min.js}"></script>
 <script th:src="@{/lib/waypoints/waypoints.min.js}"></script>
 <script th:src="@{/lib/counterup/counterup.min.js}"></script>
 <script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
+
 <script>
     $('.owl-carousel').owlCarousel({
         margin: 10,
-		dots:false,
-        items:3,
+        dots: false,
+        items: 3,
     })
     var owl = $('.owl-carousel');
     owl.owlCarousel();
     // Go to the next item
-    $('.customNextBtn').click(function() {
+    $('.customNextBtn').click(function () {
         owl.trigger('next.owl.carousel');
     })
     // Go to the previous item
-    $('.customPrevBtn').click(function() {
+    $('.customPrevBtn').click(function () {
         // With optional speed parameter
         // Parameters has to be in square bracket '[]'
         owl.trigger('prev.owl.carousel', [300]);
@@ -253,6 +299,76 @@
 <!-- Template Javascript -->
 <script th:src="@{/js/main.js}"></script>
 <script th:src="@{/js/timer.js}"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+        console.log($.now());
+        $('#bidBtn').click(function () {
+            console.log('click')
+            const options = { day: 'numeric', month: 'long',year: 'numeric', hour:'numeric', minute: 'numeric',second:'numeric' };
+            let bidTime = new Date($.now());
+            let bidPrice = $('#price').val();
+            let username = $('#username').val();
+            var json = {"bidTime": bidTime, "bidPrice": bidPrice, "user.account.username": username}
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                type: "POST",
+                data: JSON.stringify(json),
+                url: "/bid/createBid",
+                success: function () {
+                    console.log('success')
+                }
+            });
+
+        });
+</script>
+<script type="text/javascript">
+    var productId = document.getElementById('productId').value;
+        // setInterval(listBid, 30000);
+    listBid();
+    function listBid() {
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: "GET",
+            url: "/products/loadBid/" + productId,
+            success: function (bid) {
+                console.log('success')
+                var respContent = "";
+                respContent += "<span class='success'>Smartphone was edited: [";
+                respContent += bid.bidPrice + " : ";
+                respContent += bid.bidTime + "]</span>";
+                $("#BidFormResponse").html(respContent);
+            }
+        })
+    }
+</script>
+
+<script>
+    var modal = document.getElementById("confirmBidModal");
+    var btn = document.getElementById("btnModalBid");
+    var close = document.getElementsByClassName("close")[0];
+    var bidBtn = document.getElementById("bidBtn");
+
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    close.onclick = function () {
+        modal.style.display = "none";
+
+    }
+
+    bidBtn.onclick = function () {
+        modal.style.display = "none";
+    }
+
+</script>
+
 </body>
 
 </html>

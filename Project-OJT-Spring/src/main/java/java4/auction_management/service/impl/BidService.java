@@ -33,7 +33,7 @@ public class BidService implements IBidService {
 
     @Override
     public Bid save(Bid entity) {
-        return null;
+        return iBidRepository.save(entity);
     }
 
     @Override
@@ -44,5 +44,15 @@ public class BidService implements IBidService {
     @Override
     public List<Bid> getBidsByProductId(Product productId) {
         return iBidRepository.getBidsByProduct(productId);
+    }
+
+    @Override
+    public List<Bid> listBidSort(Long productId) {
+        return iBidRepository.listBidSort(productId);
+    }
+
+    @Override
+    public List<Bid> findAllByOrderByBidPriceDesc() {
+        return iBidRepository.findAllByOrderByBidPriceDesc();
     }
 }
