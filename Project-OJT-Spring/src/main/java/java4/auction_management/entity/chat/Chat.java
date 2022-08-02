@@ -28,6 +28,5 @@ public class Chat {
     private Account account;
 
     @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL)
-    @JsonBackReference
     private List<ChatDetail> chatDetails;
 }

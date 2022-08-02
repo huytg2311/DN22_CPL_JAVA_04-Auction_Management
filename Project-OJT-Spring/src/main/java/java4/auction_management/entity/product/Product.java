@@ -55,7 +55,6 @@ public class Product {
     private Category category;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    @JsonBackReference
     private List<Bid> bid;
 
     @JoinColumn(name = "username")
