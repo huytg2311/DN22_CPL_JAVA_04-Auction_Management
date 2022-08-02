@@ -181,19 +181,19 @@
                                 </div>
                             </div>
                             <div class="d-flex mt-3 mx-0">
-                                <div class="btn btn-primary btn-lg-square rounded-0 fs-3 fw-b text-light">-</div>
+                                <div id="subBidBtn" class="btn btn-primary btn-lg-square rounded-0 fs-3 fw-b text-light">-</div>
                                 <div class="price-box">
 								<span id="price" class="price text-secondary font-inter fw-bold fs-5"
                                       th:text="${'$ '+#numbers.formatDecimal(product.currentPrice+product.stepPrice,2,'COMMA',0,'POINT')}"></span>
                                 </div>
-                                <div class="btn btn-primary btn-lg-square rounded-0 fs-3 fw-b text-light">+</div>
+                                <div id="plusBidBtn"	 class="btn btn-primary btn-lg-square rounded-0 fs-3 fw-b text-light">+</div>
                                 <button id="btnModalBid" class="btn btn-primary rounded-0 ms-2 text-light fw-bold fs-7 ">
                                     <i class="fa fa-gavel fs-5"></i>
                                     Place bid
                                 </button>
-                                <input id="username" type="hidden" th:value="${#request.userPrincipal.name}">
+                                <input id="username" type="hidden" th:value="${#request.userPrincipal!=null} ? ${#request.userPrincipal.name} : ''">
 <!--                                get product id-->
-                                <input id="productId" type="hidden" th:value="${product.productId}">
+                                <input id="product" type="hidden" th:value="${product}">
                             </div>
 
                         </div>
@@ -293,49 +293,45 @@
 <!-- Template Javascript -->
 <script th:src="@{/js/main.js}"></script>
 <script th:src="@{/js/timer.js}"></script>
-<script type="text/javascript">
-        console.log($.now());
-        $('#bidBtn').click(function () {
-            console.log('click')
-            const options = { day: 'numeric', month: 'long',year: 'numeric', hour:'numeric', minute: 'numeric',second:'numeric' };
-            let bidTime = new Date($.now());
-            let bidPrice = $('#price').val();
-            let username = $('#username').val();
-            var json = {"bidTime": bidTime, "bidPrice": bidPrice, "user.account.username": username}
-            $.ajax({
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                type: "POST",
-                data: JSON.stringify(json),
-                url: "/bid/createBid",
-                success: function () {
-                    console.log('success')
-                }
-            });
-
+<script>
+    $('#bidBtn').click(function () {
+        var product = {productId: [[${product.productId}]]}
+        var user = {account: {username: $('#username').val()}};
+        var bidTime = new Date($.now()).toLocaleString('vi-VN',{hour: "2-digit", minute: "2-digit", second:"2-digit", day:"2-digit", month: "2-digit", year:"numeric"});
+        var bidPrice = Number($('#price').html().replace('$ ','').replace(',',''));
+        var json = {"bidPrice": bidPrice,"bidTime": bidTime, "user": user, "product": product};
+        console.log(JSON.stringify(json));
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: "POST",
+            data: JSON.stringify(json),
+            url: "/bid/createBid",
+            success: function () {
+                console.log('success')
+            }
         });
+
+    });
 </script>
 <script type="text/javascript">
-    var productId = document.getElementById('productId').value;
-        // setInterval(listBid, 30000);
-    listBid();
+    var productId = [[${product.productId}]];
+	setInterval(listBid, 5000);
+
     function listBid() {
+        console.log('ok')
         $.ajax({
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             type: "GET",
-            url: "/products/loadBid/" + productId,
-            success: function (bid) {
-                console.log('success')
-                var respContent = "";
-                respContent += "<span class='success'>Smartphone was edited: [";
-                respContent += bid.bidPrice + " : ";
-                respContent += bid.bidTime + "]</span>";
-                $("#BidFormResponse").html(respContent);
+            url: "/products/load/" + productId,
+            success: function (result) {
+                console.log(JSON.parse(result))
+                $('html').replaceWith(JSON.parse(result))
             }
         })
     }

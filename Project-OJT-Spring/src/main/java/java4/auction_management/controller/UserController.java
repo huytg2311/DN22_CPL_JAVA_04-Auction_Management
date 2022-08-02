@@ -112,6 +112,12 @@ public class UserController {
     public String showAuctionUser(@PathVariable("username") String username, Model model) {
 //                Optional<User> users = userService.getById(user.getId());
         List<Product> product = productService.findProductsByUsername(username);
+        if(product.isEmpty())
+            System.out.println('a');
+        for (Product prod: product
+             ) {
+            System.out.println(prod);
+        };
         model.addAttribute("products", product);
 
 //        model.addAttribute("users", user );

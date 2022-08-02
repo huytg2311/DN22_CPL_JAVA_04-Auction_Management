@@ -24,7 +24,7 @@ public class Bid {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bidId;
 
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss[.SSS][.SS][.S]'Z'")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "HH:mm:ss', 'dd/MM/yyyy")
     private LocalDateTime bidTime;
 
     private double bidPrice;

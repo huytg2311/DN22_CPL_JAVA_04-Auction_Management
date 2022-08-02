@@ -104,23 +104,24 @@ public class ProductController {
 
     }
 
-    // ajax controller history bid
-    @RequestMapping(value = "/loadBid/{id}", method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE, consumes = {"application/json"})
 
-    public @ResponseBody ResponseEntity<Object> sortListBid(@PathVariable("id") Product product) {
-        List<Bid> bidList = iBidService.listBidSort(product.getProductId());
-        List<JSONObject> entities = new ArrayList<>();
-
-        for (Bid b : bidList) {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("id", b.getProduct().getProductId());
-            entities.add(jsonObject);
-        }
-        System.out.println(product.getProductId());
-        System.out.println(iBidService.listBidSort(product.getProductId()));
-        return new ResponseEntity<Object>(entities, HttpStatus.OK);
-    }
+//     ajax controller history bid
+//    @RequestMapping(value = "/loadBid/{id}", method = RequestMethod.GET,
+//            produces = MediaType.APPLICATION_JSON_VALUE, consumes = {"application/json"})
+//
+//    public @ResponseBody ResponseEntity<Object> sortListBid(@PathVariable("id") Product product) {
+//        List<Bid> bidList = iBidService.listBidSort(product.getProductId());
+//        List<JSONObject> entities = new ArrayList<>();
+//
+//        for (Bid b : bidList) {
+//            JSONObject jsonObject = new JSONObject();
+//            jsonObject.put("id", b.getProduct().getProductId());
+//            entities.add(jsonObject);
+//        }
+//        System.out.println(product.getProductId());
+//        System.out.println(iBidService.listBidSort(product.getProductId()));
+//        return new ResponseEntity<Object>(entities, HttpStatus.OK);
+//    }
 
 
     @GetMapping("/auction/{username}")
