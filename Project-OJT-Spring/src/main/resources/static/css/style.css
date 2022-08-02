@@ -69,6 +69,11 @@ h6,
     height: 32px;
 }
 
+.btn-xs-square{
+    width: 15px;
+    height: 15px;
+}
+
 .btn-lg-square {
     width: 48px;
     height: 48px;
@@ -577,4 +582,16 @@ h6,
     position: relative;
 }
 
-.header
+.bg-light-30{
+    background: rgba(253,245,235,0.7) !important;
+}
+
+.avatar-xl{
+    width: 70px;
+    height: 70px;
+}
+
+.w-fit-content{
+   flex: 1 8 200px;
+}
+
