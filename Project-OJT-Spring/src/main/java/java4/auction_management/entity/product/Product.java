@@ -44,7 +44,7 @@ public class Product {
     @Column(length = 1000)
     private String listImage;
 
-    private boolean isApprove;
+    private boolean isSold;
 
     @Column(columnDefinition = "default 'WAITING'")
     @Enumerated(EnumType.STRING)
@@ -55,7 +55,6 @@ public class Product {
     private Category category;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    @JsonBackReference
     private List<Bid> bid;
 
     @JoinColumn(name = "username")

@@ -6,8 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
-@Service
+
 public interface IProductService extends IService<Product, Long>{
 
     Page<Product> findAllProduct(Pageable pageable);
@@ -17,4 +18,6 @@ public interface IProductService extends IService<Product, Long>{
     void saveAllProductList(List<Product> productList);
 
     List<Product> findProductsByUsername(String username);
+
+    Optional<Product> findById(Long productId);
 }

@@ -59,4 +59,9 @@ public class ProductService implements IProductService {
     public List<Product> findProductsByUsername(String username) {
         return iProductRepository.getProductsByUsername(username);
     }
+
+    @Override
+    public Optional<Product> findById(Long productId){
+        return iProductRepository.findById(productId);
+    }
 }

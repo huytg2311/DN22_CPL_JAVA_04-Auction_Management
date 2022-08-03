@@ -13,4 +13,9 @@ public interface IBidService extends IService<Bid,Long> {
     public void deleteById(Integer id);
 
     List<Bid> getBidsByProductId(Product productId);
+
+    List<Bid> listBidSort(Long productId);
+
+    List<Bid> findAllByOrderByBidPriceDesc();
+
 }

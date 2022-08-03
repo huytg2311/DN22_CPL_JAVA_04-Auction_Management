@@ -1,5 +1,6 @@
 package java4.auction_management.entity.bid;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java4.auction_management.entity.product.Product;
 import java4.auction_management.entity.user.User;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
@@ -22,7 +24,8 @@ public class Bid {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bidId;
 
-    private LocalTime bidTime;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "HH:mm:ss', 'dd/MM/yyyy")
+    private LocalDateTime bidTime;
 
     private double bidPrice;
 
@@ -33,6 +36,5 @@ public class Bid {
     @JoinColumn(name = "userId")
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
-
 
 }

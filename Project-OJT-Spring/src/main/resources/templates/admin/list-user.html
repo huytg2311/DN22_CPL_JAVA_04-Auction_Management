@@ -113,7 +113,6 @@
 										<th class="d-none d-md-table-cell">UserName</th>
 										<th class="d-none d-md-table-cell">FullName</th>
 										<th class="d-none d-md-table-cell">Email</th>
-										<th class="d-none d-md-table-cell">Enable</th>
 										<th class="d-none d-md-table-cell">Action</th>
 									</tr>
 									</thead>
@@ -125,26 +124,6 @@
 										<td th:text="${user.account.username}"></td>
 										<td th:text="${user.fullname}"></td>
 										<td th:text="${user.email}"></td>
-										<td class="total">
-
-											<div th:if="${user.account.enable} == true">
-												<label class="switch">
-													<input type="checkbox"
-														   th:id="'enable-'+${user.account.enable}"
-														   th:onclick="'changeActivateUser(' + ${user.account.enable} + ');'" checked>
-													<span class="slider round"></span>
-												</label>
-											</div>
-											<div th:if="${user.account.enable} == false">
-												<label class="switch">
-													<input type="checkbox"
-														   th:id="'enable-'+${user.account.enable}"
-														   th:onclick="'changeActivateUser(' + ${user.account.enable} + ');'" >
-													<span class="slider round"></span>
-												</label>
-											</div>
-
-										</td>
 										<td>
 											<a style="text-decoration: none;"
 											   th:href="@{/admin/detail/{id}(id = ${user.id})}">
