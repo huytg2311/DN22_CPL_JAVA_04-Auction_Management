@@ -309,11 +309,12 @@
 <script th:src="@{/js/timer.js}"></script>
 <script>
     $('#bidBtn').click(function () {
-        if ([[${#request.userPrincipal.name}]] === null) {
+        if ([[${#request.userPrincipal == null}]]) {
 			//show modal 'Log in to place your bid'
+			console.log('Fail')
         } else {
             var product = {productId: [[${product.productId}]]}
-            var user = {account: {username: [[${#request.userPrincipal.name}]]}};
+            var user = {account: {username: "[[${#request.userPrincipal != null} ? ${#request.userPrincipal.name.toString()} : '' ]]"}};
             var bidTime = new Date($.now()).toLocaleString('vi-VN', {
                 hour: "2-digit",
                 minute: "2-digit",
