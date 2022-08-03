@@ -27,7 +27,7 @@ public class Cart {
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     @JoinTable(name = "cartDetail",
-            joinColumns = @JoinColumn(name = "cardId"),
+            joinColumns = @JoinColumn(name = "cartId"),
             inverseJoinColumns = @JoinColumn(name = "productId")
     )
     private List<Product> productList;

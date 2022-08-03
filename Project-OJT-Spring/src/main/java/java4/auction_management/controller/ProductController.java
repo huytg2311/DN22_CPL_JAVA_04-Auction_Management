@@ -37,17 +37,17 @@ public class ProductController {
     public List<Category> categoryList() {
         return iCategoryService.getAll();
     }
-
-    @GetMapping("/create")
-    public String createFormProduct(Model model) {
-        model.addAttribute("product", new Product());
-        return "/products/create-product";
-    }
     @GetMapping("/auction")
     public String showAllProductPosted(Model model) {
         model.addAttribute("products", productService.getAll());
         return "/user/auction";
     }
+    @GetMapping("/create")
+    public String createFormProduct(Model model) {
+        model.addAttribute("product", new Product());
+        return "/products/create-product";
+    }
+
 
     @PostMapping("/create")
     public String createProduct(@Valid @ModelAttribute Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes,
@@ -85,7 +85,7 @@ public class ProductController {
 
         String[] listImage = product.getListImage().split(" ");
         for (String image: listImage
-             ) {
+        ) {
             System.out.println(image);
         }
 

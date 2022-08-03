@@ -3,6 +3,7 @@ package java4.auction_management.controller;
 import com.cloudinary.utils.ObjectUtils;
 import java4.auction_management.config.CloudinaryConfig;
 import java4.auction_management.entity.product.Product;
+import java4.auction_management.entity.user.Account;
 import java4.auction_management.entity.user.User;
 import java4.auction_management.service.IAccountService;
 import java4.auction_management.service.ICategoryService;
@@ -121,6 +122,7 @@ public class UserController {
     public String detailAuction(@PathVariable("productId") Product product, Model model){
 
         model.addAttribute("products", product);
+        System.out.println(product);
 
         String[] listImage = product.getListImage().split(" ");
         for (String image: listImage
@@ -133,11 +135,12 @@ public class UserController {
         return "user/detailAuction";
 
     }
+    @GetMapping("/wallet/{username}")
+    public String showWalletUser(@PathVariable("username")Account account, Model model) {
+        User user = account.getUser();
+        model.addAttribute("users", user);
+
+        return "user/wallet";
+    }
 
 }
-
-
-
-
-
-

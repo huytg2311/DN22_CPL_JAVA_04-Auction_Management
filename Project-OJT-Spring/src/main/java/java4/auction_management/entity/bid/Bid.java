@@ -27,7 +27,7 @@ public class Bid {
     private double bidPrice;
 
     @JoinColumn(name = "productId")
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Product product;
 
     @JoinColumn(name = "userId")

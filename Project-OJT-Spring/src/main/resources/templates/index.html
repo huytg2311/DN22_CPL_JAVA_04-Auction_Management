@@ -54,7 +54,7 @@
 			<div class="bg-primary rounded-circle btn-lg-square me-2">
 				<i class="fa fa-gavel text-light fs-3 "></i>
 			</div>
-			OneClick
+			Smart Auction
 		</h2>
 
 	</a>
@@ -65,7 +65,7 @@
 		<div class="navbar-nav mx-auto p-4 p-lg-0">
 			<a th:href="@{/index}" class="nav-item nav-link active">Home</a>
 			<div th:if="${#authorization.expression('hasAuthority(''ROLE_ADMIN'')')}">
-				<a th:href="@{/admin}" class="nav-item nav-link">Bidding</a>-->
+				<a th:href="@{/admin}" class="nav-item nav-link">Bidding</a>
 			</div>
 			<div th:if="${#authorization.expression('hasAuthority(''ROLE_USER'')')}">
 				<a th:href="'/products/auction/'+ ${#request.userPrincipal.name}" class="nav-item nav-link">Auction</a>
@@ -103,8 +103,9 @@
 						<i class="me-2" data-feather="archive"></i>
 						Auction winning item
 					</a>
-					<a href="testimonial.html" class="dropdown-item align-middle">
+					<a th:href="'/user/wallet/'+ ${#request.userPrincipal.name}" class="dropdown-item align-middle">
 						<i class="me-2" data-feather="dollar-sign"></i>
+
 						E-wallet
 					</a>
 					<div class="dropdown-divider"></div>

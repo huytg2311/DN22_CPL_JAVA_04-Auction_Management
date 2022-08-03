@@ -81,131 +81,54 @@
 			<i class="fa fa-right-left fs-"></i>
 		</div>
 	</nav>
-	<div class="main  ">
-
+	<div class="main">
 		<div  class="header-spacer bg-dark"></div>
-		<section  >
-			<div class="container py-5 ">
+		<nav class="navbar navbar-expand navbar-light bg-light px-4 py-3 shadow-sm">
 
-				<form class="header-spacer"   th:action="@{/admin/detail}" th:object="${users}" method="post" enctype="multipart/form-data">
-					<div class="row">
-						<div class="col-lg-4" >
-							<div class="card mb-4">
-								<div class="card-body text-center" style=" height: 495px;">
-									<img th:src="@{*{image}}" alt="avatar"
-										 class="rounded-circle img-fluid" style="width: 500px; height: 300px;">
-									<h5 class="my-3" th:text="${users.account.username} "></h5>
+		</nav>
+		<main class="content">
+			<div class="container-fluid p-0">
+				<h1 class="h3 m-3">Add New Category</h1>
+				<div class="row ms-0">
+					<div class="col-12">
+						<div class="card">
+							<form th:action="@{/admin/createCategory}" th:object="${category}" method="post" enctype="multipart/form-data">
+<!--								<input type="hidden" th:field="*{categoryId}">-->
 
+								<div class="row">
+									<div class="col-12 col-lg-6">
+										<div class="card">
+<!--											<div class="card-header">-->
+<!--												<h5 class="card-title mb-0">Category ID</h5>-->
+<!--											</div>-->
+<!--											<div class="card-body">-->
+<!--												<input type="text" class="form-control" th:field="*{categoryId}" readonly>-->
+<!--											</div>-->
+										</div>
 
-								</div>
-							</div>
-							<div class="card mb-4 mb-lg-0">
-								<div class="card-body p-0">
-									<ul class="list-group list-group-flush rounded-3">
+										<div class="col-md-6">
+											<div class="form-group first">
+												<label for="name">Category Name: </label><i style="color: red">(*)</i>
+												<input type="text" th:field="*{name}"  class="form-control" placeholder="Enter category name" id="name" required>
 
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-8">
-							<div class="card mb-4">
-								<div class="card-body">
-									<div class="row">
-										<div class="col-sm-3">
-											<p class="mb-0">Full Name</p>
-										</div>
-										<div class="col-sm-9">
-											<p class="text-muted mb-0" th:text="${users.account.username} "></p>
-										</div>
-									</div>
-									<hr>
-									<div class="row">
-										<div class="col-sm-3">
-											<p class="mb-0" >Email</p>
-										</div>
-										<div class="col-sm-9">
-											<p class="text-muted mb-0"  th:text="${users.email}"></p>
-										</div>
-									</div>
-									<hr>
-									<div class="row">
-										<div class="col-sm-3">
-											<p class="mb-0">Phone</p>
-										</div>
-										<div class="col-sm-9">
-											<p class="text-muted mb-0" th:text="${users.phoneNumber}"></p>
-										</div>
-									</div>
-									<hr>
-									<div class="row">
-										<div class="col-sm-3">
-											<p class="mb-0">Date</p>
-										</div>
-										<div class="col-sm-9">
-											<p class="text-muted mb-0" th:text="${users.dayOfBirth}"></p>
-										</div>
-									</div>
-									<hr>
-									<div class="row">
-										<div class="col-sm-3">
-											<p class="mb-0">Address</p>
-										</div>
-										<div class="col-sm-9">
-											<p class="text-muted mb-0" th:text="${users.address}"></p>
-										</div>
-									</div>
-									<hr>
-									<div class="row">
-										<div class="col-sm-3">
-											<p class="mb-0">Gender</p>
-										</div>
-										<div class="col-sm-9">
-											<p class="text-muted mb-0" th:text="${users.gender}"></p>
-										</div>
-									</div>
-									<hr>
-									<div class="row">
-										<div class="col-sm-3">
-											<p class="mb-0">UserName</p>
-										</div>
-										<div class="col-sm-9">
-											<p class="text-muted mb-0" th:text="${users.account.username}"></p>
-										</div>
-									</div>
-									<hr>
-									<div class="row">
-										<div class="col-sm-3">
-											<p class="mb-0">ID Card</p>
-										</div>
-										<div class="col-sm-9">
-											<p class="text-muted mb-0" th:text="${users.idCard}"></p>
-										</div>
-									</div>
-									<hr>
-									<div class="row">
-										<div class="col-sm-3">
-											<p class="mb-0">Enable</p>
-										</div>
-										<div class="col-sm-9">
-											<p class="text-muted mb-0" th:text="${users.account.isEnable()}"></p>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-
+								<button style="margin-left: 65px" class="btn btn-success" type="submit">Add</button>
+							</form>
 						</div>
 					</div>
-				</form>
+				</div>
 			</div>
-		</section>
-
+		</main>
 	</div>
 </div>
 
 
 <!--****** JS ******-->
 <script>
-	feather.replace()
+    feather.replace()
 </script>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

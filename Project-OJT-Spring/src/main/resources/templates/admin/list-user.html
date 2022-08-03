@@ -2,228 +2,174 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
-    <meta name="author" content="AdminKit">
-    <meta name="keywords"
-          content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="AdminKit">
+	<meta name="keywords"
+		  content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="shortcut icon" th:href="@{admin/img/icons/icon-48x48.png}"/>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" th:href="@{admin/img/icons/icon-48x48.png}"/>
 
-    <link rel="canonical" href="https://demo-basic.adminkit.io/"/>
-
-    <title>Admin List User</title>
-    <link type="text/css" th:href="@{edmin/css/button.css}" rel="stylesheet">
+	<title>Admin List User</title>
 
 
-    <link th:href="@{admin/css/app.css}" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Playfair+Display:wght@600;700&display=swap"
-          rel="stylesheet">
+	<link th:href="@{admin/css/app.css}" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<!-- Google Web Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
-    <link th:href="@{lib/animate/animate.min.css}" rel="stylesheet">
-    <link th:href="@{lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+	<!-- Icon Font Stylesheet -->
+	<script src="https://kit.fontawesome.com/091e570025.js" crossorigin="anonymous"></script>
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link th:href="@{css/bootstrap.min.css}" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link th:href="@{css/style.css}" rel="stylesheet">
 
 </head>
 
 <body>
 <div>
 
+	<div class="wrapper">
 
-    <div class="wrapper">
-        <nav id="sidebar" class="sidebar js-sidebar">
-            <div class="sidebar-content js-simplebar">
-                <a class="sidebar-brand" th:href="@{/index2}">
-                    <span class="align-middle">Admin Pay.Picker</span>
-                </a>
-
-                <ul class="sidebar-nav">
-                    <li class="sidebar-header">
-                        Pages
-                    </li>
-
-
-                    <li class="sidebar-item active">
-                        <a class="sidebar-link" th:href="@{/admin}">
-                            <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Management User</span>
-                        </a>
-                    </li>
-
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" th:href="@{/admin/categories}">
-                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Management Category</span>
-                        </a>
-                    </li>
-
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="pages-sign-in.html">
-                            <i class="align-middle" data-feather="log-in"></i> <span
-                                class="align-middle">Consulting</span>
-                        </a>
-                    </li>
-
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="pages-sign-up.html">
-                            <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Member Access</span>
-                        </a>
-                    </li>
-
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="pages-blank.html">
-                            <i class="align-middle" data-feather="book"></i> <span
-                                class="align-middle">Manage Member</span>
-                        </a>
-                    </li>
-
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="pages-blank.html">
-                            <i class="align-middle" data-feather="book"></i> <span
-                                class="align-middle">List Product</span>
-                        </a>
-                    </li>
-
-                </ul>
-
-            </div>
-        </nav>
-
-        <div class="main">
-            <nav class="navbar navbar-expand navbar-light navbar-bg" style="background-color: #303030">
-                <!--			<a class="sidebar-toggle js-sidebar-toggle">-->
-                <!--				<i class="hamburger align-self-center"></i>-->
-                <!--			</a>-->
-                <!--			<h4 style="margin-left: 850px">Welcome :-->
-                <!--				<span th:utext="${#request.userPrincipal.name}"></span>-->
-                <!--			</h4>-->
-                <!--			<a th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a>-->
-                <div class="navbar-nav mx-auto p-4 p-lg-0">
-                    <a th:href="@{index}" class="nav-item nav-link active">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
-                    <a href="products/service.html" class="nav-item nav-link">Services</a>
-                    <a href="product.html" class="nav-item nav-link">Products</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu m-0">
-                            <a href="team.html" class="dropdown-item">Our Team</a>
-                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                            <a href="success.html" class="dropdown-item">404 Page</a>
-                        </div>
-                    </div>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
-                </div>
-                <div class=" d-none d-lg-flex">
-                    <div class="flex-shrink-0 btn-lg-square border border-light rounded-circle">
-                        <i class="fa fa-user text-primary"></i>
-                    </div>
-
-                    <div class="ps-3"><a class="text-primary mb-0"
-                                         th:utext="${#request.userPrincipal.name}">Login</a><br>
-                        <a class="text-light mb-0" th:if="${#request.userPrincipal != null}"
-                           th:href="@{/logout}">Logout</a>
-                    </div>
-                </div>
-
-            </nav>
+		<nav id="sidebar" class="sidebar js-sidebar">
+			<div class="sidebar-content js-simplebar">
+				<a class="sidebar-brand" href="/admin">
+					<span class="align-middle text-primary">
+						<i class="fa-solid fa-gavel"></i> Pay.Picker
+					</span>
+				</a>
+				<ul class="sidebar-nav">
+					<li class="sidebar-header">
+						Pages
+					</li>
 
 
-            <main class="content"  style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg'); ">
-                <div class="row">
-                    <div class="col-12 col-lg-8 col-xxl-9 d-flex" style="margin-left: 140px; margin-top: 35px">
+					<li class="sidebar-item active">
+						<a class="sidebar-link" th:href="@{/admin}">
+							<i class="align-middle" data-feather="user"></i> <span class="align-middle">User management</span>
+						</a>
+					</li>
 
-                        <div class="card flex-fill">
-                            <div class="card-header">
+					<li class="sidebar-item">
+						<a class="sidebar-link" th:href="@{/admin/categories}">
+							<i class="align-middle" data-feather="grid"></i><span class="align-middle">Category management</span>
+						</a>
+					</li>
 
-                                <h5 class="card-title mb-0">List Users</h5>
-                            </div>
-                            <table class="table table-hover my-0">
-                                <thead>
-                                <tr>
-                                    <th>Image</th>
-                                    <th>UserName</th>
-                                    <th class="d-none d-md-table-cell">Email</th>
-                                    <th class="d-none d-md-table-cell">FullName</th>
-                                    <th class="d-none d-md-table-cell">Enable</th>
-                                    <th class="d-none d-md-table-cell">&emsp;&emsp;&emsp;&emsp;Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr th:each="user : ${users}">
-                                    <td>
-                                        <img style="width: 60px ; height: 60px; border-radius: 100%" th:src="@{${user.image}}">
-                                    </td>
-                                    <td th:text="${user.account.username}"></td>
-                                    <td th:text="${user.email}"></td>
-                                    <td th:text="${user.fullname}"></td>
-                                    <td class="total">
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="pages-sign-in.html">
+							<i class="align-middle" data-feather="box"></i><span class="align-middle">Product management</span>
+						</a>
+					</li>
 
-                                        <div th:if="${user.account.enable} == true">
-                                            <label class="switch">
-                                                <input type="checkbox"
-                                                       th:id="'enable-'+${user.account.enable}"
-                                                       th:onclick="'changeActivateUser(' + ${user.account.enable} + ');'" checked>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div th:if="${user.account.enable} == false">
-                                            <label class="switch">
-                                                <input type="checkbox"
-                                                       th:id="'enable-'+${user.account.enable}"
-                                                       th:onclick="'changeActivateUser(' + ${user.account.enable} + ');'" >
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
+				</ul>
 
-                                    </td>
+			</div>
+		</nav>
 
-                                    <td>
-                                        <!--									<a th:href="@{/user/edit/{id}(id = ${user.id})}">-->
-                                        <!--										<i class="material-icons" title="Edit">&#xE254;</i></a>-->
-                                        <!--									<a th:href="@{/user/delete/{id}(id = ${user.id})}" class="delBtn">-->
-                                        <!--										<i class="material-icons" title="Delete">&#xE872;</i></a>-->
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
 
-                                        <a style="text-decoration: none;"
-                                           th:href="@{/admin/detail/{id}(id = ${user.id})}">
-                                            <button type="button" class="btn btn-outline-success">Detail</button>
-                                        </a>
-                                        <a style="text-decoration: none;"
-                                           th:href="@{/admin/edit/{id}(id = ${user.id})}">
-                                            <button type="button" class="btn btn-outline-success">Edit</button>
-                                        </a>
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav navbar-align">
+						<li class="nav-item dropdown">
+							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+								<i class="align-middle" data-feather="settings"></i>
+							</a>
 
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                </div>
-
-            </main>
+							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+								<img src="/img/product-1.jpg" class="avatar img-fluid rounded me-1" alt=""/> <span class="text-primary bold">Charles Hall</span>
+							</a>
+							<div class="dropdown-menu dropdown-menu-end">
+								<a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
+								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#">Log out</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
 
 
-        </div>
-    </div>
+			<main class="content">
+				<div class="container-fluid p-0">
 
-    <script th:src="@{admin/js/app.js}"></script>
-    <script>
+					<h1 class="h5 mb-3">List Users</h1>
+
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<table class="table table-hover my-0">
+									<thead>
+									<tr>
+										<th class="d-none d-md-table-cell">Image</th>
+										<th class="d-none d-md-table-cell">UserName</th>
+										<th class="d-none d-md-table-cell">FullName</th>
+										<th class="d-none d-md-table-cell">Email</th>
+										<th class="d-none d-md-table-cell">Enable</th>
+										<th class="d-none d-md-table-cell">Action</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr th:each="user : ${users}">
+										<td>
+											<img class="avatar-lg img-fluid rounded-1" th:src="@{${user.image}}">
+										</td>
+										<td th:text="${user.account.username}"></td>
+										<td th:text="${user.fullname}"></td>
+										<td th:text="${user.email}"></td>
+										<td class="total">
+
+											<div th:if="${user.account.enable} == true">
+												<label class="switch">
+													<input type="checkbox"
+														   th:id="'enable-'+${user.account.enable}"
+														   th:onclick="'changeActivateUser(' + ${user.account.enable} + ');'" checked>
+													<span class="slider round"></span>
+												</label>
+											</div>
+											<div th:if="${user.account.enable} == false">
+												<label class="switch">
+													<input type="checkbox"
+														   th:id="'enable-'+${user.account.enable}"
+														   th:onclick="'changeActivateUser(' + ${user.account.enable} + ');'" >
+													<span class="slider round"></span>
+												</label>
+											</div>
+
+										</td>
+										<td>
+											<a style="text-decoration: none;"
+											   th:href="@{/admin/detail/{id}(id = ${user.id})}">
+												<button type="button" class="btn btn-primary">Detail</button>
+											</a>
+											<a style="text-decoration: none;"
+											   th:href="@{/admin/edit/{id}(id = ${user.id})}">
+												<button type="button" class="btn btn-primary">Edit</button>
+											</a>
+										</td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</main>
+
+
+		</div>
+	</div>
+
+	<script th:src="@{admin/js/app.js}"></script>
+	<script>
         function changeActivateUser(idU) {
 
             var check = document.getElementById('enable-' + idU);
@@ -236,18 +182,19 @@
                 url: "/list-user",
                 type: "post",
 
-                // data: {
-                //     id: idU,
-                //     status: st,
-                //     which: 'a'
-                // },
+                data: {
+                    id: idU,
+                    status: st,
+                    which: 'a'
+                },
                 success: function (data) {
 
                 }
             });
         }
-    </script>
+	</script>
 </div>
+
 </body>
 
 </html>
