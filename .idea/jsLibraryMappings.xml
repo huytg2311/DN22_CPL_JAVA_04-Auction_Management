@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="file://$PROJECT_DIR$" libraries="{091e570025}" />
+    <file url="file://$PROJECT_DIR$/Project-OJT-Spring" libraries="{091e570025, bootstrap, bootstrap-combined.no-icons, bootstrap-icons, feather-icons, font-awesome, jquery-3.4.1, popper.js}" />
+  </component>
+</project>
