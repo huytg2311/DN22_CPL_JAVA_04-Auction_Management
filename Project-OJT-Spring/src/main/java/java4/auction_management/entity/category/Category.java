@@ -27,8 +27,8 @@ public class Category {
 
     private String name;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    private List<Product> productList;
+    @OneToOne(mappedBy = "category")
+    private Product product;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private  List<Bill> billList;

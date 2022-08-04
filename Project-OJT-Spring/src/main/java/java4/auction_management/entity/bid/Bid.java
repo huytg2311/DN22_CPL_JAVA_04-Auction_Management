@@ -1,6 +1,7 @@
 package java4.auction_management.entity.bid;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.product.Product;
 import java4.auction_management.entity.user.User;
 import lombok.AllArgsConstructor;
@@ -29,12 +30,12 @@ public class Bid {
 
     private double bidPrice;
 
-    @JoinColumn(name = "productId")
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Product product;
-
     @JoinColumn(name = "userId")
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "auction_id")
+    private Auction auction;
 
 }

@@ -43,12 +43,12 @@ public class HomeController {
     @GetMapping(value = {"/","/welcome"})
     public String welcomePage(Model model,@PageableDefault(size = 6) Pageable pageable, User user) {
 //        model.addAttribute("nameAccount", accountService.getAll());
-        Page<Product> products = productService.findAllProduct(pageable);
+//        Page<Product> products = productService.findAllProduct(pageable);
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        String currentPrincipalName = authentication.getName();
 //        System.out.println(currentPrincipalName);
 //        User user1 = userService.getUserByUsername(currentPrincipalName);
-        model.addAttribute("products", products);
+//        model.addAttribute("products", products);
         model.addAttribute("account", new Account());
 //        model.addAttribute("user", user1);
 //        System.out.println(user1.toString());

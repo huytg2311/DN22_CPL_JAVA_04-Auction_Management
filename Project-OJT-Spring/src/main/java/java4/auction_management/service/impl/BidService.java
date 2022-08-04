@@ -32,6 +32,11 @@ public class BidService implements IBidService {
     }
 
     @Override
+    public List<Bid> listBidSort(Long auctionID) {
+        return iBidRepository.listBidSort(auctionID);
+    }
+
+    @Override
     public Bid save(Bid entity) {
         return iBidRepository.save(entity);
     }
@@ -39,16 +44,6 @@ public class BidService implements IBidService {
     @Override
     public void deleteById(Long id) {
 
-    }
-
-    @Override
-    public List<Bid> getBidsByProductId(Product productId) {
-        return iBidRepository.getBidsByProduct(productId);
-    }
-
-    @Override
-    public List<Bid> listBidSort(Long productId) {
-        return iBidRepository.listBidSort(productId);
     }
 
     @Override

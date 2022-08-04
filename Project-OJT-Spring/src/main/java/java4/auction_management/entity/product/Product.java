@@ -1,6 +1,7 @@
 package java4.auction_management.entity.product;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.bid.Bid;
 import java4.auction_management.entity.category.Category;
 
@@ -27,53 +28,34 @@ public class Product {
     private Long productId;
 
     @NotEmpty(message = "Name not empty")
-    private String name;
+    private String productName;
 
-    private int reservePrice;
-
-    private int timeAuction;
-
-    private LocalDateTime timeFinish;
-
-    private int stepPrice;
-
-    private int currentPrice;
-
-    private String productInfo;
+    private String description;
 
     @Column(length = 1000)
     private String listImage;
 
+    private LocalDateTime datePost;
+
     private boolean isSold;
 
-    @Column(columnDefinition = "default 'WAITING'")
-    @Enumerated(EnumType.STRING)
-    private EStatus productStatus = EStatus.WAITING;
 
-    @JoinColumn(name = "categoryId")
-    @ManyToOne(fetch = FetchType.LAZY)
+//    @Column(columnDefinition = "default 'WAITING'")
+    @Enumerated(EnumType.STRING)
+    private EStatus productStatus;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private List<Bid> bid;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "auction_id")
+    private Auction auction;
 
-    @JoinColumn(name = "username")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Account account;
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "productId=" + productId +
-                ", name='" + name + '\'' +
-                ", reservePrice=" + reservePrice +
-                ", timeAuction=" + timeAuction +
-                ", timeFinish=" + timeFinish +
-                ", stepPrice=" + stepPrice +
-                ", currentPrice=" + currentPrice +
-                ", productInfo='" + productInfo + '\'' +
-                '}';
-    }
+
+
+
 
     //    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 //    private List<Image> imageList;

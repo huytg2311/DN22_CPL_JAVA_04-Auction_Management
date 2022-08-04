@@ -1,5 +1,6 @@
 package java4.auction_management.entity.user;
 
+import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.bid.Bid;
 import java4.auction_management.entity.bill.Bill;
 import java4.auction_management.entity.cart.Cart;
@@ -89,6 +90,9 @@ public class User {
 
     @Column(name = "reset_password_token")
     private String resetPasswordToken;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Auction> auctionList;
 
 
     public Provider getProvider() {

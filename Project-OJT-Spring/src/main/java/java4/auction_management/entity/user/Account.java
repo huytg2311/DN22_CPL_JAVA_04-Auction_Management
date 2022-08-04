@@ -3,6 +3,7 @@ package java4.auction_management.entity.user;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java4.auction_management.entity.chat.Chat;
+import java4.auction_management.entity.payment.EWallet;
 import java4.auction_management.entity.product.Product;
 import java4.auction_management.validate.UniqueUsername;
 import lombok.AllArgsConstructor;
@@ -30,12 +31,12 @@ public class Account {
     @NotBlank(message = "Password is required")
     private String password;
 
-    @Column(columnDefinition = "default 'ROLE_USER'")
+//    @Column(columnDefinition = "default 'ROLE_USER'")
     @Enumerated(EnumType.STRING)
-    private ERole role = ERole.ROLE_USER;
+    private ERole role;
 
-    @Column(columnDefinition = "default true")
-    private boolean enable = true;
+//    @Column(columnDefinition = "default true")
+    private boolean enable ;
 
     @OneToOne(mappedBy = "account")
     private User user;
@@ -43,8 +44,8 @@ public class Account {
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Chat> chatList;
 
-    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
-    private List<Product> productList;
+    @OneToOne(mappedBy = "account")
+    private EWallet eWallet;
 
     public boolean getEnable() {
         return this.enable;
