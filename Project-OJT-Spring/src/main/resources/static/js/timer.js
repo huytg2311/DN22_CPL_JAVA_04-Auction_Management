@@ -31,3 +31,8 @@ let x = setInterval(function () {
     }
 }, 1000);
 
+(function ($){
+    $('#subBidBtn').click(function (){
+        plus
+    })
+})(jQuery)

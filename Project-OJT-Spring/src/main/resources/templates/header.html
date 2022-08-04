@@ -10,15 +10,14 @@
 	<meta content="" name="description">
 
 	<!-- Favicon -->
-	<link href="https://cdn1.iconfinder.com/data/icons/real-estate-2-12/128/56-512.png" rel="icon">
+	<link th:href="@{/img/logo.svg}" rel="icon">
 
 	<!-- Google Web Fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 	<!-- Icon Font Stylesheet -->
-
 
 
 	<!-- Libraries Stylesheet -->
@@ -39,71 +38,104 @@
 	<div id="spinner"
 		 class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
 		<div class="spinner-grow text-primary" role="status">
-			<i class="fa fa-gavel  fs-3"></i>
+			<i class="fa fa-gavel fs-3"></i>
 		</div>
 	</div>
 	<!-- Spinner End -->
 
 
 	<!-- Navbar Start -->
-	<nav class="navbar navbar-expand-lg bg-white fixed-top py-0 px-xl-5 px-3 wow fadeInDown" data-wow-delay="0.1s">
-		<a th:href="@{/}" class="navbar-brand ms-0">
-			<!--logo-->
-			<h2 class="text-secondary m-0 d-flex align-items-center">
-				<div class="bg-primary rounded-circle btn-xl-square me-2">
-					<i class="fa fa-gavel text-light fs-3 justify-content-center d-flex align-items-center h-100 w-100"></i>
-				</div>
-				Pay.Picker
-			</h2>
-
-		</a>
-		<button type="button" class="navbar-toggler bg-primary rounded-0 py-2 my-4 me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-			<i class="fa fa-align-justify text-light"></i>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarCollapse">
-			<div class="divider d-block b-lg-none"></div>
-			<div class="navbar-nav mx-auto p-lg-0 px-4  py-2 text-uppercase">
-				<a href="#" class="nav-item nav-link active">Home</a>
-				<a href="#" class="nav-item nav-link">Bidding</a>
-				<a href="#" class="nav-item nav-link">Auction</a>
-				<a href="#" class="nav-item nav-link">Guide</a>
-				<a href="#" class="nav-item nav-link">About</a>
+	<div id="js-header-height" class="fixed-top  wow fadeInDown" data-wow-delay="0.1s">
+		<div class="lh-1 w-100 bg-primary p-3 py-md-1 px-5 d-flex justify-content-between">
+			<div class="d-none d-md-flex align-items-center ms-xl-4">
+				<a href="" class="small text-light me-3">
+					<i class="bi bi-envelope-fill fs-5 align-middle"></i>
+					<span class="ms-1">contact@smartauction.com</span>
+				</a>
+				<a href="" class="small text-light">
+					<i class="bi bi-phone-fill fs-5 align-middle"></i></i>
+					<span class="">+84 98 4848 484</span>
+				</a>
 			</div>
-			<div class="divider d-block b-lg-none"></div>
+			<div class="d-none d-md-flex align-items-center fs-6 me-xl-4 ">
+				<a href="" class="text-light fw-bold align-middle">
+					Help
+				</a>
+				<a href="" class="border-start border-light border-2 text-light fw-bold align-middle ps-3 ms-3">
+					Follow us
+				</a>
 
-			<div class="navbar-nav mb-lg-0 mb-4">
-				<div class="ps-lg-3 d-flex justify-content-end" th:if="${#request.userPrincipal == null}">
-					<a th:href="@{/login}">
-						<div class="btn-primary p-2 px-5" >
-							<span class="text-light align-middle fs-5 mb-0">Login</span>
-						</div>
-					</a>
-				</div>
-
-				<div class="ps-3 d-flex align-items-center" th:if="${#request.userPrincipal != null}">
-					<a th:href="@{/users/profile}" class="nav-link d-flex flex-column text-center px-2 py-3" title="View your Won items">
-						<i class="bi bi-bag-check px-2 fs-5" ></i>
-						<span class="small d-block d-lg-none d-xl-block">Won Items</span>
-					</a>
-					<a th:href="@{/users/profile}" class="nav-link d-flex flex-column text-center px-2 py-3" title="View your E-wallet">
-						<i class="bi bi-wallet2 px-2 fs-5" ></i>
-						<span class="small d-block d-lg-none d-xl-block">E-Wallet</span>
-					</a>
-					<a th:href="@{/users/profile}" class="nav-link d-flex flex-column text-center px-2 py-3" title="View your profile">
-						<i class="bi bi-person px-2 fs-5" ></i>
-						<span class="small d-block d-lg-none d-xl-block">My Profile</span>
-					</a>
-					<a th:href="@{/logout}" class="nav-link btn-primary text-white d-flex flex-column text-center  px-2 py-3" title="View your profile">
-						<i class="bi bi-box-arrow-right fs-5" ></i>
-						<span class="small">Logout</span>
-					</a>
-
-
-				</div>
 			</div>
+
 		</div>
+		<nav class="navbar navbar-expand-lg bg-white py-0 px-5">
 
-	</nav>
+			<a th:href="@{/}" class="navbar-brand ms-xl-4">
+				<!--logo-->
+				<div class="m-0 d-flex align-items-center">
+					<div class="me-1">
+						<img th:src="@{/img/logo.svg}" alt="" height="65px" width="65px">
+					</div>
+					<div class="align-items-center">
+						<h5 class="text-secondary m-0 d-flex lh-1">Smart</h5>
+						<h5 class="text-primary m-0 d-flex text-uppercase lh-1" style="font-weight: 900 !important; font-size: 22px !important;">Auction</h5>
+					</div>
+				</div>
+
+			</a>
+			<button type="button" class="navbar-toggler bg-primary rounded-0 py-2 my-4 me-4" data-bs-toggle="collapse"
+					data-bs-target="#navbarCollapse">
+				<i class="fa fa-align-justify text-light"></i>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarCollapse">
+				<div class="divider d-block b-lg-none"></div>
+				<div class="navbar-nav mx-auto p-lg-0 px-4  py-2 text-uppercase">
+					<a href="#" class="nav-item nav-link active">Home</a>
+					<a href="#" class="nav-item nav-link">Bidding</a>
+					<a href="#" class="nav-item nav-link">Auction</a>
+					<a href="#" class="nav-item nav-link">About</a>
+				</div>
+				<div class="divider d-block b-lg-none"></div>
+
+				<div class="navbar-nav mb-lg-0 mb-4 me-xl-4">
+					<div class="ps-lg-3 d-flex justify-content-end" th:if="${#request.userPrincipal == null}">
+						<a th:href="@{/login}">
+							<div class="btn-primary py-1 px-4">
+								<span class="text-light align-middle fs-5 mb-0">Login</span>
+							</div>
+						</a>
+					</div>
+
+					<div class="ps-3 d-flex align-items-center" th:if="${#request.userPrincipal != null}">
+						<a th:href="@{/users/profile}" class="nav-link d-flex flex-column text-center px-2 py-3"
+						   title="View your Won items">
+							<i class="bi bi-bag-check px-2 fs-5"></i>
+							<span class="small ">Won Items</span>
+						</a>
+						<a th:href="@{/users/profile}" class="nav-link d-flex flex-column text-center px-2 py-3"
+						   title="View your E-wallet">
+							<i class="bi bi-wallet2 px-2 fs-5"></i>
+							<span class="small ">E-Wallet</span>
+						</a>
+						<a th:href="@{/users/profile}" class="nav-link d-flex flex-column text-center px-2 py-3"
+						   title="View your profile">
+							<i class="bi bi-person px-2 fs-5"></i>
+							<span class="small ">My Profile</span>
+						</a>
+						<a th:href="@{/logout}" class="nav-link d-flex flex-column text-center  px-2 py-3"
+						   title="View your profile">
+							<i class="bi bi-box-arrow-right fs-5"></i>
+							<span class="small ">Logout</span>
+						</a>
+
+
+					</div>
+				</div>
+			</div>
+
+		</nav>
+	</div>
+
 	<!-- Navbar End -->
 
 

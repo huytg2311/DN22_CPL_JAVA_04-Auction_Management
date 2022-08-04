@@ -203,7 +203,7 @@
 									Place bid
 								</button>
 								<input id="username" type="hidden"
-									   th:value="${#request.userPrincipal!=null} ? ${#request.userPrincipal.name} : ''">
+									   th:value="${#request.userPrincipal!=null} ? ${#request.userPrincipal.name.toString()} : ''">
 								<!--                                get product id-->
 								<input id="product" type="hidden" th:value="${product}">
 							</div>
@@ -308,12 +308,14 @@
 <script th:src="@{/js/main.js}"></script>
 <script th:src="@{/js/timer.js}"></script>
 <script>
+    console.log("[[${#request.getRequestURI()}]]"+"a")
     $('#bidBtn').click(function () {
-        if ([[${#request.userPrincipal.name}]] === null) {
-			//show modal 'Log in to place your bid'
+
+        if ([[${#request.userPrincipal==null}]]) {
+			console.log('in modal')
         } else {
             var product = {productId: [[${product.productId}]]}
-            var user = {account: {username: [[${#request.userPrincipal.name}]]}};
+            var user = {account: {username: "[[${#request.userPrincipal!=null} ? ${#request.userPrincipal.name.toString()} : '']]"}};
             var bidTime = new Date($.now()).toLocaleString('vi-VN', {
                 hour: "2-digit",
                 minute: "2-digit",
@@ -338,12 +340,12 @@
                 }
             });
         }
-        });
+    });
 
 </script>
 <script type="text/javascript">
     var productId = [[${product.productId}]];
-    setInterval(listBid, 1000);
+    // setInterval(listBid, 1000);
 
     function listBid() {
         console.log('ok')

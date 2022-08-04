@@ -84,7 +84,7 @@
     animation: AnimationName 3s ease infinite;
     border: medium none;
 }
-.btn-warning{
+.btn-warning2{
     background: #e5ae09;
     background: -moz-linear-gradient(-45deg, #e5ae09 0%, #ffd044 50%, #ffc107 51%, #fc9014 71%, #f1890b 100%);
     background: -webkit-linear-gradient(-45deg, #e5ae09 0%,#ffd044 50%,#ffc107 51%,#fc9014 71%,#f1890b 100%);
