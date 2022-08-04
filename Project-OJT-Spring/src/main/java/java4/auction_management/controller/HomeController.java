@@ -41,15 +41,30 @@ public class HomeController {
 
 
     @GetMapping(value = {"/","/welcome"})
-    public String welcomePage(Model model,@PageableDefault(size = 6) Pageable pageable, User user) {
+    public String welcomePage(Model model,@PageableDefault(size = 6) Pageable pageable) {
 //        model.addAttribute("nameAccount", accountService.getAll());
         Page<Product> products = productService.findAllProduct(pageable);
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        String currentPrincipalName = authentication.getName();
 //        System.out.println(currentPrincipalName);
 //        User user1 = userService.getUserByUsername(currentPrincipalName);
+//        model.addAttribute("products", productService.getAll());
         model.addAttribute("products", products);
         model.addAttribute("account", new Account());
+
+
+
+
+//        String[] listImage = products.getListImage().split(" ");
+//        for (String image: listImage
+//        ) {
+//            System.out.println(image);
+//        }
+//        model.addAttribute("listImage", listImage);
+
+
+//        String[] listImages = product.getListImage().split(" ");
+//        model.addAttribute("listImages", listImages);
 //        model.addAttribute("user", user1);
 //        System.out.println(user1.toString());
         return "index";

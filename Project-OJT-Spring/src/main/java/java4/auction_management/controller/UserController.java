@@ -149,4 +149,12 @@ public class UserController {
         return "user/wallet";
     }
 
+    @GetMapping("/bidding/{username}")
+    public String showproductBidding(@PathVariable("username")Account account, Model model) {
+        User user = account.getUser();
+        model.addAttribute("users", user);
+
+        return "user/bidding";
+    }
+
 }

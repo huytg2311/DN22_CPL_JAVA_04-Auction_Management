@@ -13,6 +13,7 @@
 	<link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
 	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 	<link th:href="@{/css/style.css}" rel="stylesheet">
+	<link th:href="@{edmin/css/button.css}" rel="stylesheet">
 
 	<!-- Google Web Fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -94,16 +95,47 @@
 							<table class="table table-hover my-0">
 								<thead>
 								<tr>
+									<th class="d-none d-md-table-cell">Image</th>
 									<th class="">Username</th>
 									<th class="d-none d-md-table-cell">FullName</th>
 									<th class="d-none d-md-table-cell">Email</th>
+									<th class="d-none d-md-table-cell">Enable</th>
 								</tr>
 								</thead>
 								<tbody>
 								<tr th:each="user : ${users}" th:href="@{/admin/detail/{id}(id = ${user.id})}">
+									<td>
+										<img class="avatar-lg img-fluid rounded-1" th:src="@{${user.image}}">
+									</td>
 									<td th:text="${user.account.username}"></td>
 									<td class="d-none d-md-table-cell" th:text="${user.fullname}"></td>
 									<td class="d-none d-md-table-cell" th:text="${user.email}"></td>
+									<td class="total">
+
+										<div th:if="${user.account.enable} == true">
+											<label class="switch">
+												<input type="checkbox"
+													   th:id="'enable-'+${user.account.enable}"
+													   th:onclick="'changeActivateUser(' + ${user.account.enable} + ');'" checked>
+												<span class="slider round"></span>
+											</label>
+										</div>
+										<div th:if="${user.account.enable} == false">
+											<label class="switch">
+												<input type="checkbox"
+													   th:id="'enable-'+${user.account.enable}"
+													   th:onclick="'changeActivateUser(' + ${user.account.enable} + ');'" >
+												<span class="slider round"></span>
+											</label>
+										</div>
+
+										</td>
+										<td>
+											<a style="text-decoration: none;"
+										   th:href="@{/admin/detail/{id}(id = ${user.id})}">
+											<button type="button" class="btn btn-primary">Detail</button>
+											</a>
+										</td>
 								</tr>
 								</tbody>
 							</table>
@@ -118,7 +150,7 @@
 
 <!--****** JS ******-->
 <script>
-    feather.replace()
+	feather.replace()
 </script>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -136,5 +168,29 @@
 <script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
 <script th:src="@{/js/main.js}"></script>
 <script th:src="@{/admin/js/app.js}"></script>
+<script>
+	function changeActivateUser(idU) {
+
+		var check = document.getElementById('enable-' + idU);
+		var st = 0
+		if (check.checked != true) {
+		} else {
+			st = 1;
+		}
+		$.ajax({
+			url: "/list-user",
+			type: "post",
+
+			data: {
+				id: idU,
+				status: st,
+				which: 'a'
+			},
+			success: function (data) {
+
+			}
+		});
+	}
+</script>
 </body>
 </html>

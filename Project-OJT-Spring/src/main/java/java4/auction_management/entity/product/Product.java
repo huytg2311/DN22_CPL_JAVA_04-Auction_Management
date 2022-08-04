@@ -46,7 +46,7 @@ public class Product {
 
     private boolean isSold;
 
-    @Column(columnDefinition = "default 'WAITING'")
+//    @Column(columnDefinition = "default 'WAITING'")
     @Enumerated(EnumType.STRING)
     private EStatus productStatus = EStatus.WAITING;
 
@@ -71,6 +71,7 @@ public class Product {
                 ", timeFinish=" + timeFinish +
                 ", stepPrice=" + stepPrice +
                 ", currentPrice=" + currentPrice +
+                "isSold=" + isSold +
                 ", productInfo='" + productInfo + '\'' +
                 '}';
     }

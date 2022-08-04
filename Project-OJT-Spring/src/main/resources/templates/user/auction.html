@@ -160,19 +160,19 @@
                                         <td th:text="${product.timeAuction}"></td>
                                         <td class="total">
 
-                                            <div th:if="${product.approve} == true">
+                                            <div th:if="${product.isSold} == true">
                                                 <label class="switch ">
                                                     <input type="checkbox"
-                                                           th:id="'enable-'+${product.approve}"
-                                                           th:onclick="'changeActivateUser(' + ${product.approve} + ');'" checked>
+                                                           th:id="'enable-'+${product.isSold}"
+                                                           th:onclick="'changeActivateUser(' + ${product.isSold} + ');'" checked>
                                                     <span class="slider round"></span>
                                                 </label>
                                             </div>
-                                            <div th:if="${product.approve} == false">
+                                            <div th:if="${product.isSold} == false">
                                                 <label class="switch">
                                                     <input type="checkbox"
-                                                           th:id="'enable-'+${product.approve}"
-                                                           th:onclick="'changeActivateUser(' + ${product.approve} + ');'" >
+                                                           th:id="'enable-'+${product.isSold}"
+                                                           th:onclick="'changeActivateUser(' + ${product.isSold} + ');'" >
                                                     <span class="slider round warning" ></span>
                                                 </label>
                                             </div>
@@ -231,7 +231,7 @@
     </div>
 
 </div>
-
+<div id="" class="header-spacer bg-dark"></div>
 
 
 <!-- Footer Start -->
