@@ -12,6 +12,4 @@ public interface  IProductRepository extends JpaRepository<Product, Long> {
     @Query(value = "select * from product as p where p.username = ?1", nativeQuery = true)
     List<Product> getProductsByUsername(String username);
 
-    @Override
-    Optional<Product> findById(Long productId);
 }

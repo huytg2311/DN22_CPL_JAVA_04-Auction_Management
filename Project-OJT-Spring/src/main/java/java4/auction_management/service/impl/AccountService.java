@@ -6,6 +6,7 @@ import java4.auction_management.entity.user.User;
 import java4.auction_management.repository.IAccountRepository;
 import java4.auction_management.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,14 @@ public class AccountService implements IAccountService {
             }
             return false;
         }).orElse(false);
+    }
+
+    public void updatePassword(Account account, String newPassword) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(newPassword);
+
+        account.setPassword(encodedPassword);
+        accountRepository.save(account);
     }
 
     @Override
@@ -90,6 +99,11 @@ public class AccountService implements IAccountService {
     @Override
     public Account getUserByUsername(String username) {
         return accountRepository.getUserByUsername(username);
+    }
+
+    @Override
+    public Account findByUsername(String username) {
+        return accountRepository.findByUsername(username);
     }
 
     public void processOAuthPostLogin(String username) {

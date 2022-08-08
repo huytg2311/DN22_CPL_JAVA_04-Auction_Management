@@ -1,14 +1,19 @@
 package java4.auction_management.controller;
 import com.cloudinary.utils.ObjectUtils;
 import java4.auction_management.config.CloudinaryConfig;
+import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.product.Product;
 import java4.auction_management.entity.user.Account;
 import java4.auction_management.entity.user.User;
 import java4.auction_management.service.IAccountService;
+import java4.auction_management.service.IAuctionService;
 import java4.auction_management.service.IUserService;
 import java4.auction_management.validate.AccountValidator;
 import java4.auction_management.validate.LoginValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -42,6 +47,10 @@ public class LoginController {
 
     @Autowired
     LoginValidator loginValidator;
+
+    @Autowired
+    private IAuctionService auctionService;
+
 
     @GetMapping(value = "/login")
     public String loginPage(Model model, Account account) {
@@ -82,15 +91,16 @@ public class LoginController {
         return "redirect:/success";
     }
 
-    @GetMapping("/success")
-    public String success(Model model) {
-        return "success";
-    }
 
-    @RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
-    public String logoutSuccessfulPage(Model model) {
-        model.addAttribute("title", "Logout");
-        return "/index";
+    @GetMapping("/logoutSuccessful")
+    public String welcomePage(Model model,@PageableDefault(size = 8) Pageable pageable) {
+        Page<Auction> auctions = auctionService.findAllAuction(pageable);
+        for (Auction ac: auctions
+        ) {
+            ac.getProduct().setListImage(ac.getProduct().getListImage().split(" ")[0]);
+        }
+        model.addAttribute("auctions", auctions);
+        return "index";
     }
 
 }

@@ -11,11 +11,11 @@ import java.util.Optional;
 
 public interface IBidRepository extends JpaRepository<Bid, Integer> {
 
-    public List<Bid> getBidsByProduct(Product product);
+//    public List<Bid> getBidsByProduct(Product product);
     public Optional<Bid> getBidByBidId(Long id);
 
-    @Query(value = "select * from bid as b where b.product_id = ?1 order by b.bid_price desc", nativeQuery = true)
-    List<Bid> listBidSort(Long productId);
+    @Query(value = "select * from bid as b where b.auction_id = ?1 order by b.bid_price desc", nativeQuery = true)
+    List<Bid> listBidSort(Long auctionID);
 
     List<Bid> findAllByOrderByBidPriceDesc();
 

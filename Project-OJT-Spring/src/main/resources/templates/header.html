@@ -90,7 +90,7 @@
 			<div class="collapse navbar-collapse" id="navbarCollapse">
 				<div class="divider d-block b-lg-none"></div>
 				<div class="navbar-nav mx-auto p-lg-0 px-4  py-2 text-uppercase">
-					<a href="#" class="nav-item nav-link active">Home</a>
+					<a th:href="@{/}" class="nav-item nav-link active">Home</a>
 					<a href="#" class="nav-item nav-link">Bidding</a>
 					<a href="#" class="nav-item nav-link">Auction</a>
 					<a href="#" class="nav-item nav-link">About</a>
@@ -117,7 +117,7 @@
 							<i class="bi bi-wallet2 px-2 fs-5"></i>
 							<span class="small ">E-Wallet</span>
 						</a>
-						<a th:href="@{/users/profile}" class="nav-link d-flex flex-column text-center px-2 py-3"
+						<a th:href="@{/view-profile/{username}(username = ${#request.userPrincipal.name})}" class="nav-link d-flex flex-column text-center px-2 py-3"
 						   title="View your profile">
 							<i class="bi bi-person px-2 fs-5"></i>
 							<span class="small ">My Profile</span>
