@@ -534,6 +534,18 @@ h6,
     max-width: 300px !important;
 }
 
+.mw-500px{
+    max-width: 500px !important;
+}
+
+.w-200{
+    width: 200%;
+}
+
+.vh-75{
+    height: 75vh;
+}
+
 .divider{border-top:1px solid rgba(0,0,0,.15);height:0;margin:.5rem 0;overflow:hidden}
 
 .price-box{
@@ -644,4 +656,30 @@ h6,
 }
 select:active + .select-div::after{
     content: "\F235";
+}
+
+.bg-gradient-primary{
+    background-image: linear-gradient(to left top, #f1b65e, #f1b357, #f0b050, #f0ad49, #efaa41, #eda83f, #eca53e, #eaa33c, #e6a040, #e39e45, #df9b48, #db994c);
+}
+
+.btn-hover-scale:hover{
+    transform: scale(1.05);
+    transition: all ease 0.3s;
+}
+
+
+.input-outline-none:focus-visible{
+    outline: none;
+    border: 1px solid var(--primary);
+    background: transparent !important;
+    transition: all ease 1s;
+}
+
+.input-outline-none{
+    border: 1px solid transparent;
+    transition: all ease 1s;
+}
+
+.form-animation{
+    transition: all 0.6s cubic-bezier(0.68,-0.55,0.265,1.55);
 }

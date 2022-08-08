@@ -43,36 +43,38 @@ public class LoginController {
     @Autowired
     LoginValidator loginValidator;
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @GetMapping(value = "/login")
     public String loginPage(Model model, Account account) {
         model.addAttribute("account", account);
+        model.addAttribute("user", new User());
         return "login";
     }
 
     @GetMapping("/signUp")
     public String showAddForm(Model model) {
         model.addAttribute("user", new User());
-        return "create-user";
+        return "signup";
     }
 
     @PostMapping("/signUp")
-    public String addUser(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                          @RequestParam("file") MultipartFile file) throws IOException {
+    public String addUser(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model
+                          ) throws IOException {
         accountValidator.validate(user, bindingResult);
         if (bindingResult.hasErrors()) {
-            return "create-user";
+            model.addAttribute("account", new Account());
+            return "login";
         }
-        if (!file.isEmpty()) {
-            try {
-                Map uploadResult = cloudc.upload(file.getBytes(),
-                        ObjectUtils.asMap("resourcetype", "auto"));
-                user.setImage(uploadResult.get("url").toString());
-
-            } catch (IOException e) {
-                e.printStackTrace();
-                return "redirect:/edit/{id}";
-            }
-        }
+//        if (!file.isEmpty()) {
+//            try {
+//                Map uploadResult = cloudc.upload(file.getBytes(),
+//                        ObjectUtils.asMap("resourcetype", "auto"));
+//                user.setImage(uploadResult.get("url").toString());
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                return "redirect:/edit/{id}";
+//            }
+//        }
 
         userService.save(user);
 //        userService.save(user);

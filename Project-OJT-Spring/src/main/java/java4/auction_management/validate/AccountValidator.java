@@ -30,11 +30,16 @@ public class AccountValidator implements Validator {
         }
 
         if (userService.existByEmail(user.getEmail())) {
-            errors.rejectValue("email", "email", new String[]{}, "Email is duplicate");
+            errors.rejectValue("email", "email", new String[]{}, "Email is duplicated");
         }
 
         if (userService.existByPhone_number(user.getPhoneNumber())) {
-            errors.rejectValue("phoneNumber", "phoneNumber", new String[]{}, "Phone number is duplidate");
+            errors.rejectValue("phoneNumber", "phoneNumber", new String[]{}, "Phone number is duplicated");
+        }
+
+        if(!user.getRetypePassword().equals(user.getAccount().getPassword())){
+            errors.rejectValue("retypePassword", "retypePassword", new  String[]{}, "Password do not match");
+
         }
 
     }

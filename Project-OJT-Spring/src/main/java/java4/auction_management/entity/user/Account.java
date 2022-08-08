@@ -1,10 +1,7 @@
 package java4.auction_management.entity.user;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java4.auction_management.entity.chat.Chat;
 import java4.auction_management.entity.product.Product;
-import java4.auction_management.validate.UniqueUsername;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,7 +21,6 @@ public class Account {
     @Id
 //    @Column(name = "username", nullable = false)
     @NotBlank(message = "Username is required")
-    @UniqueUsername
     private String username;
 
     @NotBlank(message = "Password is required")
