@@ -4,7 +4,6 @@ import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.bid.Bid;
 import java4.auction_management.entity.bill.Bill;
 import java4.auction_management.entity.cart.Cart;
-import java4.auction_management.entity.product.Product;
 import java4.auction_management.validate.DateTimeBeforeCurrent;
 
 import lombok.AllArgsConstructor;
@@ -77,6 +76,9 @@ public class User {
     @Valid
     @OneToOne(cascade = CascadeType.ALL)
     private Account account;
+
+    @Transient
+    private String retypePassword;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Bid> bidList;
