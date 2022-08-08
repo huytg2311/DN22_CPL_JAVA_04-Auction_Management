@@ -4,6 +4,8 @@ import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.repository.IAuctionRepository;
 import java4.auction_management.service.IAuctionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +20,11 @@ public class AuctionService implements IAuctionService {
     @Override
     public Auction findAuctionByProductProductId(Long productId) {
         return iAuctionRepository.findAuctionByProductProductId(productId);
+    }
+
+    @Override
+    public Page<Auction> findAllAuction(Pageable pageable) {
+        return iAuctionRepository.findAll(pageable);
     }
 
     @Override

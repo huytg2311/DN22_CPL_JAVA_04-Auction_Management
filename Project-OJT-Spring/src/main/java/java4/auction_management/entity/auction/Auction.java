@@ -23,6 +23,10 @@ public class Auction {
 
     private LocalDateTime finishTime;
 
+    @Column(columnDefinition = "default 'WAITING'")
+    @Enumerated(EnumType.STRING)
+    private EStatus auctionStatus = EStatus.WAITING;
+
     @OneToOne(mappedBy = "auction")
     private Product product;
 
@@ -32,8 +36,6 @@ public class Auction {
 
     @OneToMany(mappedBy = "auction", cascade = CascadeType.ALL)
     private List<Bid> bidList;
-
-    private String status;
 
     @JoinColumn(name = "userId")
     @ManyToOne(fetch = FetchType.EAGER)

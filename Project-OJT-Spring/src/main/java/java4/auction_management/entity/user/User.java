@@ -6,8 +6,7 @@ import java4.auction_management.entity.bill.Bill;
 import java4.auction_management.entity.cart.Cart;
 import java4.auction_management.entity.product.Product;
 import java4.auction_management.validate.DateTimeBeforeCurrent;
-import java4.auction_management.validate.UniqueEmail;
-import java4.auction_management.validate.UniquePhone;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -386,6 +386,37 @@
 
 </script>
 
+
+<!-- button increment price-->
+<script type="text/javascript">
+	var bidPrice = [[${auction.reservePrice}]]
+	console.log(bidPrice)
+	var stepPrice = [[${auction.stepPrice}]]
+	console.log(stepPrice)
+	$(document).on('click', '#plusBidBtn', function () {
+		 bidPrice += stepPrice
+		console.log($(bidPrice))
+		$('#price').html(bidPrice)
+	})
+
+</script>
+
+
+<!-- button decrement price-->
+<script type="text/javascript">
+	var bidPrice = [[${auction.reservePrice}]]
+	console.log(bidPrice)
+	var stepPrice = [[${auction.stepPrice}]]
+	console.log(stepPrice)
+	$(document).on('click', '#subBidBtn', function () {
+		bidPrice -= stepPrice
+		console.log($(bidPrice))
+		$('#price').html(bidPrice)
+	})
+
+</script>
+
+
 </body>
 
 </html>

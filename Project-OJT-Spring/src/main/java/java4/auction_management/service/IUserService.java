@@ -24,4 +24,6 @@ public interface IUserService extends IService<User, Long>{
 
     Boolean existByEmail(String email);
 
+    User saveUserNotPassword(User user);
+
 }
