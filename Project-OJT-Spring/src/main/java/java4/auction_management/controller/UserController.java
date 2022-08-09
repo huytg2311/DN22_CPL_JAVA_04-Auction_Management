@@ -5,6 +5,7 @@ import java4.auction_management.config.CloudinaryConfig;
 import java4.auction_management.entity.product.Product;
 import java4.auction_management.entity.user.User;
 import java4.auction_management.service.IAccountService;
+import java4.auction_management.service.IBidService;
 import java4.auction_management.service.ICategoryService;
 import java4.auction_management.service.IUserService;
 import java4.auction_management.service.impl.CategoryService;
@@ -48,6 +49,9 @@ public class UserController {
 
     @Autowired
     CategoryService categoryService;
+
+    @Autowired
+    IBidService iBidService;
 //    @GetMapping
 //    public String showAllUser(Model model) {
 //        model.addAttribute("users", userService.getAllUser());
