@@ -64,7 +64,7 @@ public class ProductController {
 
     @PostMapping("/create")
     public String createProduct(@Valid @ModelAttribute Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                                @RequestParam("file") MultipartFile[] files, HttpServletRequest httpRequest) throws IOException {
+                                @RequestParam("file") MultipartFile[] files) throws IOException {
 
         try {
             LocalDateTime datePost = LocalDateTime.now();
@@ -112,9 +112,44 @@ public class ProductController {
 
     @GetMapping("/edit/{id}")
     public String showEditProduct(@PathVariable("id") Product product, Model model) {
-//        Optional<User> user = userService.getById(id);
+        String username = product.getAuction().getUser().getAccount().getUsername();
         model.addAttribute("products", product );
+        String[] listImages = product.getListImage().split(" ");
+        model.addAttribute("listImages", listImages);
         return "/products/edit-product";
+    }
+
+    @PostMapping("/edit")
+    public String editProduct(@Valid @ModelAttribute Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes,
+                                @RequestParam("file") MultipartFile[] files) throws IOException {
+        String username = product.getAuction().getUser().getAccount().getUsername();
+
+        for (MultipartFile m: files
+             ) {
+            if (m.isEmpty()) {
+                productService.save(product);
+                return "redirect:/products/auction/" + username;
+            }
+        }
+        try {
+            StringBuilder listImage = new StringBuilder();
+            for (MultipartFile file : files) {
+
+                Map uploadResult = cloudc.upload(file.getBytes(),
+                        ObjectUtils.asMap("resourcetype", "auto"));
+                System.out.println("2" + (uploadResult.get("url").toString()));
+                listImage.append(uploadResult.get("url").toString()).append(" ");
+            }
+            product.setListImage(listImage.toString());
+            productService.save(product);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "redirect:/index";
+        }
+
+        redirectAttributes.addFlashAttribute("message", "Edit successful");
+        return "redirect:/products/auction/" + username;
     }
 
 }

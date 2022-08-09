@@ -1,5 +1,6 @@
 package java4.auction_management.service.impl;
 
+import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.product.Product;
 import java4.auction_management.repository.IProductRepository;
 import java4.auction_management.service.IProductService;
@@ -53,6 +54,17 @@ public class ProductService implements IProductService {
         for (Product product : productList) {
             iProductRepository.save(product);
         }
+    }
+
+
+    @Override
+    public List<Auction> findWaitingAuctions() {
+        return iProductRepository.getWaitingAuctions();
+    }
+
+    @Override
+    public Product getProductByAuctionId(Long id) {
+        return iProductRepository.getProductByAuctionId(id);
     }
 
 

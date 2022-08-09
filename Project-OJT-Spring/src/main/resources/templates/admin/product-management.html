@@ -13,7 +13,7 @@
 	<link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
 	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 	<link th:href="@{/css/style.css}" rel="stylesheet">
-	<link th:href="@{/edmin/css/button.css}" rel="stylesheet">
+	<link th:href="@{edmin/css/button.css}" rel="stylesheet">
 
 	<!-- Google Web Fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,7 +29,7 @@
 <body>
 <div class="" th:insert="header :: my-header"></div>
 <div class="wrapper">
-	<nav id="sidebar" class="sidebar js-sidebar" >
+	<nav id="sidebar" class="sidebar js-sidebar">
 		<div id="" class="header-spacer bg-dark"></div>
 		<div class="sidebar-content js-simplebar">
 			<a class="sidebar-brand text-center" href="/admin">
@@ -38,7 +38,7 @@
 					</span>
 			</a>
 			<ul class="sidebar-nav">
-				<li class="sidebar-item active">
+				<li class="sidebar-item ">
 					<a class="sidebar-link" th:href="@{/admin}">
 						<i class="align-middle" data-feather="user"></i> <span
 							class="align-middle">User management</span>
@@ -59,15 +59,15 @@
 						<span class="align-middle">Product management</span>
 					</a>
 					<ul class="collapse list-unstyled sidebar-submenu-item" id="sidebarSubmenu">
-						<li class="sidebar-item ">
-							<a href="" class="sidebar-link ps-5 pe-2 small">
+						<li class="sidebar-item active">
+							<a th:href="@{/admin/waitingProducts}" class="sidebar-link ps-5 pe-2 small">
 								<i class="align-middle" data-feather="archive"></i>
 								<span class="align-middle">Product Awaiting Approval</span>
 							</a>
 						</li>
-						<li class="sidebar-item">
+						<li class="sidebar-item ">
 							<a href="" class="sidebar-link ps-5 pe-2 small">
-								<i class="align-middle" data-feather="grid"></i>
+								<i class="align-middle " data-feather="grid"></i>
 								<span class="align-middle">Product Category Management</span>
 							</a>
 						</li>
@@ -81,124 +81,49 @@
 			<i class="fa fa-right-left fs-"></i>
 		</div>
 	</nav>
-	<div class="main  ">
-
+	<div class="main">
 		<div  class="header-spacer bg-dark"></div>
-		<section  >
-			<div class="container py-5 ">
+		<nav class="navbar navbar-expand navbar-light bg-light px-4 py-3 shadow-sm">
 
-				<form class="header-spacer"   th:action="@{/admin/detail}" th:object="${users}" method="post" enctype="multipart/form-data">
-					<div class="row">
-						<div class="col-lg-4" >
-							<div class="card mb-4">
-								<div class="card-body text-center" style=" height: 495px;">
-									<img th:src="@{*{image}}" alt="avatar"
-										 class="rounded-circle img-fluid" style="width: 500px; height: 300px;">
-									<h5 class="my-3" th:text="${users.account.username} "></h5>
+		</nav>
+		<main class="content">
+			<div class="container-fluid p-0">
+				<h1 class="h3 m-3">Product Awaiting Approval</h1>
+				<div class="row ms-0">
+					<div class="col-12">
+						<div class="card">
+							<table class="table table-hover my-0">
+								<thead>
+								<tr>
+									<th class="d-none d-md-table-cell">Product Name</th>
+									<th class="d-none d-md-table-cell">Username</th>
+									<th class="d-none d-md-table-cell">CurrentPrice</th>
+									<th class="d-none d-md-table-cell">StepPrice</th>
 
+								</tr>
+								</thead>
+								<tbody>
+								<tr class="cursor-p" th:each="auction : ${auction}"  th:data-href="'/admin/editStatusAuction/'+ ${auction.auctionID}">
 
-								</div>
-							</div>
-							<div class="card mb-4 mb-lg-0">
-								<div class="card-body p-0">
-									<ul class="list-group list-group-flush rounded-3">
+									<td class="d-none d-md-table-cell" th:text="${auction.product.productName}"></td>
+									<td class="d-none d-md-table-cell" th:text="${auction.user.account.username}"></td>
+									<td class="d-none d-md-table-cell" th:text="${auction.reservePrice}"></td>
+									<td class="d-none d-md-table-cell" th:text="${auction.stepPrice}"></td>
 
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-8">
-							<div class="card mb-4">
-								<div class="card-body">
-									<div class="row">
-										<div class="col-sm-3">
-											<p class="mb-0">Full Name</p>
-										</div>
-										<div class="col-sm-9">
-											<p class="text-muted mb-0" th:text="${users.account.username} "></p>
-										</div>
-									</div>
-									<hr>
-									<div class="row">
-										<div class="col-sm-3">
-											<p class="mb-0" >Email</p>
-										</div>
-										<div class="col-sm-9">
-											<p class="text-muted mb-0"  th:text="${users.email}"></p>
-										</div>
-									</div>
-									<hr>
-									<div class="row">
-										<div class="col-sm-3">
-											<p class="mb-0">Phone</p>
-										</div>
-										<div class="col-sm-9">
-											<p class="text-muted mb-0" th:text="${users.phoneNumber}"></p>
-										</div>
-									</div>
-									<hr>
-									<div class="row">
-										<div class="col-sm-3">
-											<p class="mb-0">Date</p>
-										</div>
-										<div class="col-sm-9">
-											<p class="text-muted mb-0" th:text="${users.dayOfBirth}"></p>
-										</div>
-									</div>
-									<hr>
-									<div class="row">
-										<div class="col-sm-3">
-											<p class="mb-0">Address</p>
-										</div>
-										<div class="col-sm-9">
-											<p class="text-muted mb-0" th:text="${users.address}"></p>
-										</div>
-									</div>
-									<hr>
-									<div class="row">
-										<div class="col-sm-3">
-											<p class="mb-0">Gender</p>
-										</div>
-										<div class="col-sm-9">
-											<p class="text-muted mb-0" th:text="${users.gender}"></p>
-										</div>
-									</div>
-									<hr>
-									<div class="row">
-										<div class="col-sm-3">
-											<p class="mb-0">UserName</p>
-										</div>
-										<div class="col-sm-9">
-											<p class="text-muted mb-0" th:text="${users.account.username}"></p>
-										</div>
-									</div>
-									<hr>
-									<div class="row">
-										<div class="col-sm-3">
-											<p class="mb-0">ID Card</p>
-										</div>
-										<div class="col-sm-9">
-											<p class="text-muted mb-0" th:text="${users.idCard}"></p>
-										</div>
-									</div>
-									<hr>
-									<div class="row">
-										<div class="col-sm-3">
-											<p class="mb-0">Enable</p>
-										</div>
-										<div class="col-sm-9">
-											<p class="text-muted mb-0" th:text="${users.account.isEnable()}"></p>
-										</div>
-									</div>
-								</div>
-							</div>
-
+<!--									<td>-->
+<!--											<a style="text-decoration: none;"-->
+<!--										   th:href="@{/admin/detail/{id}(id = ${user.id})}">-->
+<!--											<button type="button" class="btn btn-primary">Detail</button>-->
+<!--											</a>-->
+<!--									</td>-->
+								</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
-				</form>
+				</div>
 			</div>
-		</section>
-
+		</main>
 	</div>
 </div>
 
@@ -207,6 +132,7 @@
 <script>
 	feather.replace()
 </script>
+
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!-- JavaScript Bundle with Popper -->
@@ -223,6 +149,33 @@
 <script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
 <script th:src="@{/js/main.js}"></script>
 <script th:src="@{/admin/js/app.js}"></script>
+<script>
+	var rows = $('table tbody tr');
+	for (const row of rows) {
+		$(row,'td').click(function (){
+			window.location=$(row).data('href');
+		})
+	}
+</script>
+<script>
+
+	function changeEnableUser(username) {
+		console.log("vo ham")
+		console.log( "," + username);
+		$.ajax({
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'HTML'
+			},
+			type: "POST",
+			url: "/admin/changeEnable/" + username ,
+			success: function (result) {
+
+			}
+		});
+	}
+
+</script>
 
 </body>
 </html>

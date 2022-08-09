@@ -9,9 +9,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface IAccountRepository extends JpaRepository<Account, String> {
 
-    // forget password
-    Account findByUsername(String username);
-
     Boolean existsByUsername(String username);
 
     @Query("select a.enable from Account a where a.username = :username")
@@ -26,5 +23,7 @@ public interface IAccountRepository extends JpaRepository<Account, String> {
     @Modifying
     @Query(value = "update account set password = :password where username = :username", nativeQuery = true)
     Account savePassword(String username, String password);
+
+    Account findByUsername(String username);
 
 }

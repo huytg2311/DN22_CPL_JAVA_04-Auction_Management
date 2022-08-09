@@ -5,11 +5,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface IAuctionRepository extends JpaRepository<Auction, Long> {
 
     Auction findAuctionByProductProductId(Long productId);
@@ -20,6 +18,7 @@ public interface IAuctionRepository extends JpaRepository<Auction, Long> {
     @Query("select a from Auction as a where a.auctionStatus = 'ACCEPTED'")
     Page<Auction> getAllAuctionByStatus(Pageable pageable);
 
+    Auction getAuctionByAuctionID(Long id);
 
 
 //    @Query("select * from auction as a where a.product_id = ?1 order by a.", nativeQuery = true)

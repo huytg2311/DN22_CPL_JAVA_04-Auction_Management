@@ -23,4 +23,7 @@ public interface IAuctionService extends IService<Auction, Long>{
 
     Page<Auction> getAllAuctionByStatus(Pageable pageable);
 
+
+    Auction getAuctionByAuctionID(Long id);
+
 }

@@ -1,4 +1,5 @@
 package java4.auction_management.entity.user;
+
 import java4.auction_management.entity.chat.Chat;
 import java4.auction_management.entity.product.Product;
 import java4.auction_management.entity.payment.EWallet;
