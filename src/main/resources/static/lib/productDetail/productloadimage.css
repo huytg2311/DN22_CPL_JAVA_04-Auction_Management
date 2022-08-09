@@ -1,0 +1,21 @@
+
+#largeima{
+	width: 100%; /* do rong cua largeima */
+
+	margin: auto; /* can giua  */
+}
+/* ép ảnh nằm trong cha nó */
+#currentimg{
+	width: auto;
+	height: 400px;
+}
+.row{
+	display: flex;
+	justify-content: space-around;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.row img{
+	width: 16.5%;
+	height: auto;
+}

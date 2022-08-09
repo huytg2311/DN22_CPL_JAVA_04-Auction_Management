@@ -1,0 +1,28 @@
+spring:
+  mail:
+    host: smtp.gmail.com
+    password: grpyvdafusxvuegv
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    username: websiteaution2022@gmail.com
+  security:
+    oauth2:
+      client:
+        registration:
+          facebook:
+            clientId: 745428973136627
+            clientSecret: b46ec31eb236b2da3c8f10114ccd0ba1
+            scope:
+              - email
+              - public_profile
+          google:
+            clientId: 932128578559-hp7ru1o9hq7cinaor5frvrgbiqoimoc2.apps.googleusercontent.com
+            clientSecret: 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
+            scope:
+              - email
+              - profile

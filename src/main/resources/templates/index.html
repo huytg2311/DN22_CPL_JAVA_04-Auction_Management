@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>Pay.Picker</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link th:href="@{/img/logo.svg}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{lib/bootstrap-icons/bootstrap-icons.css}">
+
+
+    <!-- Libraries Stylesheet -->
+    <link th:href="@{lib/animate/animate.min.css}" rel="stylesheet">
+    <link th:href="@{lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+    <link th:href="@{lib/owlcarousel/assets/owl.theme.default.css}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link th:href="@{css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{button/styles/buttons.css}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link th:href="@{css/style.css}" rel="stylesheet">
+
+</head>
+
+<body>
+<div class="main-wrapper">
+    <div th:insert="header :: my-header"></div>
+
+    <!-- Carousel Start -->
+    <div class="header-spacer bg-white"></div>
+    <div class="container-fluid p-0 mb-lg-4 " data-wow-delay="0.1s">
+        <div class="owl-carousel header-carousel position-relative testimonial-carousel">
+            <div class="item position-relative ratio ratio-1x4" style="min-height: auto">
+                <img class="op-center of-cover" th:src="@{img/SmartAuction_banner-03.png}" alt="">
+                <div class="owl-carousel-inner">
+                    <div class="container">
+                        <div class="row justify-content-end align-items-center pe-5">
+                            <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center text-end">
+                                <div class="">
+
+                                    <span class="text-primary bg-white text-uppercase fw-bold py-1 px-2">The Best Auction website</span>
+                                </div>
+                                <h5 class="display-5 text-light animated slideInDown lh-1 pt-3">Auction With
+                                    Passion</h5>
+                                <p class="text-light fs-5 ">Easy to create your auctions - Easy to place your bids</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="item position-relative ratio ratio-1x4" style="min-height: auto">
+                <img class="op-center of-cover" th:src="@{img/SmartAuction_banner-02.png}" alt="">
+                <div class="owl-carousel-inner">
+                    <div class="container">
+                        <div class="row justify-content-end align-items-center pe-5">
+                            <div class="col-lg-6 d-flex flex-column justify-content-end align-items-center text-end">
+                                <div class="">
+
+                                    <span class="text-primary bg-white text-uppercase fw-bold py-1 px-2">The Best Auction website</span>
+                                </div>
+                                <h5 class="display-5 text-light animated slideInDown lh-1 pt-3">Auction With
+                                    Passion</h5>
+                                <p class="text-light fs-5 ">Easy to create your auctions - Easy to place your bids</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="item position-relative ratio ratio-1x4" style="min-height: auto">
+                <img class="op-center of-cover" th:src="@{img/SmartAuction_banner-01.png}" alt="">
+                <div class="owl-carousel-inner">
+                    <div class="container">
+                        <div class="row justify-content-start align-items-center ps-5">
+                            <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center text-end">
+                                <div class="">
+
+                                    <span class="text-primary bg-white text-uppercase fw-bold py-1 px-2">The Best Auction website</span>
+                                </div>
+                                <h5 class="display-5 text-light animated slideInDown lh-1 pt-3">Auction With
+                                    Passion</h5>
+                                <p class="text-light fs-5 ">Easy to create your auctions - Easy to place your bids</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="mw-1200px mx-auto px-3">
+        <div class="row m-0 mb-4">
+            <div class="col-lg-3 col-md-5 m-lg-0">
+                <div class="select-div">
+                    <select class="form-control bg-transparent border-primary rounded-0 w-100 py-3 ps-3 pe-5 appearance-none"
+                            data-trigger=""
+                            name="choices-single-defaul">
+                        <option>All category</option>
+                        <option>New Arrivals</option>
+                        <option>Sale</option>
+                        <option>Ladies</option>
+                        <option>Men</option>
+                        <option>Clothing</option>
+                        <option>Footwear</option>
+                        <option>Accessories</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-7 m-lg-0 ">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="col-5 m-0">
+                        <input type="number" class="form-control bg-transparent border-primary rounded-0 w-100 p-3"
+                               placeholder="Min price" name="" id="minPrice">
+                    </div>
+                    <div class="col-1 divider border-2 border-primary"></div>
+                    <div class="col-5 m-0">
+                        <input type="number" class="form-control bg-transparent border-primary rounded-0 w-100 p-3"
+                               placeholder="Max price" name="" id="maxPrice">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 m-lg-0 text-md-end">
+                <div class="position-relative">
+                    <input class="form-control bg-transparent border-primary rounded-0  p-3" type="text"
+                           placeholder="Enter product name"/>
+                    <button type="button"
+                            class="btn btn-primary rounded-0 py-2 px-3 position-absolute top-0 end-0 mt-2 me-2">Search
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="container-xxl p-0 mt-4">
+            <div id="list-auction" class="row m-0">
+                <div class="mt-4 col-lg-3  col-md-4 col-sm-6" th:each="auction : ${auctions}"
+                     style="--bs-gutter-y: 30px">
+                    <a href="" class="cursor-p">
+                        <div class=" wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="product-item p-1 d-flex flex-column bg-white rounded-0 overflow-hidden h-100">
+                                <div class="ratio ratio-1x1">
+                                    <img class="img-fluid of-cover op-center"
+                                         th:src="@{${auction.product.listImage}}"
+                                         alt="">
+                                    <div class="product-overlay">
+                                        <div id="get-id-auction" class="btn btn-lg-square btn-outline-primary rounded-circle" th:href="@{/products/load/{id}(id = ${auction.auctionID})}">
+                                            <i class="fa fa-gavel fs-5" ></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-start p-2">
+                                    <div class="align-middle ">
+									<a class="btn2 btn-warning2 btn-xs tex-center" th:href="@{/products/load/{id}(id = ${auction.auctionID})}">
+										Auction Now !
+									</a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class="fs-6 fw-light line-clamp-2 mt-3"
+                                            th:text="${auction.product.productName}"></h6>
+                                    </div>
+                                    <span class="fs-4 lh-1 text-primary"
+                                          th:if="${auction.bidList[#lists.size(auction.bidList)-1].bidPrice != null} ? ${auction.bidList[#lists.size(auction.bidList)-1].bidPrice} : ${auction.reservePrice}"></span>
+                                    <div class="js-products-timer">
+                                        <input class="js-auctions-finish-time" type="hidden" value="">
+                                        <div class="js-auctions-time-left" style="color: red"></div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="mw-300px mx-auto">
+            <div id="number-pagination" class="d-flex justify-content-center">
+                <div id="return-page" class="btn-sm-square btn-primary mx-2" th:if="${auctions.hasPrevious()}">
+                    <i class="bi bi-caret-left-fill"></i>
+                </div>
+                <div class="btn-sm-square border mx-2">
+                    <span th:text="${auctions.number + 1}"></span>
+                </div>
+                <div id="next-page" class="btn-sm-square btn-primary mx-2" th:if="${auctions.hasNext()}">
+                    <i class="bi bi-caret-right-fill"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--search-->
+</div>
+
+
+<!-- Product Start -->
+
+
+<!-- Product End -->
+
+
+<!-- Footer Start -->
+<div th:insert="footer :: my-footer"></div>
+<!-- Footer End -->
+
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{lib/wow/wow.min.js}"></script>
+<script th:src="@{lib/easing/easing.min.js}"></script>
+<script th:src="@{lib/waypoints/waypoints.min.js}"></script>
+<script th:src="@{lib/counterup/counterup.min.js}"></script>
+<script th:src="@{lib/owlcarousel/owl.carousel.min.js}"></script>
+
+<!-- Template Javascript -->
+<script th:src="@{js/main.js}"></script>
+<script>
+    // Set the date we're counting down to
+    var countDownDate = new Date("July 4, 2022 09:59:00").getTime();
+
+    // Update the count down every 1 second
+    var x = setInterval(function () {
+
+        // Get today's date and time
+        var now = new Date().getTime();
+
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Output the result in an element with id="demo"
+        for (let i = 0; i < 20; i++) {
+            document.getElementsByClassName("getTime")[i].innerHTML = days + "d " + hours + "h "
+                + minutes + "m " + seconds + "s ";
+
+
+            // If the count down is over, write some text
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementsByClassName("getTime")[i].innerHTML = "Time Off !";
+            }
+        }
+    }, 1000);
+</script>
+
+<script type="text/javascript">
+    $(document).on('click', '#next-page',function nextPagination() {
+        const numberId = "[[${auctions.number + 1}]]";
+        $.ajax({
+            headers: {
+                // 'Accept': 'application/json',
+                'Content-Type': 'HTML'
+            },
+            type: "GET",
+            url: "/?page=" + numberId,
+            success: function (result) {
+                $('#list-auction').replaceWith($(result).find('#list-auction'))
+                $('#number-pagination').replaceWith($(result).find('#number-pagination'))
+            }
+        });
+        console.log(numberId)
+    });
+</script>
+
+<script type="text/javascript">
+
+    $(document).on('click', '#return-page',function previousPagination() {
+        console.log("return")
+        const numberId = "[[${auctions.number - 1}]]";
+        $.ajax({
+
+            headers: {
+                // 'Accept': 'application/json',
+                'Content-Type': 'HTML'
+            },
+            type: "GET",
+            url: "/?page=" + numberId,
+            success: function (result) {
+                $('#list-auction').replaceWith($(result).find('#list-auction'))
+                $('#number-pagination').replaceWith($(result).find('#number-pagination'))
+            }
+        })
+    });
+
+</script>
+
+<!--function pagination(Page) {-->
+<!--var pageNum;-->
+<!--if (Page==='nextPage') {-->
+<!--pageNum = "[[${auctions.number + 1}]]";-->
+<!--} else {-->
+<!--pageNum = "[[${auctions.number - 1}]]";-->
+<!--}-->
+<!--$.ajax({-->
+<!--headers: {-->
+<!--'Accept': 'application/json',-->
+<!--'Content-Type': 'HTML'-->
+<!--},-->
+<!--type: "GET",-->
+<!--url: "/welcome?page=" + pageNum,-->
+<!--success: function (result) {-->
+<!--$('#list-auction').replaceWith($(result).find('#list-auction'))-->
+<!--$('#number-pagination').replaceWith($(result).find('#number-pagination'))-->
+
+<!--}-->
+<!--})-->
+<!--return null;-->
+<!--}-->
+
+<!--$('#previous-page').click(pagination('false'));-->
+<!--$('#next-page').click(pagination('nextPage'));-->
+
+</body>
+
+</html>
