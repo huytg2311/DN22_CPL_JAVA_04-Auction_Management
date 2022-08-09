@@ -186,7 +186,7 @@
                                             <div class="form-group first">
                                                 <label style="margin-top: 20px" for="image" >Upload Image</label>
                                                 <input style="height: calc(1.5em + .75rem + 2px)" multiple="multiple" type="file" name="file" id="file" class="form-control"/>
-                                                <input type="hidden" th:field="*{listImage}" class="form-control" id="image">
+                                                <input type="hidden" th:field="*{listImage}" class="form-control" id="image" onchange="OnFileValidation()">
                                             </div>
 
                                         </div>
@@ -196,7 +196,7 @@
 
                                     <div>
                                         <input style="margin-top: 30px" type="button" th:href="'/products/auction/'+ ${#request.userPrincipal.name}" value="Back" class="btn px-5 btn-secondary">
-                                        <input style="margin-top: 30px; margin-left: 40px" type="submit" value="Upload" class="btn px-5 btn-primary">
+                                        <input style="margin-top: 30px; margin-left: 40px" type="submit" value="Upload" class="btn px-5 btn-primary" onchange="OnFileValidation()">
 
                                     </div>
 
@@ -215,7 +215,21 @@
 <div style="margin-top: -450px" th:insert="footer :: my-footer"></div>
 
 
-
+<script type="Javascript">
+    function OnFileValidation() {
+        var image = document.getElementById("image");
+        if (typeof (image.files) != "undefined") {
+            var size = parseFloat(image.files[0].size / (1024 * 1024)).toFixed(2);
+            if(size > 2) {
+                alert('Please select image size less than 2 MB');
+            }else{
+                alert('success');
+            }
+        } else {
+            alert("This browser does not support HTML5.");
+        }
+    }
+</script>
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>

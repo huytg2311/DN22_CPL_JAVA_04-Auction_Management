@@ -72,10 +72,7 @@ public class UserController {
         Optional<User> currentUser = userService.getById(user.getId());
         System.out.println(currentUser);
 
-//        if (files.isEmpty()) {
-//            userService.save(user);
-//            return "redirect:/admin";
-//        } else {
+
         try {
             System.out.println(user.getImage());
             System.out.println(files + "aaaaa");
@@ -157,4 +154,47 @@ public class UserController {
         return "user/bidding";
     }
 
+//    @GetMapping("/editProductAuction/{id}")
+//    public String showEditProductAuction(@PathVariable("id") User user, Model model) {
+////        Optional<User> user = userService.getById(id);
+//        model.addAttribute("users", user);
+//        return "user/edit-productAuction";
+//    }
+//
+//
+//    @PostMapping("/editProductAuction")
+//    public String editProductAuction(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes,
+//                           @RequestParam("file") MultipartFile[] files) throws IOException {
+//        if (bindingResult.hasErrors()) {
+//            return "user/auction";
+//        }
+//        Optional<User> currentUser = userService.getById(user.getId());
+//        System.out.println(currentUser);
+//
+//        if (files.isEmpty()) {
+//            userService.save(user);
+//            return "redirect:/admin";
+//        } else {
+//            try {
+//                System.out.println(user.getImage());
+//                System.out.println(files + "aaaaa");
+//                for (MultipartFile file : files
+//                ) {
+//                    Map uploadResult = cloudc.upload(file.getBytes(),
+//                            ObjectUtils.asMap("resourcetype", "auto"));
+//                    System.out.println(uploadResult.get("url").toString());
+//                }
+//
+//                System.out.println(files);
+//                userService.save(user);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                return "redirect:/edit/{id}";
+//            }
+//            redirectAttributes.addFlashAttribute("message", "Edit successful");
+//            return "redirect:/admin";
+////        }
+//        }
+//
+//    }
 }

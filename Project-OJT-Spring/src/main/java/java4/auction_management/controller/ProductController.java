@@ -66,10 +66,7 @@ public class ProductController {
     public String createProduct(@Valid @ModelAttribute Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes,
                                 @RequestParam("file") MultipartFile[] files) throws IOException {
 
-//        if (file.isEmpty()) {
-//
-//            return "redirect:/create";
-//        }
+
         try {
             StringBuilder listImage = new StringBuilder();
             for (MultipartFile file : files) {
@@ -84,11 +81,11 @@ public class ProductController {
 
         } catch (IOException e) {
             e.printStackTrace();
-            return "redirect:/create";
+            return "redirect:/index";
         }
 
         redirectAttributes.addFlashAttribute("message", "Edit successful");
-        return "redirect:/index";
+        return "redirect:/user/auction";
     }
 
     @GetMapping("/load/{id}")
@@ -137,9 +134,44 @@ public class ProductController {
 
     @GetMapping("/edit/{id}")
     public String showEditProduct(@PathVariable("id") Product product, Model model) {
-//        Optional<User> user = userService.getById(id);
+        String username = product.getAccount().getUsername();
         model.addAttribute("products", product );
+        String[] listImages = product.getListImage().split(" ");
+        model.addAttribute("listImages", listImages);
         return "/products/edit-product";
+    }
+
+    @PostMapping("/edit")
+    public String editProduct(@Valid @ModelAttribute Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes,
+                                @RequestParam("file") MultipartFile[] files) throws IOException {
+        String username = product.getAccount().getUsername();
+
+        for (MultipartFile m: files
+             ) {
+            if (m.isEmpty()) {
+                productService.save(product);
+                return "redirect:/products/auction/" + username;
+            }
+        }
+        try {
+            StringBuilder listImage = new StringBuilder();
+            for (MultipartFile file : files) {
+
+                Map uploadResult = cloudc.upload(file.getBytes(),
+                        ObjectUtils.asMap("resourcetype", "auto"));
+                System.out.println("2" + (uploadResult.get("url").toString()));
+                listImage.append(uploadResult.get("url").toString()).append(" ");
+            }
+            product.setListImage(listImage.toString());
+            productService.save(product);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "redirect:/index";
+        }
+
+        redirectAttributes.addFlashAttribute("message", "Edit successful");
+        return "redirect:/products/auction/" + username;
     }
 
 }

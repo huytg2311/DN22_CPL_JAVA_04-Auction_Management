@@ -13,7 +13,7 @@
 	<link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
 	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 	<link th:href="@{/css/style.css}" rel="stylesheet">
-	<link th:href="@{/edmin/css/button.css}" rel="stylesheet">
+	<link th:href="@{edmin/css/button.css}" rel="stylesheet">
 
 	<!-- Google Web Fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,7 +38,7 @@
 					</span>
 			</a>
 			<ul class="sidebar-nav">
-				<li class="sidebar-item active">
+				<li class="sidebar-item ">
 					<a class="sidebar-link" th:href="@{/admin}">
 						<i class="align-middle" data-feather="user"></i> <span
 							class="align-middle">User management</span>
@@ -59,15 +59,15 @@
 						<span class="align-middle">Product management</span>
 					</a>
 					<ul class="collapse list-unstyled sidebar-submenu-item" id="sidebarSubmenu">
-						<li class="sidebar-item ">
+						<li class="sidebar-item active">
 							<a th:href="@{/admin/waitingProducts}" class="sidebar-link ps-5 pe-2 small">
 								<i class="align-middle" data-feather="archive"></i>
 								<span class="align-middle">Product Awaiting Approval</span>
 							</a>
 						</li>
-						<li class="sidebar-item">
+						<li class="sidebar-item ">
 							<a href="" class="sidebar-link ps-5 pe-2 small">
-								<i class="align-middle" data-feather="grid"></i>
+								<i class="align-middle " data-feather="grid"></i>
 								<span class="align-middle">Product Category Management</span>
 							</a>
 						</li>
@@ -87,61 +87,52 @@
 
 		</nav>
 		<main class="content">
-			<div class="row">
-				<div class="col-12 col-lg-8 col-xxl-9 d-flex" style="margin-left: 140px; margin-top: 35px">
-					<div class="card flex-fill">
-						<div class="card-header">
+			<div class="container-fluid p-0">
+				<h1 class="h3 m-3">Product Awaiting Approval</h1>
+				<div class="row ms-0">
+					<div class="col-12">
+						<div class="card">
+							<table class="table table-hover my-0">
+								<thead>
+								<tr>
+									<th class="d-none d-md-table-cell">Product Name</th>
+									<th class="d-none d-md-table-cell">Username</th>
+									<th class="d-none d-md-table-cell">CurrentPrice</th>
+									<th class="d-none d-md-table-cell">StepPrice</th>
 
-							<h5 class="card-title mb-0">List Catelories</h5>
-						</div>
-						<table class="table table-hover my-0">
-							<thead>
-							<tr>
+								</tr>
+								</thead>
+								<tbody>
+								<tr class="cursor-p" th:each="product : ${products}"  th:data-href="'/admin/detailProduct/'+ ${product.productId}">
 
-								<th class="d-none d-md-table-cell">ID</th>
-								<th class="d-none d-md-table-cell">CategoryName</th>
+									<td class="d-none d-md-table-cell" th:text="${product.name}"></td>
+									<td class="d-none d-md-table-cell" th:text="${product.account.username}"></td>
+									<td class="d-none d-md-table-cell" th:text="${product.currentPrice}"></td>
+									<td class="d-none d-md-table-cell" th:text="${product.stepPrice}"></td>
 
-							</tr>
-							</thead>
-							<tbody>
-							<tr th:each="category : ${categories}">
-
-
-								<td th:text="${category.categoryId}"></td>
-								<td th:text="${category.name}"></td>
-
-								<td>
-									<a style="text-decoration: none;"
-									   th:href="@{/admin/editCategory/{id}(id = ${category.categoryId})}">
-										<button type="button" class="btn btn-primary">Edit</button>
-									</a>
-
-								</td>
-
-							</tr>
-							</tbody>
-						</table>
-						<br>
-						<div >
-							<a style="text-decoration: none; float: left"
-							   th:href="@{/admin/createCategory}">
-								<button type="button" class="btn btn-outline-success" style="margin-bottom: 10px; margin-left: 10px">Add New Category</button>
-							</a>
+<!--									<td>-->
+<!--											<a style="text-decoration: none;"-->
+<!--										   th:href="@{/admin/detail/{id}(id = ${user.id})}">-->
+<!--											<button type="button" class="btn btn-primary">Detail</button>-->
+<!--											</a>-->
+<!--									</td>-->
+								</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
-
 			</div>
-
 		</main>
 	</div>
 </div>
-<div id="" class="header-spacer bg-dark"></div>
+
 
 <!--****** JS ******-->
 <script>
 	feather.replace()
 </script>
+
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!-- JavaScript Bundle with Popper -->
@@ -158,6 +149,33 @@
 <script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
 <script th:src="@{/js/main.js}"></script>
 <script th:src="@{/admin/js/app.js}"></script>
+<script>
+	var rows = $('table tbody tr');
+	for (const row of rows) {
+		$(row,'td').click(function (){
+			window.location=$(row).data('href');
+		})
+	}
+</script>
+<script>
+
+	function changeEnableUser(username) {
+		console.log("vo ham")
+		console.log( "," + username);
+		$.ajax({
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'HTML'
+			},
+			type: "POST",
+			url: "/admin/changeEnable/" + username ,
+			success: function (result) {
+
+			}
+		});
+	}
+
+</script>
 
 </body>
 </html>

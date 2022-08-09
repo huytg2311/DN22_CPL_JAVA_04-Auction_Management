@@ -20,4 +20,6 @@ public interface IProductService extends IService<Product, Long>{
     List<Product> findProductsByUsername(String username);
 
     Optional<Product> findById(Long productId);
+
+    List<Product> findWaitingProducts();
 }

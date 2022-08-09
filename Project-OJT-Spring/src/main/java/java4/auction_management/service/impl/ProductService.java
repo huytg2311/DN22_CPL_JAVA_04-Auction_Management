@@ -61,6 +61,15 @@ public class ProductService implements IProductService {
     }
 
     @Override
+    public List<Product> findWaitingProducts() {
+        return iProductRepository.getWaitingProduct();
+    }
+
+
+
+
+
+    @Override
     public Optional<Product> findById(Long productId){
         return iProductRepository.findById(productId);
     }

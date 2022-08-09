@@ -14,4 +14,7 @@ public interface  IProductRepository extends JpaRepository<Product, Long> {
 
     @Override
     Optional<Product> findById(Long productId);
+
+    @Query(value = "select * from product as p where  p.product_status like 'WAITING'", nativeQuery = true)
+    List<Product> getWaitingProduct();
 }

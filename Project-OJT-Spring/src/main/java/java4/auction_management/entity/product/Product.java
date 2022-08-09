@@ -12,7 +12,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -40,13 +42,12 @@ public class Product {
     private int currentPrice;
 
     private String productInfo;
-
-    @Column(length = 1000)
+    @Column(length = 10000)
     private String listImage;
 
     private boolean isSold;
 
-//    @Column(columnDefinition = "default 'WAITING'")
+    @Column(columnDefinition = "default 'WAITING'")
     @Enumerated(EnumType.STRING)
     private EStatus productStatus = EStatus.WAITING;
 
