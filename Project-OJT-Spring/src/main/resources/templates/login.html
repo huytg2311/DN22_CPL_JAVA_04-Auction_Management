@@ -44,7 +44,7 @@
 
 		<div class="container-fluid p-0">
 			<div class="vw-100 d-flex overflow-hidden">
-				<div id='white-logo' class="position-absolute start-0 top-0 d-flex  align-items-center p-4">
+				<div id='white-logo' class="position-absolute start-0 top-0 d-flex  align-items-center p-4 form-animation">
 					<div class="me-1">
 						<img th:src="@{/img/logo-onecolor.svg}" alt="" height="65px" width="65px">
 					</div>
@@ -54,7 +54,7 @@
 							style="font-weight: 900 !important; font-size: 22px !important;">Auction</h5>
 					</div>
 				</div>
-				<div id='primary-logo' class="position-absolute start-0 top-0 d-flex  align-items-center p-4 invisible">
+				<div id='primary-logo' class="position-absolute start-0 top-0 d-flex  align-items-center p-4 form-animation invisible">
 					<div class="me-1">
 						<img th:src="@{/img/logo-onecolor-primary.svg}" alt="" height="65px" width="65px">
 					</div>
@@ -259,16 +259,6 @@
 					<div id="login-banner" class="col-lg-4 col-12 p-0 shadow-lg form-animation">
 						<div  class=" vh-100 bg-gradient-primary d-flex flex-column align-items-center justify-content-center"
 							  style="padding-bottom: 10%">
-							<div class="position-absolute start-0 top-0 d-flex  align-items-center p-4">
-								<div class="me-1">
-									<img th:src="@{/img/logo-onecolor.svg}" alt="" height="65px" width="65px">
-								</div>
-								<div class="align-items-center">
-									<h5 class="text-white m-0 d-flex lh-1">Smart</h5>
-									<h5 class="text-white m-0 d-flex text-uppercase lh-1"
-										style="font-weight: 900 !important; font-size: 22px !important;">Auction</h5>
-								</div>
-							</div>
 							<div class="container-fluid px-4  text-center">
 								<h2 class="display-5 text-light fw-bolder mb-2">One of Us?</h2>
 								<p class="fs-5 text-light lh-sm mb-4">If you already have an account, just log in. We've
@@ -307,23 +297,23 @@
 <script th:src="@{lib/counterup/counterup.min.js}"></script>
 <script th:src="@{lib/owlcarousel/owl.carousel.min.js}"></script>
 <script type="text/javascript">
-    if($('.form-message').html()!=undefined){
+    if($('.form-message').html()!==undefined){
         $('#signup-banner').css('margin-left','-33.3%')
         $('#login-form').css('margin-left', '-50%')
-        $('#white-logo').toggle('d-none')
-        $('#primary-logo').toggle('d-none')
+        $('#white-logo').toggleClass('invisible')
+        $('#primary-logo').toggleClass('invisible')
 	}
 	$('#login-btn').click(function () {
         $('#signup-banner').css('margin-left', '0%')
         $('#login-form').css('margin-left', '0%')
-        $('#white-logo').toggle('d-none')
-        $('#primary-logo').toggle('d-none')
+        $('#white-logo').toggleClass('invisible')
+        $('#primary-logo').toggleClass('invisible')
     })
 	$('#signup-btn').click(function (){
         $('#signup-banner').css('margin-left','-33.3%')
         $('#login-form').css('margin-left', '-50%')
-        $('#white-logo').toggle('d-none')
-        $('#primary-logo').toggle('d-none')
+        $('#white-logo').toggleClass('invisible')
+        $('#primary-logo').toggleClass('invisible')
 
     })
 

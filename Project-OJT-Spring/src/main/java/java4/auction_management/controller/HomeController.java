@@ -62,7 +62,7 @@ public class HomeController {
 
 
     @GetMapping(value = {"/","/welcome"})
-    public String welcomePage(Model model,@PageableDefault(size = 8) Pageable pageable) {
+    public String welcomePage(Model model,@PageableDefault(size = 4) Pageable pageable) {
         Page<Auction> auctions = auctionService.findAllAuction(pageable);
         for (Auction ac: auctions
              ) {

@@ -22,7 +22,6 @@ public class Account {
     @Id
 //    @Column(name = "username", nullable = false)
     @NotBlank(message = "Username is required")
-    @UniqueUsername
     private String username;
 
     @NotBlank(message = "Password is required")

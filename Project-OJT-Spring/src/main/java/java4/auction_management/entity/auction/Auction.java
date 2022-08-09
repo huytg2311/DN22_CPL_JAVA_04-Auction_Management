@@ -34,6 +34,8 @@ public class Auction {
 
     private double stepPrice;
 
+    private boolean isFinish;
+
     @OneToMany(mappedBy = "auction", cascade = CascadeType.ALL)
     private List<Bid> bidList;
 
