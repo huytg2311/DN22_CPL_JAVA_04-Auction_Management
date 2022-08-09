@@ -6,6 +6,7 @@ import java4.auction_management.entity.product.Product;
 import java4.auction_management.entity.user.User;
 import java4.auction_management.service.IAccountService;
 import java4.auction_management.service.ICategoryService;
+import java4.auction_management.service.IProductService;
 import java4.auction_management.service.IUserService;
 import java4.auction_management.service.impl.CategoryService;
 import java4.auction_management.service.impl.ProductService;
@@ -41,7 +42,7 @@ public class UserController {
     UserService userService2;
 
     @Autowired
-    ProductService productService;
+    IProductService productService;
 
     @Autowired
     ICategoryService iCategoryService;
@@ -109,21 +110,6 @@ public class UserController {
         return "user/edit-profile";
     }
 
-    @GetMapping("/auction/{username}")
-    public String showAuctionUser(@PathVariable("username") String username, Model model) {
-//                Optional<User> users = userService.getById(user.getId());
-        List<Product> product = productService.findProductsByUsername(username);
-        if(product.isEmpty())
-            System.out.println('a');
-        for (Product prod: product
-             ) {
-            System.out.println(prod);
-        };
-        model.addAttribute("products", product);
-
-//        model.addAttribute("users", user );
-        return "user/auction";
-    }
     @GetMapping("/detailAuction/{productId}")
     public String detailAuction(@PathVariable("productId") Product product, Model model){
 

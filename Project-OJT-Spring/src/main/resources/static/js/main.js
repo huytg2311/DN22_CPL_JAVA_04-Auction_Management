@@ -99,21 +99,11 @@
     }
 
     //line-clamp-2
-    let clampObject = $('.js-line-clamp-2')
-    for (const clampObjectElement of clampObject) {
-        $clamp(clampObjectElement, {clamp: 2})
-    }
+    // let clampObject = $('.js-line-clamp-2')
+    // for (const clampObjectElement of clampObject) {
+    //     $clamp(clampObjectElement, {clamp: 2})
+    // }
     
 })(jQuery);
-
-//set height for header-spacer
-    let headerHeight = document.getElementById("header").getElementsByClassName("fixed-top")[0]
-
-    let headerSpacers = document.getElementsByClassName("header-spacer")
-    for (const headerSpacer of headerSpacers ){
-    headerSpacer.setAttribute("style", "height:" + headerHeight.clientHeight + "px")
-}
-    // document.getElementById("sidebar").setAttribute("style", "height:calc(100vh - " + headerHeight.clientHeight + "px)")
-    document.getElementsByClassName("sidebar-content")[0].setAttribute("style", "height:calc(100vh - " + headerHeight.clientHeight + "px)")
 
 

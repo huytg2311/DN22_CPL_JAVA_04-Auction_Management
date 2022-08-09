@@ -38,6 +38,11 @@ public class AuctionService implements IAuctionService {
     }
 
     @Override
+    public List<Auction> findAuctionsByUsername(String username){
+        return iAuctionRepository.findAuctionsByUsername(username);
+    }
+
+    @Override
     public Auction save(Auction entity) {
         return iAuctionRepository.save(entity);
     }

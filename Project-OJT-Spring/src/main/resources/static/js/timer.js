@@ -39,7 +39,6 @@ let timeLeftDisplayers = document.getElementsByClassName('js-auction-time-left')
     setInterval(function () {
         for (let i = 0; i<auctionTimers.length; i++) {
             let finishTime = new Date(finishTimes[i].value).getTime()
-            console.log(finishTime)
             let timeLeft = new Date().getTime() - finishTime
 
             let hours = Math.floor(timeLeft / (1000 * 60 * 60)).toString();

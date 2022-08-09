@@ -45,7 +45,7 @@
 
 
 	<!-- Navbar Start -->
-	<div id="js-header-height" class="fixed-top  wow fadeInDown" data-wow-delay="0.1s">
+	<div id="js-header-height" class="sticky-top wow fadeInDown" data-wow-delay="0.1s">
 		<div class="lh-1 w-100 bg-primary p-3 py-md-1 px-5 d-flex justify-content-between">
 			<div class="d-none d-md-flex align-items-center ms-xl-4">
 				<a href="" class="small text-light me-3">
@@ -92,7 +92,7 @@
 				<div class="navbar-nav mx-auto p-lg-0 px-4  py-2 text-uppercase">
 					<a th:href="@{/}" class="nav-item nav-link active">Home</a>
 					<a href="#" class="nav-item nav-link">Bidding</a>
-					<a href="#" class="nav-item nav-link">Auction</a>
+					<a th:href="@{/auctions/my-auctions}" class="nav-item nav-link">Auctions</a>
 					<a href="#" class="nav-item nav-link">About</a>
 				</div>
 				<div class="divider d-block b-lg-none"></div>

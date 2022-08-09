@@ -7,10 +7,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-@Service
+import java.util.List;
+
+
 public interface IAuctionService extends IService<Auction, Long>{
 
     Auction findAuctionByProductProductId(Long productId);
 
     Page<Auction> findAllAuction(Pageable pageable);
+
+    List<Auction> findAuctionsByUsername(String username);
 }

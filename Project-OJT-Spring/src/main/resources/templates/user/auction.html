@@ -38,333 +38,103 @@
 <div class="main-wrapper">
 	<div th:insert="header :: my-header"></div>
 
-	<div class="header-spacer"></div>
 
-	<div class="main bg-light">
-		<div class="content px-lg-4 pt-lg-4 pb-lg-3 py-3 p-0">
-			<div class="container-fluid m-0">
-				<div class="card mw-1200px px-lg-5 px-4 pt-5 pb-4 mx-auto my-0">
-					<div class="row">
-						<div class="col-12">
-							<div class="d-flex">
+	<div class="main bg-white">
 
-								<h5 class="h4 text-secondary m-0 mt-1">Your auction list</h5>
-								<a th:href="@{/products/create}" class="m-0 ms-3 fs-4">
-									<div class="btn btn-primary rounded-0 font-inter">
-										<i class="bi bi-plus-lg"></i>
-										Create an Auction
-									</div>
-								</a>
+		<div class="container-fluid m-0 p-0">
+			<div class="ratio ratio-1x7 bg-light">
+				<!--					<img class="op-center of-cover" th:src="@{/img/SmartAuction_banner-02.png}" alt="">-->
+
+				<div class=" d-flex align-items-center justify-content-around">
+					<div class="fs-5">
+						<span class="breadcrumb-item active ">HOME  /</span>
+						<span class="breadcrumb-item text-secondary fw-bold">AUCTIONS</span>
+					</div>
+					<div class="d-flex flex-column justify-content-end align-items-center text-end">
+						<h2 class="text-secondary animated lh-1 py-3 align-middle"><span
+								class="text-primary text-uppercase h1">Auctions</span> of yours</h2>
+						<a th:href="@{/products/create}" class="m-0 ms-3 fs-4">
+							<div class="btn btn-primary rounded-0 shadow btn-hover-scale text-light">
+								<i class="bi bi-plus-lg"></i>
+								Create an Auction
 							</div>
-						</div>
-						<div class="col-12" th:object="${products}">
-							<h5 class="text-secondary fs-7"
-								th:if="${#lists.isEmpty(products)}">
-								You have not created any auction yet</h5>
-							<div class="card table-responsive-md">
+						</a>
 
-								<table class="js-table-link table table-hover fs-6 "
-									   th:if="!${#lists.isEmpty(products)}">
-									<thead class="bg-light text-primary">
-									<tr>
-										<th class="bg-light">Product</th>
-										<th style="width: 15%">Status</th>
-										<th class="d-none d-md-table-cell" style="width: 20%;">Current Bid</th>
-										<th class="d-none d-lg-table-cell" style="width: 15%;">Num.Of Bids</th>
-										<th class="bg-light" style="width: 15%;">isSold</th>
-									</tr>
-									</thead>
-									<tbody>
-									<tr th:each="product, prodState : ${products}"
-										th:data-href="${'/user/detailAuction/' + product.productId}"
-										class="cursor-p">
-										<td>
-											<div class="d-flex align-items-center">
-												<div class="ratio ratio-1x1 avatar-xl">
-													<img th:src="${product.listImage==null}? '' : ${#strings.arraySplit(product.listImage,' ')[0]}"
-														 alt="" class="of-cover op-center">
-												</div>
-												<div class="ms-3 w-fit-content">
-													<span class="js-line-clamp-2 fw-bold"
-														  th:text="${product.name}"></span>
-												</div>
-											</div>
-										</td>
-										<td th:switch="${product.productStatus.toString()}">
-											<div th:case="'WAITING'" class="d-flex align-items-center fw-light">
-												<div class="rounded-circle btn-xs-square bg-blue me-1 "></div>
-												Waiting
-											</div>
-											<div th:case="'ACCEPTED'" class="d-flex align-items-center fw-light">
-												<div class="rounded-circle btn-xs-square bg-success me-1 "></div>
-												Accepted
-											</div>
-											<div th:case="'REJECTED'" class="d-flex align-items-center fw-light">
-												<div class="rounded-circle btn-xs-square bg-danger me-1 "></div>
-												Rejected
-											</div>
-										</td>
-
-										<td class="d-none d-md-table-cell fw-light"
-											th:text="${'$'+#numbers.formatDecimal(product.currentPrice,1,'COMMA',0,'POINT')}"></td>
-										<td class="d-none d-lg-table-cell" th:text="${product.bid.size()}"></td>
-										<td>
-										<span th:text="${product.isSold} ? 'SOLD' : 'Not yet'"
-											  th:class="${product.isSold} ? 'text-primary fw-bold' : 'fw-light'"></span>
-										</td>
-									</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
 					</div>
 
 				</div>
+
+			</div>
+
+			<div class="mw-1200px px-lg-5 px-4 pt-5 pb-4 mx-auto my-0 fadeIn" data-wow-delay="0.1s">
+				<div class="row">
+					<div class="col-12">
+						<p class="text-secondary fs-7 fw-light"
+						   th:if="${#lists.isEmpty(auctionList)}">
+							You have not created any auction yet.</p>
+						<div class="table-responsive vh-75 shadow" th:if="!${#lists.isEmpty(auctionList)}">
+							<table class="js-table-link table table-hover fs-6 ">
+								<thead class="bg-light text-primary position-sticky top-0 start-0 end-0"
+									   style="z-index: 5">
+								<tr>
+									<th class="bg-light">Product</th>
+									<th style="width: 15%">Status</th>
+									<th class="d-none d-md-table-cell" style="width: 20%;">Current Bid</th>
+									<th class="d-none d-lg-table-cell" style="width: 15%;">Num.Of Bids</th>
+									<th class="bg-light" style="width: 15%;">isSold</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr th:each="auction, auctionState : ${auctionList}"
+									th:data-href="${'/user/detailAuction/' + auction.auctionID}"
+									class="cursor-p">
+									<td>
+										<div class="d-flex align-items-center">
+											<div class="ratio ratio-1x1 avatar-xl">
+												<img th:src="${auction.product.listImage==null}? '' : ${#strings.arraySplit(auction.product.listImage,' ')[0]}"
+													 alt="" class="of-cover op-center">
+											</div>
+											<div class="ms-3 w-fit-content">
+													<span class="js-line-clamp-2 fw-bold"
+														  th:text="${auction.product.productName}"></span>
+											</div>
+										</div>
+									</td>
+									<td th:switch="${auction.auctionStatus.toString()}">
+										<div th:case="'WAITING'" class="d-flex align-items-center fw-light">
+											<div class="rounded-circle btn-xs-square bg-blue me-1 "></div>
+											Waiting
+										</div>
+										<div th:case="'ACCEPTED'" class="d-flex align-items-center fw-light">
+											<div class="rounded-circle btn-xs-square bg-success me-1 "></div>
+											Accepted
+										</div>
+										<div th:case="'REJECTED'" class="d-flex align-items-center fw-light">
+											<div class="rounded-circle btn-xs-square bg-danger me-1 "></div>
+											Rejected
+										</div>
+									</td>
+
+									<td class="d-none d-md-table-cell fw-light"
+										th:text="${'$'+#numbers.formatDecimal(auction.bidList[auction.bidList.size() - 1],1,'COMMA',2,'POINT')}"></td>
+									<td class="d-none d-lg-table-cell" th:text="${auction.bidList.size()}"></td>
+									<td>
+										<span th:text="${auction.product.isSold} ? 'SOLD' : 'Not yet'"
+											  th:class="${auction.product.isSold} ? 'text-primary fw-bold' : 'fw-light'"></span>
+									</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
 			</div>
 		</div>
 	</div>
+
 	<div class="" th:insert="footer :: my-footer"></div>
 </div>
-
-
-<!--<div class="container-fluid page-header1 py-6 wow fadeIn" data-wow-delay="0.1s" style="height: 900px">-->
-<!--	<div class="container text-center pt-5 pb-3">-->
-
-<!--		<div class="container-xxl py-6" style="margin-top: -100px">-->
-<!--			<div class="main">-->
-
-
-<!--				<main class="content">-->
-<!--					<div class="row">-->
-<!--						<div class="col-12 col-lg-8 col-xxl-9 d-flex" style="margin-left: 140px; margin-top: 35px"-->
-<!--							 th:if="${#lists.size(products)} > 0">-->
-<!--							<div class="card flex-fill border-secondary bg-light">-->
-<!--								<div class="card-header ">-->
-
-<!--									<h5 class="card-title mb-0">List Product Posted</h5>-->
-<!--								</div>-->
-<!--								<table class="table table-hover my-0">-->
-<!--									<thead>-->
-<!--									<tr>-->
-<!--										&lt;!&ndash;                                        <th>Image</th>&ndash;&gt;-->
-<!--										<th>ProductName</th>-->
-<!--										<th class="d-none d-md-table-cell">Current Price</th>-->
-<!--										<th class="d-none d-md-table-cell">Time Auction</th>-->
-<!--										<th class="d-none d-md-table-cell">Sold</th>-->
-<!--										<th class="d-none d-md-table-cell">Product Status</th>-->
-<!--										<th class="d-none d-md-table-cell">Action</th>-->
-
-<!--									</tr>-->
-<!--									</thead>-->
-<!--									<tbody>-->
-<!--									<tr th:each="product : ${products}">-->
-<!--										&lt;!&ndash;                                        <td>&ndash;&gt;-->
-<!--										&lt;!&ndash;&lt;!&ndash;                                            <img style="width: 60px ; height: 60px; border-radius: 100%" th:src="@{${products.listImage}}" alt="">&ndash;&gt;&ndash;&gt;-->
-<!--										&lt;!&ndash;                                        </td>&ndash;&gt;-->
-<!--										<td th:text="${product.name}"></td>-->
-<!--										<td th:text="${product.currentPrice}"></td>-->
-<!--										<td th:text="${product.timeAuction}"></td>-->
-<!--										<td class="total">-->
-
-<!--											<div th:if="${product.approve} == true">-->
-<!--												<label class="switch ">-->
-<!--													<input type="checkbox"-->
-<!--														   th:id="'enable-'+${product.approve}"-->
-<!--														   th:onclick="'changeActivateUser(' + ${product.approve} + ');'"-->
-<!--														   checked>-->
-<!--													<span class="slider round"></span>-->
-<!--												</label>-->
-<!--											</div>-->
-<!--											<div th:if="${product.approve} == false">-->
-<!--												<label class="switch">-->
-<!--													<input type="checkbox"-->
-<!--														   th:id="'enable-'+${product.approve}"-->
-<!--														   th:onclick="'changeActivateUser(' + ${product.approve} + ');'">-->
-<!--													<span class="slider round warning"></span>-->
-<!--												</label>-->
-<!--											</div>-->
-
-<!--										</td>-->
-<!--										<td th:text="${product.productStatus}"></td>-->
-<!--										<td>-->
-
-<!--											<a style="text-decoration: none;"-->
-<!--											   th:href="@{'/user/detailAuction/' + ${product.productId}}"-->
-<!--											>-->
-<!--												<button type="button" class="btn btn-outline-success">Detail</button>-->
-<!--											</a>-->
-<!--											<a style="text-decoration: none;"-->
-<!--											   th:if=" ${#strings.equals(product.productStatus,'REJECTED')} "-->
-<!--											   th:href="@{/products/edit/{id}(id = ${product.productId})}">-->
-<!--												&lt;!&ndash;                                               th:href="@{/admin/edit/{id}(id = ${user.id})}">         &ndash;&gt;-->
-<!--												<button type="button" class="btn btn-outline-warning">Edit</button>-->
-<!--											</a>-->
-
-<!--										</td>-->
-<!--									</tr>-->
-<!--									</tbody>-->
-<!--								</table>-->
-<!--								<br>-->
-<!--								<div>-->
-<!--									<a style="text-decoration: none; float: left"-->
-<!--									   th:href="@{/products/create}">-->
-<!--										<button type="button" class="btn btn-outline-success"-->
-<!--												style="margin-bottom: 10px; margin-left: 10px">Add Product Auction-->
-<!--										</button>-->
-<!--									</a>-->
-<!--								</div>-->
-<!--							</div>-->
-<!--						</div>-->
-<!--						<div class="col-12 col-lg-8 col-xxl-9 d-flex" style="margin-left: 140px; margin-top: 35px"-->
-<!--							 th:if="${#lists.size(products)} == 0">-->
-<!--							<div class="card flex-fill border-secondary bg-light">-->
-<!--								<div class="card-header ">-->
-
-<!--									<h5 class="card-title mb-0">You have not posted any products yet</h5>-->
-<!--								</div>-->
-<!--								<div>-->
-<!--									<a style="text-decoration: none; float: left"-->
-<!--									   th:href="@{/products/create}">-->
-<!--										<button type="button" class="btn btn-outline-success mt-2"-->
-<!--												style="margin-bottom: 10px; margin-left: 10px">Add Product Auction-->
-<!--										</button>-->
-<!--									</a>-->
-<!--								</div>-->
-
-<!--							</div>-->
-<!--						</div>-->
-
-<!--					</div>-->
-
-<!--				</main>-->
-
-
-<!--			</div>-->
-<!--		</div>-->
-
-
-<!--	</div>-->
-
-<!--</div>-->
-<!--<div class="container-fluid page-header1 py-6 wow fadeIn" data-wow-delay="0.1s" style="height: 900px">-->
-<!--	<div class="container text-center pt-5 pb-3">-->
-
-<!--		<div class="container-xxl py-6" style="margin-top: -100px">-->
-<!--			<div class="main">-->
-
-
-<!--				<main class="content">-->
-<!--					<div class="row">-->
-<!--						<div class="col-12 col-lg-8 col-xxl-9 d-flex" style="margin-left: 140px; margin-top: 35px"-->
-<!--							 th:if="${#lists.size(products)} > 0">-->
-<!--							<div class="card flex-fill border-secondary bg-light">-->
-<!--								<div class="card-header ">-->
-
-<!--									<h5 class="card-title mb-0">List Product Posted</h5>-->
-<!--								</div>-->
-<!--								<table class="table table-hover my-0">-->
-<!--									<thead>-->
-<!--									<tr>-->
-<!--										&lt;!&ndash;                                        <th>Image</th>&ndash;&gt;-->
-<!--										<th>ProductName</th>-->
-<!--										<th class="d-none d-md-table-cell">Current Price</th>-->
-<!--										<th class="d-none d-md-table-cell">Time Auction</th>-->
-<!--										<th class="d-none d-md-table-cell">Sold</th>-->
-<!--										<th class="d-none d-md-table-cell">Product Status</th>-->
-<!--										<th class="d-none d-md-table-cell">Action</th>-->
-
-<!--									</tr>-->
-<!--									</thead>-->
-<!--									<tbody>-->
-<!--									<tr th:each="product : ${products}">-->
-<!--										&lt;!&ndash;                                        <td>&ndash;&gt;-->
-<!--										&lt;!&ndash;&lt;!&ndash;                                            <img style="width: 60px ; height: 60px; border-radius: 100%" th:src="@{${products.listImage}}" alt="">&ndash;&gt;&ndash;&gt;-->
-<!--										&lt;!&ndash;                                        </td>&ndash;&gt;-->
-<!--										<td th:text="${product.name}"></td>-->
-<!--										<td th:text="${product.currentPrice}"></td>-->
-<!--										<td th:text="${product.timeAuction}"></td>-->
-<!--										<td class="total">-->
-
-<!--											<div th:if="${product.approve} == true">-->
-<!--												<label class="switch ">-->
-<!--													<input type="checkbox"-->
-<!--														   th:id="'enable-'+${product.approve}"-->
-<!--														   th:onclick="'changeActivateUser(' + ${product.approve} + ');'"-->
-<!--														   checked>-->
-<!--													<span class="slider round"></span>-->
-<!--												</label>-->
-<!--											</div>-->
-<!--											<div th:if="${product.approve} == false">-->
-<!--												<label class="switch">-->
-<!--													<input type="checkbox"-->
-<!--														   th:id="'enable-'+${product.approve}"-->
-<!--														   th:onclick="'changeActivateUser(' + ${product.approve} + ');'">-->
-<!--													<span class="slider round warning"></span>-->
-<!--												</label>-->
-<!--											</div>-->
-
-<!--										</td>-->
-<!--										<td th:text="${product.productStatus}"></td>-->
-<!--										<td>-->
-
-<!--											<a style="text-decoration: none;"-->
-<!--											   th:href="@{'/user/detailAuction/' + ${product.productId}}"-->
-<!--											>-->
-<!--												<button type="button" class="btn btn-outline-success">Detail</button>-->
-<!--											</a>-->
-<!--											<a style="text-decoration: none;"-->
-<!--											   th:if=" ${#strings.equals(product.productStatus,'REJECTED')} "-->
-<!--											   th:href="@{/products/edit/{id}(id = ${product.productId})}">-->
-<!--												&lt;!&ndash;                                               th:href="@{/admin/edit/{id}(id = ${user.id})}">         &ndash;&gt;-->
-<!--												<button type="button" class="btn btn-outline-warning">Edit</button>-->
-<!--											</a>-->
-
-<!--										</td>-->
-<!--									</tr>-->
-<!--									</tbody>-->
-<!--								</table>-->
-<!--								<br>-->
-<!--								<div>-->
-<!--									<a style="text-decoration: none; float: left"-->
-<!--									   th:href="@{/products/create}">-->
-<!--										<button type="button" class="btn btn-outline-success"-->
-<!--												style="margin-bottom: 10px; margin-left: 10px">Add Product Auction-->
-<!--										</button>-->
-<!--									</a>-->
-<!--								</div>-->
-<!--							</div>-->
-<!--						</div>-->
-<!--						<div class="col-12 col-lg-8 col-xxl-9 d-flex" style="margin-left: 140px; margin-top: 35px"-->
-<!--							 th:if="${#lists.size(products)} == 0">-->
-<!--							<div class="card flex-fill border-secondary bg-light">-->
-<!--								<div class="card-header ">-->
-
-<!--									<h5 class="card-title mb-0">You have not posted any products yet</h5>-->
-<!--								</div>-->
-<!--								<div>-->
-<!--									<a style="text-decoration: none; float: left"-->
-<!--									   th:href="@{/products/create}">-->
-<!--										<button type="button" class="btn btn-outline-success mt-2"-->
-<!--												style="margin-bottom: 10px; margin-left: 10px">Add Product Auction-->
-<!--										</button>-->
-<!--									</a>-->
-<!--								</div>-->
-
-<!--							</div>-->
-<!--						</div>-->
-
-<!--					</div>-->
-
-<!--				</main>-->
-
-
-<!--			</div>-->
-<!--		</div>-->
-
-
-<!--	</div>-->
-
-<!--</div>-->
 
 
 <!-- JavaScript Libraries -->
@@ -374,9 +144,8 @@
 <script th:src="@{/lib/easing/easing.min.js}"></script>
 <script th:src="@{/lib/waypoints/waypoints.min.js}"></script>
 <script th:src="@{/lib/counterup/counterup.min.js}"></script>
-<script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
 <!-- Template Javascript -->
-<script th:src="@{/js/header-spacer.js}"></script>
+<script th:src="@{/js/main.js}"></script>
 
 </body>
 
