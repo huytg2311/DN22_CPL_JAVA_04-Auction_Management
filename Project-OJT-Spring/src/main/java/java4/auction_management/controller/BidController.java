@@ -2,6 +2,7 @@ package java4.auction_management.controller;
 
 import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.bid.Bid;
+import java4.auction_management.entity.cart.Cart;
 import java4.auction_management.entity.product.Product;
 import java4.auction_management.entity.user.User;
 import java4.auction_management.service.IAuctionService;
@@ -10,7 +11,10 @@ import java4.auction_management.service.impl.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping(value = "/bid")
@@ -24,6 +28,17 @@ public class BidController {
 
     @Autowired
     IAuctionService iAuctionService;
+
+    @Autowired
+    CartService cartService;
+
+    @GetMapping("/cart/{username}")
+    public String showCart(@PathVariable("username") String username, Model model, HttpServletRequest httpServletRequest) {
+        User user = userService.getUserByUsername(httpServletRequest.getUserPrincipal().getName());
+        Cart cart =  cartService.getByUserID(user.getId());
+        model.addAttribute("cart", cart);
+        return "/cart/cart";
+    }
 
     @RequestMapping(value = "/createBid", method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE, consumes={"application/json"})

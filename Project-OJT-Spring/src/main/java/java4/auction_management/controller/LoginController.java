@@ -91,16 +91,15 @@ public class LoginController {
         return "redirect:/success";
     }
 
+    @GetMapping("/success")
+    public String success(Model model) {
+        return "success";
+    }
 
-    @GetMapping("/logoutSuccessful")
-    public String welcomePage(Model model,@PageableDefault(size = 8) Pageable pageable) {
-        Page<Auction> auctions = auctionService.findAllAuction(pageable);
-        for (Auction ac: auctions
-        ) {
-            ac.getProduct().setListImage(ac.getProduct().getListImage().split(" ")[0]);
-        }
-        model.addAttribute("auctions", auctions);
-        return "index";
+    @RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
+    public String logoutSuccessfulPage(Model model) {
+        model.addAttribute("title", "Logout");
+        return "/index";
     }
 
 }
