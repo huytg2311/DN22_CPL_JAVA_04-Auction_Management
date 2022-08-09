@@ -2,13 +2,15 @@ package java4.auction_management.controller;
 
 import com.cloudinary.utils.ObjectUtils;
 import java4.auction_management.config.CloudinaryConfig;
+import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.category.Category;
 import java4.auction_management.entity.product.Product;
+import java4.auction_management.entity.user.Account;
 import java4.auction_management.entity.user.User;
-import java4.auction_management.service.IAccountService;
-import java4.auction_management.service.ICategoryService;
-import java4.auction_management.service.IUserService;
+import java4.auction_management.service.*;
+import java4.auction_management.service.impl.AccountService;
 import java4.auction_management.service.impl.CategoryService;
+import java4.auction_management.service.impl.ProductService;
 import java4.auction_management.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,8 +22,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Timer;
+import java.util.TimerTask;
 
 @Controller
 @RequestMapping("/admin")
@@ -44,6 +50,18 @@ public class AdminController {
 
     @Autowired
     CategoryService categoryService;
+
+    @Autowired
+    IProductService productService;
+
+    @Autowired
+    ProductService iProductService;
+
+    @Autowired
+    IAuctionService auctionService;
+
+
+
     @GetMapping
     public String showAll(Model model) {
         model.addAttribute("users", userService.getAllUser());
@@ -133,10 +151,70 @@ public class AdminController {
         categoryService.save(category);
         return "redirect:categories";
     }
+
+    @PostMapping("/changeEnable/{username}")
+    @ResponseBody
+    public String adminApected(@PathVariable("username") Account account) {
+        if (account.getEnable()) {
+            account.setEnable(false);
+        } else {
+            account.setEnable(true);
+        }
+        accountService.save(account);
+        return "change success";
+    }
+
+    @GetMapping("/waitingAuctions")
+    public String showWaitingAuctions(Model model) {
+        model.addAttribute("auction", productService.findWaitingAuctions());
+        return "admin/product-management";
+    }
+
+    @GetMapping("/editStatusAuction/{auctionID}")
+    public String showChangeStatusAuction(@PathVariable("auctionID") Long id, Model model) {
+//        String username = product.getAuction().getUser().getAccount().getUsername();
+        Auction auction = auctionService.getAuctionByAuctionID(id);
+//        Product product = productService.getProductByAuctionId(auction.getAuctionID());
+        model.addAttribute("auction", auction);
+        String[] listImages = auction.getProduct().getListImage().split(" ");
+        model.addAttribute("listImages", listImages);
+        return "admin/detailAuction";
+    }
+
+    @PostMapping("/editAuctionStatus")
+    public String changeStatusAuction(@RequestBody Auction auctionJson) {
+        Auction auction = auctionService.getAuctionByAuctionID(auctionJson.getAuctionID());
+
+        auction.setAuctionStatus(auctionJson.getAuctionStatus());
+
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime finishTime = now.plusHours(Long.parseLong(auction.getAuctionTime()+""));
+        auction.setFinishTime(finishTime);
+
+        Timer timer = new Timer();
+        TimerTask finishAuctionTask = new TimerTask() {
+            @Override
+            public void run() {
+                Auction auction = auctionService.getAuctionByAuctionID(auctionJson.getAuctionID());
+                if (auction.getBidList().isEmpty()){
+                    LocalDateTime now = LocalDateTime.now();
+                    LocalDateTime finishTime = now.plusHours(Long.parseLong(auction.getAuctionTime()+""));
+                    auction.setFinishTime(finishTime);
+
+                    Timer timer = new Timer();
+
+                }
+            }
+        };
+
+        timer.schedule(finishAuctionTask, ChronoUnit.SECONDS.between(now, finishTime));
+
+        auctionService.save(auction);
+
+        return "redirect:/admin/waitingAuctions" ;
+    }
+
 }
-
-
-
 
 
 

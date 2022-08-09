@@ -91,10 +91,19 @@
 			<div class="collapse navbar-collapse" id="navbarCollapse">
 				<div class="divider d-block b-lg-none"></div>
 				<div class="navbar-nav mx-auto p-lg-0 px-4  py-2 text-uppercase">
-					<a th:href="@{/}" class="nav-item nav-link active">Home</a>
-					<a href="#" class="nav-item nav-link">Bidding</a>
-					<a href="#" class="nav-item nav-link">Auction</a>
-					<a href="#" class="nav-item nav-link">About</a>
+					<a th:href="@{/index}" class="nav-item nav-link active">Home</a>
+					<div th:if="${#authorization.expression('hasAuthority(''ROLE_ADMIN'')')}">
+						<a th:href="@{/admin}" class="nav-item nav-link">Admin</a>
+					</div>
+					<div th:if="${#authorization.expression('hasAuthority(''ROLE_USER'')')}">
+						<a th:href="'/user/bidding/'+ ${#request.userPrincipal.name}" class="nav-item nav-link">Bidding</a>
+					</div>
+					<div th:if="${#authorization.expression('hasAuthority(''ROLE_USER'')')}">
+						<a th:href="'/products/auction/'+ ${#request.userPrincipal.name}" class="nav-item nav-link">Auction</a>
+					</div>
+
+					<a th:href="@{/guide}" class="nav-item nav-link">Guide</a>
+					<a th:href="@{/about}" class="nav-item nav-link">About</a>
 				</div>
 				<div class="divider d-block b-lg-none"></div>
 

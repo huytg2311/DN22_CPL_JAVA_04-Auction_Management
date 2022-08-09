@@ -13,4 +13,7 @@ public interface IAuctionService extends IService<Auction, Long>{
     Auction findAuctionByProductProductId(Long productId);
 
     Page<Auction> findAllAuction(Pageable pageable);
+
+    Auction getAuctionByAuctionID(Long id);
+
 }

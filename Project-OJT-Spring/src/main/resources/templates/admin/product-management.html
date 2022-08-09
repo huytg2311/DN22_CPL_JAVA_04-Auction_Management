@@ -103,12 +103,12 @@
 								</tr>
 								</thead>
 								<tbody>
-								<tr class="cursor-p" th:each="product : ${products}"  th:data-href="'/admin/detailProduct/'+ ${product.productId}">
+								<tr class="cursor-p" th:each="auction : ${auction}"  th:data-href="'/admin/editStatusAuction/'+ ${auction.auctionID}">
 
-									<td class="d-none d-md-table-cell" th:text="${product.name}"></td>
-									<td class="d-none d-md-table-cell" th:text="${product.account.username}"></td>
-									<td class="d-none d-md-table-cell" th:text="${product.currentPrice}"></td>
-									<td class="d-none d-md-table-cell" th:text="${product.stepPrice}"></td>
+									<td class="d-none d-md-table-cell" th:text="${auction.product.productName}"></td>
+									<td class="d-none d-md-table-cell" th:text="${auction.user.account.username}"></td>
+									<td class="d-none d-md-table-cell" th:text="${auction.reservePrice}"></td>
+									<td class="d-none d-md-table-cell" th:text="${auction.stepPrice}"></td>
 
 <!--									<td>-->
 <!--											<a style="text-decoration: none;"-->

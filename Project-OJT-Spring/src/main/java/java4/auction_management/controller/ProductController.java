@@ -137,7 +137,7 @@ public class ProductController {
 
     @GetMapping("/edit/{id}")
     public String showEditProduct(@PathVariable("id") Product product, Model model) {
-        String username = product.getAccount().getUsername();
+        String username = product.getAuction().getUser().getAccount().getUsername();
         model.addAttribute("products", product );
         String[] listImages = product.getListImage().split(" ");
         model.addAttribute("listImages", listImages);
@@ -147,7 +147,7 @@ public class ProductController {
     @PostMapping("/edit")
     public String editProduct(@Valid @ModelAttribute Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes,
                                 @RequestParam("file") MultipartFile[] files) throws IOException {
-        String username = product.getAccount().getUsername();
+        String username = product.getAuction().getUser().getAccount().getUsername();
 
         for (MultipartFile m: files
              ) {

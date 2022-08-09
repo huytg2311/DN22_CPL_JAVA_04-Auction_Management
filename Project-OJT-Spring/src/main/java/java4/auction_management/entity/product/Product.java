@@ -1,6 +1,7 @@
 package java4.auction_management.entity.product;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.bid.Bid;
 import java4.auction_management.entity.category.Category;
 

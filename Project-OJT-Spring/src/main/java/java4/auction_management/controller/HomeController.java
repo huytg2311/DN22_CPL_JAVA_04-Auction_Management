@@ -11,6 +11,7 @@ import java4.auction_management.service.IAccountService;
 import java4.auction_management.service.IAuctionService;
 import java4.auction_management.service.IUserService;
 import java4.auction_management.service.impl.AccountService;
+import java4.auction_management.service.impl.AuctionService;
 import java4.auction_management.service.impl.ProductService;
 import java4.auction_management.validate.AccountValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.io.IOException;
+import java.util.Map;
 import java.util.Optional;
 
 import java.util.Optional;
@@ -41,13 +47,13 @@ public class HomeController {
     IUserService userService;
 
     @Autowired
-    private IAccountService accountService;
+    private AccountService accountService;
 
     @Autowired
     private ProductService productService;
 
     @Autowired
-    private IAuctionService auctionService;
+    private AuctionService auctionService;
 
     @Autowired
     CloudinaryConfig cloudc;
@@ -57,18 +63,15 @@ public class HomeController {
 
 
     @GetMapping(value = {"/","/welcome"})
-    public String welcomePage(Model model,@PageableDefault(size = 6) Pageable pageable) {
-//        model.addAttribute("nameAccount", accountService.getAll());
-        Page<Product> products = productService.findAllProduct(pageable);
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String currentPrincipalName = authentication.getName();
-//        System.out.println(currentPrincipalName);
-//        User user1 = userService.getUserByUsername(currentPrincipalName);
-//        model.addAttribute("products", productService.getAll());
-        model.addAttribute("products", products);
-        model.addAttribute("account", new Account());
-
-
+    public String welcomePage(Model model,@PageableDefault(size = 8) Pageable pageable) {
+        Page<Auction> auctions = auctionService.findAllAuction(pageable);
+        for (Auction ac: auctions
+        ) {
+            ac.getProduct().setListImage(ac.getProduct().getListImage().split(" ")[0]);
+        }
+        model.addAttribute("auctions", auctions);
+        return "index";
+    }
 
 
 //        String[] listImage = products.getListImage().split(" ");
@@ -83,15 +86,7 @@ public class HomeController {
 //        model.addAttribute("listImages", listImages);
 //        model.addAttribute("user", user1);
 //        System.out.println(user1.toString());
-    public String welcomePage(Model model,@PageableDefault(size = 4) Pageable pageable) {
-        Page<Auction> auctions = auctionService.findAllAuction(pageable);
-        for (Auction ac: auctions
-             ) {
-            ac.getProduct().setListImage(ac.getProduct().getListImage().split(" ")[0]);
-        }
-        model.addAttribute("auctions", auctions);
-        return "index";
-    }
+
 
     @GetMapping(value = {"/index"})
     public String welcomePage2(Model model) {
