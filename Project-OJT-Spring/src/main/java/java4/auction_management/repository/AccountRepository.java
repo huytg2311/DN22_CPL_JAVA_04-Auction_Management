@@ -7,7 +7,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 public interface AccountRepository extends CrudRepository<Account, String> {
-    @Query("SELECT a FROM Account a WHERE a.username = : username")
-    Account getUserByUsername(@Param("username") String username);
+
+    Account getAccountByUsername(String username);
+
 
 }

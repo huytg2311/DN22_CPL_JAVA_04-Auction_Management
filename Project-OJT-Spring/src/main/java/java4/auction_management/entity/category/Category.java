@@ -28,7 +28,7 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    private List<Product> productList;
+    private List<Product> product;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private  List<Bill> billList;

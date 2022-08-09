@@ -12,9 +12,9 @@ public interface IBidService extends IService<Bid,Long> {
     public Optional<Bid> getById(Long id);
     public void deleteById(Integer id);
 
-    List<Bid> getBidsByProductId(Product productId);
+//    List<Bid> getBidsByProductId(Product productId);
 
-    List<Bid> listBidSort(Long productId);
+    List<Bid> listBidSort(Long auctionID);
 
     List<Bid> findAllByOrderByBidPriceDesc();
 

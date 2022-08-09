@@ -56,26 +56,6 @@
 
 <body>
 
-<nav style="background-color: #1E1916" class="navbar navbar-expand-lg navbar-dark fixed-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
-    <a href="index.html" class="navbar-brand ms-4 ms-lg-0">
-        <h1 class="text-primary m-0">Smart Auction</h1>
-    </a>
-    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse" style="margin-left: -200px">
-        <div class="navbar-nav mx-auto p-4 p-lg-0">
-            <a th:href="@{/welcome}" class="nav-item nav-link active">Home</a>
-
-            <a th:href="@{/guide}" class="nav-item nav-link">Guide</a>
-            <a th:href="@{/about}" class="nav-item nav-link">About</a>
-
-
-
-        </div>
-
-    </div>
-</nav>
 
 <div class="d-lg-flex half" style="margin-top: 95px;background-color: #F6F7FC; height: 1000px" >
     <div class="contents order-2 order-md-1">
@@ -86,101 +66,6 @@
                 <div class="col-md-7 py-5" style="margin-left: 758px;margin-top: -1px;width: 50%;">
                     <h3 style="color: #EAA636">Sign Up Now !</h3>
                     <br><br>
-                    <form th:action="@{/signUp}" th:object="${user}" method="post" enctype="multipart/form-data">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group first">
-                                    <label for="name">Full Name</label><i style="color: red">(*)</i>
-                                    <input type="text" th:field="*{fullname}" class="form-control" placeholder="Enter your name" id="name">
-                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}"></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group first">
-                                    <label for="account.username">Username</label><i style="color: red">(*)</i>
-                                    <input type="text" th:field="*{account.username}" class="form-control" placeholder="Enter username" id="account.username">
-                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('account.username')}" th:errors="*{account.username}"></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" >
-                            <div class="col-md-12">
-                                <div class="form-group first">
-                                    <label for="email">Email Address</label><i style="color: red">(*)</i>
-                                    <input type="email" th:field="*{email}" class="form-control" placeholder="Enter your email" id="email">
-                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" >
-                            <div class="col-md-6">
-                                <div class="form-group first">
-                                    <label for="phoneNumber">Phone Number</label><i style="color: red">(*)</i>
-                                    <input type="text" th:field="*{phoneNumber}" class="form-control" placeholder="Enter your number" id="phoneNumber">
-                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group first">
-                                    <label for="dayOfBirth">Birthday</label><i style="color: red">(*)</i>
-                                    <input type="date" th:field="*{dayOfBirth}" class="form-control" id="dayOfBirth">
-                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('dayOfBirth')}" th:errors="*{dayOfBirth}"></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" >
-                            <div class="col-md-6">
-                                <div class="form-group first">
-                                    <label>Gender</label>
-                                    <select th:field="*{gender}" class="form-control">
-                                        <option th:value="'MALE'">Male</option>
-                                        <option th:value="'FEMALE'">Female</option>
-                                        <option th:value="'OTHER'">Other</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group first">
-                                    <label for="idCard">ID Card</label><i style="color: red">(*)</i>
-                                    <input type="text" th:field="*{idCard}" class="form-control" placeholder="Enter your id card" id="idCard">
-                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('idCard')}" th:errors="*{idCard}"></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" >
-                            <div class="col-md-6">
-
-                                <div class="form-group last mb-3">
-                                    <label for="password">Password</label><i style="color: red">(*)</i>
-                                    <input type="password" th:field="*{account.password}" class="form-control" placeholder="Enter your password" id="password">
-                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('account.password')}" th:errors="*{account.password}"></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-
-                                <div class="form-group last mb-3">
-                                    <label for="address">Address</label><i style="color: red">(*)</i>
-                                    <input type="text" th:field="*{address}" class="form-control" placeholder="Enter your address" id="address">
-                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row" style="margin-top: -45px">
-                            <div class="col-md-6">
-
-                                <div class="form-group last mb-3">
-                                    <label for="image" >Upload Image</label>
-                                    <input multiple="multiple" type="file" name="file" id="file" class="form-control"/>
-                                    <input type="hidden" th:field="*{image}" class="form-control" id="image">
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <input type="submit" value="Sign up" class="btn px-5 btn-primary">
-
-                    </form>
                 </div>
             </div>
         </div>

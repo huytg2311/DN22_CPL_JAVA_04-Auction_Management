@@ -2,653 +2,326 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8">
-    <title>Pay.Picker</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+	<meta charset="utf-8">
+	<title>Pay.Picker</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="" name="keywords">
+	<meta content="" name="description">
 
-    <!-- Favicon -->
-    <link href="https://cdn2.iconfinder.com/data/icons/content-design-production-1/66/36-512.png" rel="icon">
+	<!-- Favicon -->
+	<link href="https://cdn2.iconfinder.com/data/icons/content-design-production-1/66/36-512.png" rel="icon">
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
-          rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<!-- Google Web Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+		  rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Icon Font Stylesheet -->
-    <script src="https://kit.fontawesome.com/091e570025.js" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/feather-icons"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<!-- Icon Font Stylesheet -->
+	<script src="https://kit.fontawesome.com/091e570025.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" th:href="@{/lib/bootstrap-icons/bootstrap-icons.css}">
 
-    <!-- Libraries Stylesheet -->
-    <link th:href="@{lib/animate/animate.min.css}" rel="stylesheet">
-    <link th:href="@{lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link th:href="@{css/bootstrap.min.css}" rel="stylesheet">
-    <link th:href="@{button/styles/buttons.css}" rel="stylesheet">
+	<!-- Libraries Stylesheet -->
+	<link th:href="@{lib/animate/animate.min.css}" rel="stylesheet">
+	<link th:href="@{lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
 
-    <!-- Template Stylesheet -->
-    <link th:href="@{css/style.css}" rel="stylesheet">
+	<!-- Customized Bootstrap Stylesheet -->
+	<link th:href="@{css/bootstrap.min.css}" rel="stylesheet">
+	<link th:href="@{button/styles/buttons.css}" rel="stylesheet">
+
+	<!-- Template Stylesheet -->
+	<link th:href="@{css/style.css}" rel="stylesheet">
 
 </head>
 
 <body>
 
 <div>
-    <!-- Spinner Start -->
-    <!-- Spinner Start -->
-    <div id="spinner"
-         class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-grow text-primary" role="status"></div>
-    </div>
-    <!-- Spinner End -->
+	<div class="main-wrapper position-relative">
 
 
-    <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
-        <a href="index.html" class="navbar-brand ms-4 ms-lg-0">
-            <!--logo-->
-            <h2 class="text-primary m-0 d-flex align-items-center">
-                <div class="bg-primary rounded-circle btn-lg-square me-2">
-                    <i class="fa fa-gavel text-light fs-3 "></i>
-                </div>
-                Pay.Picker
-            </h2>
+		<div class="container-fluid p-0">
+			<div class="vw-100 d-flex overflow-hidden">
+				<div id='white-logo' class="position-absolute start-0 top-0 d-flex  align-items-center p-4 form-animation">
+					<div class="me-1">
+						<img th:src="@{/img/logo-onecolor.svg}" alt="" height="65px" width="65px">
+					</div>
+					<div class="align-items-center">
+						<h5 class="text-white m-0 d-flex lh-1">Smart</h5>
+						<h5 class="text-white m-0 d-flex text-uppercase lh-1"
+							style="font-weight: 900 !important; font-size: 22px !important;">Auction</h5>
+					</div>
+				</div>
+				<div id='primary-logo' class="position-absolute start-0 top-0 d-flex  align-items-center p-4 form-animation invisible">
+					<div class="me-1">
+						<img th:src="@{/img/logo-onecolor-primary.svg}" alt="" height="65px" width="65px">
+					</div>
+					<div class="align-items-center">
+						<h5 class="text-primary m-0 d-flex lh-1">Smart</h5>
+						<h5 class="text-primary m-0 d-flex text-uppercase lh-1"
+							style="font-weight: 900 !important; font-size: 22px !important;">Auction</h5>
+					</div>
+				</div>
 
-        </a>
-        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav mx-auto p-4 p-lg-0">
-                <a th:href="@{/index}"  class="nav-item nav-link active">Home</a>
-                <div th:if="${#authorization.expression('hasAuthority(''ROLE_ADMIN'')')}">
-                    <a href="product.html" class="nav-item nav-link">Bidding</a>-->
-                </div>
-                <div th:if="${#authorization.expression('hasAuthority(''ROLE_USER'')')}">
-                    <a  th:href="'/products/auction/'+ ${#request.userPrincipal.name}" class="nav-item nav-link">Auction</a>
-                </div>
-                <a th:href="@{/guide}" class="nav-item nav-link">Guide</a>
-                <a th:href="@{/about}" class="nav-item nav-link">About</a>
+				<div class="w-200 d-flex">
+					<div  id="signup-banner" class="col-lg-4 col-12 p-0 shadow-lg form-animation ">
+						<div class="vh-100 bg-gradient-primary d-flex flex-column align-items-center justify-content-center"
+							 style="padding-bottom: 10%">
 
+							<div class="container-fluid px-4  text-center">
+								<h2 class="display-5 text-light fw-bolder mb-2">New Here?</h2>
+								<p class="fs-5 text-light lh-sm mb-4">Sign up and place your bids or create your auctions
+									now!</p>
+								<div class="d-flex justify-content-center">
+									<div id="signup-btn" class="btn2 btn-light btn-hover-scale rounded-0  px-5 py-2 fs-5 text-secondary cursor-p">
+										Sign up
+									</div>
 
-            </div>
-            <div class=" d-none d-lg-flex align-items-center">
-                <div class="ps-3" th:if="${#request.userPrincipal == null}">
-                    <div class="btn-primary rounded-3 p-2 ps-4 pe-4 " data-toggle="modal" data-target="#myModal">
-                        <i class="align-middle text-light me-1" data-feather="log-in"></i>
-                        <!-- Modal -->
+								</div>
+							</div>
+						</div>
 
-                        <a class="text-light align-middle fs-5 mb-0" id="button-login" type="button">Login</a>
+					</div>
+					<div class="col-lg-8 col-12 vh-100 m-0 p-0 overflow-hidden">
+						<div class="d-flex w-200 h-100 align-items-center">
+							<div id="login-form" class="form-animation w-50 ">
+								<div  class="mx-auto col-8">
+									<div class="text-start p-2">
+										<h1 class="text-secondary">Login</h1>
+									</div>
+									<div class="p-0">
+										<form th:action="@{/j_spring_security_check}" th:object="${account}" method='POST'
+											  class="w-100">
+											<div class="row m-0">
+												<div class="form-group col-6 px-2">
+													<input class="form-control rounded-0 p-2" type="text"
+														   placeholder="Username" name="username"
+														   th:field="*{username}" required>
+												</div>
+												<div class="form-group col-6 px-2">
+													<input class="form-control rounded-0 p-2" type="password"
+														   name="password" th:field="*{password}"
+														   placeholder="Password" required>
+												</div>
+											</div>
 
-                    </div>
-                </div>
-                <div class="ps-3 d-flex align-items-center" th:if="${#request.userPrincipal != null}">
-                    <div class="flex-shrink-0 btn-lg-square border border-light rounded-circle me-2">
-                        <i class="fa fa-user text-primary"></i>
-                    </div>
-                    <a class="text-primary align-middle fs-5 p-0 mb-0 nav-link dropdown-toggle"
-                       data-bs-toggle="dropdown" th:utext="${#request.userPrincipal.name}"
-                       th:href="'/edit-profile/' + ${#request.userPrincipal.name}"></a><br>
-                    <div class="dropdown-menu dropdown-menu-end m-0 me-5">
-                        <a href="team.html" class="dropdown-item align-middle">
-                            <i class="me-2 " data-feather="user"></i>
-                            View your profile
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="team.html" class="dropdown-item align-middle">
-                            <i class="me-2" data-feather="archive"></i>
-                            Auction winning item
-                        </a>
-                        <a href="testimonial.html" class="dropdown-item align-middle">
-                            <i class="me-2" data-feather="dollar-sign"></i>
-                            E-wallet
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a th:href="@{/logout}" class="dropdown-item align-middle">
-                            <i class="me-2" data-feather="log-out"></i>
-                            Log Out
-                        </a>
-                    </div>
-                </div>
-            </div>
+											<div th:if="${#request.getParameter('error') == 'true'}"
+												 style="color: #D41E3F" class="p-2">
+												Incorrect username or password
+											</div>
+											<div class="d-flex justify-content-between align-items-center p-2 my-2">
+												<div class="">
+													<input type="checkbox" name="remember" id="remember">
+													<label for="remember" class="text-muted ms-1 fw-light cursor-p">
+														Remember me for next time
+													</label>
+												</div>
+												<a th:href="@{/forgot_password}" id="forgot" class="text-decoration-underline">
+													Forgot password?
+												</a>
+											</div>
 
-        </div>
-    </nav>
-
-
-    <!-- Navbar End -->
-    <div class="modal fade" id="myModal" role="dialog" style="display: none; margin-top: 120px">
-        <div class="container">
-            <div class="row">
-                <div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
-                    <div class="panel border bg-white" style="min-height: 380px;border-radius: 12px">
-                        <div class="panel-heading" style="border-radius: 12px;text-align: center;">
-                            <h3 class="pt-3 font-weight-bold" style="color: #EAA636">Login</h3>
-                        </div>
-                        <div class="panel-body p-3" style="border-radius: 12px">
-                            <form th:action="@{/j_spring_security_check}" th:object="${account}" method='POST'>
-                                <div class="form-group py-2">
-                                    <div class="input-field"
-                                         style="border-radius: 5px;padding: 5px;display: flex;align-items: center;cursor: pointer;border: 1px solid #ddd;color: #EAA636">
-                                        <span class="far fa-user p-2"></span> <input type="text" placeholder="Username"
-                                                                                     name="username"
-                                                                                     th:field="*{username}"
-                                                                                     required
-                                                                                     style="border: none;outline: none;box-shadow: none;width: 100%">
-                                    </div>
-                                </div>
-                                <div class="form-group py-1 pb-2">
-                                    <div class="input-field"
-                                         style="border-radius: 5px;padding: 5px;display: flex;align-items: center;cursor: pointer;border: 1px solid #ddd;color: #EAA636">
-                                        <span class="fas fa-lock px-2"></span> <input type="password" name="password"
-                                                                                      th:field="*{password}"
-                                                                                      placeholder="Enter your Password"
-                                                                                      required
-                                                                                      style="border: none;outline: none;box-shadow: none;width: 100%">
-                                    </div>
-                                    <div th:if="${#request.getParameter('error') == 'true'}"
-                                         style="color:red;margin:10px 0px;text-align: center">
-                                        Incorrect username or password<br/>
-                                    </div>
-                                    <div th:if="${#request.getParameter('role') == 'ROLE_ADMIN'}"
-                                         style="color:red;margin:10px 0px;text-align: center">
-                                        Login Failed!!!<br/>
-                                    </div>
-                                </div>
-                                <div class="form-inline" style="padding-left: 10px;margin: 0;cursor: pointer"><input
-                                        type="checkbox" name="remember" id="remember"> <label for="remember"
-                                                                                              class="text-muted"
-                                                                                              style="padding-left: 10px;margin: 0;cursor: pointer">Remember
-                                    me</label> <a th:href="@{/forgot_password}" id="forgot" class="font-weight-bold"
-                                                  style="position: relative;transition: all 0.1s ease-in-out;margin-left: 219px">Forgot
-                                    password?</a></div>
-                                <button class="btn btn-primary btn-block mt-3"
-                                        style="width: 100%;border: none;outline: none;box-shadow: none;margin-top: 20px;border-radius: 15px">
-                                    Login
-                                </button>
-                                <div class="text-center pt-4 text-muted">Don't have an account? <a th:href="@{/signUp}">Sign
-                                    up</a>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="mx-3 my-2 py-2 bordert" style="border-top: 1px solid #aaa;position: relative">
-                            <div class="text-center py-3"><a th:href="@{/oauth2/authorization/facebook}" target="_blank"
-                                                             class="px-2"> <img
-                                    src="https://www.dpreview.com/files/p/articles/4698742202/facebook.jpeg"
-
-                                    style="width: 40px;height: 40px;object-fit: cover;position: relative" alt=""> </a>
-                                <a th:href="@{/oauth2/authorization/google}" target="_blank" class="px-2"> <img
-                                        src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png"
-
-                                        style="width: 40px;height: 40px;object-fit: cover;position: relative" alt="">
-                                </a></div>
-                            <!--                            src="https://www.dpreview.com/files/p/articles/4698742202/facebook.jpeg"-->
-                            <!--                            src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png"-->
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+											<button type="submit" class="btn btn-primary btn-hover-scale rounded-0 fw-bold fs-6 py-2 px-4 ms-2 ">
+												Login
+											</button>
 
 
-    <!-- Carousel Start -->
-    <div class="container-fluid p-0 pb-5 wow fadeIn" data-wow-delay="0.1s" disabled="">
-        <div class="owl-carousel header-carousel position-relative">
-            <div class="owl-carousel-item position-relative">
-                <img class="img-fluid" th:src="@{img/background-main.jpg}" alt="">
-                <div class="owl-carousel-inner">
-                    <div class="container">
-                        <div class="row justify-content-start">
-                            <div class="col-lg-8">
-                                <p class="text-primary text-uppercase fw-bold mb-2">// The Best Auction website</p>
-                                <h1 class="display-1 text-light mb-4 animated slideInDown">Auction With Passion</h1>
-                                <p class="text-light fs-5 mb-4 pb-3">Come to us, you can buy the best products at the
-                                    best
-                                    prices!!!</p>
-                                <a href="" class="btn btn-primary rounded-pill py-3 px-5">Find </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+										</form>
+
+									</div>
+									<div class="d-flex align-items-center my-4">
+										<div class="divider  flex-grow-1"></div>
+										<span class="px-2">or</span>
+										<div class="divider  flex-grow-1"></div>
+									</div>
+									<span class="text-center p-2">Login using social networks: </span>
+									<div class="d-flex align-items-center mt-2">
+										<a th:href="@{/oauth2/authorization/facebook}" target="_blank" class="px-2">
+											<div class="p-1 pe-2 btn-hover-scale rounded-0 d-flex align-items-center"
+												 style="background: #5854A4">
+												<i class="fa fa-facebook-f fs-5 btn-sm-square bg-light" style="color: #5854A4"></i>
+												<span class="text-light ms-2">Facebook</span>
+											</div>
+										</a>
+										<a th:href="@{/oauth2/authorization/google}" target="_blank" class="px-2">
+											<div class="p-1 pe-2 btn-hover-scale rounded-0 d-flex align-items-center"
+												 style="background: #D41E3F">
+												<i class="fa fa-google fs-5 btn-sm-square bg-light" style="color: #D41E3F"></i>
+												<span class="text-light ms-2">Google</span>
+
+											</div>
+										</a>
+									</div>
 
 
-        </div>
-    </div>
-    <!-- Carousel End -->
+								</div>
+							</div>
+							<div id="signup-form" class="form-animation w-50 ">
+								<div  class=" mx-auto col-8">
+									<div class="text-start p-2">
+										<h1 class="text-secondary">Create Free Account</h1>
+									</div>
+									<div class="p-0">
+										<form th:action="@{/signUp}" th:object="${user}" method="post"
+											  enctype="multipart/form-data" class="w-100">
+											<div class="row m-0">
+												<div class="form-group col-6 px-2 ">
+													<input type="text" th:field="*{fullname}"
+														   class="form-control rounded-0 p-2"
+														   placeholder="Full name" required>
+													<p class="form-message" style="color: #D51E40"
+													   th:if="${#fields.hasErrors('fullname')}"
+													   th:errors="*{fullname}"></p>
+												</div>
+												<div class="form-group col-6 px-2 ">
+													<input type="text" th:field="*{account.username}"
+														   class="form-control rounded-0 p-2"
+														   placeholder="Username" required>
+													<p class="form-message" style="color: #D51E40"
+													   th:if="${#fields.hasErrors('account.username')}"
+													   th:errors="*{account.username}"></p>
+												</div>
+											</div>
+											<div class="row m-0">
+												<div class="form-group col-6 px-2 ">
+													<input type="email" th:field="*{email}"
+														   class="form-control rounded-0 p-2"
+														   placeholder="Email" required>
+													<p class="form-message" style="color: #D51E40"
+													   th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+												</div>
+												<div class="form-group col-6 px-2 ">
+													<input type="text" th:field="*{phoneNumber}"
+														   class="form-control rounded-0 p-2"
+														   placeholder="Phone number" required>
+													<p class="form-message" style="color: #D51E40"
+													   th:if="${#fields.hasErrors('phoneNumber')}"
+													   th:errors="*{phoneNumber}"></p>
+												</div>
+											</div>
+											<div class="row m-0">
+												<div class="form-group col-6 px-2 ">
+													<input type="password" th:field="*{account.password}"
+														   class="form-control rounded-0 p-2"
+														   placeholder="Password" required>
+													<p class="form-message" style="color: #D51E40"
+													   th:if="${#fields.hasErrors('account.password')}"
+													   th:errors="*{account.password}"></p>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script th:src="@{/lib/wow/wow.min.js}"></script>
-    <script th:src="@{/lib/easing/easing.min.js}"></script>
-    <script th:src="@{/lib/waypoints/waypoints.min.js}"></script>
-    <script th:src="@{/lib/counterup/counterup.min.js}"></script>
-    <script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
+												</div>
+												<div class="form-group col-6 px-2 ">
+													<input type="password" th:field="*{retypePassword}"
+														   class="form-control rounded-0 p-2"
+														   placeholder="Confirm password" required>
+													<p class="form-message" style="color: #D51E40"
+													   th:if="${#fields.hasErrors('retypePassword')}" th:errors="*{retypePassword}"></p>
 
-    <!-- Template Javascript -->
-    <script th:src="@{/js/main.js}"></script>
+												</div>
+											</div>
 
+											<button type="submit" class="btn btn-primary btn-hover-scale rounded-0 fw-bold fs-6 py-2 px-4 ms-2 mt-4">
+												Sign up
+											</button>
 
-    <div class="row align-items-center" style="width: 89%; margin-left: 85px;">
-        <div class="col-md-3">
+										</form>
 
-            <!--                        <h1 class="display-4 text-light mb-0">Subscribe Our Newsletter</h1>-->
-            <select class="form-control bg-transparent border-light w-100 py-3 ps-4 pe-5" data-trigger=""
-                    name="choices-single-defaul">
-                <option placeholder=""> All Category</option>
-                <option>New Arrivals</option>
-                <option>Sale</option>
-                <option>Ladies</option>
-                <option>Men</option>
-                <option>Clothing</option>
-                <option>Footwear</option>
-                <option>Accessories</option>
-            </select>
-        </div>
-        <div class="col-md-3">
-            <!--                        <h1 class="display-4 text-light mb-0">Subscribe Our Newsletter</h1>-->
-            <select class="form-control bg-transparent border-light w-100 py-3 ps-4 pe-5" data-trigger=""
-                    name="choices-single-defaul">
-                <option placeholder=""> All Prices</option>
-                <option>10000</option>
-                <option>100000</option>
-                <option>1000000</option>
-                <option>10000000</option>
-                <option>10000000</option>
-                <option>100000000</option>
-                <option>1000000000</option>
-            </select>
-        </div>
-        <div class="col-md-6 text-md-end">
-            <div class="position-relative">
-                <input class="form-control bg-transparent border-light  py-3 ps-4 pe-5" type="text"
-                       placeholder="Enter product name"/>
-                <button type="button" class="btn btn-warning py-2 px-3 position-absolute top-0 end-0 mt-2 me-2">Search
-                </button>
-            </div>
-        </div>
-    </div>
-    <!--search-->
+									</div>
+									<div class="d-flex align-items-center my-4">
+										<div class="divider  flex-grow-1"></div>
+										<span class="px-2">or</span>
+										<div class="divider  flex-grow-1"></div>
+									</div>
+									<span class="text-center p-2">Login using social networks: </span>
+									<div class="d-flex align-items-center mt-2">
+										<a th:href="@{/oauth2/authorization/facebook}" target="_blank" class="px-2">
+											<div class="p-1 pe-2 btn-hover-scale rounded-0 d-flex align-items-center"
+												 style="background: #5854A4">
+												<i class="fa fa-facebook-f fs-5 btn-sm-square bg-light" style="color: #5854A4"></i>
+												<span class="text-light ms-2">Facebook</span>
+											</div>
+										</a>
+										<a th:href="@{/oauth2/authorization/google}" target="_blank" class="px-2">
+											<div class="p-1 pe-2 btn-hover-scale rounded-0 d-flex align-items-center"
+												 style="background: #D41E3F">
+												<i class="fa fa-google fs-5 btn-sm-square bg-light" style="color: #D41E3F"></i>
+												<span class="text-light ms-2">Google</span>
 
-    <!-- Product Start -->
-    <div class="container-xxl bg-light my-6 py-6 pt-0" style="padding-bottom: 15px">
-        <div class="container">
+											</div>
+										</a>
+									</div>
 
-            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <p class="text-primary text-uppercase mb-2">// Auction Products</p>
-                <h1 class="display-6 mb-4">Explore The Categories Of Our Products</h1>
-            </div>
-            <!--        Trang1-->
-            <!--		<div class="row g-h">-->
-            <!--			<div class="col-lg-4 col-md-6 wow2 " data-wow-delay="0.1s" th:each="product : ${products}"-->
-            <!--				 style="&#45;&#45;bs-gutter-y: 30px">-->
-            <!--				<div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">-->
-            <!--					<div class="text-center p-4">-->
-            <!--						<div class="d-inline-block border border-primary rounded-pill px-3 mb-3" style="color: #3cd070">-->
-            <!--							<p th:text="${product.currentPrice} + ' VND'"></p></div>-->
-            <!--						<h3 class="mb-3" th:text="${product.name}"></h3>-->
-            <!--						<div>-->
-            <!--							<span>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</span><br>-->
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="login-banner" class="col-lg-4 col-12 p-0 shadow-lg form-animation">
+						<div  class=" vh-100 bg-gradient-primary d-flex flex-column align-items-center justify-content-center"
+							  style="padding-bottom: 10%">
+							<div class="container-fluid px-4  text-center">
+								<h2 class="display-5 text-light fw-bolder mb-2">One of Us?</h2>
+								<p class="fs-5 text-light lh-sm mb-4">If you already have an account, just log in. We've
+									missed you!</p>
+								<div class="d-flex justify-content-center">
+									<div id="login-btn" class="btn2 btn-light btn-hover-scale rounded-0  px-5 py-2 fs-5 text-secondary cursor-p">
+										Log in
+									</div>
 
-            <!--							<div class="getTime" style="color: red"></div>-->
-
-            <!--						</div>-->
-            <!--						<br>-->
-            <!--						<button type="button" class="btn2 btn-primary2 btn-sm btn-radius2" style="color: #FFFFFF">-->
-            <!--							Auction Now !-->
-            <!--						</button>-->
-            <!--					</div>-->
-            <!--					<div class="position-relative mt-auto">-->
-            <!--						<img class="img-fluid" th:src="@{${product.productImage}}" alt="">-->
-            <!--						<div class="product-overlay">-->
-            <!--							<a class="btn btn-lg-square btn-outline-light rounded-circle" href=""><i-->
-            <!--									class="fa fa-eye text-primary"></i></a>-->
-            <!--						</div>-->
-            <!--					</div>-->
-            <!--				</div>-->
-            <!--			</div>-->
-            <!--		</div>-->
-        </div>
-    </div>
-
-
-    <!-- Product End -->
-
-    <!--<div>-->
-    <!--    <a th:href="@{'/'(page=${products.number - 1})}" th:if="${products.hasPrevious()}">Previous</a>-->
-    <!--    <span th:text="${products.number + 1}"></span>/<span th:text="${products.totalPages}"></span>-->
-    <!--    <a th:href="@{'/'(page=${products.number + 1})}" th:if="${products.hasNext()}">Next</a>-->
-    <!--</div>-->
-
-    <!-- Service Start -->
-    <div class="container-xxl py-6">
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <p class="text-primary text-uppercase mb-2">// Our Services</p>
-                    <h1 class="display-6 mb-4">What Do We Offer For You?</h1>
-                    <p class="mb-5">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et
-                        eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat
-                        amet</p>
-                    <div class="row gy-5 gx-4">
-                        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.1s">
-                            <div class="d-flex align-items-center mb-3">
-                                <div class="flex-shrink-0 btn-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-bread-slice text-white"></i>
-                                </div>
-                                <h5 class="mb-0">Quality Products</h5>
-                            </div>
-                            <span>Magna sea eos sit dolor, ipsum amet ipsum lorem diam eos</span>
-                        </div>
-                        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.2s">
-                            <div class="d-flex align-items-center mb-3">
-                                <div class="flex-shrink-0 btn-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-birthday-cake text-white"></i>
-                                </div>
-                                <h5 class="mb-0">Custom Products</h5>
-                            </div>
-                            <span>Magna sea eos sit dolor, ipsum amet ipsum lorem diam eos</span>
-                        </div>
-                        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.3s">
-                            <div class="d-flex align-items-center mb-3">
-                                <div class="flex-shrink-0 btn-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-cart-plus text-white"></i>
-                                </div>
-                                <h5 class="mb-0">Online Order</h5>
-                            </div>
-                            <span>Magna sea eos sit dolor, ipsum amet ipsum lorem diam eos</span>
-                        </div>
-                        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.4s">
-                            <div class="d-flex align-items-center mb-3">
-                                <div class="flex-shrink-0 btn-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-truck text-white"></i>
-                                </div>
-                                <h5 class="mb-0">Home Delivery</h5>
-                            </div>
-                            <span>Magna sea eos sit dolor, ipsum amet ipsum lorem diam eos</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="row img-twice position-relative h-100">
-                        <div class="col-6">
-                            <img class="img-fluid rounded" th:src="@{img/service-1.jpg}" alt="">
-                        </div>
-                        <div class="col-6 align-self-end">
-                            <img class="img-fluid rounded" th:src="@{img/service-2.jpg}" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Service End -->
+								</div>
+							</div>
+						</div>
 
 
-    <!-- Team Start -->
-    <div class="container-xxl py-6">
-        <div class="container">
-            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <p class="text-primary text-uppercase mb-2">// Our Team</p>
-                <h1 class="display-6 mb-4">We're Super Professional At Our Skills</h1>
-            </div>
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="team-item text-center rounded overflow-hidden">
-                        <img class="img-fluid" th:src="@{img/team-1.jpg}" alt="">
-                        <div class="team-text">
-                            <div class="team-title">
-                                <h5>Full Name</h5>
-                                <span>Designation</span>
-                            </div>
-                            <div class="team-social">
-                                <a class="btn btn-square btn-light rounded-circle" href=""><i
-                                        class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square btn-light rounded-circle" href=""><i
-                                        class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square btn-light rounded-circle" href=""><i
-                                        class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="team-item text-center rounded overflow-hidden">
-                        <img class="img-fluid" th:src="@{img/team-2.jpg}" alt="">
-                        <div class="team-text">
-                            <div class="team-title">
-                                <h5>Full Name</h5>
-                                <span>Designation</span>
-                            </div>
-                            <div class="team-social">
-                                <a class="btn btn-square btn-light rounded-circle" href=""><i
-                                        class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square btn-light rounded-circle" href=""><i
-                                        class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square btn-light rounded-circle" href=""><i
-                                        class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="team-item text-center rounded overflow-hidden">
-                        <img class="img-fluid" th:src="@{img/team-3.jpg}" alt="">
-                        <div class="team-text">
-                            <div class="team-title">
-                                <h5>Full Name</h5>
-                                <span>Designation</span>
-                            </div>
-                            <div class="team-social">
-                                <a class="btn btn-square btn-light rounded-circle" href=""><i
-                                        class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square btn-light rounded-circle" href=""><i
-                                        class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square btn-light rounded-circle" href=""><i
-                                        class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <div class="team-item text-center rounded overflow-hidden">
-                        <img class="img-fluid" th:src="@{img/team-4.jpg}" alt="">
-                        <div class="team-text">
-                            <div class="team-title">
-                                <h5>Full Name</h5>
-                                <span>Designation</span>
-                            </div>
-                            <div class="team-social">
-                                <a class="btn btn-square btn-light rounded-circle" href=""><i
-                                        class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square btn-light rounded-circle" href=""><i
-                                        class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square btn-light rounded-circle" href=""><i
-                                        class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Team End -->
+					</div>
+
+				</div>
 
 
-    <!-- Testimonial Start -->
-    <div class="container-xxl bg-light my-6 py-6 pb-0">
-        <div class="container">
-            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <p class="text-primary text-uppercase mb-2">// Client's Review</p>
-                <h1 class="display-6 mb-4">More Than 20000+ Customers Trusted Us</h1>
-            </div>
-            <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
-                <div class="testimonial-item bg-white rounded p-4">
-                    <div class="d-flex align-items-center mb-4">
-                        <img class="flex-shrink-0 rounded-circle border p-1" th:src="@{img/team-4.jpg}" alt="">
-                        <div class="ms-4">
-                            <h5 class="mb-1">Client Name</h5>
-                            <span>Profession</span>
-                        </div>
-                    </div>
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos.
-                        Clita
-                        erat ipsum et lorem et sit.</p>
-                </div>
-                <div class="testimonial-item bg-white rounded p-4">
-                    <div class="d-flex align-items-center mb-4">
-                        <img class="flex-shrink-0 rounded-circle border p-1" th:src="@{img/testimonial-2.jpg}" alt="">
-                        <div class="ms-4">
-                            <h5 class="mb-1">Client Name</h5>
-                            <span>Profession</span>
-                        </div>
-                    </div>
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos.
-                        Clita
-                        erat ipsum et lorem et sit.</p>
-                </div>
-                <div class="testimonial-item bg-white rounded p-4">
-                    <div class="d-flex align-items-center mb-4">
-                        <img class="flex-shrink-0 rounded-circle border p-1" th:src="@{img/testimonial-3.jpg}" alt="">
-                        <div class="ms-4">
-                            <h5 class="mb-1">Client Name</h5>
-                            <span>Profession</span>
-                        </div>
-                    </div>
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos.
-                        Clita
-                        erat ipsum et lorem et sit.</p>
-                </div>
-                <div class="testimonial-item bg-white rounded p-4">
-                    <div class="d-flex align-items-center mb-4">
-                        <img class="flex-shrink-0 rounded-circle border p-1" th:src="@{img/testimonial-4.jpg}" alt="">
-                        <div class="ms-4">
-                            <h5 class="mb-1">Client Name</h5>
-                            <span>Profession</span>
-                        </div>
-                    </div>
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos.
-                        Clita
-                        erat ipsum et lorem et sit.</p>
-                </div>
-            </div>
-            <div class="bg-primary text-light rounded-top p-5 my-6 mb-0 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="row align-items-center">
-                    <div class="col-md-6">
-                        <h1 class="display-4 text-light mb-0">Subscribe Our Newsletter</h1>
-                    </div>
-                    <div class="col-md-6 text-md-end">
-                        <div class="position-relative">
-                            <input class="form-control bg-transparent border-light w-100 py-3 ps-4 pe-5" type="text"
-                                   placeholder="Your email"/>
-                            <button type="button"
-                                    class="btn btn-dark py-2 px-3 position-absolute top-0 end-0 mt-2 me-2">
-                                SignUp
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Testimonial End -->
+			</div>
+		</div>
+	</div>
 
-
-    <!-- Footer Start -->
-    <div th:insert="footer :: my-footer"></div>
-    <!-- Footer End -->
-
-
-    <!-- Copyright Start -->
-    <div class="container-fluid copyright text-light py-4 wow fadeIn" data-wow-delay="0.1s">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    &copy; <a href="#">Your Site Name</a>, All Right Reserved.
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                    Designed By <a href="https://htmlcodex.com">HTML Codex</a>
-                    <br>Distributed By: <a class="border-bottom" href="https://themewagon.com"
-                                           target="_blank">ThemeWagon</a>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
-    <!-- Copyright End -->
 
 
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i
-            class="bi bi-arrow-up"></i></a>
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{lib/wow/wow.min.js}"></script>
+<script th:src="@{lib/easing/easing.min.js}"></script>
+<script th:src="@{lib/waypoints/waypoints.min.js}"></script>
+<script th:src="@{lib/counterup/counterup.min.js}"></script>
+<script th:src="@{lib/owlcarousel/owl.carousel.min.js}"></script>
+<script type="text/javascript">
+    if($('.form-message').html()!==undefined){
+        $('#signup-banner').css('margin-left','-33.3%')
+        $('#login-form').css('margin-left', '-50%')
+        $('#white-logo').toggleClass('invisible')
+        $('#primary-logo').toggleClass('invisible')
+	}
+	$('#login-btn').click(function () {
+        $('#signup-banner').css('margin-left', '0%')
+        $('#login-form').css('margin-left', '0%')
+        $('#white-logo').toggleClass('invisible')
+        $('#primary-logo').toggleClass('invisible')
+    })
+	$('#signup-btn').click(function (){
+        $('#signup-banner').css('margin-left','-33.3%')
+        $('#login-form').css('margin-left', '-50%')
+        $('#white-logo').toggleClass('invisible')
+        $('#primary-logo').toggleClass('invisible')
+
+    })
+
+</script>
 
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script th:src="@{lib/wow/wow.min.js}"></script>
-    <script th:src="@{lib/easing/easing.min.js}"></script>
-    <script th:src="@{lib/waypoints/waypoints.min.js}"></script>
-    <script th:src="@{lib/counterup/counterup.min.js}"></script>
-    <script th:src="@{lib/owlcarousel/owl.carousel.min.js}"></script>
-    <script type="text/javascript">
-        window.onload = function () {
-            document.getElementById('button-login').click();
-        }
-    </script>
-    <script>
-        feather.replace()
-    </script>
-
-    <!-- Template Javascript -->
-    <script th:src="@{js/main.js}"></script>
-    <script>
-        // Set the date we're counting down to
-        var countDownDate = new Date("July 4, 2022 09:59:00").getTime();
-
-        // Update the count down every 1 second
-        var x = setInterval(function () {
-
-            // Get today's date and time
-            var now = new Date().getTime();
-
-            // Find the distance between now and the count down date
-            var distance = countDownDate - now;
-
-            // Time calculations for days, hours, minutes and seconds
-            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            // Output the result in an element with id="demo"
-            for (let i = 0; i < 20; i++) {
-                document.getElementsByClassName("getTime")[i].innerHTML = days + "d " + hours + "h "
-                    + minutes + "m " + seconds + "s ";
-
-
-                // If the count down is over, write some text
-                if (distance < 0) {
-                    clearInterval(x);
-                    document.getElementsByClassName("getTime")[i].innerHTML = "Time Off !";
-                }
-            }
-        }, 1000);
-    </script>
+<!-- Template Javascript -->
+<script th:src="@{js/main.js}"></script>
 
 
 </body>

@@ -2,6 +2,7 @@ package java4.auction_management.controller;
 
 import java4.auction_management.config.PaypalPaymentIntent;
 import java4.auction_management.config.PaypalPaymentMethod;
+import java4.auction_management.entity.payment.EWallet;
 import java4.auction_management.security.service.PaypalService;
 import java4.auction_management.security.util.Utils;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.paypal.api.payments.Links;

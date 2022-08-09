@@ -1,12 +1,12 @@
 package java4.auction_management.entity.user;
 
+import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.bid.Bid;
 import java4.auction_management.entity.bill.Bill;
 import java4.auction_management.entity.cart.Cart;
 import java4.auction_management.entity.product.Product;
 import java4.auction_management.validate.DateTimeBeforeCurrent;
-import java4.auction_management.validate.UniqueEmail;
-import java4.auction_management.validate.UniquePhone;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -78,6 +78,9 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     private Account account;
 
+    @Transient
+    private String retypePassword;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Bid> bidList;
 
@@ -89,6 +92,9 @@ public class User {
 
     @Column(name = "reset_password_token")
     private String resetPasswordToken;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Auction> auctionList;
 
 
     public Provider getProvider() {

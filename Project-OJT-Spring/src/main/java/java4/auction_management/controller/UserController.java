@@ -106,6 +106,7 @@ public class UserController {
         model.addAttribute("users", user);
         return "user/edit-profile";
     }
+
     @GetMapping("/auction/{username}")
     public String showAuctionUser(@PathVariable("username") String username, Model model) {
 //                Optional<User> users = userService.getById(user.getId());

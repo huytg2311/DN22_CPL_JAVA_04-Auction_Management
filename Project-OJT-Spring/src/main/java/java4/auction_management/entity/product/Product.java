@@ -12,9 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -29,53 +27,29 @@ public class Product {
     private Long productId;
 
     @NotEmpty(message = "Name not empty")
-    private String name;
+    private String productName;
 
-    private int reservePrice;
+    private String description;
 
-    private int timeAuction;
-
-    private LocalDateTime timeFinish;
-
-    private int stepPrice;
-
-    private int currentPrice;
-
-    private String productInfo;
-    @Column(length = 10000)
+    @Column(length = 1000)
     private String listImage;
+
+    private LocalDateTime datePost;
 
     private boolean isSold;
 
-    @Column(columnDefinition = "default 'WAITING'")
-    @Enumerated(EnumType.STRING)
-    private EStatus productStatus = EStatus.WAITING;
-
-    @JoinColumn(name = "categoryId")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private List<Bid> bid;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "auction_id")
+    private Auction auction;
 
-    @JoinColumn(name = "username")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Account account;
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "productId=" + productId +
-                ", name='" + name + '\'' +
-                ", reservePrice=" + reservePrice +
-                ", timeAuction=" + timeAuction +
-                ", timeFinish=" + timeFinish +
-                ", stepPrice=" + stepPrice +
-                ", currentPrice=" + currentPrice +
-                "isSold=" + isSold +
-                ", productInfo='" + productInfo + '\'' +
-                '}';
-    }
+
+
+
 
     //    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 //    private List<Image> imageList;

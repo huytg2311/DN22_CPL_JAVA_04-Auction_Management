@@ -4,6 +4,7 @@
 }
 .btn2 {
     font-size: 13px;
+    font-size: 13px;
     font-weight: bold;
     letter-spacing: 1px;
 	border-radius: 2px;
@@ -84,7 +85,7 @@
     animation: AnimationName 3s ease infinite;
     border: medium none;
 }
-.btn-warning{
+.btn-warning2{
     background: #e5ae09;
     background: -moz-linear-gradient(-45deg, #e5ae09 0%, #ffd044 50%, #ffc107 51%, #fc9014 71%, #f1890b 100%);
     background: -webkit-linear-gradient(-45deg, #e5ae09 0%,#ffd044 50%,#ffc107 51%,#fc9014 71%,#f1890b 100%);
@@ -115,7 +116,7 @@
     animation: AnimationName 3s ease infinite;
     border: medium none;
 }
-.btn-light{
+.btn-light2{
     background: #f2f2f2;
     background: -moz-linear-gradient(-45deg, #f2f2f2 0%, #dddddd 50%, #ffffff 51%, #ffffff 71%, #f6f8fb 100%);
     background: -webkit-linear-gradient(-45deg, #f2f2f2 0%,#dddddd 50%,#ffffff 51%,#ffffff 71%,#f6f8fb 100%);

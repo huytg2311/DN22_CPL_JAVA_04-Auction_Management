@@ -43,11 +43,11 @@
 
     // Header carousel
     $(".header-carousel").owlCarousel({
-        autoplay: false,
-        smartSpeed: 1500,
+        autoplay: true,
+        smartSpeed: 2000,
         loop: true,
-        nav: true,
-        dots: false,
+        nav: false,
+        dots: true,
         items: 1,
         navText : [
             '<i class="bi bi-chevron-left"></i>',
@@ -65,7 +65,7 @@
 
     // Testimonials carousel
     $(".testimonial-carousel").owlCarousel({
-        autoplay: false,
+        autoplay: true,
         smartSpeed: 1000,
         margin: 25,
         loop: true,
@@ -107,7 +107,7 @@
 })(jQuery);
 
 //set height for header-spacer
-    let headerHeight = document.getElementById("header").getElementsByClassName("navbar")[0]
+    let headerHeight = document.getElementById("header").getElementsByClassName("fixed-top")[0]
 
     let headerSpacers = document.getElementsByClassName("header-spacer")
     for (const headerSpacer of headerSpacers ){

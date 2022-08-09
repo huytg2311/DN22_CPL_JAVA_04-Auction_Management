@@ -18,5 +18,7 @@ public interface IAccountService extends IService<Account, String>{
 
     Account getUserByUsername(String username);
 
+    Account findByUsername(String username);
+
 
 }

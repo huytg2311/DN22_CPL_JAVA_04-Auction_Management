@@ -95,4 +95,9 @@ public class UserService implements IUserService {
     public Boolean existByEmail(String email) {
         return iUserRepository.existsByEmail(email);
     }
+
+    @Override
+    public User saveUserNotPassword(User user) {
+        return iUserRepository.save(user);
+    }
 }

@@ -4,9 +4,11 @@ import com.cloudinary.utils.ObjectUtils;
 import com.google.api.client.json.Json;
 import com.google.gson.JsonObject;
 import java4.auction_management.config.CloudinaryConfig;
+import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.bid.Bid;
 import java4.auction_management.entity.category.Category;
 import java4.auction_management.entity.product.Product;
+import java4.auction_management.service.IAuctionService;
 import java4.auction_management.service.IBidService;
 import java4.auction_management.service.ICategoryService;
 import java4.auction_management.service.impl.ProductService;
@@ -45,6 +47,7 @@ public class ProductController {
 
     @Autowired
     private IBidService iBidService;
+
 
     @ModelAttribute("categories")
     public List<Category> categoryList() {
@@ -89,13 +92,13 @@ public class ProductController {
     }
 
     @GetMapping("/load/{id}")
-    public String load(@PathVariable("id") Product product, Model model) {
-        List<Bid> bidList = iBidService.listBidSort(product.getProductId());
+    public String load(@PathVariable("id") Auction auction, Model model) {
+        List<Bid> bidList = iBidService.listBidSort(auction.getAuctionID());
         model.addAttribute("bids", bidList);
-        model.addAttribute("product", product);
+//        auction.setBidList(bidList);
+        model.addAttribute("auction", auction);
 
-
-        String[] listImages = product.getListImage().split(" ");
+        String[] listImages = auction.getProduct().getListImage().split(" ");
         model.addAttribute("listImages", listImages);
         return "products/post";
 

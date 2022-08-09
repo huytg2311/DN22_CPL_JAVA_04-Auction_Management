@@ -18,5 +18,8 @@ public interface IAccountRepository extends JpaRepository<Account, String> {
     @Query("SELECT a FROM Account a WHERE a.password = :password")
     public Account getPasswordByUsername(@Param("password") String password);
 
+    @Modifying
+    @Query(value = "update account set password = :password where username = :username", nativeQuery = true)
+    Account savePassword(String username, String password);
 
 }
