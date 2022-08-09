@@ -18,6 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Chat {
+    //push
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
