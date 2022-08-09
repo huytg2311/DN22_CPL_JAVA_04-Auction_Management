@@ -33,6 +33,8 @@ import javax.swing.text.html.parser.Entity;
 import javax.validation.Valid;
 import java.awt.*;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.List;
 
@@ -77,9 +79,11 @@ public class ProductController {
                                 @RequestParam("file") MultipartFile[] files, HttpServletRequest httpRequest) throws IOException {
 
         try {
+            LocalDateTime datePost = LocalDateTime.now();
 //            String uname = product.getAuction().getUser().getAccount().getUsername();
             User user = userService.getUserByUsername(httpRequest.getUserPrincipal().getName());
             product.getAuction().setUser(user);
+            product.setDatePost(datePost);
             StringBuilder listImage = new StringBuilder();
             for (MultipartFile file : files) {
 

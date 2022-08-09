@@ -8,28 +8,30 @@
 	<meta content="" name="keywords">
 	<meta content="" name="description">
 
-	<!-- Favicon -->
-	<link href="https://cdn2.iconfinder.com/data/icons/content-design-production-1/66/36-512.png" rel="icon">
+	<link th:href="@{/img/logo.svg}" rel="icon">
 
-
+	<!-- Google Web Fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap"
-		  rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
 
 	<!-- Icon Font Stylesheet -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-	<link rel="stylesheet" th:href="@{/lib/bootstrap-icons/bootstrap-icons.css}">
+	<link rel="stylesheet" th:href="@{lib/bootstrap-icons/bootstrap-icons.css}">
+
 
 	<!-- Libraries Stylesheet -->
-	<link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
-	<link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+	<link th:href="@{lib/animate/animate.min.css}" rel="stylesheet">
+	<link th:href="@{lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+	<link th:href="@{lib/owlcarousel/assets/owl.theme.default.css}" rel="stylesheet">
 
 	<!-- Customized Bootstrap Stylesheet -->
-	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+	<link th:href="@{css/bootstrap.min.css}" rel="stylesheet">
+	<link th:href="@{button/styles/buttons.css}" rel="stylesheet">
 
 	<!-- Template Stylesheet -->
-	<link th:href="@{/css/style.css}" rel="stylesheet">
+	<link th:href="@{css/style.css}" rel="stylesheet">
 
 
 </head>
@@ -86,11 +88,11 @@
 												</div>
 												<div class="ms-3 w-fit-content">
 													<span class="js-line-clamp-2 fw-bold"
-														  th:text="${product.name}"></span>
+														  th:text="${product.productName}"></span>
 												</div>
 											</div>
 										</td>
-										<td th:switch="${product.productStatus.toString()}">
+										<td th:switch="${product.description.toString()}">
 											<div th:case="'WAITING'" class="d-flex align-items-center fw-light">
 												<div class="rounded-circle btn-xs-square bg-blue me-1 "></div>
 												Waiting
@@ -106,8 +108,8 @@
 										</td>
 
 										<td class="d-none d-md-table-cell fw-light"
-											th:text="${'$'+#numbers.formatDecimal(product.currentPrice,1,'COMMA',0,'POINT')}"></td>
-										<td class="d-none d-lg-table-cell" th:text="${product.bid.size()}"></td>
+											th:text="${'$'+#numbers.formatDecimal(product.auction.reservePrice,1,'COMMA',0,'POINT')}"></td>
+										<td class="d-none d-lg-table-cell" th:text="${product.auction.bidList.size()}"></td>
 										<td>
 										<span th:text="${product.isSold} ? 'SOLD' : 'Not yet'"
 											  th:class="${product.isSold} ? 'text-primary fw-bold' : 'fw-light'"></span>
@@ -370,13 +372,14 @@
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script th:src="@{/lib/wow/wow.min.js}"></script>
-<script th:src="@{/lib/easing/easing.min.js}"></script>
-<script th:src="@{/lib/waypoints/waypoints.min.js}"></script>
-<script th:src="@{/lib/counterup/counterup.min.js}"></script>
-<script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
+<script th:src="@{lib/wow/wow.min.js}"></script>
+<script th:src="@{lib/easing/easing.min.js}"></script>
+<script th:src="@{lib/waypoints/waypoints.min.js}"></script>
+<script th:src="@{lib/counterup/counterup.min.js}"></script>
+<script th:src="@{lib/owlcarousel/owl.carousel.min.js}"></script>
+
 <!-- Template Javascript -->
-<script th:src="@{/js/header-spacer.js}"></script>
+<script th:src="@{js/main.js}"></script>
 
 </body>
 
