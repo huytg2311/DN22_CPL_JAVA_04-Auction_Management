@@ -30,6 +30,11 @@ public class AuctionService implements IAuctionService {
 
 
     @Override
+    public Page<Auction> getAllAuctionByStatus(Pageable pageable) {
+        return iAuctionRepository.getAllAuctionByStatus(pageable);
+    }
+
+    @Override
     public List<Auction> getAll() {
         return iAuctionRepository.findAll();
     }
