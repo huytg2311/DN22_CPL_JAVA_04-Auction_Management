@@ -24,23 +24,11 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cardId;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @Fetch(FetchMode.SUBSELECT)
-    @JoinTable(name = "cartDetail",
-            joinColumns = @JoinColumn(name = "cartId"),
-            inverseJoinColumns = @JoinColumn(name = "productId")
-    )
-    private List<Product> productList;
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    private List<CartDetail> cartDetailList;
 
     @JoinColumn(name = "userId")
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
-
-
-
-
-
-
-
 
 }
