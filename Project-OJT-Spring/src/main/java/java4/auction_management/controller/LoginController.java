@@ -1,11 +1,13 @@
 package java4.auction_management.controller;
 import com.cloudinary.utils.ObjectUtils;
 import java4.auction_management.config.CloudinaryConfig;
+import java4.auction_management.entity.cart.Cart;
 import java4.auction_management.entity.product.Product;
 import java4.auction_management.entity.user.Account;
 import java4.auction_management.entity.user.User;
 import java4.auction_management.service.IAccountService;
 import java4.auction_management.service.IUserService;
+import java4.auction_management.service.impl.CartService;
 import java4.auction_management.validate.AccountValidator;
 import java4.auction_management.validate.LoginValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,9 @@ public class LoginController {
     @Autowired
     LoginValidator loginValidator;
 
+    @Autowired
+    CartService cartService;
+
     @GetMapping(value = "/login")
     public String loginPage(Model model, Account account) {
         model.addAttribute("account", account);
@@ -64,6 +69,8 @@ public class LoginController {
             model.addAttribute("account", new Account());
             return "login";
         }
+        Cart cart = new Cart();
+        cart.setUser(user);
 //        if (!file.isEmpty()) {
 //            try {
 //                Map uploadResult = cloudc.upload(file.getBytes(),
@@ -77,6 +84,7 @@ public class LoginController {
 //        }
 
         userService.save(user);
+        cartService.save(cart);
 //        userService.save(user);
         redirectAttributes.addFlashAttribute("message", "Add successful");
         return "redirect:/success";
@@ -90,7 +98,7 @@ public class LoginController {
     @RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
     public String logoutSuccessfulPage(Model model) {
         model.addAttribute("title", "Logout");
-        return "/index";
+        return "redirect:/";
     }
 
 }

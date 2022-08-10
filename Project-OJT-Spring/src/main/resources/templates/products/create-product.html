@@ -30,12 +30,6 @@
     <link th:href="@{/css/style.css}" rel="stylesheet">
 
     <style>
-        input {
-            height: calc(1.5em + .75rem + 2px);
-        }
-        label {
-            font-weight: bold;
-        }
 
         textarea {
             font-size: .8rem;
@@ -64,78 +58,59 @@
 
         <div class="container">
             <div class="row align-items-center justify-content-center"  style="height: 700px">
-                <img th:src="@{/img/online-shopping.png}" style="width: 300px; height: 300px; position: absolute;margin-left: -370px;margin-top: -5px;" >
-                <div class="col-md-7 py-5" style="margin-left: 500px;background: #f5f6fa;padding-left: 550px;margin-right: 480px;width: 100%; border-radius: 30px; padding-right: 50px; margin-top: -30px">
-                    <h3 style="color: #EAA636;">Upload Product Auction</h3>
-                    <br><br>
+                <div class="col-md-7 py-5" style="margin-left: 300px;background: #f5f6fa;padding-left: 550px;margin-right: 480px;width: 100%; border-radius: 30px; padding-right: 50px; margin-top: -30px">
+                    <h1 class="text-secondary">Upload Product Auction</h1>
                     <form th:action="@{/products/create}" th:object="${product}" method="post" enctype="multipart/form-data">
-                        <div class="row">
-                            <input type="text" th:name="auction.user.account.username" th:value="${#request.userPrincipal.name} ">
-                            <div class="col-md-6">
-                                <div class="form-group first">
-                                    <label for="name">Product Name: </label><i style="color: red">(*)</i>
-                                    <input type="text" th:field="*{productName}"  class="form-control" placeholder="Enter product name" id="name">
+                        <div class="p-0">
+                            <input type="hidden" th:name="auction.user.account.username" th:value="${#request.userPrincipal.name} ">
+                            <div class="row m-0">
+                                <div class="form-group col-6 px2">
+                                    <input type="text" th:field="*{productName}"  class="form-control rounded-0 p-2" placeholder="Product name" id="name" required>
+                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"></p>
+                                </div>
+                                <div class="form-group col-6 px2">
+                                    <select class="form-control rounded-0 p-2" th:field="*{category}">
+                                        <option th:each="cate : ${categories}"
+                                                th:value="${cate.categoryId}"
+                                                th:text="${cate.name}">
+                                        </option>
+                                    </select>
                                     <!--                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}"></p>-->
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group first">
-                                    <label>Category: </label>
-                                    <select class="form-control" th:field="*{category}" style="height: calc(1.5em + .75rem + 2px)">
-                                        <option th:each="cate : ${categories}"
-                                                th:value="${cate.categoryId}"
-                                                th:text="${cate.name}"></option>
-
-                                    </select>
+                        </div>
+                        <div class="p-0">
+                            <div class="row m-0">
+                                <div class="form-group col-6 px2">
+                                    <input type="text" th:field="*{auction.reservePrice}" class="form-control rounded-0 p-2" placeholder="Enter reserve price" id="reservePrice">
+                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('auction.reservePrice')}" th:errors="*{auction.reservePrice}"></p>
+                                </div>
+                                <div class="form-group col-6 px2">
+                                    <input type="text" th:field="*{auction.stepPrice}" class="form-control rounded-0 p-2" placeholder="Enter step price" id="stepPrice">
+                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('auction.stepPrice')}" th:errors="*{auction.stepPrice}"></p>
                                 </div>
                             </div>
                         </div>
-                        <div class="row" style="margin-top: 1px">
-                            <div class="col-md-6">
-                                <div class="form-group first">
-                                    <label for="reservePrice">Product Price</label><i style="color: red">(*)</i>
-                                    <input type="text" th:field="*{auction.reservePrice}" class="form-control" placeholder="Enter reserve price" id="reservePrice">
-                                    <!--                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>-->
+                        <div class="p-0">
+                            <div class="row m-0">
+                                <div class="form-group col-6 px-2">
+                                    <textarea rows="5" cols="33" th:field="*{description}"  class="form-control rounded-0 p-2" placeholder="Enter description" id="description"></textarea>
+                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
+                                </div>
+                                <div class="form-group col-6 px-2">
+                                    <input type="text" th:field="*{auction.auctionTime}" class="form-control rounded-0 p-2" id="dayOfBirth">
+                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('auction.auctionTime')}" th:errors="*{auction.auctionTime}"></p>
+                                    <input style="margin-top: 30px" multiple="multiple" type="file" name="file" id="file" class="form-control rounded-0 p-2" onchange="Filevalidation()"    />
+                                    <input type="hidden" th:field="*{listImage}" class="form-control rounded-0 p-2" id="image">
+                                    <p class="text-danger" id="over-size-image" th:text="${message}"></p>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group first">
-                                    <label for="phoneNumber">Step Price</label><i style="color: red">(*)</i>
-                                    <input type="text" th:field="*{auction.stepPrice}" class="form-control" placeholder="Enter step price" id="phoneNumber">
-                                    <!--                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></p>-->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top: 1px">
-
-                            <div class="col-md-6">
-                                <div class="form-group first">
-                                    <label for="password">Description</label><i style="color: red">(*)</i>
-                                    <textarea rows="5" cols="33" th:field="*{description}"  class="form-control" placeholder="Enter description" id="password"></textarea>
-                                    <!--                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('account.password')}" th:errors="*{account.password}"></p>-->
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group first">
-                                    <label for="dayOfBirth">Time Auction: </label><i style="color: red">(*)</i>
-                                    <input type="text" th:field="*{auction.auctionTime}" class="form-control" id="dayOfBirth">
-                                    <!--                                    <p class="form-message" style="color: red" th:if="${#fields.hasErrors('dayOfBirth')}" th:errors="*{dayOfBirth}"></p>-->
-                                </div>
-                                <div class="form-group first">
-                                    <label style="margin-top: 20px" for="image" >Upload Image</label>
-                                    <input style="height: calc(1.5em + .75rem + 2px)" multiple="multiple" type="file" name="file" id="file" class="form-control"/>
-                                    <input type="hidden" th:field="*{listImage}" class="form-control" id="image">
-                                </div>
-
-                            </div>
-
 
                         </div>
 
                         <div>
-                            <input style="margin-top: 30px" type="button" th:href="'/products/auction/'+ ${#request.userPrincipal.name}" value="Back" class="btn px-5 btn-secondary">
-                            <input style="margin-top: 30px; margin-left: 40px" type="submit" value="Upload" class="btn px-5 btn-primary">
+                            <input style="margin-top: 30px" type="button" th:href="'/products/auction/'+ ${#request.userPrincipal.name}" value="Back" class="btn px-5 btn-secondary rounded-0 p-2">
+                            <input style="margin-top: 30px; margin-left: 40px" type="submit" value="Upload" class="btn px-5 btn-primary rounded-0 p-2" id="upload-product">
 
                         </div>
 
@@ -151,7 +126,7 @@
 
 
 
-<div style="margin-top: -450px" th:insert="footer :: my-footer"></div>
+<div style="margin-top: -350px" th:insert="footer :: my-footer"></div>
 
 
 
@@ -166,6 +141,40 @@
 
     <!-- Template Javascript -->
     <script th:src="@{/js/main.js}"></script>
+
+<script>
+    Filevalidation = () => {
+        const fi = document.getElementById('file');
+        var overSizeImage = document.getElementById('over-size-image');
+        let numOfFile = 0;
+        let productUpload = document.getElementById('upload-product')
+        // Check if any file is selected.
+        if (fi.files.length > 0) {
+            for (const i = 0; i <= fi.files.length - 1; i++) {
+               console.log(fi.files.length);
+                const fsize = fi.files.item(i).size;
+                const file = Math.round((fsize / 1024));
+                // The size of the file.
+                if (fi.files.length > 5) {
+
+                    overSizeImage.innerText = 'The number of photos is only 5';
+                    fi.value = '';
+                    productUpload.disabled = true;
+
+                    if (file > 24000) {
+                        fi.value = '';
+                        overSizeImage.innerText = 'File too big, please select a file less than 25mb';
+                    }
+                } else {
+                    overSizeImage.innerText = '';
+                    productUpload.disabled = false;
+
+                }
+
+            }
+        }
+    }
+</script>
 
 </body>
 

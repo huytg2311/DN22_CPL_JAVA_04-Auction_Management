@@ -76,8 +76,14 @@ public class ProductController {
 
     @PostMapping("/create")
     public String createProduct(@Valid @ModelAttribute Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                                @RequestParam("file") MultipartFile[] files, HttpServletRequest httpRequest) throws IOException {
-
+                                @RequestParam("file") MultipartFile[] files, HttpServletRequest httpRequest, Model model) throws IOException {
+        if (files.length > 5) {
+            model.addAttribute("message", "Not Over 5 images");
+            return "/products/create-product";
+        }
+        if (bindingResult.hasErrors()) {
+            return "/products/create-product";
+        }
         try {
             LocalDateTime datePost = LocalDateTime.now();
 //            String uname = product.getAuction().getUser().getAccount().getUsername();
