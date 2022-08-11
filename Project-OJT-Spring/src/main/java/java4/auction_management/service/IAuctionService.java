@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface IAuctionService extends IService<Auction, Long>{
 
@@ -16,4 +18,7 @@ public interface IAuctionService extends IService<Auction, Long>{
 
     Auction getAuctionByAuctionID(Long id);
 
+    List<Auction> getAuctionsByUserId(Long id);
+
+    public Page<Auction> getAllAuctionByStatus(Pageable pageable);
 }

@@ -74,131 +74,131 @@
 <div class="" th:insert="header :: my-header"></div>
 
 <div class="main-wrapper">
-<!--    <div th:insert="header :: my-header"></div>-->
+    <!--    <div th:insert="header :: my-header"></div>-->
     <!-- Carousel Start -->
     <div class="header-spacer bg-white"></div>
     <!--search-->
-            <div class="container-xxl py-6" style="margin-top: -140px; margin-left: 165px">
-                <div class="container">
-                    <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" >
-                    </div>
-                    <div class="row" th:object="${user}" >
-                        <div class="col-md-2 col-xl-3">
-                            <div class="card mb-3">
-                                <div class="card-body text-center" style="padding-top: 70px">
-                                    <img th:src="*{image}" class="img-fluid rounded-circle mb-2" width="128" height="128">
-                                    <h5 class="card-title mb-0" th:text="*{fullname}"></h5>
-                                    <div class="text-muted mb-2" th:text="*{account.username}"></div>
-                                </div>
-                                <hr class="my-0">
-                                <div class="card-body" style="padding-bottom: 66%">
-                                    <a th:href="@{/changePassword/{username}(username = ${#request.userPrincipal.name})}" style="text-align: center;font-size: 120%; margin-top: 20px; display: block">
-                                        <i class="bi bi-lock-fill ml-"></i>
-                                        <span>Change Password</span>
-                                    </a>
-                                    <a style="font-size: 120%;margin-top: 30px;margin-left: 40px; display: block">
-                                        <i class="bi bi-card-heading"></i>
-                                        <span>My Product</span>
-                                    </a>
-                                    <a style="font-size: 120%;margin-top: 30px;margin-left: 40px; display: block">
-                                        <i class="bi bi-box-seam-fill"></i>
-                                        <span>My Order</span>
-                                    </a>
-                                </div>
-                            </div>
+    <div class="container-xxl py-6" style="margin-top: -140px; margin-left: 165px">
+        <div class="container">
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" >
+            </div>
+            <div class="row" th:object="${user}" >
+                <div class="col-md-2 col-xl-3">
+                    <div class="card mb-3">
+                        <div class="card-body text-center" style="padding-top: 70px">
+                            <img th:src="*{image}" class="img-fluid rounded-circle mb-2" width="128" height="128">
+                            <h5 class="card-title mb-0" th:text="*{fullname}"></h5>
+                            <div class="text-muted mb-2" th:text="*{account.username}"></div>
                         </div>
-
-                        <div class="col-md-6 col-xl-8">
-                            <div class="card">
-                                <strong style="font-size: 200%; margin-left: 6%;margin-top: 3%;margin-bottom: 6%;">My Profile <a id="btnEdit" onclick="editUser()" class="bi bi-pencil-square" style="margin-left: 510px"></a></strong>
-                                <form id="formEdit" th:action="@{/edit-profile}" th:object="${user}" method="post" enctype="multipart/form-data" style="padding-left: 10%; padding-right: 10%; padding-bottom: 20%">
-                                    <input type="hidden" th:field="*{id}">
-                                    <input type="hidden" th:field="*{account.password}">
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group first">
-                                                <label for="name">Full Name</label>
-                                                <input type="text" th:field="*{fullname}" class="form-control" placeholder="Enter your name" id="name" disabled>
-                                                <p class="form-message" style="color: red" th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}"></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group first">
-                                                <label for="account.username">Username</label>
-                                                <input type="text" th:field="*{account.username}" class="form-control" placeholder="Enter username" id="account.username" disabled>
-                                                <p class="form-message" style="color: red" th:if="${#fields.hasErrors('account.username')}" th:errors="*{account.username}"></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row" >
-                                        <div class="col-md-6">
-                                            <div class="form-group first">
-                                                <label for="email">Email Address</label>
-                                                <input type="email" th:field="*{email}" class="form-control" placeholder="Enter your email" id="email" disabled>
-                                                <p class="form-message" style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group first">
-                                                <label for="phoneNumber">Phone Number</label>
-                                                <input type="text" th:field="*{phoneNumber}" class="form-control" placeholder="Enter your number" id="phoneNumber" disabled>
-                                                <p class="form-message" style="color: red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row" >
-                                        <div class="col-md-6">
-                                            <div class="form-group first">
-                                                <label for="dayOfBirth">Birthday</label>
-                                                <input type="date" th:field="*{dayOfBirth}" class="form-control" id="dayOfBirth" disabled>
-                                                <p class="form-message" style="color: red" th:if="${#fields.hasErrors('dayOfBirth')}" th:errors="*{dayOfBirth}"></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group first">
-                                                <label>Gender</label>
-                                                <select id="gender" th:field="*{gender}" class="form-control" disabled>
-                                                    <option th:value="'MALE'">Male</option>
-                                                    <option th:value="'FEMALE'">Female</option>
-                                                    <option th:value="'OTHER'">Other</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row" >
-                                        <div class="col-md-6">
-                                            <div class="form-group first">
-                                                <label for="idCard">ID Card</label>
-                                                <input type="text" th:field="*{idCard}" class="form-control" placeholder="Enter your id card" id="idCard" disabled>
-                                                <p class="form-message" style="color: red" th:if="${#fields.hasErrors('idCard')}" th:errors="*{idCard}"></p>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="form-group first">
-                                                <label for="address">Address</label>
-                                                <input type="text" th:field="*{address}" class="form-control" placeholder="Enter your address" id="address" disabled>
-                                                <p class="form-message" style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}" ></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <p>
-                                        <input hidden type="file" name="file"  id="file" maxlength="254"/>
-                                        <input type="hidden" th:field="*{image}"/>
-                                    </p>
-
-                                    <input hidden id="submit" type="submit" value="Edit Profile" class="btn px-5 btn-primary">
-
-                                </form>
-
-                            </div>
+                        <hr class="my-0">
+                        <div class="card-body" style="padding-bottom: 66%">
+                            <a th:href="@{/changePassword/{username}(username = ${#request.userPrincipal.name})}" style="text-align: center;font-size: 120%; margin-top: 20px; display: block">
+                                <i class="bi bi-lock-fill ml-"></i>
+                                <span>Change Password</span>
+                            </a>
+                            <a style="font-size: 120%;margin-top: 30px;margin-left: 40px; display: block">
+                                <i class="bi bi-card-heading"></i>
+                                <span>My Product</span>
+                            </a>
+                            <a style="font-size: 120%;margin-top: 30px;margin-left: 40px; display: block">
+                                <i class="bi bi-box-seam-fill"></i>
+                                <span>My Order</span>
+                            </a>
                         </div>
                     </div>
                 </div>
+
+                <div class="col-md-6 col-xl-8">
+                    <div class="card">
+                        <strong style="font-size: 200%; margin-left: 6%;margin-top: 3%;margin-bottom: 6%;">My Profile <a id="btnEdit" onclick="editUser()" class="bi bi-pencil-square" style="margin-left: 510px"></a></strong>
+                        <form id="formEdit" th:action="@{/edit-profile}" th:object="${user}" method="post" enctype="multipart/form-data" style="padding-left: 10%; padding-right: 10%; padding-bottom: 20%">
+                            <input type="hidden" th:field="*{id}">
+                            <input type="hidden" th:field="*{account.password}">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group first">
+                                        <label for="name">Full Name</label>
+                                        <input type="text" th:field="*{fullname}" class="form-control" placeholder="Enter your name" id="name" disabled>
+                                        <p class="form-message" style="color: red" th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}"></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group first">
+                                        <label for="account.username">Username</label>
+                                        <input type="text" th:field="*{account.username}" class="form-control" placeholder="Enter username" id="account.username" disabled>
+                                        <p class="form-message" style="color: red" th:if="${#fields.hasErrors('account.username')}" th:errors="*{account.username}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" >
+                                <div class="col-md-6">
+                                    <div class="form-group first">
+                                        <label for="email">Email Address</label>
+                                        <input type="email" th:field="*{email}" class="form-control" placeholder="Enter your email" id="email" disabled>
+                                        <p class="form-message" style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group first">
+                                        <label for="phoneNumber">Phone Number</label>
+                                        <input type="text" th:field="*{phoneNumber}" class="form-control" placeholder="Enter your number" id="phoneNumber" disabled>
+                                        <p class="form-message" style="color: red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" >
+                                <div class="col-md-6">
+                                    <div class="form-group first">
+                                        <label for="dayOfBirth">Birthday</label>
+                                        <input type="date" th:field="*{dayOfBirth}" class="form-control" id="dayOfBirth" disabled>
+                                        <p class="form-message" style="color: red" th:if="${#fields.hasErrors('dayOfBirth')}" th:errors="*{dayOfBirth}"></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group first">
+                                        <label>Gender</label>
+                                        <select id="gender" th:field="*{gender}" class="form-control" disabled>
+                                            <option th:value="'MALE'">Male</option>
+                                            <option th:value="'FEMALE'">Female</option>
+                                            <option th:value="'OTHER'">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" >
+                                <div class="col-md-6">
+                                    <div class="form-group first">
+                                        <label for="idCard">ID Card</label>
+                                        <input type="text" th:field="*{idCard}" class="form-control" placeholder="Enter your id card" id="idCard" disabled>
+                                        <p class="form-message" style="color: red" th:if="${#fields.hasErrors('idCard')}" th:errors="*{idCard}"></p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group first">
+                                        <label for="address">Address</label>
+                                        <input type="text" th:field="*{address}" class="form-control" placeholder="Enter your address" id="address" disabled>
+                                        <p class="form-message" style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}" ></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>
+                                <input hidden type="file" name="file"  id="file" maxlength="254"/>
+                                <input type="hidden" th:field="*{image}"/>
+                            </p>
+
+                            <input hidden id="submit" type="submit" value="Edit Profile" class="btn px-5 btn-primary">
+
+                        </form>
+
+                    </div>
+                </div>
             </div>
-            <!-- Contact End -->
         </div>
+    </div>
+    <!-- Contact End -->
+</div>
 
 
 <!-- Footer Start -->

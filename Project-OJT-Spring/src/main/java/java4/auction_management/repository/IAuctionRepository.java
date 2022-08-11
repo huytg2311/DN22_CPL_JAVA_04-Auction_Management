@@ -1,7 +1,9 @@
 package java4.auction_management.repository;
 
 import java4.auction_management.entity.auction.Auction;
+import java4.auction_management.entity.product.Product;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -15,6 +17,14 @@ public interface IAuctionRepository extends JpaRepository<Auction, Long> {
 
     Auction getAuctionByAuctionID(Long id);
 
+    @Query(value = "select a from Auction a where a.user.id = ?1")
+    List<Product> getAuctionByUserId(Long id);
+
+    @Query(value = "select a from Auction  as a where  a.user.id = ?1")
+    List<Auction> getAuctionsByUserId(Long id);
+
+    @Query("select a from Auction as a where a.auctionStatus = 'ACCEPTED'")
+    Page<Auction> getAllAuctionByStatus(Pageable pageable);
 
 //    @Query("select * from auction as a where a.product_id = ?1 order by a.", nativeQuery = true)
 

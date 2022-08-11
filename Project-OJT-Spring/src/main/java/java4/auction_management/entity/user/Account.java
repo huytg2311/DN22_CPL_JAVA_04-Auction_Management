@@ -1,12 +1,9 @@
 package java4.auction_management.entity.user;
-<<<<<<<<< Temporary merge branch 1
 import java4.auction_management.entity.chat.Chat;
 import java4.auction_management.entity.payment.EWallet;
-=========
 
 import java4.auction_management.entity.chat.Chat;
 import java4.auction_management.entity.product.Product;
->>>>>>>>> Temporary merge branch 2
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

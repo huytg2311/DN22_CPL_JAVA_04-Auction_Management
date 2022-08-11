@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Pay.Picker Guide</title>
+    <title>Smart Auction Guide</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -34,117 +34,20 @@
 
 <body>
 
-
-<!-- Spinner Start -->
-<!-- Spinner Start -->
-<div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-    <div class="spinner-grow text-primary" role="status"></div>
-</div>
-<!-- Spinner End -->
-
-
-<!-- Topbar Start -->
-<div class="container-fluid top-bar bg-dark text-light px-0 wow fadeIn" data-wow-delay="0.1s">
-    <div class="row gx-0 align-items-center d-none d-lg-flex">
-
-        <div class="col-lg-6 px-5 text-end" style="margin-left: 50%">
-            <small th:if="${#authorization.expression('hasAuthority(''ROLE_ADMIN'')')} " ><a th:href="@{/admin}">Go Page Admin</a></small>
-            <small th:if="${#authorization.expression('hasAuthority(''ROLE_USER'')')}"  ><a></a>
-
-                <div class="h-100 d-inline-flex align-items-center" >
-                    <a class="btn-lg-square text-primary pe-0" th:href="@{/products/create}"><i class="bi bi-bag-plus"></i></a>
-                    <a class="btn-lg-square text-primary  rounded-0" href=""><i class="bi bi-cart"></i></a>
-                    <a class="btn-lg-square text-primary  rounded-0" href=""><i class="bi bi-wallet"></i></a>
-                    <a class="btn-lg-square text-primary  rounded-0" href=""><i class="bi bi-bell"></i></a>
-                    <a class="btn-lg-square text-primary  rounded-0" href=""><i class="bi bi-gear"></i></a>
-
-                </div>
-            </small>
-        </div>
-    </div>
-</div>
-<!-- Topbar End -->
-
-
-<!-- Navbar Start -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
-    <a href="index.html" class="navbar-brand ms-4 ms-lg-0">
-        <h1 class="text-primary m-0">Pay.Picker</h1>
-    </a>
-    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-        <div class="navbar-nav mx-auto p-4 p-lg-0">
-            <a href="#" class="nav-item nav-link ">Home</a>
-            <a href="about.html" class="nav-item nav-link ">About</a>
-            <a href="products/service.html" class="nav-item nav-link active">Guide</a>
-            <a href="product.html" class="nav-item nav-link">Products</a>
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                <div class="dropdown-menu m-0">
-                    <a href="team.html" class="dropdown-item">Our Team</a>
-                    <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                    <a href="success.html" class="dropdown-item">404 Page</a>
-                </div>
-            </div>
-            <a href="contact.html" class="nav-item nav-link">Contact</a>
-        </div>
-        <div class=" d-none d-lg-flex">
-            <div class="flex-shrink-0 btn-lg-square border border-light rounded-circle">
-                <i class="fa fa-user text-primary"></i>
-            </div>
-            <div class="ps-3" style="margin-top: 10px" th:if="${#request.userPrincipal == null}">
-                <a class="text-primary mb-0" th:href="@{/login}" >Login</a>
-                <!--                        <p class="text-light fs-5 mb-0">+012 345 6789</p>-->
-            </div>
-            <!--sao khong up-->
-            <div class="ps-3" th:if="${#request.userPrincipal != null}">
-                <a class="text-primary mb-0" th:utext="${#request.userPrincipal.name}" th:href="'/edit-profile/' + ${#request.userPrincipal.name}"></a><br>
-                <a class="text-light mb-0" th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a>
-            </div>
-        </div>
-    </div>
-</nav>
-<!-- Navbar End -->
-
-
-<!-- Carousel Start -->
-<div class="container-fluid p-0 pb-5 wow fadeIn" data-wow-delay="0.1s" disabled="">
-    <div class="owl-carousel header-carousel position-relative">
-        <div class="owl-carousel-item position-relative">
-            <img class="img-fluid" th:src="@{img/background-main.jpg}"  alt="">
-            <div class="owl-carousel-inner">
-                <div class="container">
-                    <div class="row justify-content-start">
-                        <div class="col-lg-8">
-                            <p class="text-primary text-uppercase fw-bold mb-2">// The Best Auction</p>
-                            <h1 class="display-1 text-light mb-4 animated slideInDown">Auction With Passion</h1>
-                            <p class="text-light fs-5 mb-4 pb-3">Come to us, you can buy the best products at the best prices!!!</p>
-                            <a href="" class="btn btn-primary rounded-pill py-3 px-5">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
-</div>
-<!-- Carousel End -->
-
+<div class="" th:insert="header :: my-header"></div>
+<div class="header-spacer"></div>
 
 <div class="container">
 
-    <h1  style="text-align: center">QUY CHẾ HOẠT ĐỘNG WEBSITE CUNG CẤP DỊCH VỤ ĐẤU GIÁ FAUTIONS.COM</h1>
+    <h1  style="text-align: center">QUY CHẾ HOẠT ĐỘNG WEBSITE CUNG CẤP DỊCH VỤ ĐẤU GIÁ SMARTAUCTION.COM</h1>
 
     <p>*Áp dụng từ: 1/7/2022</p>
 
     <h4>I. Nguyên tắc chung</h4>
     <p>
-        - Website thương mại điện tử fauctions.com do team 4 lớp java03 fpt software thực hiện hoạt động và vận hành. Đối tượng phục vụ là tất cả khách hàng trên 63 tỉnh thành Việt Nam có nhu cầu đấu giá online.
-        <br>- Sản phẩm được kinh doanh tại www.fauctions.com phải đáp ứng đầy đủ các quy định của pháp luật, không bán hàng nhái, hàng không rõ nguồn gốc, hàng xách tay.
-       <br> - Hoạt động mua bán tại fauctions.com phải được thực hiện công khai, minh bạch, đảm bảo quyền lợi của người tiêu dùng.
+        - Website thương mại điện tử smartAuction.com do team 4 lớp java03 fpt software thực hiện hoạt động và vận hành. Đối tượng phục vụ là tất cả khách hàng trên 63 tỉnh thành Việt Nam có nhu cầu đấu giá online.
+        <br>- Sản phẩm được kinh doanh tại www.smartAuction.com phải đáp ứng đầy đủ các quy định của pháp luật, không bán hàng nhái, hàng không rõ nguồn gốc, hàng xách tay.
+       <br> - Hoạt động mua bán tại smartAuction.com phải được thực hiện công khai, minh bạch, đảm bảo quyền lợi của người tiêu dùng.
     </p>
 
     <h4>II. Quy định chung</h4>
@@ -154,23 +57,23 @@
     Người mua là công dân Việt Nam trên khắp 63 tỉnh thành. Người đấu giá có quyền đăng ký tài khoản  để thực hiện giao dịch.
     </p>
     <h4>III. Quy trình giao dịch</h4>
-    <p>Dành cho người đấu giá hàng tại website fauctions.com</p>
+    <p>Dành cho người đấu giá hàng tại website smartAuction.com</p>
     <p>
     Bước 1: Người dùng cần đăng ký tài khoản và nạp vào ví tiền một khoản tiền đủ để đấu giá (Người dùng có thể rút ra bất cứ khi nào nếu muốn).
     <br>Bước 2: Tìm sản phẩm cần đấu giá. <br>Bước 3:Xem giá và thông tin chi tiết sản phẩm đó, nếu quý khách đồng ý muốn đấu giá, quý khách cần nhập số tiền mình đấu giá (Trong thời gian phiên đấu giá đang diễn ra) và số tiền trong ví thỏa mãn (số tiền trong ví phải lớn hơn số tiền đấu giá).
     <br>Bước 4:Hết phiên đấu giá, nếu người dùng là người ra giá cao nhất trong thời gian đấu giá là người có được sản phẩm đó và có thể xem thông tin chi tiết trong giỏ hàng của người dùng.
-     Nếu quý khách đang sở hữu "Phiếu quà tặng Fauctions.com", quý khách hãng cào lớp bạc trên thẻ nhập "Mã giảm giá" vào khung "Mã giảm giá" để được trừ tiền trực tiếp vào đơn hàng.
-   <br> Bước 5:Sau khi nhận đơn hàng của người mua, fauctions.com sẽ liên lạc với khách hàng qua thông tin số điện quý khách hàng cung cấp  để xác thực thông tin đơn hàng.
-    <br>Bước 6:Fauctions.com giao hàng tận nhà đến cho khách hàng hoặc khách hàng đến trực tiếp cơ sở để nhận hàng.
+     Nếu quý khách đang sở hữu "Phiếu quà tặng smartAuction.com", quý khách hãng cào lớp bạc trên thẻ nhập "Mã giảm giá" vào khung "Mã giảm giá" để được trừ tiền trực tiếp vào đơn hàng.
+   <br> Bước 5:Sau khi nhận đơn hàng của người mua, smartAuction.com sẽ liên lạc với khách hàng qua thông tin số điện quý khách hàng cung cấp  để xác thực thông tin đơn hàng.
+    <br>Bước 6:SmartAuction.com giao hàng tận nhà đến cho khách hàng hoặc khách hàng đến trực tiếp cơ sở để nhận hàng.
     </p>
       <p>Quy trình giao nhận vận chuyển:</p>
-    <p>fauctions.com thực hiện giao hàng trên toàn quốc. Khi nhận đơn hàng từ người mua và sau khi đã xác thông tin mua hàng qua điện thoại, fauctions.com sẽ tiến hành giao hàng theo yêu cầu của quý khách hàng
-    Đối với giao dịch của fauctions.com
-    fauctions.com tiếp nhận khiếu nại qua các hình thức sau:</p>
+    <p>smartAuction.com thực hiện giao hàng trên toàn quốc. Khi nhận đơn hàng từ người mua và sau khi đã xác thông tin mua hàng qua điện thoại, fauctions.com sẽ tiến hành giao hàng theo yêu cầu của quý khách hàng
+    Đối với giao dịch của smartAuction.com
+        smartAuction.com tiếp nhận khiếu nại qua các hình thức sau:</p>
     <p>
         + Tại website liên hệ, nhắn tin trực tiếp với trang quản lý.
     <br>    + Qua tổng đài giải quyết khiếu nại: 0123456789 <br>+ Qua email: daibanggaycanh@gmail.com
-     <br>   + Trực tiếp tại nơi đấu giá fauctions fpt complex Nam Kỳ Khởi Nghĩa - Hòa Hải - Ngũ Hành Sơn - Đà Nẵng.
+     <br>   + Trực tiếp tại nơi đấu giá smartAuction fpt complex Nam Kỳ Khởi Nghĩa - Hòa Hải - Ngũ Hành Sơn - Đà Nẵng.
     </p>
 
     <h4>IV. Quy trình thanh toán</h4>
@@ -182,27 +85,27 @@
 
    <h4> V. Đảm bảo an toàn giao dịch</h4>
     <p>
-    Ban quản lý đã sử dụng các dịch vụ để bảo vệ thông tin về nội dung mà người bán đăng  sản phẩm trên fauctions.com. Để đảm bảo các giao dịch được tiến hành thành công, hạn chế tối đa rủi ro có thể phát sinh.
-    Người mua nên cung cấp thông tin đầy đủ (tên, địa chỉ, số điện thoại, email) khi tham gia mua hàng của Thegioididong.com để fauctions.com có thể liên hệ nhanh lại với người mua trong trường hợp xảy ra lỗi.
+    Ban quản lý đã sử dụng các dịch vụ để bảo vệ thông tin về nội dung mà người bán đăng  sản phẩm trên smartAuction.com. Để đảm bảo các giao dịch được tiến hành thành công, hạn chế tối đa rủi ro có thể phát sinh.
+    Người mua nên cung cấp thông tin đầy đủ (tên, địa chỉ, số điện thoại, email) khi tham gia mua hàng của smartAuction.com để fauctions.com có thể liên hệ nhanh lại với người mua trong trường hợp xảy ra lỗi.
     </p>
 
    <h4> VI. Bảo vệ thông tin cá nhân khách hàng</h4>
-    <p>Fauctions.com cam kết sẽ bảo mật những thông tin mang tính riêng tư của bạn. Bạn vui lòng đọc bản “Chính sách bảo mật” dưới đây để hiểu hơn những cam kết mà chúng tôi thực hiện, nhằm tôn trọng và bảo vệ quyền lợi của người truy cập:
+    <p>SmartAuction.com cam kết sẽ bảo mật những thông tin mang tính riêng tư của bạn. Bạn vui lòng đọc bản “Chính sách bảo mật” dưới đây để hiểu hơn những cam kết mà chúng tôi thực hiện, nhằm tôn trọng và bảo vệ quyền lợi của người truy cập:
     </p>
     <p>1. Mục đích và phạm vi thu thập</p>
-    <p>- Để truy cập và sử dụng một số dịch vụ tại fauctions.com, bạn có thể sẽ được yêu cầu đăng ký với chúng tôi thông tin cá nhân (Email, Họ tên, Số ĐT liên lạc…). Mọi thông tin khai báo phải đảm bảo tính chính xác và hợp pháp. fauctions.com không chịu mọi trách nhiệm liên quan đến pháp luật của thông tin khai báo. 
+    <p>- Để truy cập và sử dụng một số dịch vụ tại smartAuction.com, bạn có thể sẽ được yêu cầu đăng ký với chúng tôi thông tin cá nhân (Email, Họ tên, Số ĐT liên lạc…). Mọi thông tin khai báo phải đảm bảo tính chính xác và hợp pháp. fauctions.com không chịu mọi trách nhiệm liên quan đến pháp luật của thông tin khai báo. 
         <br>- Chúng tôi cũng có thể thu thập thông tin về số lần viếng thăm, bao gồm số trang bạn xem, số links (liên kết) bạn click và những thông tin khác liên quan đến việc kết nối đến site fauctions.com. Chúng tôi cũng thu thập các thông tin mà trình duyệt Web (Browser) bạn sử dụng mỗi khi truy cập vào thegioididong.com, bao gồm: địa chỉ IP, loại Browser, ngôn ngữ sử dụng, thời gian và những địa chỉ mà Browser truy xuất đến.
     </p>
     <p>2. Phạm vi sử dụng thông tin</p>
-    <p>fauctions.com thu thập và sử dụng thông tin cá nhân bạn với mục đích phù hợp và hoàn toàn tuân thủ nội dung của “Chính sách bảo mật” này. 
+    <p>smartAuction.com thu thập và sử dụng thông tin cá nhân bạn với mục đích phù hợp và hoàn toàn tuân thủ nội dung của “Chính sách bảo mật” này. 
         Cụ thể:</p>
     <p>Khi cần thiết, chúng tôi có thể sử dụng những thông tin này vào các mục đích:</p>
     <p>
         - Xử lý đơn hàng: gọi điện/tin nhắn xác nhận việc đặt hàng, thông báo về trạng thái đơn hàng & thời gian giao hàng, xác nhận việc huỷ đơn hàng (nếu có).
-       <br> - Gởi thư ngỏ/thư cảm ơn, giới thiệu sản phẩm mới, dịch vụ mới hoặc các chương trình khuyến mãi của fauctions.com.
+       <br> - Gởi thư ngỏ/thư cảm ơn, giới thiệu sản phẩm mới, dịch vụ mới hoặc các chương trình khuyến mãi của smartAuction.com.
         <br>  - Gởi thông tin về bảo hành sản phẩm.
         <br>  - Giải quyết khiếu nại của khách hàng.
-        <br>  - Thông tin trao thưởng (của fauctions.com hoặc của hãng).
+        <br>  - Thông tin trao thưởng (của smartAuction.com hoặc của hãng).
         <br>  - Gởi thông tin cho công ty tài chính để tiếp nhận, thẩm định & duyệt hồ sơ trả góp.
         <br>  - Các khảo sát để chăm sóc khách hàng tốt hơn.
         <br>   - Xác nhận các thông tin về kỹ thuật & bảo mật thông tin khách hàng.
@@ -215,82 +118,18 @@
     <p>4. Cam kết bảo mật thông tin cá nhân khách hàng</p>
     <p>
         - Khách hàng có quyền yêu cầu thay đổi hoặc huỷ bỏ thông tin cá nhân của mình.
-       <br> - Thông tin cá nhân của thành viên trên fauctions.com được fauctions.com cam kết bảo mật tuyệt đối theo chính sách bảo vệ thông tin cá nhân của Thegioididong.com. Việc thu thập và sử dụng thông tin của mỗi thành viên chỉ được thực hiện khi có sự đồng ý của khách hàng đó trừ những trường hợp pháp luật có quy định khác.
+       <br> - Thông tin cá nhân của thành viên trên smartAuction.com được smartAuction.com cam kết bảo mật tuyệt đối theo chính sách bảo vệ thông tin cá nhân của Thegioididong.com. Việc thu thập và sử dụng thông tin của mỗi thành viên chỉ được thực hiện khi có sự đồng ý của khách hàng đó trừ những trường hợp pháp luật có quy định khác.
         <br>  - Chỉ sử dụng thông tin khách hàng vào các nội dung ở mục 2. Không phát tán, cung cấp thông tin khách hàng cho bên thứ 3 trừ trường hợp:
         <br>   +Cung cấp cho công ty tài chính khi khách hàng mua trả góp, cung cấp hãng để trao thưởng hoặc trường hợp khác khi cơ quan nhà nước có thẩm quyền yêu cầu.
         <br>   + Cung cấp cho bên thứ 3 sau khi khách hàng mua hàng để gửi tin nhắn cho khách hàng các thông tin về sản phẩm, bảo hành, chính sách dịch vụ, khuyến mãi, khảo sát hoặc xác nhận các thông tin về kỹ thuật & bảo mật thông tin khách hàng.
         <br>   - Chúng tôi cam kết sử dụng các biện pháp quản lý, kỹ thuật phù hợp để bảo vệ thông tin do mình thu thập, lưu trữ; tuân thủ các tiêu chuẩn, quy chuẩn kỹ thuật về bảo đảm an toàn thông tin mạng. Trong trường hợp máy chủ lưu trữ thông tin bị hacker tấn công dẫn đến mất mát dữ liệu cá nhân thành viên, Thegioididong.com sẽ có trách nhiệm thông báo vụ việc cho cơ quan chức năng điều tra xử lý kịp thời và thông báo cho thành viên được biết.
         <br>   - Bảo mật tuyệt đối mọi thông tin giao dịch trực tuyến của Thành viên bao gồm thông tin hóa đơn kế toán chứng từ số hóa tại khu vực dữ liệu trung tâm an toàn cấp 1 của fauctions.com.
-        <br>    - Ban quản lý fauctions.com yêu cầu các cá nhân khi đăng ký/mua hàng là thành viên, phải cung cấp đầy đủ thông tin cá nhân có liên quan như: Họ và tên, địa chỉ liên lạc, email, số chứng minh nhân dân, điện thoại, số tài khoản, số thẻ thanh toán …., và chịu trách nhiệm về tính pháp lý của những thông tin trên. Ban quản lý fauctions.com không chịu trách nhiệm cũng như không giải quyết mọi khiếu nại có liên quan đến quyền lợi của Thành viên đó nếu xét thấy tất cả thông tin cá nhân của thành viên đó cung cấp khi đăng ký ban đầu là không chính xác
+        <br>    - Ban quản lý smartAuction.com yêu cầu các cá nhân khi đăng ký/mua hàng là thành viên, phải cung cấp đầy đủ thông tin cá nhân có liên quan như: Họ và tên, địa chỉ liên lạc, email, số chứng minh nhân dân, điện thoại, số tài khoản, số thẻ thanh toán …., và chịu trách nhiệm về tính pháp lý của những thông tin trên. Ban quản lý fauctions.com không chịu trách nhiệm cũng như không giải quyết mọi khiếu nại có liên quan đến quyền lợi của Thành viên đó nếu xét thấy tất cả thông tin cá nhân của thành viên đó cung cấp khi đăng ký ban đầu là không chính xác
 
     </p>
 
 </div>
 
-
-<!-- Footer Start -->
-<div class="container-fluid bg-dark text-light footer my-6 mb-0 py-5 wow fadeIn" data-wow-delay="0.1s">
-    <div class="container py-5">
-        <div class="row g-5">
-            <div class="col-lg-3 col-md-6">
-                <h4 class="text-light mb-4">Office Address</h4>
-                <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
-                <div class="d-flex pt-2">
-                    <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
-                            class="fab fa-twitter"></i></a>
-                    <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
-                            class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
-                            class="fab fa-youtube"></i></a>
-                    <a class="btn btn-square btn-outline-light rounded-circle me-0" href=""><i
-                            class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <h4 class="text-light mb-4">Quick Links</h4>
-                <a class="btn btn-link" href="">About Us</a>
-                <a class="btn btn-link" href="">Contact Us</a>
-                <a class="btn btn-link" href="">Our Services</a>
-                <a class="btn btn-link" href="">Terms & Condition</a>
-                <a class="btn btn-link" href="">Support</a>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <h4 class="text-light mb-4">Quick Links</h4>
-                <a class="btn btn-link" href="">About Us</a>
-                <a class="btn btn-link" href="">Contact Us</a>
-                <a class="btn btn-link" href="">Our Services</a>
-                <a class="btn btn-link" href="">Terms & Condition</a>
-                <a class="btn btn-link" href="">Support</a>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <h4 class="text-light mb-4">Photo Gallery</h4>
-                <div class="row g-2">
-                    <div class="col-4">
-                        <img class="img-fluid bg-light rounded p-1" th:src="@{img/product-1.jpg}" alt="Image">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid bg-light rounded p-1" th:src="@{img/product-2.jpg}" alt="Image">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid bg-light rounded p-1" th:src="@{img/product-3.jpg}" alt="Image">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid bg-light rounded p-1" th:src="@{img/product-2.jpg}" alt="Image">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid bg-light rounded p-1" th:src="@{img/product-3.jpg}" alt="Image">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid bg-light rounded p-1" th:src="@{img/product-1.jpg}" alt="Image">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Footer End -->
 
 
 
@@ -303,7 +142,8 @@
 
 <!-- Back to Top -->
 <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
-
+<div class="header-spacer"></div>
+<div class="" th:insert="footer :: my-footer"></div>
 
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

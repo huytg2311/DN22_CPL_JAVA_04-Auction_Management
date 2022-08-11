@@ -2,6 +2,7 @@ package java4.auction_management.controller;
 
 import com.cloudinary.utils.ObjectUtils;
 import java4.auction_management.config.CloudinaryConfig;
+import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.product.Product;
 import java4.auction_management.entity.user.Account;
 import java4.auction_management.entity.user.User;
@@ -9,6 +10,7 @@ import java4.auction_management.service.IAccountService;
 import java4.auction_management.service.IBidService;
 import java4.auction_management.service.ICategoryService;
 import java4.auction_management.service.IUserService;
+import java4.auction_management.service.impl.AuctionService;
 import java4.auction_management.service.impl.CategoryService;
 import java4.auction_management.service.impl.ProductService;
 import java4.auction_management.service.impl.UserService;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
@@ -50,6 +53,9 @@ public class UserController {
 
     @Autowired
     CategoryService categoryService;
+
+    @Autowired
+    AuctionService auctionService;
 
     @Autowired
     IBidService iBidService;
@@ -114,14 +120,15 @@ public class UserController {
     @GetMapping("/auction/{username}")
     public String showAuctionUser(@PathVariable("username") String username, Model model) {
 //                Optional<User> users = userService.getById(user.getId());
-        List<Product> product = productService.findProductsByUsername(username);
-        if(product.isEmpty())
+        User user = userService.getUserByUsername(username);
+        List<Auction> auctions = auctionService.getAuctionsByUserId(user.getId());
+        if(auctions.isEmpty())
             System.out.println('a');
-        for (Product prod: product
+        for (Auction auction: auctions
              ) {
-            System.out.println(prod);
+            System.out.println(auction);
         };
-        model.addAttribute("products", product);
+        model.addAttribute("auctions", auctions);
 
 //        model.addAttribute("users", user );
         return "user/auction";

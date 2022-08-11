@@ -159,14 +159,13 @@ public class ProductController {
 
     @PostMapping("/edit")
     public String editProduct(@Valid @ModelAttribute Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                                @RequestParam("file") MultipartFile[] files) throws IOException {
-        String username = product.getAuction().getUser().getAccount().getUsername();
+                                @RequestParam("file") MultipartFile[] files, HttpServletRequest request) throws IOException {
 
         for (MultipartFile m: files
              ) {
             if (m.isEmpty()) {
                 productService.save(product);
-                return "redirect:/products/auction/" + username;
+                return "redirect:/user/auction/" + request.getUserPrincipal().getName();
             }
         }
         try {
@@ -187,7 +186,7 @@ public class ProductController {
         }
 
         redirectAttributes.addFlashAttribute("message", "Edit successful");
-        return "redirect:/products/auction/" + username;
+        return "redirect:/user/auction/" + request.getUserPrincipal().getName();
     }
 
 }

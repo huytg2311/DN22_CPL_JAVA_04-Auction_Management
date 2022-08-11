@@ -99,7 +99,7 @@
 						<a th:href="'/user/bidding/'+ ${#request.userPrincipal.name}" class="nav-item nav-link">Bidding</a>
 					</div>
 					<div th:if="${#authorization.expression('hasAuthority(''ROLE_USER'')')}">
-						<a th:href="'/products/auction/'+ ${#request.userPrincipal.name}" class="nav-item nav-link">Auction</a>
+						<a th:href="@{/user/auction/{username}(username = ${#request.userPrincipal.name})}" class="nav-item nav-link">Auction</a>
 					</div>
 
 					<a th:href="@{/guide}" class="nav-item nav-link">Guide</a>
