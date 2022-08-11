@@ -69,9 +69,7 @@ public class LoginController {
             model.addAttribute("account", new Account());
             return "login";
         }
-        Cart cart = new Cart();
-        cart.setUser(user);
-        cartService.save(cart);
+
 //        if (!file.isEmpty()) {
 //            try {
 //                Map uploadResult = cloudc.upload(file.getBytes(),
@@ -85,7 +83,9 @@ public class LoginController {
 //        }
 
         userService.save(user);
-
+        Cart cart = new Cart();
+        cart.setUser(user);
+        cartService.save(cart);
 //        userService.save(user);
         redirectAttributes.addFlashAttribute("message", "Add successful");
         return "redirect:/success";
