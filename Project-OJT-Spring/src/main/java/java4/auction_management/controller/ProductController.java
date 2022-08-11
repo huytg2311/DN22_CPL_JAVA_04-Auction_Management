@@ -140,8 +140,8 @@ public class ProductController {
 
     @GetMapping("/auction/{username}")
     public String loadAuction(@PathVariable("username") String username, Model model){
-        List<Product> products = productService.findProductsByUsername(username);
-        model.addAttribute("products", products);
+//        List<Product> products = productService.findProductsByUsername(username);
+//        model.addAttribute("products", products);
 
         return "user/auction";
     }
@@ -161,13 +161,13 @@ public class ProductController {
     @PostMapping("/edit")
     public String editProduct(@Valid @ModelAttribute Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes,
                                 @RequestParam("file") MultipartFile[] files) throws IOException {
-        String username = product.getAuction().getUser().getAccount().getUsername();
+//        String username = product.getAuction().getUser().getAccount().getUsername();
 
         for (MultipartFile m: files
              ) {
             if (m.isEmpty()) {
                 productService.save(product);
-                return "redirect:/products/auction/" + username;
+                return "redirect:/auctions/my-auctions/" ;
             }
         }
         try {
@@ -188,7 +188,7 @@ public class ProductController {
         }
 
         redirectAttributes.addFlashAttribute("message", "Edit successful");
-        return "redirect:/products/auction/" + username;
+        return "redirect:/auctions/my-auctions/" ;
     }
 
 }

@@ -150,12 +150,12 @@
                             <h6 class="price">Step price:
                                 <span th:text="*{auction.stepPrice}"></span>
                             </h6>
-                            <a style="text-decoration: none;"  class="mb-4" th:href="'/user/auction/'+ ${#request.userPrincipal.name}">
+                            <a style="text-decoration: none;"  class="mb-4" th:href="@{/auctions/my-auctions}">
 
                                 <button type="button" class="btn btn-outline-success ">Back</button>
                             </a>
-                            <a style="text-decoration: none;" th:if=" ${#strings.equals(products.auction.auctionStatus,'REJECTED')} ">
-                                <!--                                               th:href="@{/admin/edit/{id}(id = ${user.id})}">         -->
+                            <a style="text-decoration: none;" th:if=" ${#strings.equals(products.auction.auctionStatus,'REJECTED')} "
+                                                                               th:href="@{/products/edit/{id}(id = ${products.productId})}">
                                 <button type="button" class="btn btn-outline-success">Edit</button>
                             </a>
 

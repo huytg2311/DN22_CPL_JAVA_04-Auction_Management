@@ -64,10 +64,10 @@ public class AuctionService implements IAuctionService {
         return iAuctionRepository.getAuctionByAuctionID(id);
     }
 
-    @Override
-    public List<Auction> getAuctionsByUserId(Long id) {
-        return iAuctionRepository.getAuctionsByUserId(id);
-
-    }
+//    @Override
+//    public List<Auction> getAuctionsByUserId(Long id) {
+//        return iAuctionRepository.getAuctionsByUserId(id);
+//
+//    }
 
 }

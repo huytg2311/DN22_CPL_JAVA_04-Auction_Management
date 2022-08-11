@@ -3,6 +3,7 @@ package java4.auction_management.controller;
 import com.cloudinary.utils.ObjectUtils;
 import java4.auction_management.config.CloudinaryConfig;
 import java4.auction_management.entity.auction.Auction;
+import java4.auction_management.entity.bid.Bid;
 import java4.auction_management.entity.product.Product;
 import java4.auction_management.entity.user.Account;
 import java4.auction_management.entity.user.User;
@@ -114,22 +115,7 @@ public class UserController {
         return "user/edit-profile";
     }
 
-    @GetMapping("/auction/{username}")
-    public String showAuctionUser(@PathVariable("username") String username, Model model) {
-//                Optional<User> users = userService.getById(user.getId());
-        User user = userService.getUserByUsername(username);
-        List<Auction> auctions = auctionService.getAuctionsByUserId(user.getId());
-        if(auctions.isEmpty())
-            System.out.println('a');
-        for (Auction auction: auctions
-             ) {
-            System.out.println(auction);
-        };
-        model.addAttribute("auctions", auctions);
 
-//        model.addAttribute("users", user );
-        return "user/auction";
-    }
     @GetMapping("/detailAuction/{productId}")
     public String detailAuction(@PathVariable("productId") Product product, Model model){
 
@@ -155,55 +141,12 @@ public class UserController {
         return "user/wallet";
     }
 
-    @GetMapping("/bidding/{username}")
-    public String showproductBidding(@PathVariable("username")Account account, Model model) {
-        User user = account.getUser();
-        model.addAttribute("users", user);
+    @GetMapping("/bidding/{userId}")
+    public String showAuctionBidding(@PathVariable("userId")Bid bid, Model model) {
+
+//        model.addAttribute("users", user);
 
         return "user/bidding";
     }
 
-//    @GetMapping("/editProductAuction/{id}")
-//    public String showEditProductAuction(@PathVariable("id") User user, Model model) {
-////        Optional<User> user = userService.getById(id);
-//        model.addAttribute("users", user);
-//        return "user/edit-productAuction";
-//    }
-//
-//
-//    @PostMapping("/editProductAuction")
-//    public String editProductAuction(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes,
-//                           @RequestParam("file") MultipartFile[] files) throws IOException {
-//        if (bindingResult.hasErrors()) {
-//            return "user/auction";
-//        }
-//        Optional<User> currentUser = userService.getById(user.getId());
-//        System.out.println(currentUser);
-//
-//        if (files.isEmpty()) {
-//            userService.save(user);
-//            return "redirect:/admin";
-//        } else {
-//            try {
-//                System.out.println(user.getImage());
-//                System.out.println(files + "aaaaa");
-//                for (MultipartFile file : files
-//                ) {
-//                    Map uploadResult = cloudc.upload(file.getBytes(),
-//                            ObjectUtils.asMap("resourcetype", "auto"));
-//                    System.out.println(uploadResult.get("url").toString());
-//                }
-//
-//                System.out.println(files);
-//                userService.save(user);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                return "redirect:/edit/{id}";
-//            }
-//            redirectAttributes.addFlashAttribute("message", "Edit successful");
-//            return "redirect:/admin";
-////        }
-//        }
-//
-//    }
 }

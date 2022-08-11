@@ -16,8 +16,8 @@ public interface IAuctionRepository extends JpaRepository<Auction, Long> {
 
     Auction getAuctionByAuctionID(Long id);
 
-    @Query(value = "select a from Auction a where a.user.id = ?1")
-    List<Product> getAuctionByUserId(Long id);
+//    @Query(value = "select a from Auction a where a.user.id = ?1")
+//    List<Product> getAuctionByUserId(Long id);
 
     @Query(value = "select a from Auction  as a where  a.user.id = ?1")
     List<Auction> getAuctionsByUserId(Long id);
@@ -28,7 +28,7 @@ public interface IAuctionRepository extends JpaRepository<Auction, Long> {
     @Query("select a from Auction as a where a.auctionStatus = 'ACCEPTED'")
     Page<Auction> getAllAuctionByStatus(Pageable pageable);
 
-    Auction getAuctionByAuctionID(Long id);
+//    Auction getAuctionByAuctionID(Long id);
 
 
 //    @Query("select * from auction as a where a.product_id = ?1 order by a.", nativeQuery = true)

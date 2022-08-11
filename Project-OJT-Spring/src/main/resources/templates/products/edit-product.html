@@ -57,7 +57,7 @@
     <div class="" th:insert="header :: my-header"></div>
     <div class="header-spacer"></div>
 
-    <div class="main bg-light">
+    <div class="main bg-light " style="margin-top: 100px" >
         <main class="content px-lg-4 pt-lg-4 pb-lg-3 py-3 p-0">
             <div class="container-fluid m-0">
                 <div class="card mw-1200px px-lg-5 px-4 pt-5 pb-4 mx-auto my-0" th:object="${products}">
@@ -205,8 +205,8 @@
                                 </div>
 
                                 <div>
-                                    <a style="margin-left: 65px" class="btn btn-success" th:href="@{/user/auction/{username}(username = ${#request.userPrincipal.name})}" >Back</a>
-                                    <button style="margin-left: 65px" class="btn btn-success" type="submit">Save</button>
+                                    <a style="margin-left: 65px; margin-top: 50px" class="btn btn-success" th:href="@{/auctions/my-auctions}" >Back</a>
+                                    <button style="margin-left: 65px; margin-top: 50px" class="btn btn-primary" type="submit">Save</button>
 
                                 </div>
 

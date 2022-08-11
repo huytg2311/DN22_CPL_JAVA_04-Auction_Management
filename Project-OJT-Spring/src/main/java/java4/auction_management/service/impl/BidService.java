@@ -1,7 +1,6 @@
 package java4.auction_management.service.impl;
 
 import java4.auction_management.entity.bid.Bid;
-import java4.auction_management.entity.product.Product;
 import java4.auction_management.repository.IBidRepository;
 import java4.auction_management.service.IBidService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,4 +49,11 @@ public class BidService implements IBidService {
     public List<Bid> findAllByOrderByBidPriceDesc() {
         return iBidRepository.findAllByOrderByBidPriceDesc();
     }
+
+    @Override
+    public List<Bid> findBiddingByUserId(Long userId) {
+        return iBidRepository.findBiddingByUserId(userId);
+    }
+
+
 }

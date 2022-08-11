@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/bid")
@@ -27,7 +28,7 @@ public class BidController {
     UserService userService;
 
     @Autowired
-    IAuctionService iAuctionService;
+    AuctionService iAuctionService;
 
     @Autowired
     CartService cartService;
@@ -53,5 +54,13 @@ public class BidController {
         bid.setUser(user);
         bid.setAuction(auction);
         bidService.save(bid);
+    }
+
+    @GetMapping("/my-bidding")
+    public String loadAuction(Model model, HttpServletRequest httpServletRequest) {
+        User user = userService.getUserByUsername(httpServletRequest.getUserPrincipal().getName());
+        List<Bid> bid = bidService.findBiddingByUserId(user.getId());
+        model.addAttribute("bids", bid);
+        return "user/bidding";
     }
 }

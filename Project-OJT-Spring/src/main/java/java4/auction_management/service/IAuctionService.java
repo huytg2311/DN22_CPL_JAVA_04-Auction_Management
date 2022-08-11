@@ -25,6 +25,5 @@ public interface IAuctionService extends IService<Auction, Long>{
 
 
     Auction getAuctionByAuctionID(Long id);
-    Auction getAuctionByAuctionID(Long id);
 
 }
