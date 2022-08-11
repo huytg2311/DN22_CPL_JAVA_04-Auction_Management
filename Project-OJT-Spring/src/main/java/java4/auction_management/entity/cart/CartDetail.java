@@ -22,8 +22,6 @@ public class CartDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cartDetailID;
 
-    private double winPrice;
-
     @JoinColumn(name = "cartId")
     @ManyToOne(fetch = FetchType.EAGER)
     private Cart cart;
