@@ -42,7 +42,7 @@ public class CartService implements ICartService {
     }
 
     @Override
-    public Cart getCartByUserId(Long id) {
+    public List<Cart> getCartByUserId(Long id) {
         return iCartRepository.getCartByUserId(id);
     }
 }

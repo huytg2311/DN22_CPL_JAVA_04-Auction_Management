@@ -21,6 +21,11 @@ public class CartDetailService implements ICartDetailService {
     }
 
     @Override
+    public List<CartDetail> getAllCartByUserId(Long id) {
+        return iCartDetailRepository.getAllCartByUserId(id);
+    }
+
+    @Override
     public List<CartDetail> getAll() {
         return null;
     }

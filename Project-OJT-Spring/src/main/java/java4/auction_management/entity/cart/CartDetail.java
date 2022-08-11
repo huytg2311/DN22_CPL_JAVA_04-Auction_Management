@@ -1,10 +1,13 @@
 package java4.auction_management.entity.cart;
 
+import java4.auction_management.entity.bid.Bid;
 import java4.auction_management.entity.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 
@@ -19,6 +22,8 @@ public class CartDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cartDetailID;
 
+    private double winPrice;
+
     @JoinColumn(name = "cartId")
     @ManyToOne(fetch = FetchType.EAGER)
     private Cart cart;
@@ -27,4 +32,7 @@ public class CartDetail {
     @OneToOne(cascade = CascadeType.ALL)
     private Product product;
 
+    @OneToOne
+    @NotFound(action= NotFoundAction.IGNORE)
+    private Bid bid;
 }

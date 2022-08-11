@@ -36,12 +36,51 @@
 <body>
 <div th:insert="header :: my-header"></div>
 
-<div class="container" th:object="${cartDetail}" style="margin-top: 200px">
-    <div class="cart">
-        <a class="img"></a>
-        <a class="name" th:text="*{product.productName}"></a>
-        <span class="space"></span>
-        <a class="price" th:text="*{product.auction.bidList[0]}"></a>
+<div class="container" style="margin-top: 200px">
+    <h1 class="text-secondary">My Auction</h1>
+    <div class="row">
+        <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+
+            <!-- Shopping cart table -->
+            <div class="table-responsive">
+                <table class="table" th:each="cart : ${carts}">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="border-0 bg-light">
+                            <div class="p-2 px-3 text-uppercase">Product</div>
+                        </th>
+                        <th scope="col" class="border-0 bg-light">
+                            <div class="py-2 text-uppercase">Price</div>
+                        </th>
+                        <th scope="col" class="border-0 bg-light">
+                            <div class="py-2 text-uppercase">Date</div>
+                        </th>
+                        <th scope="col" class="border-0 bg-light">
+                            <div class="py-2 text-uppercase"></div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="cd: ${cart.cartDetailList}">
+                        <th scope="row" class="border-0">
+                            <div class="p-2" th:each="img, imgState : ${#strings.arraySplit(cd.product.listImage, ' ')}" th:if="${imgState.index==0}">
+                                <img th:src="@{${img}}" alt="" width="70" class="img-fluid rounded shadow-sm">
+                                <div class="ml-name d-inline-block align-middle">
+                                    <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle" th:text="${cd.product.productName}"></a></h5>
+                                </div>
+                            </div>
+                        </th>
+                        <td class="border-0 align-middle"><strong th:text="'$' + ${cd.bid.bidPrice}"></strong></td>
+                        <td class="border-0 align-middle"><strong th:text="${cd.bid.bidTime}"></strong></td>
+                        <td class="border-0 align-middle"><input type="submit" value="Confirm transport" class="btn px-5 btn-primary rounded-0 p-2">
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- End -->
+        </div>
     </div>
 </div>
 
@@ -61,5 +100,6 @@
 
 <!-- Template Javascript -->
 <script th:src="@{js/main.js}"></script>
+
 </body>
 </html>

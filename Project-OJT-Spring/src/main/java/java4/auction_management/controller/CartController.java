@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class CartController {
@@ -30,9 +31,9 @@ public class CartController {
     @GetMapping("/cart")
     public String showCartUser(HttpServletRequest httpServletRequest, Model model) {
         User user = userService.getUserByUsername(httpServletRequest.getUserPrincipal().getName());
-        Cart cart = iCartService.getCartByUserId(user.getId());
-        CartDetail cartDetail = cartDetailService.getCartDetailByCartID(cart.getCardId());
-        model.addAttribute("cartDetail", cartDetail);
+        List<Cart> cart = iCartService.getCartByUserId(user.getId());
+
+        model.addAttribute("carts", cart);
         return "/cart/cart";
     }
 }
