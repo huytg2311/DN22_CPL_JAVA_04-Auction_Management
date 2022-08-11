@@ -37,10 +37,10 @@ public class AccountValidator implements Validator {
             errors.rejectValue("phoneNumber", "phoneNumber", new String[]{}, "Phone number is duplicated");
         }
 
-        if(!user.getRetypePassword().equals(user.getAccount().getPassword())){
-            errors.rejectValue("retypePassword", "retypePassword", new  String[]{}, "Password do not match");
-
-        }
+//        if(!user.getAccount().getRetypePassword().equals(user.getAccount().getPassword())){
+//            errors.rejectValue("retypePassword", "retypePassword", new  String[]{}, "Password do not match");
+//
+//        }
 
     }
 }

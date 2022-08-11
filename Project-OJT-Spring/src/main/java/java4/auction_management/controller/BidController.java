@@ -30,16 +30,6 @@ public class BidController {
     @Autowired
     AuctionService iAuctionService;
 
-    @Autowired
-    CartService cartService;
-
-    @GetMapping("/cart/{username}")
-    public String showCart(@PathVariable("username") String username, Model model, HttpServletRequest httpServletRequest) {
-        User user = userService.getUserByUsername(httpServletRequest.getUserPrincipal().getName());
-        Cart cart =  cartService.getByUserID(user.getId());
-        model.addAttribute("cart", cart);
-        return "/cart/cart";
-    }
 
     @RequestMapping(value = "/createBid", method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE, consumes={"application/json"})

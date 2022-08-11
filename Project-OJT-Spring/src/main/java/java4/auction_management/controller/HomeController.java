@@ -13,6 +13,7 @@ import java4.auction_management.service.IUserService;
 import java4.auction_management.service.impl.AccountService;
 import java4.auction_management.service.impl.AuctionService;
 import java4.auction_management.service.impl.ProductService;
+import java4.auction_management.service.impl.UserService;
 import java4.auction_management.validate.AccountValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -44,7 +45,7 @@ public class HomeController {
     IUserRepository iUserRepository;
 
     @Autowired
-    IUserService userService;
+    UserService userService;
 
     @Autowired
     private AccountService accountService;
@@ -89,16 +90,24 @@ public class HomeController {
     @GetMapping("/view-profile/{username}")
     public String editProfile(@PathVariable("username") String username, Model model) {
         User user = userService.getUserByUsername(username);
+        Account account = accountService.getById(user.getAccount().getUsername()).orElseThrow(() -> {
+            throw new IllegalStateException("Not account found");
+        });
         System.out.println(username);
         model.addAttribute("user", user);
+        model.addAttribute("account", account);
         return "user-form";
     }
 
     @PostMapping("/edit-profile")
     public String editUser(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes,
                            @RequestParam("file") MultipartFile file) throws IOException {
+//        Account account = accountService.getById(user.getAccount().getUsername()).orElseThrow(() -> {
+//            throw new IllegalStateException("No account found");
+//        });
+//        account.setRetypePassword(user.getAccount().getRetypePassword());
+//        user.setAccount(account);
         accountValidator.validate(user, bindingResult);
-
         if (bindingResult.hasErrors()) {
             return "/user-form";
         }
@@ -141,6 +150,29 @@ public class HomeController {
         accountService.updatePassword(account, password);
         model.addAttribute("message", "Change password successfully !");
         return "/success";
+    }
+
+    @GetMapping("/changeAvatar")
+    public String formChangeAvatar(HttpServletRequest httpServletRequest, Model model) {
+        User user = userService.getUserByUsername(httpServletRequest.getUserPrincipal().getName());
+        model.addAttribute("user", user);
+        return "form-change-image";
+    }
+
+    @PostMapping("/changeAvatar")
+    public String changeAvatar(HttpServletRequest httpServletRequest, @RequestParam("file") MultipartFile file, Model model) {
+        String image = httpServletRequest.getParameter("image");
+        User user = userService.getUserByUsername(httpServletRequest.getUserPrincipal().getName());
+        try {
+            Map uploadResult = cloudc.upload(file.getBytes(),
+                    ObjectUtils.asMap("resourcetype", "auto"));
+            image = uploadResult.get("url").toString();
+            userService.changeAvatar(user, image);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "redirect:/view-profile/{username}";
+        }
+        return "redirect:/changeAvatar";
     }
 
     @GetMapping(value = {"/403"})

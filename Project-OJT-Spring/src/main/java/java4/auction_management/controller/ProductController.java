@@ -76,9 +76,14 @@ public class ProductController {
 
     @PostMapping("/create")
     public String createProduct(@Valid @ModelAttribute Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                                @RequestParam("file") MultipartFile[] files, HttpServletRequest httpRequest) throws IOException {
-
-
+                                @RequestParam("file") MultipartFile[] files, HttpServletRequest httpRequest, Model model) throws IOException {
+        if (files.length > 5) {
+            model.addAttribute("message", "Not Over 5 images");
+            return "/products/create-product";
+        }
+        if (bindingResult.hasErrors()) {
+            return "/products/create-product";
+        }
         try {
             LocalDateTime datePost = LocalDateTime.now();
 //            String uname = product.getAuction().getUser().getAccount().getUsername();
@@ -98,7 +103,7 @@ public class ProductController {
 
         } catch (IOException e) {
             e.printStackTrace();
-            return "redirect:/index";
+            return "redirect:/create";
         }
 
         redirectAttributes.addFlashAttribute("message", "Edit successful");
@@ -140,8 +145,8 @@ public class ProductController {
 
     @GetMapping("/auction/{username}")
     public String loadAuction(@PathVariable("username") String username, Model model){
-//        List<Product> products = productService.findProductsByUsername(username);
-//        model.addAttribute("products", products);
+        List<Product> products = productService.findProductsByUsername(username);
+        model.addAttribute("products", products);
 
         return "user/auction";
     }

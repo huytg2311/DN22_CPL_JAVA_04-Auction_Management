@@ -12,6 +12,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
@@ -25,9 +29,10 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productId;
 
-    @NotEmpty(message = "Name not empty")
+    @NotBlank(message = "product name not empty")
     private String productName;
 
+    @NotBlank(message = "description not empty")
     private String description;
 
     @Column(length = 1000)
@@ -41,6 +46,7 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @Valid
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "auction_id")
     private Auction auction;

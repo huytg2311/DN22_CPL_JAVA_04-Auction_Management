@@ -28,7 +28,11 @@ public class Bill {
 
     private String paymentMethod;
 
-    private String shippingMethod;
+    private EShipping shippingMethod;
+
+    @Column(columnDefinition = "default 'WAITING'")
+    @Enumerated(EnumType.STRING)
+    private ETransport eTransport = ETransport.WAITING;
 
     @JoinColumn(name = "userId")
     @ManyToOne(fetch = FetchType.EAGER)
