@@ -24,7 +24,7 @@ public class CartDetail {
     private Cart cart;
 
     @JoinColumn(name = "productId")
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     private Product product;
 
 }

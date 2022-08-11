@@ -56,10 +56,6 @@ public class ProductService implements IProductService {
         }
     }
 
-    @Override
-    public List<Product> findProductsByUsername(String username) {
-        return iProductRepository.getProductsByUsername(username);
-    }
 
     @Override
     public List<Auction> findWaitingAuctions() {

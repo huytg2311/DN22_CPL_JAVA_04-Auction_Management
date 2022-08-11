@@ -21,7 +21,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
-    //push --
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productId;

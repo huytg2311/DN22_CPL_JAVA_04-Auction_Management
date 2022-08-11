@@ -36,7 +36,7 @@ public class Auction {
 
     private boolean isFinish;
 
-    @OneToMany(mappedBy = "auction", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "auction", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Bid> bidList;
 
     @JoinColumn(name = "userId")

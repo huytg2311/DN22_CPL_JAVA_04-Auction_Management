@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
+import java.util.List;
+
 @Service
 public interface IAuctionService extends IService<Auction, Long>{
 
@@ -16,9 +19,12 @@ public interface IAuctionService extends IService<Auction, Long>{
 
     Page<Auction> findAllAuction(Pageable pageable);
 
+    List<Auction> findAuctionsByUsername(String username);
+
+    Page<Auction> getAllAuctionByStatus(Pageable pageable);
+
+
+    Auction getAuctionByAuctionID(Long id);
     Auction getAuctionByAuctionID(Long id);
 
-    List<Auction> getAuctionsByUserId(Long id);
-
-    public Page<Auction> getAllAuctionByStatus(Pageable pageable);
 }

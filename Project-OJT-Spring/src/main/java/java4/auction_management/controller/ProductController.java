@@ -78,6 +78,7 @@ public class ProductController {
     public String createProduct(@Valid @ModelAttribute Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes,
                                 @RequestParam("file") MultipartFile[] files, HttpServletRequest httpRequest) throws IOException {
 
+
         try {
             LocalDateTime datePost = LocalDateTime.now();
 //            String uname = product.getAuction().getUser().getAccount().getUsername();
@@ -97,7 +98,7 @@ public class ProductController {
 
         } catch (IOException e) {
             e.printStackTrace();
-            return "redirect:/create";
+            return "redirect:/index";
         }
 
         redirectAttributes.addFlashAttribute("message", "Edit successful");
@@ -159,13 +160,14 @@ public class ProductController {
 
     @PostMapping("/edit")
     public String editProduct(@Valid @ModelAttribute Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                                @RequestParam("file") MultipartFile[] files, HttpServletRequest request) throws IOException {
+                                @RequestParam("file") MultipartFile[] files) throws IOException {
+        String username = product.getAuction().getUser().getAccount().getUsername();
 
         for (MultipartFile m: files
              ) {
             if (m.isEmpty()) {
                 productService.save(product);
-                return "redirect:/user/auction/" + request.getUserPrincipal().getName();
+                return "redirect:/products/auction/" + username;
             }
         }
         try {
@@ -186,7 +188,7 @@ public class ProductController {
         }
 
         redirectAttributes.addFlashAttribute("message", "Edit successful");
-        return "redirect:/user/auction/" + request.getUserPrincipal().getName();
+        return "redirect:/products/auction/" + username;
     }
 
 }

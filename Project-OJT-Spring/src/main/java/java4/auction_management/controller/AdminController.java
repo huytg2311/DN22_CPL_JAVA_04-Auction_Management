@@ -3,15 +3,14 @@ package java4.auction_management.controller;
 import com.cloudinary.utils.ObjectUtils;
 import java4.auction_management.config.CloudinaryConfig;
 import java4.auction_management.entity.auction.Auction;
+import java4.auction_management.entity.cart.CartDetail;
 import java4.auction_management.entity.category.Category;
 import java4.auction_management.entity.product.Product;
 import java4.auction_management.entity.user.Account;
 import java4.auction_management.entity.user.User;
 import java4.auction_management.service.*;
-import java4.auction_management.service.impl.AccountService;
-import java4.auction_management.service.impl.CategoryService;
-import java4.auction_management.service.impl.ProductService;
-import java4.auction_management.service.impl.UserService;
+import java4.auction_management.service.impl.*;
+import java4.auction_management.timerTask.AuctionFinishedTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,6 +58,9 @@ public class AdminController {
 
     @Autowired
     IAuctionService auctionService;
+
+    @Autowired
+    AuctionFinishedTask auctionFinishedTask;
 
 
 
@@ -184,35 +186,21 @@ public class AdminController {
     @PostMapping("/editAuctionStatus")
     public String changeStatusAuction(@RequestBody Auction auctionJson) {
         Auction auction = auctionService.getAuctionByAuctionID(auctionJson.getAuctionID());
-
         auction.setAuctionStatus(auctionJson.getAuctionStatus());
 
         LocalDateTime now = LocalDateTime.now();
-        LocalDateTime finishTime = now.plusHours(Long.parseLong(auction.getAuctionTime()+""));
+        LocalDateTime finishTime = now.plusMinutes(Long.parseLong(auction.getAuctionTime()+""));
         auction.setFinishTime(finishTime);
-
-        Timer timer = new Timer();
-        TimerTask finishAuctionTask = new TimerTask() {
-            @Override
-            public void run() {
-                Auction auction = auctionService.getAuctionByAuctionID(auctionJson.getAuctionID());
-                if (auction.getBidList().isEmpty()){
-                    LocalDateTime now = LocalDateTime.now();
-                    LocalDateTime finishTime = now.plusHours(Long.parseLong(auction.getAuctionTime()+""));
-                    auction.setFinishTime(finishTime);
-
-                    Timer timer = new Timer();
-
-                }
-            }
-        };
-
-        timer.schedule(finishAuctionTask, ChronoUnit.SECONDS.between(now, finishTime));
-
         auctionService.save(auction);
+
+        auctionFinishedTask.setAuctionId(auction.getAuctionID());
+        Timer timer = new Timer();
+        timer.schedule(auctionFinishedTask, ChronoUnit.MILLIS.between(now,finishTime));
 
         return "redirect:/admin/waitingAuctions" ;
     }
+
+
 
 }
 

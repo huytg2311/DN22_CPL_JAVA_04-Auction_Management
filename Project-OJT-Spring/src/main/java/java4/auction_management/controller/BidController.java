@@ -27,7 +27,7 @@ public class BidController {
     UserService userService;
 
     @Autowired
-    AuctionService auctionService;
+    IAuctionService iAuctionService;
 
     @Autowired
     CartService cartService;
@@ -44,7 +44,7 @@ public class BidController {
             produces = MediaType.APPLICATION_JSON_VALUE, consumes={"application/json"})
     @ResponseBody
     public void createBid(@RequestBody Bid bid) {
-        Auction auction =  auctionService.getById(bid.getAuction().getAuctionID()).orElseThrow(() -> {
+        Auction auction =  iAuctionService.getById(bid.getAuction().getAuctionID()).orElseThrow(() -> {
             throw new IllegalStateException("No auction id found");
         });
         User user = userService.getUserByUsername(bid.getUser().getAccount().getUsername());

@@ -9,6 +9,7 @@ import java4.auction_management.entity.user.User;
 import java4.auction_management.service.IAccountService;
 import java4.auction_management.service.IBidService;
 import java4.auction_management.service.ICategoryService;
+import java4.auction_management.service.IProductService;
 import java4.auction_management.service.IUserService;
 import java4.auction_management.service.impl.AuctionService;
 import java4.auction_management.service.impl.CategoryService;
@@ -22,7 +23,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
@@ -53,9 +53,6 @@ public class UserController {
 
     @Autowired
     CategoryService categoryService;
-
-    @Autowired
-    AuctionService auctionService;
 
     @Autowired
     IBidService iBidService;

@@ -10,8 +10,7 @@ import java.util.Optional;
 
 public interface  IProductRepository extends JpaRepository<Product, Long> {
 
-    @Query(value = "select a from Auction a where a.user.account.username = ?1")
-    List<Product> getProductsByUsername(String username);
+
 
     @Override
     Optional<Product> findById(Long productId);
