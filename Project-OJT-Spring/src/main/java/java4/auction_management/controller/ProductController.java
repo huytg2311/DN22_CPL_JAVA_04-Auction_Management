@@ -64,11 +64,11 @@ public class ProductController {
 
     @PostMapping("/create")
     public String createProduct(@Valid @ModelAttribute Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                                @RequestParam("file") MultipartFile[] files) throws IOException {
+                                @RequestParam("file") MultipartFile[] files, HttpServletRequest httpServletRequest) throws IOException {
 
         try {
             LocalDateTime datePost = LocalDateTime.now();
-            User user = userService.getUserByUsername(httpRequest.getUserPrincipal().getName());
+            User user = userService.getUserByUsername(httpServletRequest.getUserPrincipal().getName());
             product.getAuction().setUser(user);
             product.setDatePost(datePost);
             StringBuilder listImage = new StringBuilder();
@@ -88,21 +88,10 @@ public class ProductController {
         }
 
         redirectAttributes.addFlashAttribute("message", "Edit successful");
-        return "redirect:/index";
+        return "redirect:/";
     }
 
-    @GetMapping("/load/{id}")
-    public String load(@PathVariable("id") Auction auction, Model model) {
-        List<Bid> bidList = iBidService.listBidSort(auction.getAuctionID());
-        model.addAttribute("bids", bidList);
-//        auction.setBidList(bidList);
-        model.addAttribute("auction", auction);
 
-        String[] listImages = auction.getProduct().getListImage().split(" ");
-        model.addAttribute("listImages", listImages);
-        return "products/post";
-
-    }
 
 
 

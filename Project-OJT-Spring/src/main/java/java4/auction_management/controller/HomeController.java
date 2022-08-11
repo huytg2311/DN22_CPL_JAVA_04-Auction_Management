@@ -11,6 +11,7 @@ import java4.auction_management.service.IAccountService;
 import java4.auction_management.service.IAuctionService;
 import java4.auction_management.service.IUserService;
 import java4.auction_management.service.impl.AccountService;
+import java4.auction_management.service.impl.AuctionService;
 import java4.auction_management.service.impl.ProductService;
 import java4.auction_management.validate.AccountValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,11 +64,7 @@ public class HomeController {
 
     @GetMapping(value = {"/","/welcome"})
     public String welcomePage(Model model,@PageableDefault(size = 8) Pageable pageable) {
-        Page<Auction> auctions = auctionService.findAllAuction(pageable);
-        for (Auction ac: auctions
-             ) {
-            ac.getProduct().setListImage(ac.getProduct().getListImage().split(" ")[0]);
-        }
+        Page<Auction> auctions = auctionService.getAllAuctionByStatus(pageable);
         model.addAttribute("auctions", auctions);
         return "index";
     }

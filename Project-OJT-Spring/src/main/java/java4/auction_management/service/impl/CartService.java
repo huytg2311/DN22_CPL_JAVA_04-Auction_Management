@@ -1,6 +1,7 @@
 package java4.auction_management.service.impl;
 
 import java4.auction_management.entity.cart.Cart;
+import java4.auction_management.entity.user.User;
 import java4.auction_management.repository.ICartRepository;
 import java4.auction_management.service.ICartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +39,9 @@ public class CartService implements ICartService {
     @Override
     public Cart getByUserID(Long id) {
         return iCartRepository.getById(id);
+    }
+
+    public Cart findCartByUser (User user){
+        return iCartRepository.findCartByUser(user);
     }
 }

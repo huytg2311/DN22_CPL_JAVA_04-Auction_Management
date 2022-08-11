@@ -14,7 +14,7 @@
 	<!-- Google Web Fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 
 	<!-- Icon Font Stylesheet -->
@@ -35,8 +35,6 @@
 	<!-- Template Stylesheet -->
 	<link th:href="@{css/style.css}" rel="stylesheet">
 
-	<link th:href="@{/lib/productDetail/productDetail.css}" rel="stylesheet">
-	<link th:href="@{/lib/productDetail/productloadimage.css}" rel="stylesheet">
 
 </head>
 
@@ -172,12 +170,12 @@
 			<div id="list-auction" class="row m-0">
 				<div class="mt-4 col-lg-3  col-md-4 col-sm-6 cursor-p" th:each="auction : ${auctions}"
 					 style="--bs-gutter-y: 30px">
-					<a th:href="'/products/load/' + ${auction.auctionID}">
+					<a th:href="'/auctions/detail-auction/' + ${auction.auctionID}">
 						<div class=" wow fadeIn" data-wow-delay="0s" data-wow-duration="1.3s">
 							<div class="product-item p-2 d-flex flex-column bg-white rounded-0 overflow-hidden h-100">
 								<div class="ratio ratio-1x1">
 									<img class="img-fluid of-cover op-center"
-										 th:src="@{${auction.product.listImage}}" alt="">
+										 th:src="@{${#strings.arraySplit(auction.product.listImage, ' ')[0]}}" alt="">
 									<div class="product-overlay">
 										<div id="get-id-auction"
 											 class="btn btn-lg-square btn-outline-primary rounded-circle">
@@ -201,9 +199,9 @@
 											th:text="${auction.product.productName}"></h6>
 									</div>
 									<th:block
-											th:with="price = (${auction.bidList.isEmpty()} ? ${auction.reservePrice} : ${auction.bidList[#lists.size(auction.bidList)-1].bidPrice})">
+											th:with="currentBid = (${auction.bidList.isEmpty()} ? ${auction.reservePrice} : ${auction.bidList[#lists.size(auction.bidList)-1].bidPrice})">
 										<span class="fs-5 lh-1 text-primary"
-											  th:text="'$'+${#numbers.formatDecimal(price,1,'COMMA',2,'POINT')}"></span>
+											  th:text="'$'+${#numbers.formatDecimal(currentBid,1,'COMMA',2,'POINT')}"></span>
 									</th:block>
 
 

@@ -90,13 +90,7 @@
     });
 
     //set link for rows of table
-    let rows = $('.js-table-link tbody tr');
-    for (const row of rows) {
-        $(row, 'td').click(function (){
-            console.log('a')
-            window.location=$(row).data('href');
-        })
-    }
+
 
     //line-clamp-2
     // let clampObject = $('.js-line-clamp-2')
