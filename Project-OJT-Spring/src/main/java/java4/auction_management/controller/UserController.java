@@ -3,6 +3,7 @@ package java4.auction_management.controller;
 import com.cloudinary.utils.ObjectUtils;
 import java4.auction_management.config.CloudinaryConfig;
 import java4.auction_management.entity.product.Product;
+import java4.auction_management.entity.user.Account;
 import java4.auction_management.entity.user.User;
 import java4.auction_management.service.IAccountService;
 import java4.auction_management.service.IBidService;
@@ -69,11 +70,11 @@ public class UserController {
     @PostMapping("/edit")
     public String editUser(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes,
                            @RequestParam("file") MultipartFile[] files) throws IOException {
+
         if (bindingResult.hasErrors()) {
             return "admin/edit-user";
         }
-        Optional<User> currentUser = userService.getById(user.getId());
-        System.out.println(currentUser);
+
 
 //        if (files.isEmpty()) {
 //            userService.save(user);

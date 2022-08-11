@@ -28,7 +28,7 @@ public class CartService implements ICartService {
 
     @Override
     public Cart save(Cart entity) {
-        return null;
+        return iCartRepository.save(entity);
     }
 
     @Override
