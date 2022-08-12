@@ -1,6 +1,7 @@
 package java4.auction_management.entity.bill;
 
 import java4.auction_management.entity.cart.Cart;
+import java4.auction_management.entity.cart.CartDetail;
 import java4.auction_management.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +10,7 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Entity
@@ -24,19 +26,18 @@ public class Bill {
 
     private LocalDateTime timeBill;
 
+    @NotBlank(message = "Delivery Address is required")
     private String deliveryAddress;
 
-    private String paymentMethod;
-
+    @Enumerated(EnumType.STRING)
     private EShipping shippingMethod;
 
     @Column(columnDefinition = "default 'WAITING'")
     @Enumerated(EnumType.STRING)
     private ETransport eTransport = ETransport.WAITING;
 
-    @JoinColumn(name = "userId")
-    @ManyToOne(fetch = FetchType.EAGER)
-    private User user;
+    @OneToOne(cascade = CascadeType.ALL)
+    private CartDetail cartDetail;
 
 
 }

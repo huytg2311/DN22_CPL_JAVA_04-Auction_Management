@@ -143,13 +143,13 @@ public class ProductController {
 //    }
 
 
-    @GetMapping("/auction/{username}")
-    public String loadAuction(@PathVariable("username") String username, Model model){
-        List<Product> products = productService.findProductsByUsername(username);
-        model.addAttribute("products", products);
-
-        return "user/auction";
-    }
+//    @GetMapping("/auction/{username}")
+//    public String loadAuction(@PathVariable("username") String username, Model model){
+//        List<Product> products = productService.findProductsByUsername(username);
+//        model.addAttribute("products", products);
+//
+//        return "user/auction";
+//    }
 
     @GetMapping(value = "/productDetail")
     public String productDetail(){ return "product-detail";}

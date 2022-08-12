@@ -14,4 +14,6 @@ public interface ICartDetailRepository extends JpaRepository<CartDetail, Long> {
 
     @Query(value = "select * from cart_detail as d join cart as c on c.cart_id = d.cart_id where c.user_id = ?1", nativeQuery = true)
     List<CartDetail> getAllCartByUserId(Long id);
+
+    CartDetail getCartDetailByCartDetailID(Long id);
 }

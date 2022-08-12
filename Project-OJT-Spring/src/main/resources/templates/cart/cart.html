@@ -44,6 +44,7 @@
             <!-- Shopping cart table -->
             <div class="table-responsive">
                 <table class="table" th:each="cart : ${carts}">
+
                     <thead>
                     <tr>
                         <th scope="col" class="border-0 bg-light">
@@ -72,7 +73,8 @@
                         </th>
                         <td class="border-0 align-middle"><strong th:text="'$' + ${cd.bid.bidPrice}"></strong></td>
                         <td class="border-0 align-middle"><strong th:text="${cd.bid.bidTime}"></strong></td>
-                        <td class="border-0 align-middle"><input type="submit" value="Confirm transport" class="btn px-5 btn-primary rounded-0 p-2">
+                        <td class="border-0 align-middle"><a type="submit" class="btn px-5 btn-primary rounded-0 p-2"
+                                                             th:href="@{/bill/billConfirm/{cartDetailId}(cartDetailId = ${cd.cartDetailID})}" >Confirm transport</a>
                         </td>
                     </tr>
 

@@ -118,7 +118,7 @@
                         </div>
 
                         <div>
-                            <input style="margin-top: 30px" type="button" th:href="'/products/auction/'+ ${#request.userPrincipal.name}" value="Back" class="btn px-5 btn-secondary rounded-0 p-2">
+                            <a style="margin-top: 30px" type="button" th:href="@{/auctions/my-auctions}"  class="btn px-5 btn-secondary rounded-0 p-2">Back</a>
                             <input style="margin-top: 30px; margin-left: 40px" type="submit" value="Upload" class="btn px-5 btn-primary rounded-0 p-2" id="upload-product">
 
                         </div>
@@ -159,7 +159,7 @@
         let productUpload = document.getElementById('upload-product')
         // Check if any file is selected.
         if (fi.files.length > 0) {
-            for (const i = 0; i <= fi.files.length - 1; i++) {
+            for (let i = 0; i <= fi.files.length - 1; i++) {
                console.log(fi.files.length);
                 const fsize = fi.files.item(i).size;
                 const file = Math.round((fsize / 1024));
