@@ -22,7 +22,6 @@ public class Auction {
     private Long auctionID;
 
     @Min(value = 1, message = "time must over 0 hour")
-    @Max(value = 5, message = "time not over 5 hour")
     private int auctionTime;
 
     private LocalDateTime finishTime;
@@ -34,12 +33,10 @@ public class Auction {
     @OneToOne(mappedBy = "auction")
     private Product product;
 
-    @Min(value = 5, message = "Price must over 4$")
-    @Max(value = 99999, message = "Price not over 99999$")
+    @Min(value = 0, message = "Price must over 0$")
     private double reservePrice;
 
-    @Min(value = 2, message = "Step price must over 1")
-    @Max(value = 10, message = "Step price not over 10")
+    @Min(value = 1, message = "Step price must over 1")
     private double stepPrice;
 
     private boolean isFinish;

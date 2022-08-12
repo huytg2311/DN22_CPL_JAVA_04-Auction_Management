@@ -47,7 +47,6 @@
 <body>
 <div class="main-wrapper bg-light">
     <div class="sticky-top" th:insert="header :: my-header"></div>
-    <div class="header-spacer"></div>
 
     <div class="main bg-light">
         <main class="content px-lg-4 pt-lg-4 pb-lg-3 py-3 p-0">
@@ -331,12 +330,16 @@
     <div id="winnerModal" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content rounded-0">
-                <div class="modal-body d-flex flex-column align-items-center justify-content-center">
-                    <i class="bi bi-x-octagon-fill display-1" style="color: #69BE55"></i>
-                    <p>Congrats <span id="winnerModal-username" class="fw-bold"></span>! You won "<span id="winnerModal-productName"></span>" with the bid price <span id="winnerModal-bid"></span>!</p>
+                <div class="modal-body d-flex flex-column align-items-center justify-content-center px-4 btn-warning2">
+                    <i class="bi bi-trophy-fill display-1 text-light"></i>
+                    <p class="text-center">Congrats <span id="winnerModal-username" class="fw-bold"></span>!</p>
+                    <p class="text-center">You won "<span id="winnerModal-productName" class="fw-bold"></span>" with the bid price <span id="winnerModal-bid" class="fw-bold"></span>!</p>
+                    <div class="w-50 ratio ratio-1x1 my-3 border-secondary border border-3">
+                        <img class="op-center of-cover" th:src="${#strings.arraySplit(auction.product.listImage,' ')[0]}" alt="">
+                    </div>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <a th:href="@{/login}" class="btn btn-primary rounded-0">See it in your Won Items</a>
+                    <a th:href="@{/login}" class="btn btn-warning2 rounded-0">See it in your Won Items</a>
                     <button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -418,7 +421,7 @@
 
     function finishAuctionTask() {
         $('#timer').html('Please wait...')
-        setTimeout(function () {
+
             $.ajax({
                 headers: {
                     'Accept': 'application/json',
@@ -434,16 +437,13 @@
                         $('#loserModal').modal('show')
                     }
                     if (result["auctionResult"]==="winner"){
-                        let cartDetail = getWinnerDetail();
-                        $('#winnerModal-username').html(cartDetail["bid"]["user"]["account"]["username"])
-                        $('#winnerModal-productName').html(cartDetail["product"]["productName"])
-                        $('#winnerModal-bid').html(formatter.format(cartDetail["bid"]["bidPrice"]))
-                        $('#visitorModal').modal('show')
+                        getWinnerDetail();
+
+                        $('#winnerModal').modal('show')
                     }
 
                 }
             })
-        }, 500)
     }
 
     function getWinnerDetail(){
@@ -455,11 +455,13 @@
             },
             type: "GET",
             url: "/auctions/get-winner-cartDetail/" + [[${auction.auctionID}]],
-            success: function (result) {
-                cartDetail = result
+            success: function (cartDetail) {
+                $('#winnerModal-bid').html(formatter.format(cartDetail["bid"]["bidPrice"]))
+                $('#winnerModal-username').html(cartDetail["bid"]["user"]["account"]["username"])
+                $('#winnerModal-productName').html(cartDetail["product"]["productName"])
             }
         })
-        return cartDetail;
+        return null;
     }
 
 </script>
@@ -510,7 +512,7 @@
                 'Content-Type': 'application/json'
             },
             type: "GET",
-            url: "/auctions/getWinBid/" + [[${auction.auctionID}]],
+            url: "/auctions/detail-auction/" + [[${auction.auctionID}]],
             success: function (result) {
                 $('#current-bid').replaceWith($(result).find('#current-bid'))
                 $('#current-winner').replaceWith($(result).find('#current-winner'))

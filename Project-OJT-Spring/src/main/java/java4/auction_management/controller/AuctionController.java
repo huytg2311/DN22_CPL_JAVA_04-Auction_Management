@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 @Controller
@@ -83,10 +84,10 @@ public class AuctionController {
 
             String winnerUsername = auction.getProduct().getCartDetail().getBid().getUser().getAccount().getUsername();
 
-            Iterable<Bid> bidList = auction.getBidList();
+            Iterator<Bid> bidList = auction.getBidList().iterator();
 
-            while (bidList.iterator().hasNext()) {
-                Bid bid = bidList.iterator().next();
+            while (bidList.hasNext()) {
+                Bid bid = bidList.next();
                 String usernameOfBid = bid.getUser().getAccount().getUsername();
                 String usernameCurrent = httpServletRequest.getUserPrincipal().getName();
                 if (usernameCurrent.equals(usernameOfBid)) {
