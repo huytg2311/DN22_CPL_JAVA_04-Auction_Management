@@ -61,19 +61,18 @@
 	<div th:insert="header :: my-header"></div>
 
 	<!-- Carousel Start -->
-	<div class="container-fluid p-0 mb-lg-4 " data-wow-delay="0.1s">
+	<div class="container-fluid p-0 mb-lg-4 ">
 		<div class="owl-carousel header-carousel position-relative">
 			<div class="item position-relative ratio ratio-1x4" style="min-height: auto">
 				<img class="op-center of-cover" th:src="@{/img/SmartAuction_banner-03.png}" alt="">
-				<div class="owl-carousel-inner">
+				<div class="owl-carousel-inner " >
 					<div class="container">
-						<div class="row justify-content-end align-items-center pe-5">
+						<div class="row justify-content-end align-items-center pe-5 wow slideInDown" data-wow-delay="0">
 							<div class="col-lg-6 d-flex flex-column justify-content-center align-items-center text-end">
 								<div class="">
-
 									<span class="text-primary bg-white text-uppercase fw-bold py-1 px-2">The Best Auction website</span>
 								</div>
-								<h5 class="display-5 text-light animated slideInDown lh-1 pt-3">Auction With
+								<h5 class="display-5 text-light animated lh-1 pt-3">Auction With
 									Passion</h5>
 								<p class="text-light fs-5 ">Easy to create your auctions - Easy to place your bids</p>
 							</div>

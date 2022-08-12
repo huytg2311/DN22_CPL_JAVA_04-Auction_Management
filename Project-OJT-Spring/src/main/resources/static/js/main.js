@@ -7,13 +7,22 @@
             if ($('#spinner').length > 0) {
                 $('#spinner').removeClass('show');
             }
-        }, 1);
+        }, 100);
     };
     spinner();
     
     
     // Initiate the wowjs
-    new WOW().init();
+    var wow = new WOW(
+        {
+            boxClass:     'wow',      // default
+            animateClass: 'animated', // default
+            offset:       0,          // default
+            mobile:       false,       // default
+            live:         true        // default
+        }
+    )
+    wow.init();
 
 
     // Fixed Navbar
@@ -36,7 +45,8 @@
         }
     });
     $('.back-to-top').click(function () {
-        $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
+        $('html, body').animate({scrollTop: 0}, 1500, 'easeIn');
+        $('.back-to-top').fadeOut('slow');
         return false;
     });
 

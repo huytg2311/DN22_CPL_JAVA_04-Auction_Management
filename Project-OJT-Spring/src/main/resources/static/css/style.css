@@ -527,7 +527,9 @@ h6,
     font-weight: bold;
 
 }
-
+.minw-500px {
+    min-width: 500px;
+}
 .mw-1200px {
     max-width: 1200px !important;
 }
