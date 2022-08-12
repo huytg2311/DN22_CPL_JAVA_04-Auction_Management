@@ -33,4 +33,13 @@ public class CartDetail {
     @OneToOne
     @NotFound(action= NotFoundAction.IGNORE)
     private Bid bid;
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"cartDetailID\":" + cartDetailID +
+                ", \"product\":" + product.toString() +
+                ", \"bid\":" + bid.toString() +
+                '}';
+    }
 }

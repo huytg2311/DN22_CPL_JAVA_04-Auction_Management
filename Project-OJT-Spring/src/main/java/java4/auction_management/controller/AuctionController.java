@@ -3,10 +3,10 @@ package java4.auction_management.controller;
 import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.bid.Bid;
 import java4.auction_management.service.impl.AuctionService;
+import java4.auction_management.service.impl.CartDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +21,9 @@ import java.util.List;
 public class AuctionController {
     @Autowired
     AuctionService auctionService;
+
+    @Autowired
+    CartDetailService cartDetailService;
 
     @Autowired
     SimpMessagingTemplate simpMessagingTemplate;
@@ -40,7 +43,7 @@ public class AuctionController {
             "id") Long auctionId,
                        Model model) {
         Auction auction = auctionService.getById(auctionId).orElseThrow(() -> {
-                    throw new IllegalStateException("No auction found!");
+            throw new IllegalStateException("No auction found!");
         });
 
         //sort bidList of the auction by bid price
@@ -51,19 +54,54 @@ public class AuctionController {
                 return Double.compare(o2.getBidPrice(), o1.getBidPrice());
             }
         });
-        if (bidList.size() > 5) bidList = bidList.subList(0,5);
+        if (bidList.size() > 5) bidList = bidList.subList(0, 5);
         auction.setBidList(bidList);
 
         model.addAttribute("auction", auction);
         return "products/post";
     }
 
-    @GetMapping("/get-win-bid/{auctionId}")
-    public Bid getWinBidByAuctionId(@RequestParam Long auctionId){
+    @GetMapping("/get-winner-cartDetail/{auctionId}")
+    @ResponseBody
+    public String getWinBidByAuctionId(@PathVariable("auctionId") Long auctionId) {
         Auction auction = auctionService.getById(auctionId).orElseThrow(() -> {
-            throw  new IllegalStateException("No auction was found by Id: " + auctionId);
+            throw new IllegalStateException("No auction was found by Id: " + auctionId);
         });
-        auction.getProduct().getCartDetail().;
+        System.out.println(auction.getProduct().getCartDetail().toString());
+        return auction.getProduct().getCartDetail().toString();
+    }
+
+    @GetMapping("/auction-result/{auctionId}")
+    @ResponseBody
+    public String getAuctionResult(@PathVariable Long auctionId, HttpServletRequest httpServletRequest) {
+        String result = "{\"auctionResult\": \"visitor\"}";
+
+        if (httpServletRequest.getUserPrincipal() != null) {
+            Auction auction = auctionService.getById(auctionId).orElseThrow(() -> {
+                throw new IllegalStateException("No auction was found by Id: " + auctionId);
+            });
+
+            String winnerUsername = auction.getProduct().getCartDetail().getBid().getUser().getAccount().getUsername();
+
+            Iterable<Bid> bidList = auction.getBidList();
+
+            while (bidList.iterator().hasNext()) {
+                Bid bid = bidList.iterator().next();
+                String usernameOfBid = bid.getUser().getAccount().getUsername();
+                String usernameCurrent = httpServletRequest.getUserPrincipal().getName();
+                if (usernameCurrent.equals(usernameOfBid)) {
+                    if (usernameCurrent.equals(winnerUsername)){
+                        result = result.replace("visitor","winner");
+                    } else{
+                        result = result.replace("visitor", "loser");
+                    }
+                    break;
+                }
+            }
+        }
+
+        return result;
+
     }
 
     @MessageMapping("/auctions/new-bid-alert/{auctionId}")

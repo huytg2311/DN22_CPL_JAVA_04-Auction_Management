@@ -204,7 +204,8 @@
                             </div>
 
                         </div>
-                        <div id="bidding-content" class="col-lg-5 m-0 ps-lg-4 pt-5 pt-lg-0 p-0  " th:style="${auction.bidList.isEmpty()} ? 'display: none' : ''">
+                        <div id="bidding-content" class="col-lg-5 m-0 ps-lg-4 pt-5 pt-lg-0 p-0  "
+                             th:style="${auction.bidList.isEmpty()} ? 'display: none' : ''">
                             <div class="table-responsive w-100">
                                 <table class="table minw-500px ms-0 fs-6 border border-primary wow ">
                                     <thead class="bg-primary text-light">
@@ -246,16 +247,16 @@
     </div>
 
     <!--    modal bid-->
-    <div id="loginErrorModal" class="modal fade" tabindex="-1" role="dialog" >
+    <div id="loginErrorModal" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content rounded-0">
                 <div class="modal-body d-flex flex-column align-items-center justify-content-center">
                     <i class="bi bi-exclamation-circle-fill display-1" style="color: #D51E40"></i>
-                    <p >Login to place your bids!</p>
+                    <p>Login to place your bids!</p>
                 </div>
                 <div class="modal-footer justify-content-center">
                     <a th:href="@{/login}" class="btn btn-primary rounded-0">Login now</a>
-                    <button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal" >Close</button>
+                    <button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -268,7 +269,7 @@
                     <p id="error-modal-message" class=" px-4 text-center"></p>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal" >Close</button>
+                    <button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -277,7 +278,8 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content rounded-0">
                 <div class="modal-body d-flex flex-column align-items-center justify-content-center">
-                    <p id="confirm-modal-message">Place a bid price <span class="fw-bold" id="price-confirm"></span> for this product?</p>
+                    <p id="confirm-modal-message">Place a bid price <span class="fw-bold" id="price-confirm"></span> for
+                        this product?</p>
                 </div>
                 <div class="modal-footer justify-content-center">
                     <button id="confirmBidBtn" type="button" class="btn btn-primary rounded-0">Place bid</button>
@@ -294,6 +296,51 @@
                     <p>Place bid successfully!</p>
                 </div>
             </div>
+        </div>
+    </div>
+    <div id="loserModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content rounded-0">
+                <div class="modal-body d-flex flex-column align-items-center justify-content-center">
+                    <i class="bi bi-x-octagon-fill display-1" style="color: #D51E40"></i>
+                    <p>You lost in this auction!</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <a th:href="@{/login}" class="btn btn-primary rounded-0">Go to Home page</a>
+                    <button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="visitorModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content rounded-0">
+                <div class="modal-body d-flex flex-column align-items-center justify-content-center">
+                    <i class="bi bi-hourglass-bottom display-1" style="color: #D51E40"></i>
+                    <p>Auction finished!</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <a th:href="@{/}" class="btn btn-primary rounded-0">Go to Home page</a>
+                    <button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="winnerModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content rounded-0">
+                <div class="modal-body d-flex flex-column align-items-center justify-content-center">
+                    <i class="bi bi-x-octagon-fill display-1" style="color: #69BE55"></i>
+                    <p>Congrats <span id="winnerModal-username" class="fw-bold"></span>! You won "<span id="winnerModal-productName"></span>" with the bid price <span id="winnerModal-bid"></span>!</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <a th:href="@{/login}" class="btn btn-primary rounded-0">See it in your Won Items</a>
+                    <button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -338,6 +385,13 @@
 
 <!-- Timer -->
 <script>
+    var formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        maximumFractionDigits: 2,
+        minimumFractionDigits: 2,
+        minimumIntegerDigits: 1,
+    });
 
     let finishTime = new Date("[[${auction.finishTime}]]").getTime()
     let timer = setInterval(function () {
@@ -358,34 +412,64 @@
 
         if (timeLeft <= 0) {
             clearInterval(timer);
-            $('#timer').html('Please wait...')
+            finishAuctionTask()
+        }
+    }, 1000);
+
+    function finishAuctionTask() {
+        $('#timer').html('Please wait...')
+        setTimeout(function () {
             $.ajax({
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'HTML'
                 },
                 type: "GET",
-                url: "/auctions/detail-auction/" + [[${auction.auctionID}]],
-            })
-        }
-    }, 1000);
+                url: "/auctions/auction-result/" + [[${auction.auctionID}]],
+                success: function (result) {
+                    if (result["auctionResult"]==="visitor"){
+                        $('#visitorModal').modal('show')
+                    }
+                    if (result["auctionResult"]==="loser"){
+                        $('#loserModal').modal('show')
+                    }
+                    if (result["auctionResult"]==="winner"){
+                        let cartDetail = getWinnerDetail();
+                        $('#winnerModal-username').html(cartDetail["bid"]["user"]["account"]["username"])
+                        $('#winnerModal-productName').html(cartDetail["product"]["productName"])
+                        $('#winnerModal-bid').html(formatter.format(cartDetail["bid"]["bidPrice"]))
+                        $('#visitorModal').modal('show')
+                    }
 
+                }
+            })
+        }, 500)
+    }
+
+    function getWinnerDetail(){
+        let cartDetail
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'HTML'
+            },
+            type: "GET",
+            url: "/auctions/get-winner-cartDetail/" + [[${auction.auctionID}]],
+            success: function (result) {
+                cartDetail = result
+            }
+        })
+        return cartDetail;
+    }
 
 </script>
 
 <!-- button increment price-->
 <script type="text/javascript">
-    function incrementPrice(isPlus){
+    function incrementPrice(isPlus) {
         var bidPrice = parseFloat($('#price').html().replace('$', '').replaceAll(',', ''))
         var stepPrice = [[${auction.stepPrice}]]
-        var formatter = new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-            maximumFractionDigits: 2,
-            minimumFractionDigits: 2,
-            minimumIntegerDigits: 1,
-        });
-        if(isPlus){
+        if (isPlus) {
             bidPrice += stepPrice
             $('#subBidBtn').removeClass('bg-muted').removeClass('cursor-not-allowed');
             $('#price').html(formatter.format(bidPrice))
@@ -399,15 +483,15 @@
         return null;
     }
 
-    $('#plusBidBtn').click(function (){
+    $('#plusBidBtn').click(function () {
         incrementPrice(true)
-    } )
-    $('#subBidBtn').click(function (){
+    })
+    $('#subBidBtn').click(function () {
         incrementPrice(false)
-    } )
+    })
 
 </script>
-
+<!-- Socket -->
 <script type="text/javascript">
     var socket = new SockJS('/smart-auction-websocket');
     var stompClient = Stomp.over(socket);
@@ -430,8 +514,8 @@
             success: function (result) {
                 $('#current-bid').replaceWith($(result).find('#current-bid'))
                 $('#current-winner').replaceWith($(result).find('#current-winner'))
-                $('#current-bid').attr('class','wow tada');
-                $('#current-winner').attr('class','wow tada');
+                $('#current-bid').attr('class', 'wow tada');
+                $('#current-winner').attr('class', 'wow tada');
 
                 $('.table').replaceWith($(result).find('.table'))
                 $('#winnerRow').parent().parent().addClass('wow fadeInUp');
@@ -454,7 +538,7 @@
         }
     });
 
-    $('#confirmBidBtn').click(function (){
+    $('#confirmBidBtn').click(function () {
         $('#confirmBidModal').modal('hide')
         var auction = {auctionID: [[${auction.auctionID}]]}
         var user = {account: {username: "[[${#request.userPrincipal != null} ? ${#request.userPrincipal.name.toString()} : '' ]]"}};
@@ -491,8 +575,6 @@
         });
     })
 </script>
-
-
 
 
 <!-- button decrement price-->

@@ -136,12 +136,8 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", fullname='" + fullname + '\'' +
-                ", email='" + email + '\'' +
-                ", provider=" + provider +
-                ", account=" + account +
+        return "{" +
+                "\"account\":" + account.toString() +
                 '}';
     }
 }
