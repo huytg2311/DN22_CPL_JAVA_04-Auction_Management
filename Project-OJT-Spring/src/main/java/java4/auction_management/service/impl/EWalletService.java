@@ -39,4 +39,9 @@ public class EWalletService implements IEWalletService {
     public EWallet getEWalletByAccount_Username(String username) {
         return ieWalletRepository.getEWalletByAccount_Username(username);
     }
+
+    public void updateDeposit(EWallet eWallet, Double balance) {
+        eWallet.setBalance(balance);
+        ieWalletRepository.save(eWallet);
+    }
 }
