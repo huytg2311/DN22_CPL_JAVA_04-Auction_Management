@@ -54,7 +54,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     private EGender gender;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+//    @DateTimeBeforeCurrent
     private LocalDate dayOfBirth;
 
     //    @NotEmpty(message = "Address Not Empty")
@@ -62,7 +63,8 @@ public class User {
     private String address;
 
     //    @NotEmpty(message = "ID Card Not Empty")
-    @Pattern(regexp = "^[0-9]{9}$", message = "ID Card Invalid!")
+//    @Pattern(regexp = "^[0-9]{9}$", message = "ID Card Invalid!")
+//    @NotBlank(message = "Id Card required")
     private String idCard;
 
     @Column(length = 500)
@@ -75,9 +77,6 @@ public class User {
     @Valid
     @OneToOne(cascade = CascadeType.ALL)
     private Account account;
-
-    @Transient
-    private String retypePassword;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Bid> bidList;

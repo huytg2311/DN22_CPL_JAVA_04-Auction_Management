@@ -2,14 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="utf-8">
-	<title>Pay.Picker</title>
-	<meta content="width=device-width, initial-scale=1.0" name="viewport">
-	<meta content="" name="keywords">
-	<meta content="" name="description">
+    <meta charset="utf-8">
+    <title>Smart Auction</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
 
-	<!-- Favicon -->
-	<link href="https://cdn2.iconfinder.com/data/icons/content-design-production-1/66/36-512.png" rel="icon">
+    <!-- Favicon -->
+    <link th:href="@{/img/logo.svg}" rel="icon">
 
 	<!-- Google Web Fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,7 +35,6 @@
 	<!-- Template Stylesheet -->
 	<link th:href="@{css/style.css}" rel="stylesheet">
 
-
 </head>
 
 <body>
@@ -57,7 +56,7 @@
         }
     }
 </script>
-<div class="main-wrapper">
+<div class="main-wrapper sticky-top">
 	<div th:insert="header :: my-header"></div>
 
 	<!-- Carousel Start -->

@@ -2,6 +2,7 @@ package java4.auction_management.entity.bid;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java4.auction_management.entity.auction.Auction;
+import java4.auction_management.entity.cart.CartDetail;
 import java4.auction_management.entity.product.Product;
 import java4.auction_management.entity.user.User;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -37,5 +40,9 @@ public class Bid {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "auction_id")
     private Auction auction;
+
+    @OneToOne(mappedBy = "bid")
+    @NotFound(action= NotFoundAction.IGNORE)
+    private CartDetail cartDetail;
 
 }

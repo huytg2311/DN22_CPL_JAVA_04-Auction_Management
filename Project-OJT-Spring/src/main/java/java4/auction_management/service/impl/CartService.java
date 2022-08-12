@@ -6,11 +6,12 @@ import java4.auction_management.repository.ICartRepository;
 import java4.auction_management.service.ICartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+@Service
 public class CartService implements ICartService {
 
     @Autowired
@@ -28,7 +29,7 @@ public class CartService implements ICartService {
 
     @Override
     public Cart save(Cart entity) {
-        return null;
+        return iCartRepository.save(entity);
     }
 
     @Override
@@ -43,5 +44,10 @@ public class CartService implements ICartService {
 
     public Cart findCartByUser (User user){
         return iCartRepository.findCartByUser(user);
+    }
+
+    @Override
+    public List<Cart> getCartByUserId(Long id) {
+        return iCartRepository.getCartByUserId(id);
     }
 }

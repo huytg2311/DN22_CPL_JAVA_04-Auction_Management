@@ -204,19 +204,15 @@
 											<div class="row m-0">
 												<div class="form-group col-6 px-2 ">
 													<input type="password" th:field="*{account.password}"
-														   class="form-control rounded-0 p-2"
-														   placeholder="Password" required>
-													<p class="form-message" style="color: #D51E40"
-													   th:if="${#fields.hasErrors('account.password')}"
-													   th:errors="*{account.password}"></p>
+														   class="form-control rounded-0 p-2" id="password-signUp"
+														   placeholder="Password" >
 
 												</div>
 												<div class="form-group col-6 px-2 ">
-													<input type="password" th:field="*{retypePassword}"
+													<input type="password" id="password1" name="confirm"
 														   class="form-control rounded-0 p-2"
-														   placeholder="Confirm password" required>
-													<p class="form-message" style="color: #D51E40"
-													   th:if="${#fields.hasErrors('retypePassword')}" th:errors="*{retypePassword}"></p>
+														   placeholder="Confirm password" onchange="checkPasswordMatch(this)" >
+													<p id="message-pass" class="form-message" style="color: #D51E40"></p>
 
 												</div>
 											</div>
@@ -319,6 +315,18 @@
 
 </script>
 
+<script>
+	function checkPasswordMatch(fieldConfirmPassword) {
+		var message = document.getElementById("message-pass")
+		if (fieldConfirmPassword.value === $("#password-signUp").val()) {
+			message.innerText =''
+
+		} else {
+			console.log("==")
+			message.innerText = 'Password do not match !'
+		}
+	}
+</script>
 
 <!-- Template Javascript -->
 <script th:src="@{js/main.js}"></script>

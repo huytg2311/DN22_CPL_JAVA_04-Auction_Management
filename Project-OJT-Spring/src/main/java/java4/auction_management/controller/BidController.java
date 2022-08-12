@@ -1,7 +1,5 @@
 package java4.auction_management.controller;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.bid.Bid;
 import java4.auction_management.entity.cart.Cart;
@@ -13,7 +11,6 @@ import java4.auction_management.service.impl.ProductService;
 import java4.auction_management.validate.BidValidator;
 import org.cloudinary.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +27,6 @@ public class BidController {
 
     @Autowired
     UserService userService;
-
 
     @Autowired
     IAuctionService iAuctionService;
@@ -57,6 +53,8 @@ public class BidController {
             throw new IllegalStateException("No auction id found");
         });
         User user = userService.getUserByUsername(bid.getUser().getAccount().getUsername());
+        System.out.println(bid.getUser().getAccount().getUsername());
+        System.out.println(user);
         bid.setUser(user);
 
         String responseMessage = bidValidator.validateBid(bid, auction);

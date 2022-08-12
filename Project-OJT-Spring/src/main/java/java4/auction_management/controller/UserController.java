@@ -71,11 +71,11 @@ public class UserController {
     @PostMapping("/edit")
     public String editUser(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes,
                            @RequestParam("file") MultipartFile[] files) throws IOException {
+
         if (bindingResult.hasErrors()) {
             return "admin/edit-user";
         }
-        Optional<User> currentUser = userService.getById(user.getId());
-        System.out.println(currentUser);
+
 
 
         try {

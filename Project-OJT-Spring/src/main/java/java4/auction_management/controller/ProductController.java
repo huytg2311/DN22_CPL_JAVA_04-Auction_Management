@@ -1,27 +1,39 @@
 package java4.auction_management.controller;
 
 import com.cloudinary.utils.ObjectUtils;
+import com.google.api.client.json.Json;
+import com.google.gson.JsonObject;
 import java4.auction_management.config.CloudinaryConfig;
 import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.bid.Bid;
 import java4.auction_management.entity.category.Category;
 import java4.auction_management.entity.product.Product;
 import java4.auction_management.entity.user.User;
+import java4.auction_management.service.IAuctionService;
 import java4.auction_management.service.IBidService;
 import java4.auction_management.service.ICategoryService;
 import java4.auction_management.service.impl.ProductService;
 import java4.auction_management.service.impl.UserService;
+import org.cloudinary.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.text.html.parser.Entity;
 import javax.validation.Valid;
+import java.awt.*;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.List;
@@ -64,11 +76,18 @@ public class ProductController {
 
     @PostMapping("/create")
     public String createProduct(@Valid @ModelAttribute Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                                @RequestParam("file") MultipartFile[] files, HttpServletRequest httpServletRequest) throws IOException {
-
+                                @RequestParam("file") MultipartFile[] files, HttpServletRequest httpRequest, Model model) throws IOException {
+        if (files.length > 5) {
+            model.addAttribute("message", "Not Over 5 images");
+            return "/products/create-product";
+        }
+        if (bindingResult.hasErrors()) {
+            return "/products/create-product";
+        }
         try {
             LocalDateTime datePost = LocalDateTime.now();
-            User user = userService.getUserByUsername(httpServletRequest.getUserPrincipal().getName());
+//            String uname = product.getAuction().getUser().getAccount().getUsername();
+            User user = userService.getUserByUsername(httpRequest.getUserPrincipal().getName());
             product.getAuction().setUser(user);
             product.setDatePost(datePost);
             StringBuilder listImage = new StringBuilder();
