@@ -15,6 +15,7 @@ public interface IAuctionRepository extends JpaRepository<Auction, Long> {
     @Query(value = "select a from Auction a where a.user.account.username = ?1")
     List<Auction> findAuctionsByUsername(String username);
 
+
     @Query("select a from Auction as a where a.auctionStatus = 'ACCEPTED' and current_timestamp <= a.finishTime")
     Page<Auction> getAllAuctionByStatus(Pageable pageable);
 

@@ -56,14 +56,78 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable();
 
-        // Các trang không yêu cầu login
-        http.authorizeRequests().antMatchers( "/", "/login", "/logout", "/index", "/signUp").permitAll();
-//        http.authorizeRequests().antMatchers("/admin").permitAll();
-
-//        // Trang chỉ dành cho ADMIN
+//       admin
         http.authorizeRequests().antMatchers("/admin").access("hasRole('ROLE_ADMIN')");
         http.authorizeRequests().antMatchers("/admin/edit/{id}").access("hasRole('ROLE_ADMIN')");
         http.authorizeRequests().antMatchers("/admin/edit").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/admin/categories").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/admin/detail/{id}").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/admin/editCategory/{id}").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/admin/editCategory").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/admin/createCategory").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/admin/changeEnable/{username}").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/admin/waitingAuctions").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/admin/editStatusAuction/{auctionID}").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/admin/editAuctionStatus").access("hasRole('ROLE_ADMIN')");
+
+        //  auction
+        http.authorizeRequests().antMatchers("/auctions/my-auctions").access("hasRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/auctions/detail-auction/{id}").permitAll();
+        http.authorizeRequests().antMatchers("/auctions/get-winner-cartDetail/{auctionId}").access("hasRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/auctions/auction-result/{auctionId}").access("hasRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/auctions/auctions/new-bid-alert/{auctionId}").permitAll();
+
+        //  bid
+        http.authorizeRequests().antMatchers("/bid/cart/{username}").access("hasRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/bid/createBid").access("hasRole('ROLE_USER')");
+
+        //  cart
+        http.authorizeRequests().antMatchers("/cart").access("hasRole('ROLE_USER')");
+
+        //  e-wallet
+        http.authorizeRequests().antMatchers("/myEwallet").access("hasRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/deposit").access("hasRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/updateDeposit").access("hasRole('ROLE_USER')");
+
+        //  forgot-password
+        http.authorizeRequests().antMatchers("/forgot_password").permitAll();
+        http.authorizeRequests().antMatchers("/reset_password").permitAll();
+
+        //  home
+        http.authorizeRequests().antMatchers("/view-profile/{username}").access("hasRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/edit-profile").access("hasRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/changePassword/{username}").access("hasRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/savePassword").access("hasRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/changeAvatar").access("hasRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/savePassword").access("hasRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/savePassword").access("hasRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/403", "/register", "/about", "/guide").permitAll();
+
+        //  login
+        http.authorizeRequests().antMatchers("/", "/welcome", "/login", "/signUp", "/success", "/logoutSuccessful").permitAll();
+
+        //  payment
+        http.authorizeRequests().antMatchers("/paynow").access("hasRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/pay").access("hasRole('ROLE_USER')");
+
+        //  product
+        http.authorizeRequests().antMatchers("/products").access("hasRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/products/create").access("hasRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/products/auction").access("hasRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/products/productDetail").access("hasRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/products/edit/{id}").access("hasRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/products/edit").access("hasRole('ROLE_USER')");
+
+        // page user
+        http.authorizeRequests().antMatchers("/user/edit").access("hasRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/user/edit/{id}").access("hasRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/user/categories").access("hasRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/user/detail/{id}").access("hasRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/user/detailAuction/{productId}").access("hasRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/user/wallet/{username}").access("hasRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/user/bidding/{username}").access("hasRole('ROLE_USER')");
+
+
 
         // Khi người dùng đã login, với vai trò XX.
         // Nhưng truy cập vào trang yêu cầu vai trò YY,

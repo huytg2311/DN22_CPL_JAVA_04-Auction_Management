@@ -26,8 +26,6 @@ public class Bill {
 
     private String deliveryAddress;
 
-    private String paymentMethod;
-
     private EShipping shippingMethod;
 
     @Column(columnDefinition = "default 'WAITING'")
