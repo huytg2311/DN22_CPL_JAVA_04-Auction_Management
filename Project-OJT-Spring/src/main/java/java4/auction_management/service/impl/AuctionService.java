@@ -27,6 +27,8 @@ public class AuctionService implements IAuctionService {
         return iAuctionRepository.findAll(pageable);
     }
 
+
+
     @Override
     public Page<Auction> getAllAuctionByStatus(Pageable pageable) {
         return iAuctionRepository.getAllAuctionByStatus(pageable);
@@ -43,6 +45,11 @@ public class AuctionService implements IAuctionService {
     }
 
     @Override
+    public List<Auction> findAuctionsByUsername(String username){
+        return iAuctionRepository.findAuctionsByUsername(username);
+    }
+
+    @Override
     public Auction save(Auction entity) {
         return iAuctionRepository.save(entity);
     }
@@ -50,5 +57,10 @@ public class AuctionService implements IAuctionService {
     @Override
     public void deleteById(Long id) {
 
+    }
+
+    @Override
+    public Auction getAuctionByAuctionID(Long id) {
+        return iAuctionRepository.getAuctionByAuctionID(id);
     }
 }

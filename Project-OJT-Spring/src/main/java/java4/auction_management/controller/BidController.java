@@ -8,6 +8,8 @@ import java4.auction_management.entity.user.User;
 import java4.auction_management.service.IAuctionService;
 import java4.auction_management.service.impl.*;
 import java4.auction_management.service.impl.ProductService;
+import java4.auction_management.validate.BidValidator;
+import org.cloudinary.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -27,21 +29,43 @@ public class BidController {
     UserService userService;
 
     @Autowired
-    AuctionService auctionService;
+    IAuctionService iAuctionService;
 
+    @Autowired
+    CartService cartService;
+
+    @Autowired
+    BidValidator bidValidator;
+
+    @GetMapping("/cart/{username}")
+    public String showCart(@PathVariable("username") String username, Model model, HttpServletRequest httpServletRequest) {
+        User user = userService.getUserByUsername(httpServletRequest.getUserPrincipal().getName());
+        Cart cart =  cartService.getByUserID(user.getId());
+        model.addAttribute("cart", cart);
+        return "/cart/cart";
+    }
 
     @RequestMapping(value = "/createBid", method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE, consumes={"application/json"})
     @ResponseBody
-    public void createBid(@RequestBody Bid bid) {
-        Auction auction =  auctionService.getById(bid.getAuction().getAuctionID()).orElseThrow(() -> {
+    public String createBid(@RequestBody Bid bid) {
+        Auction auction =  iAuctionService.getById(bid.getAuction().getAuctionID()).orElseThrow(() -> {
             throw new IllegalStateException("No auction id found");
         });
         User user = userService.getUserByUsername(bid.getUser().getAccount().getUsername());
         System.out.println(bid.getUser().getAccount().getUsername());
         System.out.println(user);
         bid.setUser(user);
-        bid.setAuction(auction);
-        bidService.save(bid);
+
+        String responseMessage = bidValidator.validateBid(bid, auction);
+
+        if (responseMessage.contains("true")){
+
+            bid.setAuction(auction);
+
+            bidService.save(bid);
+        }
+
+        return responseMessage;
     }
 }

@@ -69,7 +69,7 @@ h6,
     height: 32px;
 }
 
-.btn-xs-square {
+.btn-xs-square{
     width: 15px;
     height: 15px;
 }
@@ -120,13 +120,14 @@ h6,
     color: var(--primary);
 }
 
-.navbar .navbar-nav .nav-link.active {
+.navbar .navbar-nav .nav-link.active{
     font-weight: 500;
 }
 
 .navbar.fixed-top {
     transition: .5s;
 }
+
 
 
 @media (max-width: 992px) {
@@ -274,7 +275,7 @@ h6,
 
 .product-item:hover {
     /*background: var(--primary) !important;*/
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.4);
 }
 
 /*.product-item:hover h6 {*/
@@ -444,11 +445,11 @@ h6,
 }
 
 /**** ****/
-.indicator-img {
+.indicator-img{
     width: 25%;
 }
 
-.sidebar-toggle-btn {
+.sidebar-toggle-btn{
     width: fit-content;
     width: -moz-fit-content;
     font-size: 1rem;
@@ -464,43 +465,44 @@ h6,
     left: 320px;
     cursor: pointer;
 }
-
-.sidebar-toggle-btn:hover {
-    background: var(--primary) 60%;
+.sidebar-toggle-btn:hover{
+    background: var(--primary)60%;
     color: var(--secondary);
 }
 
 
 /*  */
-.timer-box {
+.timer-box{
     width: 55px;
     height: 45px;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 1px solid #dee2e6;
-    font-family: Inter, sans-serif;
+    font-family: Inter,sans-serif;
     font-weight: bold;
 
 }
-
+.minw-500px {
+    min-width: 500px;
+}
 .mw-1200px {
     max-width: 1200px !important;
 }
 
-.mw-300px {
+.mw-300px{
     max-width: 300px !important;
 }
 
-.mw-500px {
+.mw-500px{
     max-width: 500px !important;
 }
 
-.w-200 {
+.w-200{
     width: 200%;
 }
 
-.vh-75 {
+.vh-75{
     height: 75vh;
 }
 
@@ -511,7 +513,7 @@ h6,
     overflow: hidden
 }
 
-.price-box {
+.price-box{
     height: auto;
     width: 150px;
     border: 1px solid var(--primary);
@@ -520,12 +522,12 @@ h6,
     align-items: center;
 }
 
-.fs-7 {
+.fs-7{
     font-size: calc(0.7rem + 0.5vw) !important;
 }
 
 
-.customNav {
+.customNav{
     position: absolute;
     top: 0;
     height: 100%;
@@ -536,15 +538,15 @@ h6,
     align-items: center;
 }
 
-.customNextBtn {
+.customNextBtn{
     right: 0;
 }
 
-.customPrevBtn {
+.customPrevBtn{
     left: 0;
 }
 
-.customNextBtn, .customPrevBtn {
+.customNextBtn, .customPrevBtn{
     width: 15%;
     font-size: 1.8rem;
     color: var(--primary);
@@ -552,41 +554,41 @@ h6,
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: 0;
+    top:0;
     bottom: 0;
 
 }
 
-.main-wrapper {
+.main-wrapper{
     min-height: 100vh;
     position: relative;
 }
 
-.bg-light-30 {
-    background: rgba(253, 245, 235, 0.7) !important;
+.bg-light-30{
+    background: rgba(253,245,235,0.7) !important;
 }
 
-.avatar-xl {
+.avatar-xl{
     width: 70px;
     height: 70px;
 }
 
-.w-fit-content {
-    flex: 1 8 200px;
+.w-fit-content{
+   flex: 1 8 200px;
 }
 
 
-.appearance-none {
-    -moz-appearance: none; /* Firefox */
-    -webkit-appearance: none; /* Safari and Chrome */
-    appearance: none;
+.appearance-none{
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    appearance:none;
 }
 
-.select-div {
+.select-div{
     position: relative;
 }
 
-.select-div::after {
+.select-div::after{
     width: 30px;
     height: 30px;
     content: "\F229";
@@ -607,50 +609,56 @@ h6,
     z-index: -1;
 }
 
-.text-transparent {
+.text-transparent{
     color: transparent !important;
 }
-
-.line-clamp-2 {
+.line-clamp-2{
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
-
-select:active + .select-div::after {
+select:active + .select-div::after{
     content: "\F235";
 }
 
-.bg-gradient-primary {
+.bg-gradient-primary{
     background-image: linear-gradient(to left top, #f1b65e, #f1b357, #f0b050, #f0ad49, #efaa41, #eda83f, #eca53e, #eaa33c, #e6a040, #e39e45, #df9b48, #db994c);
 }
 
-.btn-hover-scale:hover {
+.btn-hover-scale:hover{
     transform: scale(1.05);
     transition: all ease 0.3s;
 }
 
 
-.input-outline-none:focus-visible {
+.input-outline-none:focus-visible{
     outline: none;
     border: 1px solid var(--primary);
     background: transparent !important;
     transition: all ease 1s;
 }
 
-.input-outline-none {
+.input-outline-none{
     border: 1px solid transparent;
     transition: all ease 1s;
 }
 
-.form-animation {
-    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+.form-animation{
+    transition: all 0.6s cubic-bezier(0.68,-0.55,0.265,1.55);
+}
+
+.cursor-not-allowed {
+    cursor: not-allowed !important;
+}
+
+.ratio-1x7 {
+    --bs-aspect-ratio: calc(1 / 7 * 100%)
 }
 
 .ml-name {
-    margin-left: 3rem !important;
+    margin-left: 3rem!important;
 }
 
 .text-credit {

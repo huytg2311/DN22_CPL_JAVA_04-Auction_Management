@@ -8,6 +8,7 @@ import java4.auction_management.entity.user.User;
 import java4.auction_management.service.IAccountService;
 import java4.auction_management.service.IBidService;
 import java4.auction_management.service.ICategoryService;
+import java4.auction_management.service.IProductService;
 import java4.auction_management.service.IUserService;
 import java4.auction_management.service.impl.CategoryService;
 import java4.auction_management.service.impl.ProductService;
@@ -43,7 +44,7 @@ public class UserController {
     UserService userService2;
 
     @Autowired
-    ProductService productService;
+    IProductService productService;
 
     @Autowired
     ICategoryService iCategoryService;
@@ -76,10 +77,7 @@ public class UserController {
         }
 
 
-//        if (files.isEmpty()) {
-//            userService.save(user);
-//            return "redirect:/admin";
-//        } else {
+
         try {
             System.out.println(user.getImage());
             System.out.println(files + "aaaaa");
@@ -114,25 +112,11 @@ public class UserController {
         return "user/edit-profile";
     }
 
-    @GetMapping("/auction/{username}")
-    public String showAuctionUser(@PathVariable("username") String username, Model model) {
-//                Optional<User> users = userService.getById(user.getId());
-        List<Product> product = productService.findProductsByUsername(username);
-        if(product.isEmpty())
-            System.out.println('a');
-        for (Product prod: product
-             ) {
-            System.out.println(prod);
-        };
-        model.addAttribute("products", product);
-
-//        model.addAttribute("users", user );
-        return "user/auction";
-    }
     @GetMapping("/detailAuction/{productId}")
     public String detailAuction(@PathVariable("productId") Product product, Model model){
 
         model.addAttribute("products", product);
+        System.out.println(product);
 
         String[] listImage = product.getListImage().split(" ");
         for (String image: listImage
@@ -145,11 +129,63 @@ public class UserController {
         return "user/detailAuction";
 
     }
+    @GetMapping("/wallet/{username}")
+    public String showWalletUser(@PathVariable("username")Account account, Model model) {
+        User user = account.getUser();
+        model.addAttribute("users", user);
 
+        return "user/wallet";
+    }
+
+    @GetMapping("/bidding/{username}")
+    public String showproductBidding(@PathVariable("username")Account account, Model model) {
+        User user = account.getUser();
+        model.addAttribute("users", user);
+
+        return "user/bidding";
+    }
+
+//    @GetMapping("/editProductAuction/{id}")
+//    public String showEditProductAuction(@PathVariable("id") User user, Model model) {
+////        Optional<User> user = userService.getById(id);
+//        model.addAttribute("users", user);
+//        return "user/edit-productAuction";
+//    }
+//
+//
+//    @PostMapping("/editProductAuction")
+//    public String editProductAuction(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes,
+//                           @RequestParam("file") MultipartFile[] files) throws IOException {
+//        if (bindingResult.hasErrors()) {
+//            return "user/auction";
+//        }
+//        Optional<User> currentUser = userService.getById(user.getId());
+//        System.out.println(currentUser);
+//
+//        if (files.isEmpty()) {
+//            userService.save(user);
+//            return "redirect:/admin";
+//        } else {
+//            try {
+//                System.out.println(user.getImage());
+//                System.out.println(files + "aaaaa");
+//                for (MultipartFile file : files
+//                ) {
+//                    Map uploadResult = cloudc.upload(file.getBytes(),
+//                            ObjectUtils.asMap("resourcetype", "auto"));
+//                    System.out.println(uploadResult.get("url").toString());
+//                }
+//
+//                System.out.println(files);
+//                userService.save(user);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                return "redirect:/edit/{id}";
+//            }
+//            redirectAttributes.addFlashAttribute("message", "Edit successful");
+//            return "redirect:/admin";
+////        }
+//        }
+//
+//    }
 }
-
-
-
-
-
-

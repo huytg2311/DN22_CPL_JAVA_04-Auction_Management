@@ -25,7 +25,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
-    //push --
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productId;
@@ -55,11 +54,11 @@ public class Product {
     @OneToOne(mappedBy = "product")
     private CartDetail cartDetail;
 
-
-
-
-
-    //    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-//    private List<Image> imageList;
-
+    @Override
+    public String toString() {
+        return "{" +
+                "\"productId\":" + productId +
+                ", \"productName\": \"" + productName + '\"' +
+                '}';
+    }
 }

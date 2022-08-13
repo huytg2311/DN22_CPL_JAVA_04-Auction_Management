@@ -11,6 +11,7 @@ import java4.auction_management.service.IAccountService;
 import java4.auction_management.service.IAuctionService;
 import java4.auction_management.service.IUserService;
 import java4.auction_management.service.impl.AccountService;
+import java4.auction_management.service.impl.AuctionService;
 import java4.auction_management.service.impl.ProductService;
 import java4.auction_management.service.impl.UserService;
 import java4.auction_management.validate.AccountValidator;
@@ -53,7 +54,7 @@ public class HomeController {
     private ProductService productService;
 
     @Autowired
-    private IAuctionService auctionService;
+    private AuctionService auctionService;
 
     @Autowired
     CloudinaryConfig cloudc;
@@ -65,14 +66,36 @@ public class HomeController {
     @GetMapping(value = {"/","/welcome"})
     public String welcomePage(Model model,@PageableDefault(size = 8) Pageable pageable) {
         Page<Auction> auctions = auctionService.getAllAuctionByStatus(pageable);
-        for (Auction ac: auctions
-             ) {
-            ac.getProduct().setListImage(ac.getProduct().getListImage().split(" ")[0]);
-        }
         model.addAttribute("auctions", auctions);
         return "index";
     }
 
+
+//        String[] listImage = products.getListImage().split(" ");
+//        for (String image: listImage
+//        ) {
+//            System.out.println(image);
+//        }
+//        model.addAttribute("listImage", listImage);
+
+
+//        String[] listImages = product.getListImage().split(" ");
+//        model.addAttribute("listImages", listImages);
+//        model.addAttribute("user", user1);
+//        System.out.println(user1.toString());
+
+
+    @GetMapping(value = {"/index"})
+    public String welcomePage2(Model model) {
+//        model.addAttribute("nameAccount", accountService.getAll());
+//        User userImage = iUserRepository.findImageUser(user.getAccount().getUsername());
+//        System.out.println(userImage);
+//        model.addAttribute("account", new Account());
+//        model.addAttribute("users", userService.getById(id));
+//        model.addAttribute("user", new User());
+//        System.out.println(id);
+        return "index";
+    }
 // moi ne
     @GetMapping("/view-profile/{username}")
     public String editProfile(@PathVariable("username") String username, Model model) {

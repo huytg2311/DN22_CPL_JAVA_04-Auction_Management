@@ -27,10 +27,19 @@ public class CartDetail {
     private Cart cart;
 
     @JoinColumn(name = "productId")
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     private Product product;
 
     @OneToOne
     @NotFound(action= NotFoundAction.IGNORE)
     private Bid bid;
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"cartDetailID\":" + cartDetailID +
+                ", \"product\":" + product.toString() +
+                ", \"bid\":" + bid.toString() +
+                '}';
+    }
 }

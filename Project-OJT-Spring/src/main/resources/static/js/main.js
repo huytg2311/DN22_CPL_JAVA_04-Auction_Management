@@ -7,13 +7,22 @@
             if ($('#spinner').length > 0) {
                 $('#spinner').removeClass('show');
             }
-        }, 1);
+        }, 100);
     };
     spinner();
     
     
     // Initiate the wowjs
-    new WOW().init();
+    var wow = new WOW(
+        {
+            boxClass:     'wow',      // default
+            animateClass: 'animated', // default
+            offset:       0,          // default
+            mobile:       false,       // default
+            live:         true        // default
+        }
+    )
+    wow.init();
 
 
     // Fixed Navbar
@@ -36,7 +45,8 @@
         }
     });
     $('.back-to-top').click(function () {
-        $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
+        $('html, body').animate({scrollTop: 0}, 1500, 'easeIn');
+        $('.back-to-top').fadeOut('slow');
         return false;
     });
 
@@ -90,30 +100,14 @@
     });
 
     //set link for rows of table
-    let rows = $('.js-table-link tbody tr');
-    for (const row of rows) {
-        $(row, 'td').click(function (){
-            console.log('a')
-            window.location=$(row).data('href');
-        })
-    }
+
 
     //line-clamp-2
-    let clampObject = $('.js-line-clamp-2')
-    for (const clampObjectElement of clampObject) {
-        $clamp(clampObjectElement, {clamp: 2})
-    }
+    // let clampObject = $('.js-line-clamp-2')
+    // for (const clampObjectElement of clampObject) {
+    //     $clamp(clampObjectElement, {clamp: 2})
+    // }
     
 })(jQuery);
-
-//set height for header-spacer
-    let headerHeight = document.getElementById("header").getElementsByClassName("fixed-top")[0]
-
-    let headerSpacers = document.getElementsByClassName("header-spacer")
-    for (const headerSpacer of headerSpacers ){
-    headerSpacer.setAttribute("style", "height:" + headerHeight.clientHeight + "px")
-}
-    // document.getElementById("sidebar").setAttribute("style", "height:calc(100vh - " + headerHeight.clientHeight + "px)")
-    document.getElementsByClassName("sidebar-content")[0].setAttribute("style", "height:calc(100vh - " + headerHeight.clientHeight + "px)")
 
 

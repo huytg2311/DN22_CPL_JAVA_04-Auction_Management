@@ -4,6 +4,7 @@ import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.bid.Bid;
 import java4.auction_management.entity.bill.Bill;
 import java4.auction_management.entity.cart.Cart;
+import java4.auction_management.entity.product.Product;
 import java4.auction_management.validate.DateTimeBeforeCurrent;
 
 import lombok.AllArgsConstructor;
@@ -135,12 +136,8 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", fullname='" + fullname + '\'' +
-                ", email='" + email + '\'' +
-                ", provider=" + provider +
-                ", account=" + account +
+        return "{" +
+                "\"account\":" + account.toString() +
                 '}';
     }
 }

@@ -31,4 +31,5 @@ public class Cart {
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
+
 }

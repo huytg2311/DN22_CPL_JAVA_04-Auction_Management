@@ -1,16 +1,21 @@
 package java4.auction_management.controller;
 import com.cloudinary.utils.ObjectUtils;
 import java4.auction_management.config.CloudinaryConfig;
+import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.cart.Cart;
 import java4.auction_management.entity.product.Product;
 import java4.auction_management.entity.user.Account;
 import java4.auction_management.entity.user.User;
 import java4.auction_management.service.IAccountService;
+import java4.auction_management.service.IAuctionService;
 import java4.auction_management.service.IUserService;
 import java4.auction_management.service.impl.CartService;
 import java4.auction_management.validate.AccountValidator;
 import java4.auction_management.validate.LoginValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -46,6 +51,10 @@ public class LoginController {
     LoginValidator loginValidator;
 
     @Autowired
+    private IAuctionService auctionService;
+
+
+    @Autowired
     CartService cartService;
 
     @GetMapping(value = "/login")
@@ -69,7 +78,6 @@ public class LoginController {
             model.addAttribute("account", new Account());
             return "login";
         }
-
 //        if (!file.isEmpty()) {
 //            try {
 //                Map uploadResult = cloudc.upload(file.getBytes(),

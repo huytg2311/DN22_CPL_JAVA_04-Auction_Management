@@ -45,4 +45,12 @@ public class Bid {
     @NotFound(action= NotFoundAction.IGNORE)
     private CartDetail cartDetail;
 
+    @Override
+    public String toString() {
+        return '{' +
+                "\"bidId\":" + bidId +
+                ", \"bidPrice\":" + bidPrice +
+                ", \"user\":" + user.toString() +
+                '}';
+    }
 }

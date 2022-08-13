@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+
+	<title>Administration</title>
+
+	<link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+	<link th:href="@{/css/style.css}" rel="stylesheet">
+	<link th:href="@{/edmin/css/button.css}" rel="stylesheet">
+
+	<!-- Google Web Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+
+	<!-- Icon Font Stylesheet -->
+	<script src="https://kit.fontawesome.com/091e570025.js" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+</head>
+<body>
+<div class="" th:insert="header :: my-header"></div>
+<div class="wrapper">
+	<nav id="sidebar" class="sidebar js-sidebar" >
+		<div id="" class="header-spacer bg-dark"></div>
+		<div class="sidebar-content js-simplebar">
+			<a class="sidebar-brand text-center" href="/admin">
+					<span class="align-middle text-primary ">
+						Administration
+					</span>
+			</a>
+			<ul class="sidebar-nav">
+				<li class="sidebar-item active">
+					<a class="sidebar-link" th:href="@{/admin}">
+						<i class="align-middle" data-feather="user"></i> <span
+							class="align-middle">User management</span>
+					</a>
+				</li>
+
+				<li class="sidebar-item">
+					<a class="sidebar-link" th:href="@{/admin/categories}">
+						<i class="align-middle" data-feather="grid"></i><span
+							class="align-middle">Category management</span>
+					</a>
+				</li>
+
+				<li class="sidebar-item  ">
+					<a class="sidebar-link no-hover dropdown-toggle" data-toggle="collapse" aria-expanded="false"
+					   href="#sidebarSubmenu">
+						<i class="align-middle" data-feather="box"></i>
+						<span class="align-middle">Product management</span>
+					</a>
+					<ul class="collapse list-unstyled sidebar-submenu-item" id="sidebarSubmenu">
+						<li class="sidebar-item ">
+							<a href="" class="sidebar-link ps-5 pe-2 small">
+								<i class="align-middle" data-feather="archive"></i>
+								<span class="align-middle">Product Awaiting Approval</span>
+							</a>
+						</li>
+						<li class="sidebar-item">
+							<a href="" class="sidebar-link ps-5 pe-2 small">
+								<i class="align-middle" data-feather="grid"></i>
+								<span class="align-middle">Product Category Management</span>
+							</a>
+						</li>
+					</ul>
+				</li>
+
+			</ul>
+
+		</div>
+		<div class="sidebar-toggle-btn js-sidebar-toggle">
+			<i class="fa fa-right-left fs-"></i>
+		</div>
+	</nav>
+	<div class="main">
+		<div  class="header-spacer bg-dark"></div>
+		<nav class="navbar navbar-expand navbar-light bg-light px-4 py-3 shadow-sm">
+
+		</nav>
+		<main class="content">
+			<div class="container-fluid p-0">
+				<h1 class="h3 m-3">Add New Category</h1>
+				<div class="row ms-0">
+					<div class="col-12">
+						<div class="card">
+							<form th:action="@{/admin/createCategory}" th:object="${category}" method="post" enctype="multipart/form-data">
+<!--								<input type="hidden" th:field="*{categoryId}">-->
+
+								<div class="row">
+									<div class="col-12 col-lg-6">
+										<div class="card">
+<!--											<div class="card-header">-->
+<!--												<h5 class="card-title mb-0">Category ID</h5>-->
+<!--											</div>-->
+<!--											<div class="card-body">-->
+<!--												<input type="text" class="form-control" th:field="*{categoryId}" readonly>-->
+<!--											</div>-->
+										</div>
+
+										<div class="col-md-6">
+											<div class="form-group first">
+												<label for="name">Category Name: </label><i style="color: red">(*)</i>
+												<input type="text" th:field="*{name}"  class="form-control" placeholder="Enter category name" id="name" required>
+
+											</div>
+										</div>
+									</div>
+								</div>
+								<button style="margin-left: 65px" class="btn btn-success" type="submit">Add</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
+</div>
+
+
+<!--****** JS ******-->
+<script>
+    feather.replace()
+</script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+		integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+		crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+		integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+		crossorigin="anonymous"></script>
+<script th:src="@{/lib/wow/wow.min.js}"></script>
+<script th:src="@{/lib/easing/easing.min.js}"></script>
+<script th:src="@{/lib/waypoints/waypoints.min.js}"></script>
+<script th:src="@{/lib/counterup/counterup.min.js}"></script>
+<script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/admin/js/app.js}"></script>
+
+</body>
+</html>
