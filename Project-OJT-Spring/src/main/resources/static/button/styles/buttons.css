@@ -40,7 +40,7 @@
     animation: AnimationName 3s ease infinite;
     border: medium none;
 }
-.btn-secondary{
+.btn-secondary2{
     background: #797b7f;
     background: -moz-linear-gradient(-45deg, #797b7f 0%, #b5b8bf 50%, #8e9397 51%, #8e9397 71%, #828589 100%);
     background: -webkit-linear-gradient(-45deg, #797b7f 0%,#b5b8bf 50%,#8e9397 51%,#8e9397 71%,#828589 100%);

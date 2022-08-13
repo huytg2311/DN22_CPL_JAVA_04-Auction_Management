@@ -1,291 +1,371 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:nl2br="https://github.com/bufferings/thymeleaf-extras-nl2br"
-	  lang="en-US" xml:lang="en-US">
+      xmlns:nl2br="https://github.com/bufferings/thymeleaf-extras-nl2br"
+      lang="en-US" xml:lang="en-US">
 
 <head>
-	<meta charset="utf-8">
-	<title>Pay.Picker</title>
-	<meta content="width=device-width, initial-scale=1.0" name="viewport">
-	<meta content="" name="keywords">
-	<meta content="" name="description">
+    <meta charset="utf-8">
+    <title>Pay.Picker</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
 
-	<!-- Favicon -->
-	<link href="https://cdn2.iconfinder.com/data/icons/content-design-production-1/66/36-512.png" rel="icon">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap"
-		  rel="stylesheet">
+    <!-- Favicon -->
+    <link href="https://cdn2.iconfinder.com/data/icons/content-design-production-1/66/36-512.png" rel="icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
 
-	<!-- Icon Font Stylesheet -->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-	<script src="https://kit.fontawesome.com/091e570025.js" crossorigin="anonymous"></script>
-	<link rel="stylesheet" th:href="@{/lib/bootstrap-icons/bootstrap-icons.css}">
-
-
-	<!-- Libraries Stylesheet -->
-	<link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
-	<link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
-	<link th:href="@{/lib/owlcarousel/assets/owl.theme.default.css}" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/091e570025.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/lib/bootstrap-icons/bootstrap-icons.css}">
 
 
-	<!-- Customized Bootstrap Stylesheet -->
-	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
+    <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+    <link th:href="@{/lib/owlcarousel/assets/owl.theme.default.css}" rel="stylesheet">
 
-	<!-- Template Stylesheet -->
-	<link th:href="@{/css/style.css}" rel="stylesheet">
-	<style>
 
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1031; /* Sit on top */
-            padding-top: 100px; /* Location of the box */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-        }
+    <!-- Customized Bootstrap Stylesheet -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/button/styles/buttons.css}" rel="stylesheet">
 
-	</style>
+    <!-- Template Stylesheet -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+
+
+    <!--	SocketJS and STOMP-->
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script th:src="@{/lib/stomp/stomp.min.js}"></script>
+
 
 </head>
 
 <body>
 <div class="main-wrapper bg-light">
-	<div class="" th:insert="header :: my-header"></div>
-			<div class="header-spacer"></div>
+    <div class="sticky-top" th:insert="header :: my-header"></div>
 
-	<div class="main bg-light">
-		<main class="content px-lg-4 pt-lg-4 pb-lg-3 py-3 p-0">
-			<div class="container-fluid m-0">
-				<div class="card mw-1200px px-lg-5 px-4 pt-5 pb-4 mx-auto my-0" th:object="${auction}">
-					<div class="row m-0 flex-lg-row flex-sm-column">
-						<div class="col-lg-4 p-0 m-0 mb-3">
-							<div class="row m-0 justify-content-between">
-								<div class="w-100 p-0 m-0 ">
-									<div id="productImageSlide"
-										 class="carousel slide border-primary border border-2 p-0"
-										 data-ride="carousel">
-										<ol class="carousel-indicators m-0">
-											<li th:each="img, imgState : ${listImages}" th:if="${imgState.index==0}"
-												data-target="#productImageSlide"
-												th:attr="data-slide-to=${imgState.index}"
-												class="bg-primary active"></li>
-											<li th:each="img, imgState : ${listImages}" th:if="${imgState.index>0}"
-												data-target="#productImageSlide"
-												th:attr="data-slide-to=${imgState.index}"
-												class="bg-primary"></li>
-										</ol>
-										<div class="carousel-inner">
-											<div th:each="img, imgState : ${listImages}" th:if="${imgState.index==0}"
-												 class="carousel-item ratio ratio-1x1 active">
-												<img class="d-block of-contain " th:src="@{${img.toString()}}" alt=""
-													 src=""/>
-											</div>
-											<div th:each="img, imgState : ${listImages}" th:if="${imgState.index>0}"
-												 class="carousel-item ratio ratio-1x1 ">
-												<img class="d-block of-contain" th:src="@{${img.toString()}}" alt=""
-													 src=""/>
-											</div>
+    <div class="main bg-light">
+        <main class="content px-lg-4 pt-lg-4 pb-lg-3 py-3 p-0">
+            <div class="container-fluid m-0">
+                <div class="card  px-lg-5 px-4 pt-5 pb-4 mx-auto my-0" th:object="${auction}">
+                    <div class="row m-0 flex-lg-row flex-sm-column">
+                        <div class="col-lg-3 p-0 m-0 mb-3">
+                            <div class="row m-0 justify-content-between">
+                                <div class="w-100 p-0 m-0 ">
+                                    <div id="productImageSlide"
+                                         class="carousel slide border-primary border border-2 p-0"
+                                         data-ride="carousel">
+                                        <ol class="carousel-indicators m-0">
+                                            <li th:each="img, imgState : ${#strings.arraySplit(auction.product.listImage, ' ')}"
+                                                th:if="${imgState.index==0}"
+                                                data-target="#productImageSlide"
+                                                th:attr="data-slide-to=${imgState.index}"
+                                                class="bg-primary active"></li>
+                                            <li th:each="img, imgState : ${#strings.arraySplit(auction.product.listImage, ' ')}"
+                                                th:if="${imgState.index>0}"
+                                                data-target="#productImageSlide"
+                                                th:attr="data-slide-to=${imgState.index}"
+                                                class="bg-primary"></li>
+                                        </ol>
+                                        <div class="carousel-inner">
+                                            <div th:each="img, imgState : ${#strings.arraySplit(auction.product.listImage, ' ')}"
+                                                 th:if="${imgState.index==0}"
+                                                 class="carousel-item ratio ratio-1x1 active">
+                                                <img class="d-block of-contain " th:src="@{${img.toString()}}" alt=""
+                                                     src=""/>
+                                            </div>
+                                            <div th:each="img, imgState : ${#strings.arraySplit(auction.product.listImage, ' ')}"
+                                                 th:if="${imgState.index>0}"
+                                                 class="carousel-item ratio ratio-1x1 ">
+                                                <img class="d-block of-contain" th:src="@{${img.toString()}}" alt=""
+                                                     src=""/>
+                                            </div>
 
-										</div>
-										<a class="carousel-control-prev " href="#productImageSlide" role="button"
-										   data-slide="prev">
+                                        </div>
+                                        <a class="carousel-control-prev " href="#productImageSlide" role="button"
+                                           data-slide="prev">
 											<span class="carousel-control-prev-icon bg-primary"
-												  aria-hidden="true"></span>
-											<span class="sr-only">Previous</span>
-										</a>
-										<a class="carousel-control-next	" href="#productImageSlide" role="button"
-										   data-slide="next">
+                                                  aria-hidden="true"></span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="carousel-control-next	" href="#productImageSlide" role="button"
+                                           data-slide="next">
 											<span class="carousel-control-next-icon bg-primary"
-												  aria-hidden="true"></span>
-											<span class="sr-only">Next</span>
-										</a>
+                                                  aria-hidden="true"></span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
 
-									</div>
-								</div>
-								<div class="w-100 p-0 mt-2 d-none d-md-block justify-content-start position-relative">
-									<div class="w-75 mx-auto owl-carousel owl-theme ">
-										<div th:each="img, imgState : ${listImages}" th:if="${imgState.index==0}"
-											 data-target="#productImageSlide" th:attr="data-slide-to=${imgState.index}"
-											 class="item ratio ratio-1x1 border border-1 border-primary active">
-											<img class="m-0 of-cover op-center " th:src="@{${img.toString()}}" alt=""
-												 src=""/>
-										</div>
-										<div th:each="img, imgState : ${listImages}" th:if="${imgState.index>0}"
-											 data-target="#productImageSlide" th:attr="data-slide-to=${imgState.index}"
-											 class="item ratio ratio-1x1 border border-1 border-primary">
-											<img class="m-0 of-cover op-center" th:src="@{${img.toString()}}" alt=""
-												 src=""/>
-										</div>
-									</div>
-									<div class="customNav">
-										<div class="customNextBtn">
-											<i class="bi bi-caret-right-fill fs-4"></i>
-										</div>
-										<div class="customPrevBtn">
-											<i class="bi bi-caret-left-fill fs-4"></i>
-										</div>
-									</div>
-								</div>
-							</div>
+                                    </div>
+                                </div>
+                                <div class="w-100 p-0 mt-2 d-none d-md-block justify-content-start position-relative">
+                                    <div class="w-75 mx-auto owl-carousel owl-theme ">
+                                        <div th:each="img, imgState : ${#strings.arraySplit(auction.product.listImage, ' ')}"
+                                             th:if="${imgState.index==0}"
+                                             data-target="#productImageSlide" th:attr="data-slide-to=${imgState.index}"
+                                             class="item ratio ratio-1x1 border border-1 border-primary active">
+                                            <img class="m-0 of-cover op-center " th:src="@{${img.toString()}}" alt=""
+                                                 src=""/>
+                                        </div>
+                                        <div th:each="img, imgState : ${#strings.arraySplit(auction.product.listImage, ' ')}"
+                                             th:if="${imgState.index>0}"
+                                             data-target="#productImageSlide" th:attr="data-slide-to=${imgState.index}"
+                                             class="item ratio ratio-1x1 border border-1 border-primary">
+                                            <img class="m-0 of-cover op-center" th:src="@{${img.toString()}}" alt=""
+                                                 src=""/>
+                                        </div>
+                                    </div>
+                                    <div class="customNav">
+                                        <div class="customNextBtn">
+                                            <i class="bi bi-caret-right-fill fs-4"></i>
+                                        </div>
+                                        <div class="customPrevBtn">
+                                            <i class="bi bi-caret-left-fill fs-4"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
 
-						</div>
-						<div class="col-lg-8 m-0 pt-2 ps-md-4 p-0">
-							<h5 class="h4 text-uppercase text-primary" th:text="*{product.productName}"></h5>
+                        </div>
+                        <div class="col-lg-4 m-0 pt-2 ps-lg-4 p-0">
+                            <h5 class="h4 text-uppercase text-primary" th:text="*{product.productName}"></h5>
 
-							<div class="mt-3">
-								<h5 class="text-secondary fs-7">Time left: </h5>
-								<input type="hidden" th:value="*{finishTime}" id="timeFinish">
-								<div class="d-flex flex-row fs-3 text-danger">
-									<div class="timer-box">
-										<span id="hour"></span>
-									</div>
-									<span class="my-auto mx-3 font-inter fw-bold">:</span>
-									<div class="timer-box">
-										<span id="minute"></span>
-									</div>
-									<span class="my-auto mx-3 font-inter fw-bold">:</span>
-									<div class="timer-box">
-										<span id="second"></span>
-									</div>
-								</div>
-							</div>
-							<div class="divider"></div>
-							<div class="d-flex mt-3 mx-0">
-								<div class="d-flex flex-column m-0 p-0">
-									<h5 class="text-secondary fs-7">Current bid: </h5>
-									<div class="">
-										<i class="bi bi-currency-dollar fs-4 align-middle"></i>
-										<span class="fs-5 align-middle text-primary fw-bold"
-											  th:text="${auction.bidList.isEmpty()} ? '0' : ${#numbers.formatDecimal(auction.bidList[0].bidPrice,1,'COMMA',2,'POINT')}"></span>
-									</div>
-								</div>
-								<div class="d-flex flex-column m-0 p-0 ms-5">
-									<h5 class="text-secondary fs-7">Current winner: </h5>
-									<div class="">
-										<i class="bi bi-trophy fs-4"></i>
-										<span class=" fs-5 text-primary fw-bold"
-											  th:text="${auction.bidList.isEmpty()} ? 'Place bid to become winner' : ${auction.bidList[0].user.account.username} "></span>
-										<!--										<span th:if="${auction.bidList.isEmpty()}" class=" fs-5 text-primary fw-bold"-->
-										<!--										>Not find bid</span>-->
-									</div>
-								</div>
-							</div>
-							<div class="divider"></div>
-							<div class="d-flex mt-3 mx-0">
-								<div class="d-flex flex-column m-0 p-0">
-									<h5 class="text-secondary fs-7">Reserve price: $<span id="reservePrice"
-																						  th:text="${#numbers.formatDecimal(auction.reservePrice,1,'COMMA',2,'POINT')}"></span>
-									</h5>
-									<h5 class="text-secondary fs-7">Step price: $<span id="stepPrice"
-																					   th:text="${#numbers.formatDecimal(auction.stepPrice,1,'COMMA',2,'POINT')}"></span>
-									</h5>
-								</div>
-							</div>
-							<div class="d-flex mt-3 mx-0">
-								<div id="subBidBtn"
-									 class="btn btn-primary btn-lg-square rounded-0 fs-3 fw-b text-light">-
-								</div>
-								<div class="price-box">
-								<span id="price" class="price text-secondary font-inter fw-bold fs-5"
-									  th:with="defaultprice = ${auction.bidList.isEmpty()} ? ${auction.reservePrice} : ${auction.bidList[auction.bidList.size()-1].bidPrice + auction.stepPrice}"
-									  th:text="${'$ '+#numbers.formatDecimal(defaultprice,1,'COMMA',2,'POINT')}"></span>
-								</div>
-								<div id="plusBidBtn"
-									 class="btn btn-primary btn-lg-square rounded-0 fs-3 fw-b text-light">+
-								</div>
-								<button id="btnModalBid"
-										class="btn btn-primary rounded-0 ms-2 text-light fw-bold fs-7 ">
-									<i class="fa fa-gavel fs-5"></i>
-									Place bid
-								</button>
-								<input id="username" type="hidden"
-									   th:value="${#request.userPrincipal!=null} ? ${#request.userPrincipal.name} : ''">
-								<!--                                get product id-->
-								<!--								<input id="product" type="hidden" th:value="${product}">-->
-							</div>
+                            <div class="mt-3">
+                                <h5 class="text-secondary fs-6">Time left: </h5>
+                                <input type="hidden" th:value="*{finishTime}" id="timeFinish">
+                                <div id="timer" class="d-flex flex-row fs-3 text-danger" style="height: 45px">
+                                    <div class="timer-box">
+                                        <span id="hour"></span>
+                                    </div>
+                                    <span class="my-auto mx-3 font-inter fw-bold">:</span>
+                                    <div class="timer-box">
+                                        <span id="minute"></span>
+                                    </div>
+                                    <span class="my-auto mx-3 font-inter fw-bold">:</span>
+                                    <div class="timer-box">
+                                        <span id="second"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="divider"></div>
+                            <div class="d-flex mt-3 mx-0">
+                                <div class="d-flex flex-column m-0 p-0">
+                                    <h5 class="text-secondary fs-6">Current bid: </h5>
+                                    <div id="current-bid" class="">
+                                        <i class="bi bi-currency-dollar fs-4 align-middle"></i>
+                                        <span class="fs-5 align-middle text-primary fw-bold"
+                                              th:text="${auction.bidList.isEmpty()} ? '0' : ${#numbers.formatDecimal(auction.bidList[0].bidPrice,1,'COMMA',2,'POINT')}"></span>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column m-0 p-0 ms-5">
+                                    <h5 class="text-secondary fs-6">Current winner: </h5>
+                                    <div id="current-winner" class="">
+                                        <i class="bi bi-trophy fs-4"></i>
+                                        <span class=" fs-5 text-primary fw-bold"
+                                              th:text="${auction.bidList.isEmpty()} ? 'Be the first to bid!' : ${auction.bidList[0].user.account.username} "></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="divider"></div>
+                            <div class="d-flex mt-3 mx-0">
+                                <div class="d-flex flex-column m-0 p-0">
+                                    <h5 class="text-secondary fs-6">Reserve price: $<span id="reservePrice"
+                                                                                          th:text="${#numbers.formatDecimal(auction.reservePrice,1,'COMMA',2,'POINT')}"></span>
+                                    </h5>
+                                    <h5 class="text-secondary fs-6">Step price: $<span id="stepPrice"
+                                                                                       th:text="${#numbers.formatDecimal(auction.stepPrice,1,'COMMA',2,'POINT')}"></span>
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-column mt-3 mx-0">
+                                <div class="d-flex">
+                                    <div id="subBidBtn"
+                                         class="btn btn-primary btn-lg-square rounded-0 fs-3 fw-b text-light">-
+                                    </div>
+                                    <div class="price-box flex-grow-1">
+								<span id="price" class="price text-secondary  font-inter fw-bold fs-5"
+                                      th:with="defaultprice = ${auction.bidList.isEmpty()} ? ${auction.reservePrice} : ${auction.bidList[0].bidPrice + auction.stepPrice}"
+                                      th:text="${'$'+#numbers.formatDecimal(defaultprice,1,'COMMA',2,'POINT')}"></span>
+                                    </div>
+                                    <div id="plusBidBtn"
+                                         class="btn btn-primary btn-lg-square rounded-0 fs-3 fw-b text-light">+
+                                    </div>
+                                </div>
+                                <button id="bidBtn"
+                                        class="btn2 btn-warning2 rounded-0 mt-3 text-light fw-bold fs-7 ">
+                                    <i class="fa fa-gavel fs-5"></i>
+                                    Place bid
+                                </button>
+                            </div>
 
-						</div>
-					</div>
-					<div class="row mx-0 mt-3 flex-lg-row flex-sm-column">
-						<div class="col-lg-4 p-0 m-0 mb-3 order-lg-first">
-							<h5 class="text-secondary fs-7">Product description:</h5>
-							<p nl2br:text="*{product.description}" class="text-secondary fs-6"></p>
-						</div>
-						<div class="col-lg-8 m-0 ps-lg-4 p-0 order-first" th:if="${!auction.bidList.isEmpty()}">
-							<h5 class="text-secondary fs-7">Bidding board:</h5>
-							<table class="table ms-0 fs-7 border border-primary">
-								<thead class="bg-primary text-light">
-								<tr>
-									<th>No.</th>
-									<th>Username</th>
-									<th>Bid</th>
-									<th>Time</th>
-								</tr>
-								</thead>
-								<tbody>
-								<tr th:each="bid, bidState : ${auction.bidList}"
-									th:class="${bidState.index==(#lists.size(auction.bidList)-1)} ? ${'border-primary'} : ${'border-light'}">
-									<td><span th:text="${bidState.index+1}"></span><i
-											class="bi bi-trophy-fill text-primary ms-2"
-											th:if="${bidState.index==0}"></i>
-									</td>
-									<td th:text="${bid.user.account.username}"></td>
-									<td th:text="${'$ ' + #numbers.formatDecimal(bid.bidPrice,1,'COMMA',0,'POINT')}"></td>
-									<td th:text="${#strings.replace(bid.bidTime,'T',' ')}"></td>
-								</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-		</main>
+                        </div>
+                        <div id="bidding-content" class="col-lg-5 m-0 ps-lg-4 pt-5 pt-lg-0 p-0  "
+                             th:style="${auction.bidList.isEmpty()} ? 'display: none' : ''">
+                            <div class="table-responsive w-100">
+                                <table class="table minw-500px ms-0 fs-6 border border-primary wow ">
+                                    <thead class="bg-primary text-light">
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Username</th>
+                                        <th>Bid</th>
+                                        <th>Time</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="bid, bidState : ${auction.bidList}"
+                                        th:class="${bidState.index==(#lists.size(auction.bidList)-1)} ? ${'border-primary'} : ${'border-light'}">
+                                        <td><span th:text="${bidState.index+1}"></span>
+                                            <i class="bi bi-trophy-fill text-primary ms-2"
+                                               th:if="${bidState.index==0}" id="winnerRow"></i>
+                                        </td>
+                                        <td th:text="${bid.user.account.username}"></td>
+                                        <td th:text="${'$' + #numbers.formatDecimal(bid.bidPrice,1,'COMMA',0,'POINT')}"></td>
+                                        <td th:text="${#temporals.format(bid.bidTime, 'HH:mm:ss dd/MM/yyyy')}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
-	</div>
+                        </div>
+                    </div>
+                    <div class="row mx-0 mt-3 flex-lg-row flex-sm-column">
+                        <div class="col-lg-4 p-0 m-0 mb-3 order-lg-first mt-lg-0 mt-4">
+                            <h5 class="text-secondary fs-6">Product description:</h5>
+                            <p nl2br:text="*{product.description}" class="text-secondary fs-6"></p>
+                        </div>
 
-	<!--    modal bid-->
-	<div class="modal" id="confirmBidModal" style="display: none;">
-		<div class="container">
-			<div class="row">
-				<div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3 mx-auto my-auto">
-					<div class="panel border bg-white" style="min-height: 150px;border-radius: 12px; margin-top: 150px">
-						<div class="panel-heading" style="border-radius: 12px;text-align: center;">
-							<h3 class="pt-3 font-weight-bold" style="color: #EAA636">Do you want to confirm ?</h3>
-						</div>
-						<div style="margin-left: 26%; margin-top: 5%">
-							<button type="button" class="btn btn-danger rounded-0 ms-2 text-light fw-bold fs-7 close">
-								Cancel
-							</button>
-							<button id="bidBtn" class="btn btn-primary rounded-0 ms-2 text-light fw-bold fs-7 ">
-								<i class="fa fa-gavel fs-5"></i>
-								Confirm
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                    </div>
+                </div>
+            </div>
+        </main>
 
-	<div id="BidFormResponse"></div>
+    </div>
 
-	<div class="" th:insert="footer :: my-footer"></div>
+    <!--    modal bid-->
+    <div id="loginErrorModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content rounded-0">
+                <div class="modal-body d-flex flex-column align-items-center justify-content-center">
+                    <i class="bi bi-exclamation-circle-fill display-1" style="color: #D51E40"></i>
+                    <p>Login to place your bids!</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <a th:href="@{/login}" class="btn btn-primary rounded-0">Login now</a>
+                    <button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="otherErrorsModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content rounded-0">
+                <div class="modal-body d-flex flex-column align-items-center justify-content-center">
+                    <i class="bi bi-exclamation-circle-fill display-1" style="color: #D51E40"></i>
+                    <p id="error-modal-message" class=" px-4 text-center"></p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="confirmBidModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content rounded-0">
+                <div class="modal-body d-flex flex-column align-items-center justify-content-center">
+                    <p id="confirm-modal-message">Place a bid price <span class="fw-bold" id="price-confirm"></span> for
+                        this product?</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button id="confirmBidBtn" type="button" class="btn btn-primary rounded-0">Place bid</button>
+                    <button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="successBidModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content rounded-0">
+                <div class="modal-body d-flex flex-column align-items-center justify-content-center">
+                    <i class="bi bi-check-circle-fill display-1" style="color: #69BE55"></i>
+                    <p>Place bid successfully!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="loserModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content rounded-0">
+                <div class="modal-body d-flex flex-column align-items-center justify-content-center">
+                    <i class="bi bi-x-octagon-fill display-1" style="color: #D51E40"></i>
+                    <p>You lost in this auction!</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <a th:href="@{/login}" class="btn btn-primary rounded-0">Go to Home page</a>
+                    <button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="visitorModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content rounded-0">
+                <div class="modal-body d-flex flex-column align-items-center justify-content-center">
+                    <i class="bi bi-hourglass-bottom display-1" style="color: #D51E40"></i>
+                    <p>Auction finished!</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <a th:href="@{/}" class="btn btn-primary rounded-0">Go to Home page</a>
+                    <button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="winnerModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content rounded-0">
+                <div class="modal-body d-flex flex-column align-items-center justify-content-center px-4 btn-warning2">
+                    <i class="bi bi-trophy-fill display-1 text-light"></i>
+                    <p class="text-center">Congrats <span id="winnerModal-username" class="fw-bold"></span>!</p>
+                    <p class="text-center">You won "<span id="winnerModal-productName" class="fw-bold"></span>" with the bid price <span id="winnerModal-bid" class="fw-bold"></span>!</p>
+                    <div class="w-50 ratio ratio-1x1 my-3 border-secondary border border-3">
+                        <img class="op-center of-cover" th:src="${#strings.arraySplit(auction.product.listImage,' ')[0]}" alt="">
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <a th:href="@{/login}" class="btn btn-warning2 rounded-0">See it in your Won Items</a>
+                    <button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="BidFormResponse"></div>
+
+    <div class="" th:insert="footer :: my-footer"></div>
 </div>
 
 
 <!-- JavaScript Libraries -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
 <script th:src="@{/lib/wow/wow.min.js}"></script>
 <script th:src="@{/lib/easing/easing.min.js}"></script>
 <script th:src="@{/lib/waypoints/waypoints.min.js}"></script>
 <script th:src="@{/lib/counterup/counterup.min.js}"></script>
 <script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+
+<!--carousel of small images-->
 <script>
     $('.owl-carousel').owlCarousel({
         margin: 10,
@@ -305,93 +385,9 @@
         owl.trigger('prev.owl.carousel', [300]);
     })
 </script>
-<!-- Template Javascript -->
-<script th:src="@{/js/main.js}"></script>
-<script th:src="@{/js/timer.js}"></script>
+
+<!-- Timer -->
 <script>
-    $('#bidBtn').click(function () {
-        if ([[${#request.userPrincipal == null}]]) {
-            //show modal 'Log in to place your bid'
-            alert("You Need Login To Bid !")
-        } else {
-            var auction = {auctionID: [[${auction.auctionID}]]}
-            var user = {account: {username: "[[${#request.userPrincipal != null} ? ${#request.userPrincipal.name.toString()} : '' ]]"}};
-            var bidTime = new Date($.now()).toLocaleString('vi-VN', {
-                hour: "2-digit",
-                minute: "2-digit",
-                second: "2-digit",
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric"
-            });
-            var bidPrice = Number($('#price').html().replace('$ ', '').replace(',', ''));
-            var json = {"bidPrice": bidPrice, "bidTime": bidTime, "user": user, "auction": auction};
-            console.log(JSON.stringify(json));
-            $.ajax({
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                type: "POST",
-                data: JSON.stringify(json),
-                url: "/bid/createBid",
-                success: function () {
-                    console.log('success')
-                }
-            });
-            alert("You Bid Successfully !")
-        }
-    });
-
-</script>
-<script type="text/javascript">
-    var productId = [[${auction.product.productId}]];
-    setInterval(listBid, 1000);
-
-    function listBid() {
-        console.log('ok')
-        $.ajax({
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'HTML'
-            },
-            type: "GET",
-            url: "/products/load/" + productId,
-            success: function (result) {
-                console.log($(result, '.table').html())
-                $('.table').replaceWith($(result).find('.table'))
-            }
-        })
-    }
-</script>
-
-<script>
-    var modal = document.getElementById("confirmBidModal");
-    var btn = document.getElementById("btnModalBid");
-    var close = document.getElementsByClassName("close")[0];
-    var bidBtn = document.getElementById("bidBtn");
-
-    btn.onclick = function () {
-        modal.style.display = "block";
-    }
-
-    close.onclick = function () {
-        modal.style.display = "none";
-
-    }
-
-    bidBtn.onclick = function () {
-        modal.style.display = "none";
-    }
-
-</script>
-
-
-<!-- button increment price-->
-<script type="text/javascript">
-    var bidPrice = Number($('#price').html().replace('$ ', '').replace(',', ''))
-    var stepPrice = [[${auction.stepPrice}]]
-    console.log(stepPrice)
     var formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
@@ -399,22 +395,187 @@
         minimumFractionDigits: 2,
         minimumIntegerDigits: 1,
     });
-    $(document).on('click', '#plusBidBtn', function () {
-        bidPrice += stepPrice
-        $('#subBidBtn').removeClass('bg-muted').removeClass('cursor-not-allowed');
-        $('#price').html(formatter.format(bidPrice))
-    })
-    $(document).on('click', '#subBidBtn', function () {
 
-        if (bidPrice - stepPrice > 0) {
-            bidPrice -= stepPrice
-            $('#price').html(formatter.format(bidPrice))
-			if (bidPrice - stepPrice <= 0) $('#subBidBtn').addClass('bg-muted').addClass('cursor-not-allowed');
+    let finishTime = new Date("[[${auction.finishTime}]]").getTime()
+    let timer = setInterval(function () {
+        let now = $.now()
+        let timeLeft = finishTime - now;
+
+        let hours = Math.floor(timeLeft / (1000 * 60 * 60)).toString();
+        let minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60)).toString();
+        let seconds = Math.floor((timeLeft % (1000 * 60)) / 1000).toString();
+
+        hours = hours.length < 2 ? "0" + hours : hours;
+        minutes = minutes.length < 2 ? "0" + minutes : minutes;
+        seconds = seconds.length < 2 ? "0" + seconds : seconds;
+
+        $('#hour').html(hours)
+        $('#minute').html(minutes)
+        $('#second').html(seconds)
+
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            finishAuctionTask()
         }
+    }, 1000);
 
+    function finishAuctionTask() {
+        $('#timer').html('Please wait...')
 
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'HTML'
+                },
+                type: "GET",
+                url: "/auctions/auction-result/" + [[${auction.auctionID}]],
+                success: function (result) {
+                    if (result["auctionResult"]==="visitor"){
+                        $('#visitorModal').modal('show')
+                    }
+                    if (result["auctionResult"]==="loser"){
+                        $('#loserModal').modal('show')
+                    }
+                    if (result["auctionResult"]==="winner"){
+                        getWinnerDetail();
+
+                        $('#winnerModal').modal('show')
+                    }
+
+                }
+            })
+    }
+
+    function getWinnerDetail(){
+        let cartDetail
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'HTML'
+            },
+            type: "GET",
+            url: "/auctions/get-winner-cartDetail/" + [[${auction.auctionID}]],
+            success: function (cartDetail) {
+                $('#winnerModal-bid').html(formatter.format(cartDetail["bid"]["bidPrice"]))
+                $('#winnerModal-username').html(cartDetail["bid"]["user"]["account"]["username"])
+                $('#winnerModal-productName').html(cartDetail["product"]["productName"])
+            }
+        })
+        return null;
+    }
+
+</script>
+
+<!-- button increment price-->
+<script type="text/javascript">
+    function incrementPrice(isPlus) {
+        var bidPrice = parseFloat($('#price').html().replace('$', '').replaceAll(',', ''))
+        var stepPrice = [[${auction.stepPrice}]]
+        if (isPlus) {
+            bidPrice += stepPrice
+            $('#subBidBtn').removeClass('bg-muted').removeClass('cursor-not-allowed');
+            $('#price').html(formatter.format(bidPrice))
+        } else {
+            if (bidPrice - stepPrice > 0) {
+                bidPrice -= stepPrice
+                $('#price').html(formatter.format(bidPrice))
+                if (bidPrice - stepPrice <= 0) $('#subBidBtn').addClass('bg-muted').addClass('cursor-not-allowed');
+            }
+        }
+        return null;
+    }
+
+    $('#plusBidBtn').click(function () {
+        incrementPrice(true)
+    })
+    $('#subBidBtn').click(function () {
+        incrementPrice(false)
     })
 
+</script>
+<!-- Socket -->
+<script type="text/javascript">
+    var socket = new SockJS('/smart-auction-websocket');
+    var stompClient = Stomp.over(socket);
+    stompClient.connect({}, function (frame) {
+        console.log("Connected: " + frame);
+        stompClient.subscribe('/auctions/new-bid-alert-receiver/' + [[${auction.auctionID}]], function () {
+            reloadBidList();
+        })
+    })
+
+    function reloadBidList() {
+        console.log('ok')
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: "GET",
+            url: "/auctions/detail-auction/" + [[${auction.auctionID}]],
+            success: function (result) {
+                $('#current-bid').replaceWith($(result).find('#current-bid'))
+                $('#current-winner').replaceWith($(result).find('#current-winner'))
+                $('#current-bid').attr('class', 'wow tada');
+                $('#current-winner').attr('class', 'wow tada');
+
+                $('.table').replaceWith($(result).find('.table'))
+                $('#winnerRow').parent().parent().addClass('wow fadeInUp');
+                $('.table tbody tr').addClass('wow fadeInDown')
+
+                $('#bidding-content').css('display', 'block')
+
+                incrementPrice(true)
+            }
+        })
+    }
+
+    $('#bidBtn').click(function () {
+        if ([[${#request.userPrincipal == null}]]) {
+            //show modal 'Log in to place your bid'
+            $('#loginErrorModal').modal('show')
+        } else {
+            $('#price-confirm').html($('#price').html())
+            $('#confirmBidModal').modal('show')
+        }
+    });
+
+    $('#confirmBidBtn').click(function () {
+        $('#confirmBidModal').modal('hide')
+        var auction = {auctionID: [[${auction.auctionID}]]}
+        var user = {account: {username: "[[${#request.userPrincipal != null} ? ${#request.userPrincipal.name.toString()} : '' ]]"}};
+        var bidTime = new Date($.now()).toLocaleString('vi-VN', {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "numeric",
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric"
+        });
+        var bidPrice = parseFloat($('#price').html().replace('$', '').replaceAll(',', ''));
+        var json = {"bidPrice": bidPrice, "bidTime": bidTime, "user": user, "auction": auction};
+        console.log(JSON.stringify(json));
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: "POST",
+            data: JSON.stringify(json),
+            url: "/bid/createBid",
+            success: function (result) {
+                // let result = JSON.parse(jsonObject);
+                console.log(result)
+                if (result["isSuccess"]) {
+                    stompClient.send("/auctions/new-bid-alert/" + [[${auction.auctionID}]], {}, "New Bid Alert")
+                } else {
+                    //show error mess in modal
+                    $('#error-modal-message').html(result["errorMess"])
+                    $('#otherErrorsModal').modal('toggle')
+                }
+            }
+        });
+    })
 </script>
 
 
