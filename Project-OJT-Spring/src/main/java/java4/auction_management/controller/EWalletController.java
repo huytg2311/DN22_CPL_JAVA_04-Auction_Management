@@ -2,7 +2,6 @@ package java4.auction_management.controller;
 
 import java4.auction_management.entity.payment.EWallet;
 import java4.auction_management.entity.user.User;
-import java4.auction_management.service.IEWalletService;
 import java4.auction_management.service.IUserService;
 import java4.auction_management.service.impl.EWalletService;
 import org.springframework.beans.factory.annotation.Autowired;

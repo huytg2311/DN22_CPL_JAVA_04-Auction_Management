@@ -42,11 +42,6 @@ public class AdminController {
 
     @Autowired
     CategoryService categoryService;
-//    @GetMapping
-//    public String showAllUser(Model model) {
-//        model.addAttribute("users", userService.getAllUser());
-//        return "admin/list-user";
-//    }
 
     @GetMapping
     public String showAll(Model model) {
@@ -65,9 +60,7 @@ public class AdminController {
     @PostMapping("/edit")
     public String editUser(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes,
                            @RequestParam("file") MultipartFile file) throws IOException {
-//        if (bindingResult.hasErrors()) {
-//            return "admin/edit-user";
-//        }
+
         Optional<User> currentUser = userService.getById(user.getId());
         System.out.println(currentUser);
 
@@ -102,8 +95,6 @@ public class AdminController {
         model.addAttribute("users", user );
         return "admin/detail-user";
     }
-
-
 
     }
 
