@@ -163,7 +163,7 @@
             for (const i = 0; i <= fi.files.length - 1; i++) {
                console.log(fi.files.length);
                 const fsize = fi.files.item(i).size;
-                const file = Math.round((fsize / 1024));
+                const file = Math.round((fsize / 1024 / 1024));
                 // The size of the file.
                 if (fi.files.length > 5) {
 
@@ -171,11 +171,11 @@
                     fi.value = '';
                     productUpload.disabled = true;
 
-                    if (file > 24000) {
+                } else if (file > 9) {
                         fi.value = '';
-                        overSizeImage.innerText = 'File too big, please select a file less than 25mb';
-                    }
-                } else {
+                        overSizeImage.innerText = 'File too big, please select a file less than 10mb';
+                }
+                else {
                     overSizeImage.innerText = '';
                     productUpload.disabled = false;
 
