@@ -17,8 +17,13 @@ public class CartDetailService implements ICartDetailService {
     ICartDetailRepository iCartDetailRepository;
 
     @Override
-    public Optional<CartDetail> findCartDetailByProduct(Product product){
-        return iCartDetailRepository.findCartDetailByProduct(product);
+    public Optional<CartDetail> findCartDetailByProduct(Product product) {
+        return Optional.empty();
+    }
+
+    @Override
+    public CartDetail getCartDetailByCartID(Long id) {
+        return iCartDetailRepository.getCartDetailByCartID(id);
     }
 
     @Override

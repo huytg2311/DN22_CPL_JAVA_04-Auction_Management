@@ -28,7 +28,7 @@
 </head>
 <body>
 <div class="" th:insert="header :: my-header"></div>
-<div class="wrapper">
+<div class="wrapper" style="margin-top: 100px">
     <nav id="sidebar" class="sidebar js-sidebar">
         <div id="" class="header-spacer bg-dark"></div>
         <div class="sidebar-content js-simplebar">
@@ -104,7 +104,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="bill : ${bills}" th:href="@{/admin/billManagement}">
+                                <tr th:each="bill : ${bills}" th:href="@{/admin/billManagement}" th:if="${bill.deliveryAddress != null}">
 
 <!--                                    <td class="d-none d-md-table-cell" th:text="${bill.cartDetail.product.productName}"></td>-->
 <!--                                    <td class="d-none d-md-table-cell" th:text="${bill.cartDetail.cart.user.account}"></td>-->
