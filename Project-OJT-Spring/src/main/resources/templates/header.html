@@ -20,6 +20,7 @@
 	<!-- Icon Font Stylesheet -->
 
 
+
 	<!-- Libraries Stylesheet -->
 	<link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
 	<link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
@@ -36,16 +37,16 @@
 	<!-- Spinner Start -->
 	<!-- Spinner Start -->
 	<div id="spinner"
-		 class="show bg-light position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex flex-row align-items-center justify-content-center">
-		<div class="spinner-border text-light d-flex align-items-center justify-content-center" role="status">
-			<img th:src="@{/img/logo.svg}" alt="" height="100px" width="100px">
+		 class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+		<div class="spinner-grow text-primary" role="status">
+			<i class="fa fa-gavel fs-3"></i>
 		</div>
 	</div>
 	<!-- Spinner End -->
 
 
 	<!-- Navbar Start -->
-	<div id="js-header-height" class="wow fadeInDown" data-wow-delay="0.1s">
+	<div id="js-header-height" class="fixed-top  wow fadeInDown" data-wow-delay="0.1s">
 		<div class="lh-1 w-100 bg-primary p-3 py-md-1 px-5 d-flex justify-content-between">
 			<div class="d-none d-md-flex align-items-center ms-xl-4">
 				<a href="" class="small text-light me-3">
@@ -90,10 +91,19 @@
 			<div class="collapse navbar-collapse" id="navbarCollapse">
 				<div class="divider d-block b-lg-none"></div>
 				<div class="navbar-nav mx-auto p-lg-0 px-4  py-2 text-uppercase">
-					<a th:href="@{/}" class="nav-item nav-link active">Home</a>
-					<a href="#" class="nav-item nav-link">Bidding</a>
-					<a th:href="@{/auctions/my-auctions}" class="nav-item nav-link">Auctions</a>
-					<a href="#" class="nav-item nav-link">About</a>
+					<a th:href="@{/welcome}" class="nav-item nav-link active">Home</a>
+					<div th:if="${#authorization.expression('hasAuthority(''ROLE_ADMIN'')')}">
+						<a th:href="@{/admin}" class="nav-item nav-link">Admin</a>
+					</div>
+					<div th:if="${#authorization.expression('hasAuthority(''ROLE_USER'')')}">
+						<a th:href="@{/bid/my-bidding}" class="nav-item nav-link">Bidding</a>
+					</div>
+					<div th:if="${#authorization.expression('hasAuthority(''ROLE_USER'')')}">
+						<a th:href="@{/auctions/my-auctions}"  class="nav-item nav-link">Auction</a>
+					</div>
+
+					<a th:href="@{/guide}" class="nav-item nav-link">Guide</a>
+					<a th:href="@{/about}" class="nav-item nav-link">About</a>
 				</div>
 				<div class="divider d-block b-lg-none"></div>
 
@@ -107,12 +117,14 @@
 					</div>
 
 					<div class="ps-3 d-flex align-items-center" th:if="${#request.userPrincipal != null}">
+						<div th:if="${#authorization.expression('hasAuthority(''ROLE_USER'')')}" >
 						<a th:href="@{/cart}" class="nav-link d-flex flex-column text-center px-2 py-3"
 						   title="View your Won items">
 							<i class="bi bi-bag-check px-2 fs-5"></i>
 							<span class="small ">Won Items</span>
 						</a>
-						<a th:href="@{/myEwallet}" class="nav-link d-flex flex-column text-center px-2 py-3"
+						</div>
+						<a th:href="@{/users/profile}" class="nav-link d-flex flex-column text-center px-2 py-3"
 						   title="View your E-wallet">
 							<i class="bi bi-wallet2 px-2 fs-5"></i>
 							<span class="small ">E-Wallet</span>

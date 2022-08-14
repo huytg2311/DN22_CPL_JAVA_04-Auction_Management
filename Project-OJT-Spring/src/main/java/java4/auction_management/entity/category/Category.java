@@ -30,10 +30,5 @@ public class Category {
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Product> product;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private  List<Bill> billList;
-
-
-
 
 }

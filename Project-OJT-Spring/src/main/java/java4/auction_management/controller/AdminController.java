@@ -3,6 +3,7 @@ package java4.auction_management.controller;
 import com.cloudinary.utils.ObjectUtils;
 import java4.auction_management.config.CloudinaryConfig;
 import java4.auction_management.entity.auction.Auction;
+import java4.auction_management.entity.bill.Bill;
 import java4.auction_management.entity.cart.CartDetail;
 import java4.auction_management.entity.category.Category;
 import java4.auction_management.entity.product.Product;
@@ -10,7 +11,7 @@ import java4.auction_management.entity.user.Account;
 import java4.auction_management.entity.user.User;
 import java4.auction_management.service.*;
 import java4.auction_management.service.impl.*;
-import java4.auction_management.timerTask.AuctionFinishedTask;
+//import java4.auction_management.timerTask.AuctionFinishedTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -48,6 +50,12 @@ public class AdminController {
     ICategoryService iCategoryService;
 
     @Autowired
+    BillService iBillService;
+
+    @Autowired
+    CartDetailService cartDetailService;
+
+    @Autowired
     CategoryService categoryService;
 
     @Autowired
@@ -60,7 +68,10 @@ public class AdminController {
     IAuctionService auctionService;
 
     @Autowired
-    AuctionFinishedTask auctionFinishedTask;
+    IBillService billService;
+
+//    @Autowired
+//    AuctionFinishedTask auctionFinishedTask;
 
 
 
@@ -193,15 +204,38 @@ public class AdminController {
         auction.setFinishTime(finishTime);
         auctionService.save(auction);
 
-        auctionFinishedTask.setAuctionId(auction.getAuctionID());
-        Timer timer = new Timer();
-        timer.schedule(auctionFinishedTask, ChronoUnit.MILLIS.between(now,finishTime));
+//        auctionFinishedTask.setAuctionId(auction.getAuctionID());
+//        Timer timer = new Timer();
+//        timer.schedule(auctionFinishedTask, ChronoUnit.MILLIS.between(now,finishTime));
 
         return "redirect:/admin/waitingAuctions" ;
     }
 
+    @GetMapping("/billManagement")
+    public String showAllBills(Model model) {
+        model.addAttribute("bills", billService.getAll());
+        return "admin/bill-management";
+    }
+
+    @GetMapping("/editTransport/{billId}")
+    public String showEditTransportForm(@PathVariable("billId") Bill bill, Model model) {
+//        Bill bill = billService.getBillCartDetailId(cartDetailId);
+        model.addAttribute("bill", bill);
+        model.addAttribute("cartdetailid", bill.getCartDetail().getCartDetailID());
+        return "/bill/editTransport";
+    }
 
 
+    @PostMapping("/editTransport")
+    public String editTransport(@Valid @ModelAttribute  Bill bill, BindingResult bindingResult,HttpServletRequest request, RedirectAttributes redirectAttributes)
+    {
+        Long cartdetailid = Long.valueOf(request.getParameter("cartdetailid"));
+        CartDetail cartDetail = cartDetailService.getCartDetailByCartDetailID(cartdetailid);
+        bill.setCartDetail(cartDetail);
+        iBillService.save(bill);
+        return "redirect:/admin/billManagement";
+
+    }
 }
 
 

@@ -88,54 +88,33 @@
         </nav>
         <main class="content">
             <div class="container-fluid p-0">
-                <h1 class="h3 m-3">Users</h1>
+                <h1 class="h3 m-3">Bill Management</h1>
                 <div class="row ms-0">
                     <div class="col-12">
                         <div class="card">
                             <table class="table table-hover my-0">
                                 <thead>
                                 <tr>
-                                    <th class="d-none d-md-table-cell">Image</th>
-                                    <th class="">Username</th>
-                                    <th class="d-none d-md-table-cell">FullName</th>
-                                    <th class="d-none d-md-table-cell">Email</th>
-                                    <th class="d-none d-md-table-cell">Enable</th>
+
+                                    <th class="">Product Name</th>
+                                    <th class="d-none d-md-table-cell">UserName</th>
+                                    <th class="d-none d-md-table-cell">Delivery Address</th>
+                                    <th class="d-none d-md-table-cell">Shipping Method</th>
+                                    <th class="d-none d-md-table-cell">Transport Status</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="user : ${users}" th:href="@{/admin/detail/{id}(id = ${user.id})}">
-                                    <td>
-                                        <img class="avatar-lg img-fluid rounded-1" th:src="@{${user.image}}">
-                                    </td>
-                                    <td id="getUsername" th:text="${user.account.username}"></td>
-                                    <td class="d-none d-md-table-cell" th:text="${user.fullname}"></td>
-                                    <td class="d-none d-md-table-cell" th:text="${user.email}"></td>
-                                    <td class="total">
+                                <tr th:each="bill : ${bills}" th:href="@{/admin/billManagement}">
 
-                                        <div th:if="${user.account.enable} == true" class="js-switch">
-                                            <label class="switch " >
-                                                <input type="checkbox" checked
-                                                       th:data-username="${user.account.username}"
-                                                       onchange="change(this.getAttribute('data-username'));">
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div th:if="${user.account.enable} == false" class="js-switch" th:data-username="${user.account.username}">
-                                            <label class="switch " >
-                                                <input type="checkbox"
-                                                       th:data-username="${user.account.username}"
-                                                       onchange="change(this.getAttribute('data-username'));">
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
+<!--                                    <td class="d-none d-md-table-cell" th:text="${bill.cartDetail.product.productName}"></td>-->
+<!--                                    <td class="d-none d-md-table-cell" th:text="${bill.cartDetail.cart.user.account}"></td>-->
+                                    <td class="d-none d-md-table-cell" th:text="${bill.deliveryAddress}"></td>
+                                    <td class="d-none d-md-table-cell" th:text="${bill.shippingMethod}"></td>
+                                    <td class="d-none d-md-table-cell" th:text="${bill.ETransport}"></td>
+                                    <td class="border-0 align-middle"><a type="submit" class="btn px-5 btn-primary rounded-0 p-2"
+                                                                         th:href="@{/admin/editTransport/{billId}(billId = ${bill.billId})}" >Edit Transport Status</a>
+                                    </td>
 
-                                    </td>
-                                    <td>
-                                        <a style="text-decoration: none;"
-                                           th:href="@{/admin/detail/{id}(id = ${user.id})}">
-                                            <button type="button" class="btn btn-primary">Detail</button>
-                                        </a>
-                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -168,20 +147,7 @@
 <script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
 <script th:src="@{/js/main.js}"></script>
 <script th:src="@{/admin/js/app.js}"></script>
-<script>
 
-    function change(username){
-        $.ajax({
-            type: "POST",
-            url: "/admin/changeEnable/" + username,
-
-        });
-        window.alert("Change Enable " + username + " !");
-    }
-
-
-
-</script>
 
 </body>
 </html>

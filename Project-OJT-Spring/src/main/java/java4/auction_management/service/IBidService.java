@@ -18,4 +18,5 @@ public interface IBidService extends IService<Bid,Long> {
 
     List<Bid> findAllByOrderByBidPriceDesc();
 
+    List<Bid> findBiddingByUserId(Long userId);
 }
