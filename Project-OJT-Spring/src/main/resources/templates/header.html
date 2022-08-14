@@ -41,6 +41,15 @@
 			<img th:src="@{/img/logo.svg}" alt="" height="100px" width="100px">
 		</div>
 	</div>
+
+	<!-- Spinner Start -->
+	<div id="spinner-load"
+		 class="bg-light-30 position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex flex-row align-items-center justify-content-center">
+		<div class="spinner-border text-light d-flex align-items-center justify-content-center" role="status">
+			<img th:src="@{/img/logo.svg}" alt="" height="100px" width="100px">
+		</div>
+	</div>
+
 	<!-- Spinner End -->
 
 
@@ -91,7 +100,7 @@
 				<div class="divider d-block b-lg-none"></div>
 				<div class="navbar-nav mx-auto p-lg-0 px-4  py-2 text-uppercase">
 					<a th:href="@{/}" class="nav-item nav-link active">Home</a>
-					<a href="#" class="nav-item nav-link">Bidding</a>
+					<a th:href="@{/auctions/my-bidding}" class="nav-item nav-link">Bidding</a>
 					<a th:href="@{/auctions/my-auctions}" class="nav-item nav-link">Auctions</a>
 					<a href="#" class="nav-item nav-link">About</a>
 				</div>

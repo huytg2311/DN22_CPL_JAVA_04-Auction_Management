@@ -85,18 +85,8 @@ public class HomeController {
 //        System.out.println(user1.toString());
 
 
-    @GetMapping(value = {"/index"})
-    public String welcomePage2(Model model) {
-//        model.addAttribute("nameAccount", accountService.getAll());
-//        User userImage = iUserRepository.findImageUser(user.getAccount().getUsername());
-//        System.out.println(userImage);
-//        model.addAttribute("account", new Account());
-//        model.addAttribute("users", userService.getById(id));
-//        model.addAttribute("user", new User());
-//        System.out.println(id);
-        return "index";
-    }
-// moi ne
+
+
     @GetMapping("/view-profile/{username}")
     public String editProfile(@PathVariable("username") String username, Model model) {
         User user = userService.getUserByUsername(username);

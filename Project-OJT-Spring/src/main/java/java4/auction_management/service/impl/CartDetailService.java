@@ -11,7 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CartDetailService implements ICartDetailService{
+public class CartDetailService implements ICartDetailService {
+
     @Autowired
     ICartDetailRepository iCartDetailRepository;
 
@@ -23,6 +24,11 @@ public class CartDetailService implements ICartDetailService{
     @Override
     public List<CartDetail> getAllCartByUserId(Long id) {
         return iCartDetailRepository.getAllCartByUserId(id);
+    }
+
+    @Override
+    public CartDetail getCartDetailByCartDetailID(Long id) {
+        return iCartDetailRepository.getCartDetailByCartDetailID(id);
     }
 
     @Override

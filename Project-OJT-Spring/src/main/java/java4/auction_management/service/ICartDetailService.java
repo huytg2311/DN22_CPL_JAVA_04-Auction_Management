@@ -14,4 +14,7 @@ public interface ICartDetailService extends IService<CartDetail, Long>{
 
     List<CartDetail> getAllCartByUserId(Long id);
 
+    CartDetail getCartDetailByCartDetailID(Long id);
+
+
 }

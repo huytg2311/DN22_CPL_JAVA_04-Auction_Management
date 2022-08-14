@@ -107,13 +107,49 @@ public class ProductController {
         }
 
         redirectAttributes.addFlashAttribute("message", "Edit successful");
-        return "redirect:/";
+        return "redirect:/auctions/my-auctions";
+    }
+
+    @GetMapping("/load/{id}")
+    public String load(@PathVariable("id") Auction auction, Model model) {
+        List<Bid> bidList = iBidService.listBidSort(auction.getAuctionID());
+        model.addAttribute("bids", bidList);
+//        auction.setBidList(bidList);
+        model.addAttribute("auction", auction);
+
+        String[] listImages = auction.getProduct().getListImage().split(" ");
+        model.addAttribute("listImages", listImages);
+        return "products/post";
+
     }
 
 
+//     ajax controller history bid
+//    @RequestMapping(value = "/loadBid/{id}", method = RequestMethod.GET,
+//            produces = MediaType.APPLICATION_JSON_VALUE, consumes = {"application/json"})
+//
+//    public @ResponseBody ResponseEntity<Object> sortListBid(@PathVariable("id") Product product) {
+//        List<Bid> bidList = iBidService.listBidSort(product.getProductId());
+//        List<JSONObject> entities = new ArrayList<>();
+//
+//        for (Bid b : bidList) {
+//            JSONObject jsonObject = new JSONObject();
+//            jsonObject.put("id", b.getProduct().getProductId());
+//            entities.add(jsonObject);
+//        }
+//        System.out.println(product.getProductId());
+//        System.out.println(iBidService.listBidSort(product.getProductId()));
+//        return new ResponseEntity<Object>(entities, HttpStatus.OK);
+//    }
 
 
-
+//    @GetMapping("/auction/{username}")
+//    public String loadAuction(@PathVariable("username") String username, Model model){
+//        List<Product> products = productService.findProductsByUsername(username);
+//        model.addAttribute("products", products);
+//
+//        return "user/auction";
+//    }
 
     @GetMapping(value = "/productDetail")
     public String productDetail(){ return "product-detail";}
@@ -130,13 +166,13 @@ public class ProductController {
     @PostMapping("/edit")
     public String editProduct(@Valid @ModelAttribute Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes,
                                 @RequestParam("file") MultipartFile[] files) throws IOException {
-        String username = product.getAuction().getUser().getAccount().getUsername();
+//        String username = product.getAuction().getUser().getAccount().getUsername();
 
         for (MultipartFile m: files
              ) {
             if (m.isEmpty()) {
                 productService.save(product);
-                return "redirect:/products/auction/" + username;
+                return "redirect:/auctions/my-auctions/" ;
             }
         }
         try {
@@ -157,7 +193,7 @@ public class ProductController {
         }
 
         redirectAttributes.addFlashAttribute("message", "Edit successful");
-        return "redirect:/products/auction/" + username;
+        return "redirect:/auctions/my-auctions/" ;
     }
 
 }

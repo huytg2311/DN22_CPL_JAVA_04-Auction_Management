@@ -84,9 +84,6 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Cart> cartList;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Bill> billLlist;
-
     @Column(name = "reset_password_token")
     private String resetPasswordToken;
 

@@ -1,5 +1,6 @@
 package java4.auction_management.repository;
 
+import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.bid.Bid;
 import java4.auction_management.entity.product.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,6 +19,14 @@ public interface IBidRepository extends JpaRepository<Bid, Integer> {
     List<Bid> listBidSort(Long auctionID);
 
     List<Bid> findAllByOrderByBidPriceDesc();
+
+    @Query(value = "select b from Bid b where b.user.id = ?1")
+    List<Bid> findBiddingByUserId(Long userId);
+
+    @Query(value = "select b from Bid as b where b.user.account.username = ?1 group by b.auction order by b.bidPrice")
+    List<Bid> getBidsHadBeenBidByUsername(String username);
+
+
 
 //    List<Bid> findAllByProduct
 }

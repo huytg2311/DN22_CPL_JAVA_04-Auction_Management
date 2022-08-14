@@ -63,4 +63,13 @@ public class AuctionService implements IAuctionService {
     public Auction getAuctionByAuctionID(Long id) {
         return iAuctionRepository.getAuctionByAuctionID(id);
     }
+
+
+
+//    @Override
+//    public List<Auction> getAuctionsByUserId(Long id) {
+//        return iAuctionRepository.getAuctionsByUserId(id);
+//
+//    }
+
 }
