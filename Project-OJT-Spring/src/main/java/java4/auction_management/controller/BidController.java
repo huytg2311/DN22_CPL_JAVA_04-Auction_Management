@@ -48,7 +48,7 @@ public class BidController {
         return "/cart/cart";
     }
 
-    @RequestMapping(value = "/createBid", method = RequestMethod.POST,
+    @RequestMapping(value = "/createBid",
             produces = MediaType.APPLICATION_JSON_VALUE, consumes={"application/json"})
     @ResponseBody
     public String createBid(@RequestBody Bid bid) {

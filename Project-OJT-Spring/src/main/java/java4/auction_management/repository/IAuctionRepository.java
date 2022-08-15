@@ -23,7 +23,7 @@ public interface IAuctionRepository extends JpaRepository<Auction, Long> {
     @Query(value = "select a from Auction  as a where  a.user.id = ?1")
     List<Auction> getAuctionsByUserId(Long id);
 
-    @Query(value = "select a from Auction a where a.user.account.username = ?1 order by a.product.datePost asc ")
+    @Query(value = "select a from Auction a where a.user.account.username = ?1 order by a.product.datePost desc ")
     List<Auction> findAuctionsByUsername(String username);
 
     @Query("select a from Auction as a where a.auctionStatus = 'ACCEPTED' and current_timestamp < a.finishTime order by a.finishTime asc")

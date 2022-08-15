@@ -262,12 +262,13 @@
 <!-- Template Javascript -->
 <script th:src="@{/js/main.js}"></script>
 <script>
-    let auctionTimers = $('.js-auction-timer');
-    let finishTimes = $('.js-auction-finish-time');
-    let timeLeftDisplayers = $('.js-auction-time-left');
 
-    setInterval(function () {
-        for (let i = 0; i<auctionTimers.length; i++) {
+    let x = setInterval(function () {
+		let auctionTimers = $('.js-auction-timer');
+		let finishTimes = $('.js-auction-finish-time');
+		let timeLeftDisplayers = $('.js-auction-time-left');
+
+		for (let i = 0; i<auctionTimers.length; i++) {
             let finishTime = new Date(finishTimes.eq(i).val()).getTime()
             let now = $.now()
             let timeLeft = finishTime-now
@@ -281,8 +282,10 @@
 
             timeLeftDisplayers.eq(i).html(hours + ' : ' + minutes + ' : ' + seconds)
             if(timeLeft <= 0){
+				clearInterval(x)
 				timeLeftDisplayers.eq(i).html('Auction Ended')
 				setTimeout(reloadAuctions, 2000)
+
             }
         }
 
@@ -293,7 +296,6 @@
         console.log(pageNum)
         $.ajax({
             headers: {
-                'Accept': 'application/json',
                 'Content-Type': 'HTML'
             },
             type: "GET",
@@ -302,6 +304,7 @@
                 $("#list-auction").replaceWith($(result).find("#list-auction"))
             }
         })
+		setInterval(x)
     }
 </script>
 
