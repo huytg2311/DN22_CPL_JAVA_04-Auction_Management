@@ -6,9 +6,11 @@ import com.google.gson.JsonObject;
 import java4.auction_management.config.CloudinaryConfig;
 import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.bid.Bid;
+import java4.auction_management.entity.cart.Cart;
 import java4.auction_management.entity.category.Category;
 import java4.auction_management.entity.product.Product;
 import java4.auction_management.entity.user.User;
+import java4.auction_management.repository.IProductRepository;
 import java4.auction_management.service.IAuctionService;
 import java4.auction_management.service.IBidService;
 import java4.auction_management.service.ICategoryService;
@@ -56,6 +58,9 @@ public class ProductController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private IProductRepository iProductRepository;
 
 
     @ModelAttribute("categories")
@@ -169,6 +174,15 @@ public class ProductController {
 
         redirectAttributes.addFlashAttribute("message", "Edit successful");
         return "redirect:/auctions/my-auctions/" ;
+    }
+
+    @GetMapping("/sold")
+    public String showProductsSold(HttpServletRequest httpServletRequest, Model model) {
+        User user = userService.getUserByUsername(httpServletRequest.getUserPrincipal().getName());
+        List<Product> products = iProductRepository.getProductsSoldByUserId(user.getId());
+
+        model.addAttribute("products", products);
+        return "/products/productsSold";
     }
 
 }

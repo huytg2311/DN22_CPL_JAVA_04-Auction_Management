@@ -121,6 +121,11 @@
 
 					<div class="ps-3 d-flex align-items-center" th:if="${#request.userPrincipal != null}">
 						<th:block th:if="${#authorization.expression('hasAuthority(''ROLE_USER'')')}">
+							<a th:href="@{/products/sold}" class="nav-link d-flex flex-column text-center px-2 py-3"
+							   title="View your Won items">
+								<i class="bi bi-cart px-2 fs-5"></i>
+								<span class="small ">Products Sold</span>
+							</a>
 							<a th:href="@{/cart}" class="nav-link d-flex flex-column text-center px-2 py-3"
 							   title="View your Won items">
 								<i class="bi bi-cart px-2 fs-5"></i>
