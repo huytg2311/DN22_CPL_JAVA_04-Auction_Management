@@ -65,7 +65,7 @@
                                     <tr>
                                         <th>Product Name</th>
                                         <th class="d-none d-md-table-cell">Your Bidding</th>
-                                        <th class="d-none d-md-table-cell">Time Finish</th>
+                                        <th class="d-none d-md-table-cell">Time Left</th>
                                         <th class="d-none d-md-table-cell">Product Status Bidding</th>
                                         <th class="d-none d-md-table-cell">Action</th>
 
@@ -79,7 +79,11 @@
                                         <td class="d-none d-md-table-cell" th:text="${bid.bidPrice}"></td>
                                         <td class="d-none d-md-table-cell" th:text="${bid.bidTime}"></td>
                                         <td>
-                                            <button type="button" class="btn btn-danger">Loading...</button>
+                                            <div class="js-auction-timer my-2">
+                                                <input class="js-auction-finish-time" type="hidden"
+                                                       th:value="${bid.auction.finishTime}">
+                                                <div class="js-auction-time-left fw-bold fs-6" style="color: #D41E3F"></div>
+                                            </div>
                                         </td>
                                         <td>
                                             <a style="text-decoration: none;"
@@ -129,6 +133,7 @@
 
 <!-- Template Javascript -->
 <script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/timer.js}"></script>
 
 </body>
 

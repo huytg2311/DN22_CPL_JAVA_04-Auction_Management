@@ -141,12 +141,6 @@ public class UserController {
         return "user/wallet";
     }
 
-    @GetMapping("/bidding/{userId}")
-    public String showAuctionBidding(@PathVariable("userId")Bid bid, Model model) {
 
-//        model.addAttribute("users", user);
-
-        return "user/bidding";
-    }
 
 }

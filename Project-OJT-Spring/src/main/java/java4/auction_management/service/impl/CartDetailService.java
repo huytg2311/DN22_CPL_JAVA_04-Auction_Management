@@ -16,10 +16,14 @@ public class CartDetailService implements ICartDetailService {
     @Autowired
     ICartDetailRepository iCartDetailRepository;
 
-
     @Override
     public Optional<CartDetail> findCartDetailByProduct(Product product) {
         return Optional.empty();
+    }
+
+    @Override
+    public CartDetail getCartDetailByCartID(Long id) {
+        return iCartDetailRepository.getCartDetailByCartID(id);
     }
 
     @Override
@@ -44,8 +48,9 @@ public class CartDetailService implements ICartDetailService {
 
     @Override
     public CartDetail save(CartDetail entity) {
-        return null;
+        return iCartDetailRepository.save(entity);
     }
+
 
     @Override
     public void deleteById(Long id) {

@@ -20,9 +20,11 @@ public interface IBidRepository extends JpaRepository<Bid, Integer> {
 
     List<Bid> findAllByOrderByBidPriceDesc();
 
-    @Query(value = "select b from Bid b where b.user.id = ?1")
+    @Query(value = "select b from Bid as b where b.user.id = ?1 and current_timestamp <= b.auction.finishTime  group by b.auction order by b.bidPrice")
     List<Bid> findBiddingByUserId(Long userId);
 
+    @Query(value = "select b from Bid as b where b.user.account.username = ?1 group by b.auction order by b.bidPrice")
+    List<Bid> getBidsHadBeenBidByUsername(String username);
 
 
 

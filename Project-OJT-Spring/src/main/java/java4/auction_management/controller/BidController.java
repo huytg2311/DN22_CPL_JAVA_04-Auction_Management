@@ -3,13 +3,10 @@ package java4.auction_management.controller;
 import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.bid.Bid;
 import java4.auction_management.entity.cart.Cart;
-import java4.auction_management.entity.product.Product;
 import java4.auction_management.entity.user.User;
-import java4.auction_management.service.IAuctionService;
 import java4.auction_management.service.impl.*;
-import java4.auction_management.service.impl.ProductService;
+import java4.auction_management.timerTask.AuctionTimer;
 import java4.auction_management.validate.BidValidator;
-import org.cloudinary.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -17,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Controller
@@ -37,6 +36,9 @@ public class BidController {
 
     @Autowired
     BidValidator bidValidator;
+
+    @Autowired
+    AuctionTimer auctionTimer;
 
     @GetMapping("/cart/{username}")
     public String showCart(@PathVariable("username") String username, Model model, HttpServletRequest httpServletRequest) {
@@ -61,10 +63,16 @@ public class BidController {
         String responseMessage = bidValidator.validateBid(bid, auction);
 
         if (responseMessage.contains("true")){
+            if(ChronoUnit.SECONDS.between(bid.getBidTime(),auction.getFinishTime()) < 30) {
+                auction.setFinishTime(LocalDateTime.now().plusSeconds(30));
+                iAuctionService.save(auction);
 
+                auctionTimer.scheduleTimerTask(auction.getAuctionID(), ChronoUnit.MILLIS.between(LocalDateTime.now(),auction.getFinishTime()));
+            }
             bid.setAuction(auction);
-
             bidService.save(bid);
+
+
         }
 
         return responseMessage;

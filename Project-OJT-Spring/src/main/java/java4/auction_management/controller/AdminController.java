@@ -6,12 +6,12 @@ import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.bill.Bill;
 import java4.auction_management.entity.cart.CartDetail;
 import java4.auction_management.entity.category.Category;
-import java4.auction_management.entity.product.Product;
 import java4.auction_management.entity.user.Account;
 import java4.auction_management.entity.user.User;
 import java4.auction_management.service.*;
 import java4.auction_management.service.impl.*;
 //import java4.auction_management.timerTask.AuctionFinishedTask;
+import java4.auction_management.timerTask.AuctionTimer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,8 +27,6 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Timer;
-import java.util.TimerTask;
 
 @Controller
 @RequestMapping("/admin")
@@ -67,11 +65,12 @@ public class AdminController {
     @Autowired
     IAuctionService auctionService;
 
+
     @Autowired
     IBillService billService;
 
-//    @Autowired
-//    AuctionFinishedTask auctionFinishedTask;
+    @Autowired
+    AuctionTimer auctionTimer;
 
 
 
@@ -204,9 +203,7 @@ public class AdminController {
         auction.setFinishTime(finishTime);
         auctionService.save(auction);
 
-//        auctionFinishedTask.setAuctionId(auction.getAuctionID());
-//        Timer timer = new Timer();
-//        timer.schedule(auctionFinishedTask, ChronoUnit.MILLIS.between(now,finishTime));
+       auctionTimer.scheduleTimerTask(auction.getAuctionID(),ChronoUnit.MILLIS.between(now,finishTime));
 
         return "redirect:/admin/waitingAuctions" ;
     }

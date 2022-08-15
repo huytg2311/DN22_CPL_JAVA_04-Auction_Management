@@ -3,6 +3,7 @@ package java4.auction_management.controller;
 import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.bid.Bid;
 import java4.auction_management.service.impl.AuctionService;
+import java4.auction_management.service.impl.BidService;
 import java4.auction_management.service.impl.CartDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
@@ -24,13 +25,19 @@ public class AuctionController {
     AuctionService auctionService;
 
     @Autowired
+    BidService bidService;
+
+    @Autowired
     CartDetailService cartDetailService;
 
     @Autowired
     SimpMessagingTemplate simpMessagingTemplate;
 
+    @Autowired
+    HttpServletRequest httpServletRequest;
+
     @GetMapping("/my-auctions")
-    public String loadAuction(Model model, HttpServletRequest httpServletRequest) {
+    public String loadAuction(Model model) {
         List<Auction> auctions =
                 auctionService.findAuctionsByUsername(httpServletRequest.getUserPrincipal().getName());
         model.addAttribute(
@@ -74,7 +81,7 @@ public class AuctionController {
 
     @GetMapping("/auction-result/{auctionId}")
     @ResponseBody
-    public String getAuctionResult(@PathVariable Long auctionId, HttpServletRequest httpServletRequest) {
+    public String getAuctionResult(@PathVariable Long auctionId) {
         String result = "{\"auctionResult\": \"visitor\"}";
 
         if (httpServletRequest.getUserPrincipal() != null) {
@@ -108,5 +115,14 @@ public class AuctionController {
     @MessageMapping("/auctions/new-bid-alert/{auctionId}")
     public void alertClientToReloadBidList(@DestinationVariable String auctionId, @RequestBody String alert) {
         simpMessagingTemplate.convertAndSend("/auctions/new-bid-alert-receiver/" + auctionId, alert);
+    }
+
+    @GetMapping("/my-bidding")
+    public String showAuctionBidding(Model model) {
+        List<Bid> bidList= bidService.getAuctionsHadBeenBidByUsername(httpServletRequest.getUserPrincipal().getName());
+
+        model.addAttribute("bids",bidList);
+
+        return "user/bidding";
     }
 }

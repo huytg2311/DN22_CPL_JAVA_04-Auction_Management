@@ -55,5 +55,8 @@ public class BidService implements IBidService {
         return iBidRepository.findBiddingByUserId(userId);
     }
 
+    public List<Bid> getAuctionsHadBeenBidByUsername(String username){
+        return iBidRepository.getBidsHadBeenBidByUsername(username);
+    }
 
 }

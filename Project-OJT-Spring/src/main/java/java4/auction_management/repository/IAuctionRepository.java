@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IAuctionRepository extends JpaRepository<Auction, Long> {
 
@@ -25,8 +26,7 @@ public interface IAuctionRepository extends JpaRepository<Auction, Long> {
     @Query(value = "select a from Auction a where a.user.account.username = ?1")
     List<Auction> findAuctionsByUsername(String username);
 
-
-    @Query("select a from Auction as a where a.auctionStatus = 'ACCEPTED' and current_timestamp <= a.finishTime")
+    @Query("select a from Auction as a where a.auctionStatus = 'ACCEPTED' and current_timestamp < a.finishTime")
     Page<Auction> getAllAuctionByStatus(Pageable pageable);
 
 //    Auction getAuctionByAuctionID(Long id);

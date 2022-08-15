@@ -1,5 +1,6 @@
 package java4.auction_management.service;
 
+import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.bid.Bid;
 import java4.auction_management.entity.product.Product;
 import org.springframework.security.access.method.P;
@@ -19,4 +20,7 @@ public interface IBidService extends IService<Bid,Long> {
     List<Bid> findAllByOrderByBidPriceDesc();
 
     List<Bid> findBiddingByUserId(Long userId);
+
+
+
 }

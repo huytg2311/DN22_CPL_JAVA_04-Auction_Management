@@ -40,4 +40,6 @@ public class CloudinaryConfig {
                 .border("2px _solid _black").crop(action))
                 .imageTag(name);
     }
+
+
 }
