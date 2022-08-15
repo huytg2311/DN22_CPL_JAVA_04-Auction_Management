@@ -107,12 +107,12 @@ public class UserController {
                         ObjectUtils.asMap("resourcetype", "auto"));
                 user.setImage(uploadResult.get("url").toString());
                 if (bindingResult.hasErrors()) {
-                    return "redirect:/view-profile/{username}";
+                    return "redirect:/user/view-profile/{username}";
                 }
                 userService.saveUserNotPassword(user);
             } catch (IOException e) {
                 e.printStackTrace();
-                return "redirect:/view-profile/{username}";
+                return "redirect:/user/view-profile/{username}";
             }
             return "/user-form";
         }
@@ -158,7 +158,7 @@ public class UserController {
             e.printStackTrace();
             return "redirect:/view-profile/{username}";
         }
-        return "redirect:/changeAvatar";
+        return "redirect:/user/changeAvatar";
     }
 
 

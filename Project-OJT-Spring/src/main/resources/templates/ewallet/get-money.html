@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Smart Auction Profile</title>
+    <title>Smart Auction My E-Wallet</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -103,7 +103,8 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 col-xl-8">
+                <div class="col-md-6 col-xl-8" >
+
                     <div class="card">
                         <strong style="font-size: 200%; margin-left: 6%;margin-top: 3%;">My E-Wallet</strong>
                         <form th:if="${ewallet} != null" th:object="${ewallet}" method="post"  style="padding-left: 10%; padding-right: 10%">
@@ -120,7 +121,11 @@
                             </div>
                         </form>
                         <a id="submit" type="submit" th:href="@{/deposit}" class="btn px-5 btn-primary rounded-0 p-2">-> Make a deposit into e-wallet</a>
-                        <div class="card">
+                        <br>
+                        <h4 class="text-secondary" style="text-align: center"
+                           th:if="${#lists.isEmpty(transactions)}">
+                            You have no transactions yet!</h4>
+                        <div class="card" th:if="!${#lists.isEmpty(transactions)}">
                             <strong style="font-size: 200%; margin-left: 6%;margin-top: 3%;margin-bottom: 6%;">My Transaction</strong>
                             <table class="table table-hover my-0">
                                 <thead>
