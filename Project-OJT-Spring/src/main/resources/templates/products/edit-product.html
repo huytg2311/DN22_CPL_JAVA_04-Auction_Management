@@ -119,6 +119,7 @@
                                              class="item ratio ratio-1x1 border border-1 border-primary">
                                             <img class="m-0 of-cover op-center" th:src="@{${img.toString()}}" alt=""
                                                  src=""/>
+
                                         </div>
                                     </div>
                                     <div class="customNav">
@@ -197,6 +198,7 @@
                                             <label style="margin-top: 20px" for="image" >Upload Image</label>
                                             <input style="height: calc(1.5em + .75rem + 2px)" multiple="multiple" type="file" name="file" id="file" class="form-control"/>
                                             <input type="hidden" th:field="*{listImage}" class="form-control" id="image">
+                                            <p class="text-danger" id="over-size-image" th:text="${message}"></p>
                                         </div>
 
                                     </div>

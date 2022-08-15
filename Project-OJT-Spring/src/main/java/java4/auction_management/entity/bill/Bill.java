@@ -10,6 +10,7 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Entity
@@ -25,8 +26,10 @@ public class Bill {
 
     private LocalDateTime timeBill;
 
+    @NotBlank(message = "Delivery Address is required")
     private String deliveryAddress;
 
+    @Enumerated(EnumType.STRING)
     private EShipping shippingMethod;
 
     @Column(columnDefinition = "default 'WAITING'")
@@ -35,7 +38,6 @@ public class Bill {
 
     @OneToOne(cascade = CascadeType.ALL)
     private CartDetail cartDetail;
-
 
 
 }
