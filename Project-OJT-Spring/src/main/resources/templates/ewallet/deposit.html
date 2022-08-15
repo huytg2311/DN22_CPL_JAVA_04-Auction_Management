@@ -3,13 +3,12 @@
 
 <head>
     <meta charset="utf-8">
-    <title>F.Auction - Auction Now!</title>
+    <title>Smart Auction Profile</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
 
-    <!-- Favicon -->
-    <!--    <link href="img/favicon.ico" rel="icon">-->
+
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,12 +23,11 @@
     <!-- Libraries Stylesheet -->
     <link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
     <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
-    <!DOCTYPE html>
-    <html xmlns:th="http://www.thymeleaf.org">
+
 
     <head>
         <meta charset="utf-8">
-        <title>Pay.Picker</title>
+        <title>Smart Auction    </title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -62,7 +60,6 @@
 
 
     </head>
-
 <body style="background: #e3e4e7">
 
 <div class="" th:insert="header :: my-header"></div>
@@ -85,11 +82,11 @@
                         </div>
                         <hr class="my-0">
                         <div class="card-body" style="padding-bottom: 66%">
-                            <a th:href="@{/changePassword/{username}(username = ${#request.userPrincipal.name})}" style="text-align: center;font-size: 120%; margin-top: 20px; display: block">
+                            <a th:href="@{/user/changePassword}" style="text-align: center;font-size: 120%; margin-top: 20px; display: block">
                                 <i class="bi bi-lock-fill ml-"></i>
                                 <span>Change Password</span>
                             </a>
-                            <a th:href="@{/changeAvatar}" style="text-align: center;font-size: 120%; margin-top: 20px; display: block; margin-left: -30px">
+                            <a th:href="@{/user/changeAvatar}" style="text-align: center;font-size: 120%; margin-top: 20px; display: block; margin-left: -30px">
                                 <i class="bi bi-person-bounding-box"></i>
                                 <span>Change Avatar</span>
                             </a>
