@@ -43,6 +43,7 @@ public class UserService implements IUserService {
         iUserRepository.save(user);
     }
 
+    @Override
     public void changeAvatar(User user, String image) {
         user.setImage(image);
         iUserRepository.save(user);

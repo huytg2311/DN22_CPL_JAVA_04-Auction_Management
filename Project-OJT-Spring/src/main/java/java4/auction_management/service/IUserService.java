@@ -26,4 +26,6 @@ public interface IUserService extends IService<User, Long>{
 
     User saveUserNotPassword(User user);
 
+    void changeAvatar(User user, String image);
+
 }

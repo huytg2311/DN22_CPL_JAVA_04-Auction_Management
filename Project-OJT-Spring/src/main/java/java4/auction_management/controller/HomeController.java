@@ -50,8 +50,7 @@ public class HomeController {
     @Autowired
     private AccountService accountService;
 
-    @Autowired
-    private ProductService productService;
+
 
     @Autowired
     private AuctionService auctionService;
@@ -71,21 +70,6 @@ public class HomeController {
     }
 
 
-//        String[] listImage = products.getListImage().split(" ");
-//        for (String image: listImage
-//        ) {
-//            System.out.println(image);
-//        }
-//        model.addAttribute("listImage", listImage);
-
-
-//        String[] listImages = product.getListImage().split(" ");
-//        model.addAttribute("listImages", listImages);
-//        model.addAttribute("user", user1);
-//        System.out.println(user1.toString());
-
-
-
 
     @GetMapping("/view-profile/{username}")
     public String editProfile(@PathVariable("username") String username, Model model) {
@@ -99,81 +83,7 @@ public class HomeController {
         return "user-form";
     }
 
-    @PostMapping("/edit-profile")
-    public String editUser(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                           @RequestParam("file") MultipartFile file) throws IOException {
-//        Account account = accountService.getById(user.getAccount().getUsername()).orElseThrow(() -> {
-//            throw new IllegalStateException("No account found");
-//        });
-//        account.setRetypePassword(user.getAccount().getRetypePassword());
-//        user.setAccount(account);
-        accountValidator.validate(user, bindingResult);
-        if (bindingResult.hasErrors()) {
-            return "/user-form";
-        }
 
-        if (file.isEmpty()) {
-            userService.saveUserNotPassword(user);
-            return "/user-form";
-        } else {
-            try {
-                Map uploadResult = cloudc.upload(file.getBytes(),
-                        ObjectUtils.asMap("resourcetype", "auto"));
-                user.setImage(uploadResult.get("url").toString());
-                if (bindingResult.hasErrors()) {
-                    return "redirect:/view-profile/{username}";
-                }
-                userService.saveUserNotPassword(user);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return "redirect:/view-profile/{username}";
-            }
-            return "/user-form";
-        }
-    }
-
-    @GetMapping("/changePassword/{username}")
-    public String formChangePassword(@PathVariable("username") String username, Model model) {
-        Account account1 = accountService.findByUsername(username);
-        User user = userService.getUserByUsername(username);
-        model.addAttribute("username", username);
-        model.addAttribute("user", user);
-        return "/change-password";
-    }
-
-    @PostMapping("/savePassword")
-    public String changePassword(HttpServletRequest request, Model model) {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-
-        Account account = accountService.findByUsername(username);
-        accountService.updatePassword(account, password);
-        model.addAttribute("message", "Change password successfully !");
-        return "/success";
-    }
-
-    @GetMapping("/changeAvatar")
-    public String formChangeAvatar(HttpServletRequest httpServletRequest, Model model) {
-        User user = userService.getUserByUsername(httpServletRequest.getUserPrincipal().getName());
-        model.addAttribute("user", user);
-        return "form-change-image";
-    }
-
-    @PostMapping("/changeAvatar")
-    public String changeAvatar(HttpServletRequest httpServletRequest, @RequestParam("file") MultipartFile file, Model model) {
-        String image = httpServletRequest.getParameter("image");
-        User user = userService.getUserByUsername(httpServletRequest.getUserPrincipal().getName());
-        try {
-            Map uploadResult = cloudc.upload(file.getBytes(),
-                    ObjectUtils.asMap("resourcetype", "auto"));
-            image = uploadResult.get("url").toString();
-            userService.changeAvatar(user, image);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "redirect:/view-profile/{username}";
-        }
-        return "redirect:/changeAvatar";
-    }
 
     @GetMapping(value = {"/403"})
     public String accessDenied(Model model) {

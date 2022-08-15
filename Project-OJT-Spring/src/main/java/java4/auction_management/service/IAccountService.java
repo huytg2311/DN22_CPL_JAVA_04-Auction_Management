@@ -20,5 +20,6 @@ public interface IAccountService extends IService<Account, String>{
 
     Account findByUsername(String username);
 
+    void updatePassword(Account account, String newPassword);
 
 }
