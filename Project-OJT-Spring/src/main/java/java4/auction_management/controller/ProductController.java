@@ -175,13 +175,12 @@ public class ProductController {
     @PostMapping("/edit")
     public String editProduct(@Valid @ModelAttribute Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model,
                                 @RequestParam("file") MultipartFile[] files) throws IOException {
-//        String username = product.getAuction().getUser().getAccount().getUsername();
 
-        for (MultipartFile file: files
-             ) {
-            if (file.isEmpty()) {
-                model.addAttribute("message", "You must upload img product");
-                return "/products/edit-product" ;
+        for (MultipartFile m: files
+        ) {
+            if (m.isEmpty()) {
+                productService.save(product);
+                return "redirect:/auctions/my-auctions/" ;
             }
         }
         try {

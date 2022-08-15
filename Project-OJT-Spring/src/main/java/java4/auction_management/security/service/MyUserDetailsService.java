@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Optional;
 
@@ -20,7 +21,7 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<Account> accountOptional = this.accountService.getById(username);
+        Optional<Account> accountOptional = this.accountService.getAccountEnable(username);
         return accountOptional.map(MyUserDetails::new).orElse(null);
     }
 

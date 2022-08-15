@@ -2,7 +2,6 @@ package java4.auction_management.service.impl;
 
 import java4.auction_management.dto.user.ChangePasswordRequest;
 import java4.auction_management.entity.user.Account;
-import java4.auction_management.entity.user.User;
 import java4.auction_management.repository.IAccountRepository;
 import java4.auction_management.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,6 +103,18 @@ public class AccountService implements IAccountService {
     @Override
     public Account findByUsername(String username) {
         return accountRepository.findByUsername(username);
+    }
+
+    @Override
+    public Boolean existsAccountByPassword(String password) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(password);
+        return this.accountRepository.existsAccountByPassword(encodedPassword);
+    }
+
+    @Override
+    public Optional<Account> getAccountEnable(String username) {
+        return this.accountRepository.getAccountEnable(username);
     }
 
     public void processOAuthPostLogin(String username) {

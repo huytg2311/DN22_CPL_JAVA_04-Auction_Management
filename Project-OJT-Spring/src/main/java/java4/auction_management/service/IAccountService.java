@@ -2,10 +2,8 @@ package java4.auction_management.service;
 
 import java4.auction_management.dto.user.ChangePasswordRequest;
 import java4.auction_management.entity.user.Account;
-import java4.auction_management.entity.user.User;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 
 public interface IAccountService extends IService<Account, String>{
@@ -19,6 +17,12 @@ public interface IAccountService extends IService<Account, String>{
     Account getUserByUsername(String username);
 
     Account findByUsername(String username);
+
+    Boolean existsAccountByPassword(String password);
+
+    Optional<Account> getAccountEnable(String username);
+
+
 
 
 }

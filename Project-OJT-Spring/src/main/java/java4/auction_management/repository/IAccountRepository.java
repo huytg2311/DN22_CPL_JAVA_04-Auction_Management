@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Optional;
+
 public interface IAccountRepository extends JpaRepository<Account, String> {
 
     Boolean existsByUsername(String username);
@@ -25,5 +27,10 @@ public interface IAccountRepository extends JpaRepository<Account, String> {
     Account savePassword(String username, String password);
 
     Account findByUsername(String username);
+
+    Boolean existsAccountByPassword(String password);
+
+    @Query(value = "select a from Account as a where a.username = ?1 and a.enable = true")
+    Optional<Account> getAccountEnable(String username);
 
 }
