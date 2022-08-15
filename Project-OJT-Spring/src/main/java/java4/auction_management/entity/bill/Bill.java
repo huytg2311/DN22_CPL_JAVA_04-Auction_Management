@@ -1,6 +1,7 @@
 package java4.auction_management.entity.bill;
 
 import java4.auction_management.entity.cart.Cart;
+import java4.auction_management.entity.cart.CartDetail;
 import java4.auction_management.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,9 +33,9 @@ public class Bill {
     @Enumerated(EnumType.STRING)
     private ETransport eTransport = ETransport.WAITING;
 
-    @JoinColumn(name = "userId")
-    @ManyToOne(fetch = FetchType.EAGER)
-    private User user;
+    @OneToOne(cascade = CascadeType.ALL)
+    private CartDetail cartDetail;
+
 
 
 }

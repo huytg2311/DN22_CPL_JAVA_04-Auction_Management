@@ -45,6 +45,9 @@ public class Account {
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Chat> chatList;
 
+    @OneToOne(mappedBy = "account")
+    private EWallet eWallet;
+
 
 
     public boolean getEnable() {

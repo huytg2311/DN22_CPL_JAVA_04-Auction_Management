@@ -1,6 +1,8 @@
 package java4.auction_management.service.impl;
 
+import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.bid.Bid;
+import java4.auction_management.entity.user.User;
 import java4.auction_management.repository.IBidRepository;
 import java4.auction_management.service.IBidService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,4 +61,7 @@ public class BidService implements IBidService {
         return iBidRepository.getBidsHadBeenBidByUsername(username);
     }
 
+    public Bid getBidByAuctionAndUser(Auction auction, User user){
+        return iBidRepository.getBidByAuctionAndUser(auction,user);
+    }
 }

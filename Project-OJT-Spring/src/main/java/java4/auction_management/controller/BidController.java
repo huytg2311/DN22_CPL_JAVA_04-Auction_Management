@@ -56,8 +56,7 @@ public class BidController {
             throw new IllegalStateException("No auction id found");
         });
         User user = userService.getUserByUsername(bid.getUser().getAccount().getUsername());
-        System.out.println(bid.getUser().getAccount().getUsername());
-        System.out.println(user);
+
         bid.setUser(user);
 
         String responseMessage = bidValidator.validateBid(bid, auction);
@@ -69,9 +68,15 @@ public class BidController {
 
                 auctionTimer.scheduleTimerTask(auction.getAuctionID(), ChronoUnit.MILLIS.between(LocalDateTime.now(),auction.getFinishTime()));
             }
-            bid.setAuction(auction);
-            bidService.save(bid);
-
+            if(!(bidService.getBidByAuctionAndUser(auction,user)==null)){
+                Bid oldBid = bidService.getBidByAuctionAndUser(auction,user);
+                oldBid.setBidPrice(bid.getBidPrice());
+                oldBid.setBidTime(bid.getBidTime());
+                bidService.save(oldBid);
+            } else {
+                bid.setAuction(auction);
+                bidService.save(bid);
+            }
 
         }
 
