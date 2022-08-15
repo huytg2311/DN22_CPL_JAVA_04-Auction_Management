@@ -37,8 +37,7 @@ public class TransactionService implements ITransactionService {
     }
 
     @Override
-    public Transaction save(Transaction entity) {
-        return null;
+
     public List<Transaction> findTransactionsByUsername(String username) {
         return iTransactionRepository.findTransactionsByUsername(username);
     }

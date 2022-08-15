@@ -8,10 +8,6 @@ public interface ITransactionService extends IService<Transaction, Long>{
     @Override
     Transaction save(Transaction entity);
 
-
-@Service
-public interface ITransactionService extends IService<Transaction, Long>{
-
     List<Transaction> findTransactionsByUsername(String username);
 
 }

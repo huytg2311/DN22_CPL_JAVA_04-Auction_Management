@@ -3,6 +3,7 @@ package java4.auction_management.repository;
 import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.bid.Bid;
 import java4.auction_management.entity.product.Product;
+import java4.auction_management.entity.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
