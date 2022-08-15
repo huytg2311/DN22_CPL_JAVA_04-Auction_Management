@@ -62,7 +62,7 @@ public class HomeController {
     AccountValidator accountValidator;
 
 
-    @GetMapping(value = {"/","/welcome"})
+    @RequestMapping(value = {"/","/welcome"}, method = RequestMethod.GET)
     public String welcomePage(Model model,@PageableDefault(size = 8) Pageable pageable) {
         Page<Auction> auctions = auctionService.getAllAuctionByStatus(pageable);
         model.addAttribute("auctions", auctions);

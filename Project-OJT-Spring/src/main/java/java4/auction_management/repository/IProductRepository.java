@@ -15,10 +15,8 @@ public interface  IProductRepository extends JpaRepository<Product, Long> {
     @Override
     Optional<Product> findById(Long productId);
 
-    @Query(value = "select p from Auction  as p where  p.auctionStatus = 'WAITING'")
+    @Query(value = "select a from Auction  as a where  a.auctionStatus = 'WAITING' order by a.product.datePost desc ")
     List<Auction> getWaitingAuctions();
-
-
 
     @Query(value = "select p from Product as p where p.auction.auctionID = ?1")
     Product getProductByAuctionId(Long id);

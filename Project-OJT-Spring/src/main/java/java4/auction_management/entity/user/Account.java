@@ -1,10 +1,8 @@
 package java4.auction_management.entity.user;
-import java4.auction_management.entity.chat.Chat;
 import java4.auction_management.entity.payment.EWallet;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java4.auction_management.entity.chat.Chat;
 import java4.auction_management.entity.product.Product;
 import java4.auction_management.entity.payment.EWallet;
 import lombok.AllArgsConstructor;
@@ -42,8 +40,6 @@ public class Account {
     @OneToOne(mappedBy = "account")
     private User user;
 
-    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
-    private List<Chat> chatList;
 
 
 

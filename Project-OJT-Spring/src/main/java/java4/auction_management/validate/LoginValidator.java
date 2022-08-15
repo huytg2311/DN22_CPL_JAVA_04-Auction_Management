@@ -24,5 +24,9 @@ public class LoginValidator implements Validator {
         if (!iAccountService.existByUserName(account.getUsername())) {
             errors.rejectValue("username", "username", new String[]{}, "User is incorrect");
         }
+
+        if (!iAccountService.existsAccountByPassword(account.getPassword())) {
+            errors.rejectValue("password", "password", new String[]{}, "Password is incorrect");
+        }
     }
 }

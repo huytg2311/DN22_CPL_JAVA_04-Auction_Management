@@ -1,8 +1,9 @@
 package java4.auction_management.controller;
 
 import java4.auction_management.entity.payment.EWallet;
+import java4.auction_management.entity.payment.Transaction;
 import java4.auction_management.entity.user.User;
-import java4.auction_management.service.IEWalletService;
+import java4.auction_management.service.ITransactionService;
 import java4.auction_management.service.IUserService;
 import java4.auction_management.service.impl.EWalletService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class EWalletController {
@@ -24,10 +26,15 @@ public class EWalletController {
     @Autowired
     IUserService iUserService;
 
+    @Autowired
+    ITransactionService iTransactionService;
+
     @GetMapping("/myEwallet")
     public String getMoneyInEWallet(HttpServletRequest httpServletRequest, Model model) {
         EWallet eWallet = ieWalletService.getEWalletByAccount_Username(httpServletRequest.getUserPrincipal().getName());
         User user = iUserService.getUserByUsername(httpServletRequest.getUserPrincipal().getName());
+        List<Transaction> transactionList = iTransactionService.findTransactionsByUsername(httpServletRequest.getUserPrincipal().getName());
+        model.addAttribute("transactions", transactionList);
         model.addAttribute("ewallet", eWallet);
         model.addAttribute("user", user);
         return "/ewallet/get-money";
