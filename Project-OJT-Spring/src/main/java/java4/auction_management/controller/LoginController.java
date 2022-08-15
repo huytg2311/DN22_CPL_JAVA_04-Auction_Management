@@ -3,6 +3,7 @@ import com.cloudinary.utils.ObjectUtils;
 import java4.auction_management.config.CloudinaryConfig;
 import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.cart.Cart;
+import java4.auction_management.entity.payment.EWallet;
 import java4.auction_management.entity.product.Product;
 import java4.auction_management.entity.user.Account;
 import java4.auction_management.entity.user.User;
@@ -10,6 +11,7 @@ import java4.auction_management.service.IAccountService;
 import java4.auction_management.service.IAuctionService;
 import java4.auction_management.service.IUserService;
 import java4.auction_management.service.impl.CartService;
+import java4.auction_management.service.impl.EWalletService;
 import java4.auction_management.validate.AccountValidator;
 import java4.auction_management.validate.LoginValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +55,8 @@ public class LoginController {
     @Autowired
     private IAuctionService auctionService;
 
+    @Autowired
+    EWalletService eWalletService;
 
     @Autowired
     CartService cartService;
@@ -94,6 +98,10 @@ public class LoginController {
         Cart cart = new Cart();
         cart.setUser(user);
         cartService.save(cart);
+
+        EWallet eWallet = new EWallet();
+        eWallet.setAccount(user.getAccount());
+        eWalletService.save(eWallet);
 //        userService.save(user);
         redirectAttributes.addFlashAttribute("message", "Add successful");
         return "redirect:/success";

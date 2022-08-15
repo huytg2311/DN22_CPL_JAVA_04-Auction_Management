@@ -1,6 +1,7 @@
 package java4.auction_management.service.impl;
 
 import java4.auction_management.entity.cart.CartDetail;
+import java4.auction_management.entity.product.Product;
 import java4.auction_management.repository.ICartDetailRepository;
 import java4.auction_management.service.ICartDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,10 @@ public class CartDetailService implements ICartDetailService {
     @Autowired
     ICartDetailRepository iCartDetailRepository;
 
+
     @Override
-    public CartDetail getCartDetailByCartID(Long id) {
-        return iCartDetailRepository.getCartDetailByCartID(id);
+    public Optional<CartDetail> findCartDetailByProduct(Product product) {
+        return Optional.empty();
     }
 
     @Override
