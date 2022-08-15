@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -19,6 +20,8 @@ public class Transaction {
     private Long id;
 
     private double amount;
+
+    private LocalDateTime dateTransaction;
 
     @Enumerated(EnumType.STRING)
     private EType eType;

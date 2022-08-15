@@ -67,7 +67,7 @@
 
 <div class="" th:insert="header :: my-header"></div>
 
-<div class="main-wrapper">
+<div class="main-wrapper" style="margin-top: 100px">
     <!--    <div th:insert="header :: my-header"></div>-->
     <!-- Carousel Start -->
     <div class="header-spacer bg-white"></div>
@@ -107,23 +107,47 @@
 
                 <div class="col-md-6 col-xl-8">
                     <div class="card">
-                        <strong style="font-size: 200%; margin-left: 6%;margin-top: 3%;margin-bottom: 6%;">My E-Wallet</strong>
-                        <form th:if="${ewallet} != null" th:object="${ewallet}" method="post"  style="padding-left: 10%; padding-right: 10%; padding-bottom: 20%">
+                        <strong style="font-size: 200%; margin-left: 6%;margin-top: 3%;">My E-Wallet</strong>
+                        <form th:if="${ewallet} != null" th:object="${ewallet}" method="post"  style="padding-left: 10%; padding-right: 10%">
                             <div class="my-credit">
                                 <p class="text-credit">Total Credit ($)</p>
                                 <div class="total-credit" th:text="'$'+*{balance}"></div>
                             </div>
                         </form>
 
-                        <form th:if="${ewallet} == null" th:object="${ewallet}" method="post"  style="padding-left: 10%; padding-right: 10%; padding-bottom: 20%">
+                        <form th:if="${ewallet} == null" th:object="${ewallet}" method="post"  style="padding-left: 10%; padding-right: 10%; ">
                             <div class="my-credit">
                                 <p class="text-credit">Total Credit ($)</p>
                                 <div class="total-credit" style="color: red">$0</div>
                             </div>
                         </form>
                         <a id="submit" type="submit" th:href="@{/deposit}" class="btn px-5 btn-primary rounded-0 p-2">-> Make a deposit into e-wallet</a>
+                        <div class="card">
+                            <strong style="font-size: 200%; margin-left: 6%;margin-top: 3%;margin-bottom: 6%;">My Transaction</strong>
+                            <table class="table table-hover my-0">
+                                <thead>
+                                <tr>
+                                    <th class="d-none d-md-table-cell">Mount</th>
+                                    <th class="d-none d-md-table-cell">Type</th>
+                                    <th class="d-none d-md-table-cell">Date</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="cursor-p" th:each="transaction : ${transactions}" >
+
+                                    <td class="d-none d-md-table-cell" th:text="${transaction.amount}"></td>
+                                    <td class="d-none d-md-table-cell" th:text="${transaction.EType}"></td>
+                                    <td class="d-none d-md-table-cell" th:text="${transaction.dateTransaction}"></td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>

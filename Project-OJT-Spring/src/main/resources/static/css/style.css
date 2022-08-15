@@ -719,6 +719,7 @@ select:active + .select-div::after{
     font-weight: 700;
     color: #198754;
     line-height: 30px;
+    margin-bottom: 5%;
 }
 
 
