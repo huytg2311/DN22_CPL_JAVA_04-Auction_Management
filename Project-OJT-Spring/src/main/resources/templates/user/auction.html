@@ -36,7 +36,8 @@
 
 <body>
 <div class="main-wrapper">
-	<div th:insert="header :: my-header"></div>
+<div class="main-wrapper">
+	<div class="sticky-top" th:insert="header :: my-header"></div>
 
 
 	<div class="main bg-white">
@@ -138,10 +139,11 @@
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script th:src="@{/lib/wow/wow.min.js}"></script>
-<script th:src="@{/lib/easing/easing.min.js}"></script>
-<script th:src="@{/lib/waypoints/waypoints.min.js}"></script>
-<script th:src="@{/lib/counterup/counterup.min.js}"></script>
+	<script th:src="@{/lib/wow/wow.min.js}"></script>
+	<script th:src="@{/lib/easing/easing.min.js}"></script>
+	<script th:src="@{/lib/waypoints/waypoints.min.js}"></script>
+	<script th:src="@{/lib/counterup/counterup.min.js}"></script>
+	<script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
 <!-- Template Javascript -->
 <script th:src="@{/js/main.js}"></script>
 <script>

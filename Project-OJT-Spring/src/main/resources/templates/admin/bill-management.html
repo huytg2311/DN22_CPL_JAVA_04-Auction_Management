@@ -106,8 +106,8 @@
                                 <tbody>
                                 <tr th:each="bill : ${bills}" th:href="@{/admin/billManagement}" th:if="${bill.deliveryAddress != null}">
 
-<!--                                    <td class="d-none d-md-table-cell" th:text="${bill.cartDetail.product.productName}"></td>-->
-<!--                                    <td class="d-none d-md-table-cell" th:text="${bill.cartDetail.cart.user.account}"></td>-->
+                                    <td class="d-none d-md-table-cell" th:text="${bill.cartDetail.product.productName}"></td>
+                                    <td class="d-none d-md-table-cell" th:text="${bill.cartDetail.cart.user.account.username}"></td>
                                     <td class="d-none d-md-table-cell" th:text="${bill.deliveryAddress}"></td>
                                     <td class="d-none d-md-table-cell" th:text="${bill.shippingMethod}"></td>
                                     <td class="d-none d-md-table-cell" th:text="${bill.ETransport}"></td>

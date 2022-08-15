@@ -57,11 +57,13 @@
                 console.log('success')
             }
         })
-        window.location = '/admin/waitingAuctions'
+        setTimeout(function () {
+            window.location = '/admin/waitingAuctions'
+        }, 500)
     }
 </script>
 <div class="main-wrapper bg-light">
-    <div class="" th:insert="header :: my-header"></div>
+    <div class="sticky-top" th:insert="header :: my-header"></div>
 
 
     <div class="container-fluid">
