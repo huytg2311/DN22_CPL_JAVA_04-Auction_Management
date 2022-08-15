@@ -282,10 +282,8 @@
 
             timeLeftDisplayers.eq(i).html(hours + ' : ' + minutes + ' : ' + seconds)
             if(timeLeft <= 0){
-				clearInterval(x)
 				timeLeftDisplayers.eq(i).html('Auction Ended')
-				setTimeout(reloadAuctions, 2000)
-
+				setTimeout(reloadAuctions, 500)
             }
         }
 
@@ -304,7 +302,6 @@
                 $("#list-auction").replaceWith($(result).find("#list-auction"))
             }
         })
-		setInterval(x)
     }
 </script>
 

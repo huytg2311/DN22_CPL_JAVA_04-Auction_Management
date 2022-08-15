@@ -17,7 +17,7 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Playfair+Display:wght@600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Inter:wght@300;400;600;700&display=swap"
           rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
@@ -39,80 +39,91 @@
 </head>
 
 <body>
+<div class="main-wrapper bg-white">
+    <div th:insert="header :: my-header"></div>
+
+    <!-- Page Header Start -->
 
 
-<div th:insert="header :: my-header"></div>
+    <div class="main bg-white">
+        <div class="container-fluid m-0 p-0">
+            <div class="mw-1200px mx-auto py-5 bg-light d-flex align-items-center">
 
-<!-- Page Header Start -->
-<div class="container-fluid page-header1 py-6 wow fadeIn" data-wow-delay="0.1s" style="height: 900px">
-    <div class="container text-center pt-5 pb-3">
-
-        <div class="container-xxl py-6" style="margin-top: -100px">
-            <div class="main bg-primary ">
-
-                <main class="content">
-                    <div class="row">
-                        <div class="col-12 " style=" margin-top: 35px">
-                            <div class="card  ">
-                                <div class="card-header ">
-
-                                    <h5 class="card-title mb-0">List Product Bidding</h5>
-                                </div>
-                                <table class="table table-hover my-0">
-                                    <thead>
-                                    <tr>
-                                        <th>Product Name</th>
-                                        <th class="d-none d-md-table-cell">Your Bidding</th>
-                                        <th class="d-none d-md-table-cell">Time Left</th>
-                                        <th class="d-none d-md-table-cell">Product Status Bidding</th>
-                                        <th class="d-none d-md-table-cell">Action</th>
-
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    <tr th:each="bid : ${bids}" th:href="@{/user/bidding}">
-
-                                        <td id="getProductName" th:text="${bid.auction.product.productName}"></td>
-                                        <td class="d-none d-md-table-cell" th:text="${bid.bidPrice}"></td>
-                                        <td class="d-none d-md-table-cell" th:text="${bid.bidTime}"></td>
-                                        <td>
-                                            <div class="js-auction-timer my-2">
-                                                <input class="js-auction-finish-time" type="hidden"
-                                                       th:value="${bid.auction.finishTime}">
-                                                <div class="js-auction-time-left fw-bold fs-6" style="color: #D41E3F"></div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <a style="text-decoration: none;"
-                                               th:href="@{/auctions/detail-auction/{id}(id = ${bid.auction.auctionID})}">
-                                                <button type="button" class="btn btn-primary">Go to product bidding</button>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-
-                            </div>
-                        </div>
+                <div class="row w-100 m-0 px-4 px-lg-5 py-lg-4">
+                    <div class="col-lg-6 m-0">
+                        <h2 class="text-secondary animated lh-1">
+                            <span class="text-primary text-uppercase h1">Bidding</span> of yours
+                        </h2>
+                    </div>
+                    <div class="col-lg-6 m-0 text-lg-end my-auto">
 
 
                     </div>
 
-                </main>
-
+                </div>
 
             </div>
+            <div class="mw-1200px pt-5 pb-4 mx-auto my-0">
+                <p class="text-secondary fs-7 fw-light"
+                   th:if="${#lists.isEmpty(bids)}">
+                    You have not created any auction yet.</p>
+                <div class="table-responsive vh-75" th:if="!${#lists.isEmpty(bids)}">
+                    <table class="table table-hover fs-6 ">
+                        <thead class="bg-light text-primary position-sticky top-0 start-0 end-0"
+                               style="z-index: 5">
+                        <tr>
+                            <th>Product Name</th>
+                            <th class="d-none d-md-table-cell">Your Bidding</th>
+                            <th class="d-none d-md-table-cell">Time Left</th>
+                            <th class="d-none d-md-table-cell">Product Status Bidding</th>
+                            <th class="d-none d-md-table-cell">Action</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr th:each="bid : ${bids}" th:href="@{/user/bidding}">
+
+                            <td id="getProductName" th:text="${bid.auction.product.productName}"></td>
+                            <td class="d-none d-md-table-cell" th:text="${'$' + #numbers.formatDecimal(bid.bidPrice,1,'COMMA',2,'POINT')}"></td>
+                            <td>
+                                <div class="js-auction-timer my-2">
+                                    <input class="js-auction-finish-time" type="hidden"
+                                           th:value="${bid.auction.finishTime}">
+                                    <div class="js-auction-time-left fw-bold fs-6" style="color: #D41E3F"></div>
+                                </div>
+                            </td>
+                            <td class="d-none d-md-table-cell"
+                                th:with="listBid=${bid.auction.bidList}"
+                                th:text="${listBid.get(bid.auction.bidList.size()-1).bidPrice == bid.bidPrice} ? 'WIN' : 'LOSE'"></td>
+                            <td>
+                                <a style="text-decoration: none;"
+                                   th:href="@{/auctions/detail-auction/{id}(id = ${bid.auction.auctionID})}">
+                                    <button type="button" class="btn btn-primary">Go to Auction</button>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+
+
         </div>
 
 
     </div>
+    <div  th:insert="footer :: my-footer"></div>
 
 </div>
 
 
 <!-- Footer Start -->
-<div style="margin-top: -100px" th:insert="footer :: my-footer"></div>
+
+
+
 <!-- Footer End -->
 
 <!-- JavaScript Libraries -->

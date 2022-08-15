@@ -116,19 +116,10 @@ public class UserController {
     }
 
 
-    @GetMapping("/detailAuction/{productId}")
-    public String detailAuction(@PathVariable("productId") Product product, Model model){
+    @GetMapping("/detailAuction/{auctionId}")
+    public String detailAuction(@PathVariable("auctionId") Auction auction, Model model){
 
-        model.addAttribute("products", product);
-        System.out.println(product);
-
-        String[] listImage = product.getListImage().split(" ");
-        for (String image: listImage
-        ) {
-            System.out.println(image);
-        }
-        model.addAttribute("listImage", listImage);
-
+        model.addAttribute("auction", auction);
 
         return "user/detailAuction";
 
