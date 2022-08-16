@@ -94,7 +94,7 @@ public class EWalletController {
         transaction.setEWallet(eWallet);
         transaction.setEType(EType.ADD);
         transactionService.save(transaction);
-        return "redirect:/myEwallet";
+        return "redirect:/EWallet/myEwallet";
     }
 
     @PostMapping("/updateDrawMoney")
@@ -110,7 +110,7 @@ public class EWalletController {
         transaction.setEWallet(eWallet);
         transaction.setEType(EType.WITHDRAW);
         transactionService.save(transaction);
-        return "redirect:/myEwallet";
+        return "redirect:/EWallet/myEwallet";
     }
 
 
