@@ -23,9 +23,12 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 
+
 	<!-- Icon Font Stylesheet -->
 	<script src="https://kit.fontawesome.com/091e570025.js" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/lib/bootstrap-icons/bootstrap-icons.css}">
 
 </head>
 <body>
@@ -33,7 +36,7 @@
 <div class="wrapper" style="margin-top: 100px">
 
 	<nav id="sidebar" class="sidebar js-sidebar">
-		<div id="" class="header-spacer bg-dark"></div>
+
 		<div class="sidebar-content js-simplebar">
 			<a class="sidebar-brand text-center" href="/admin">
 					<span class="align-middle text-primary ">
@@ -41,7 +44,7 @@
 					</span>
 			</a>
 			<ul class="sidebar-nav">
-				<li class="sidebar-item active">
+				<li class="sidebar-item ">
 					<a class="sidebar-link" th:href="@{/admin}">
 						<i class="align-middle" data-feather="user"></i> <span
 							class="align-middle">User management</span>
@@ -62,10 +65,10 @@
 						<span class="align-middle">Product management</span>
 					</a>
 					<ul class="collapse list-unstyled sidebar-submenu-item" id="sidebarSubmenu">
-						<li class="sidebar-item ">
+						<li class="sidebar-item active">
 							<a th:href="@{/admin/waitingAuctions}" class="sidebar-link ps-5 pe-2 small">
 								<i class="align-middle" data-feather="archive"></i>
-								<span class="align-middle">Product Awaiting Approval</span>
+								<span class="align-middle ">Product Awaiting Approval</span>
 							</a>
 						</li>
 						<li class="sidebar-item">
