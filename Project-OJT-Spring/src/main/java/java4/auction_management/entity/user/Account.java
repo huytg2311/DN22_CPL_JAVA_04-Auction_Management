@@ -12,6 +12,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @Entity
@@ -25,6 +26,7 @@ public class Account {
 //    @Column(name = "username", nullable = false)
     @NotBlank(message = "Username is required")
 
+    @Pattern(regexp = "^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$", message = "Username invalid")
     private String username;
 
     @NotBlank(message = "Password is required")

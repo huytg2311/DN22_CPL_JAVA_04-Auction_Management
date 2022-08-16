@@ -69,7 +69,7 @@
 <div class="main-wrapper bg-light">
     <div class="sticky-top" th:insert="header :: my-header"></div>
 
-            <div class="container-xxl py-5" >
+            <div class="container-xxl py-5">
                 <div class="container">
                     <div class="row" th:object="${user}" >
                         <div class="col-md-2 col-xl-3">
@@ -117,7 +117,7 @@
 
                                             <div class="form-group col-6 px-2">
                                                 <label for="email">Email Address</label>
-                                                <input type="email" th:field="*{email}" class="form-control rounded-0 p-2" placeholder="Enter your email" id="email" disabled>
+                                                <input type="email" th:field="*{email}" class="form-control rounded-0 p-2" placeholder="Enter your email" id="email" readonly>
                                                 <p class="form-message" style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
                                             </div>
                                         </div>
@@ -126,7 +126,7 @@
                                         <div class="row m-0">
                                             <div class="form-group col-6 px-2">
                                                 <label for="phoneNumber">Phone Number</label>
-                                                <input type="text" th:field="*{phoneNumber}" class="form-control rounded-0 p-2" placeholder="Enter your number" id="phoneNumber" disabled>
+                                                <input type="text" th:field="*{phoneNumber}" class="form-control rounded-0 p-2" placeholder="Enter your number" id="phoneNumber" readonly>
                                                 <p class="form-message" style="color: red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></p>
                                             </div>
 
@@ -197,8 +197,8 @@
         console.log("1")
         var btnEdit = document.getElementById("btnEdit")
         var formInput0 = document.getElementsByClassName("form-control rounded-0 p-2")[0]
-        var formInput1 = document.getElementsByClassName("form-control rounded-0 p-2")[1]
-        var formInput2 = document.getElementsByClassName("form-control rounded-0 p-2")[2]
+        // var formInput1 = document.getElementsByClassName("form-control rounded-0 p-2")[1]
+        // var formInput2 = document.getElementsByClassName("form-control rounded-0 p-2")[2]
         var formInput3 = document.getElementsByClassName("form-control rounded-0 p-2")[3]
         var formInput4 = document.getElementsByClassName("form-control rounded-0 p-2")[4]
         var formInput5 = document.getElementsByClassName("form-control rounded-0 p-2")[5]
@@ -206,8 +206,8 @@
         var submit = document.getElementById("submit")
 
         formInput0.disabled = false
-        formInput1.disabled = false
-        formInput2.disabled = false
+        // formInput1.disabled = false
+        // formInput2.disabled = false
         formInput3.disabled = false
         formInput4.disabled = false
         formInput5.disabled = false
@@ -216,8 +216,8 @@
 
         btnEdit.addEventListener('click', function (event) {
             formInput0.disabled = !formInput0.disabled;
-            formInput1.disabled = !formInput1.disabled;
-            formInput2.disabled = !formInput2.disabled;
+            // formInput1.disabled = !formInput1.disabled;
+            // formInput2.disabled = !formInput2.disabled;
             formInput3.disabled = !formInput3.disabled;
             formInput4.disabled = !formInput4.disabled;
             formInput5.disabled = !formInput5.disabled;

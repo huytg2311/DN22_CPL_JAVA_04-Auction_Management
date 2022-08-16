@@ -54,7 +54,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private EGender gender;
 
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
 //    @DateTimeBeforeCurrent
     private LocalDate dayOfBirth;
 
