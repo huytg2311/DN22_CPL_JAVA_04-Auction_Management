@@ -3,6 +3,7 @@ package java4.auction_management.controller;
 import com.cloudinary.utils.ObjectUtils;
 import java4.auction_management.config.CloudinaryConfig;
 import java4.auction_management.entity.auction.Auction;
+import java4.auction_management.entity.auction.EStatus;
 import java4.auction_management.entity.bill.Bill;
 import java4.auction_management.entity.cart.CartDetail;
 import java4.auction_management.entity.category.Category;
@@ -198,13 +199,13 @@ public class AdminController {
         Auction auction = auctionService.getAuctionByAuctionID(auctionJson.getAuctionID());
         auction.setAuctionStatus(auctionJson.getAuctionStatus());
 
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime finishTime = now.plusMinutes(Long.parseLong(auction.getAuctionTime()+""));
-        auction.setFinishTime(finishTime);
+        if (auctionJson.getAuctionStatus() == EStatus.ACCEPTED) {
+            LocalDateTime now = LocalDateTime.now();
+            LocalDateTime finishTime = now.plusMinutes(Long.parseLong(auction.getAuctionTime() + ""));
+            auction.setFinishTime(finishTime);
+            auctionTimer.scheduleTimerTask(auction.getAuctionID(), ChronoUnit.MILLIS.between(now, finishTime));
+        }
         auctionService.save(auction);
-
-       auctionTimer.scheduleTimerTask(auction.getAuctionID(),ChronoUnit.MILLIS.between(now,finishTime));
-
         return "redirect:/admin/waitingAuctions" ;
     }
 

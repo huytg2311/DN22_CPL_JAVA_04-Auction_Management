@@ -96,17 +96,22 @@
 					data-bs-target="#navbarCollapse">
 				<i class="fa fa-align-justify text-light"></i>
 			</button>
-			<div class="collapse navbar-collapse" id="navbarCollapse">
+			<div class="collapse navbar-collapse" id="navbarCollapse" th:with="uri=${#request.getRequestURI().toString()}">
 				<div class="divider d-block b-lg-none"></div>
 				<div class="navbar-nav mx-auto p-lg-0 px-4  py-2 text-uppercase">
-					<a th:href="@{/}" class="nav-item nav-link active">Home</a>
-					<a th:if="${#authorization.expression('hasAuthority(''ROLE_ADMIN'')')}" th:href="@{/admin}" class="nav-item nav-link active">Administration</a>
+					<a th:href="@{/}"
+					   th:class="${uri == '/welcome' || uri == '/'} ? 'nav-item nav-link active' : 'nav-item nav-link'">Home</a>
+					<a th:if="${#authorization.expression('hasAuthority(''ROLE_ADMIN'')')}" th:href="@{/admin}"
+					   th:class="${#strings.contains(uri,'/admin')} ? 'nav-item nav-link active' : 'nav-item nav-link'">Administration</a>
 					<th:block th:if="${#authorization.expression('hasAuthority(''ROLE_USER'')')}">
-						<a th:href="@{/auctions/my-bidding}" class="nav-item nav-link">Bidding</a>
-						<a th:href="@{/auctions/my-auctions}" class="nav-item nav-link">Auctions</a>
+						<a th:href="@{/user/my-bidding}"
+						   th:class="${uri == '/user/my-bidding'} ? 'nav-item nav-link active' : 'nav-item nav-link'">Bidding</a>
+						<a th:href="@{/user/my-auctions}"
+						   th:class="${uri == '/user/my-auctions'} ? 'nav-item nav-link active' : 'nav-item nav-link'">Auctions</a>
 					</th:block>
-					<a th:href="@{/guide}" class="nav-item nav-link">Guide</a>
-					<a th:href="@{/about}" class="nav-item nav-link">About</a>
+					<a th:href="@{/guide}" th:class="${uri == '/guide'} ? 'nav-item nav-link active' : 'nav-item nav-link'"
+					   th:if="${#authorization.expression('!hasAuthority(''ROLE_ADMIN'')')}">Guide</a>
+					<a th:href="@{/about}" th:class="${uri == '/about'} ? 'nav-item nav-link active' : 'nav-item nav-link'">About</a>
 				</div>
 				<div class="divider d-block b-lg-none"></div>
 
@@ -123,8 +128,8 @@
 						<th:block th:if="${#authorization.expression('hasAuthority(''ROLE_USER'')')}">
 							<a th:href="@{/products/sold}" class="nav-link d-flex flex-column text-center px-2 py-3"
 							   title="View your Won items">
-								<i class="bi bi-cart px-2 fs-5"></i>
-								<span class="small ">Products Sold</span>
+								<i class="bi bi-box-seam px-2 fs-5"></i>
+								<span class="small ">Sold Items</span>
 							</a>
 							<a th:href="@{/cart}" class="nav-link d-flex flex-column text-center px-2 py-3"
 							   title="View your Won items">
@@ -158,10 +163,13 @@
 	</div>
 
 	<!-- Navbar End -->
-
+	<script>
+		console.log("[[${#request.getRequestURI().toString()}]]")
+	</script>
 
 </div>
 
 </body>
+
 
 </html>

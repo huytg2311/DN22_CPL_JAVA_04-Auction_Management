@@ -729,3 +729,7 @@ select:active + .select-div::after{
         box-shadow: inset 0px 0px 0px 30px #7ac142
     }
 }
+
+.rotate-icon-90{
+    transform: rotate(90deg)
+}
