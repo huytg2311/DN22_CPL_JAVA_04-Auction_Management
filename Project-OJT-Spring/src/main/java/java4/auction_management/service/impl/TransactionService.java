@@ -27,7 +27,7 @@ public class TransactionService implements ITransactionService {
 
     @Override
     public Transaction save(Transaction entity) {
-        return null;
+        return iTransactionRepository.save(entity);
     }
 
     @Override

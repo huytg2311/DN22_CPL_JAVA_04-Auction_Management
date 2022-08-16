@@ -3,12 +3,14 @@ package java4.auction_management.controller;
 import com.cloudinary.utils.ObjectUtils;
 import java4.auction_management.config.CloudinaryConfig;
 import java4.auction_management.entity.auction.Auction;
+import java4.auction_management.entity.category.Category;
 import java4.auction_management.entity.product.Product;
 import java4.auction_management.entity.user.Account;
 import java4.auction_management.entity.user.User;
 import java4.auction_management.repository.IUserRepository;
 import java4.auction_management.service.IAccountService;
 import java4.auction_management.service.IAuctionService;
+import java4.auction_management.service.ICategoryService;
 import java4.auction_management.service.IUserService;
 import java4.auction_management.service.impl.AccountService;
 import java4.auction_management.service.impl.AuctionService;
@@ -33,8 +35,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import java.util.Optional;
 
@@ -62,11 +63,16 @@ public class HomeController {
     @Autowired
     AccountValidator accountValidator;
 
+    @Autowired
+    ICategoryService categoryService;
+
 
     @RequestMapping(value = {"/","/welcome"}, method = RequestMethod.GET)
     public String welcomePage(Model model,@PageableDefault(size = 8) Pageable pageable) {
         Page<Auction> auctions = auctionService.getAllAuctionByStatus(pageable);
+        List<Category> category = categoryService.getAll();
         model.addAttribute("auctions", auctions);
+        model.addAttribute("category", category);
         return "index";
     }
 
@@ -100,36 +106,27 @@ public class HomeController {
     }
 
     @PostMapping("/edit-profile")
-    public String editUser(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes,
+    public String editUser(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpServletRequest httpServletRequest,
                            @RequestParam("file") MultipartFile file) throws IOException {
 //        Account account = accountService.getById(user.getAccount().getUsername()).orElseThrow(() -> {
 //            throw new IllegalStateException("No account found");
 //        });
 //        account.setRetypePassword(user.getAccount().getRetypePassword());
 //        user.setAccount(account);
-        accountValidator.validate(user, bindingResult);
-        if (bindingResult.hasErrors()) {
-            return "/user-form";
-        }
-
-        if (file.isEmpty()) {
+        Account account = accountService.findByUsername(httpServletRequest.getUserPrincipal().getName());
+        User user1 = userService.getUserByUsername(httpServletRequest.getUserPrincipal().getName());
+        if(Objects.equals(user.getEmail(), user1.getEmail())) {
+            user.setAccount(account);
             userService.saveUserNotPassword(user);
             return "/user-form";
         } else {
-            try {
-                Map uploadResult = cloudc.upload(file.getBytes(),
-                        ObjectUtils.asMap("resourcetype", "auto"));
-                user.setImage(uploadResult.get("url").toString());
-                if (bindingResult.hasErrors()) {
-                    return "redirect:/view-profile/{username}";
-                }
-                userService.saveUserNotPassword(user);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return "redirect:/view-profile/{username}";
+
+            accountValidator.validate(user, bindingResult);
+            if (bindingResult.hasErrors()) {
+                return "/user-form";
             }
-            return "/user-form";
         }
+            return "/user-form";
     }
 
     @GetMapping("/changePassword/{username}")
