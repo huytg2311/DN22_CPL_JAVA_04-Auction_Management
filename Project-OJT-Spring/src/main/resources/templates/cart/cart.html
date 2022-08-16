@@ -34,48 +34,49 @@
     <link th:href="@{css/style.css}" rel="stylesheet">
 </head>
 <body>
-<div th:insert="header :: my-header"></div>
+<div class="sticky-top" th:insert="header :: my-header"></div>
 <h3 class="text-secondary " style="text-align: center; margin-top: 100px"
    th:if="${#lists.isEmpty(carts)}">
     You have not won any auctions!</h3>
 
-<div class="container" style="margin-top: 200px" th:if="!${#lists.isEmpty(carts)}">
-    <h1 class="text-secondary">My Auction</h1>
-    <div class="row">
-        <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+<div class="container mt-5" th:if="!${#lists.isEmpty(carts)}">
 
+        <div class="mw-1200px mx-auto bg-white mb-5">
+            <h1 class="text-secondary">My won items</h1>
             <!-- Shopping cart table -->
-            <div class="table-responsive" th:if="!${#lists.isEmpty(carts)}">
+            <div class="table-responsive vh-75" th:if="!${#lists.isEmpty(carts)}">
                 <table class="table" th:each="cart : ${carts}">
 
                     <thead>
                     <tr>
                         <th scope="col" class="border-0 bg-light">
-                            <div class="p-2 px-3 text-uppercase">Product</div>
+                            <div class=" text-uppercase">Product</div>
                         </th>
                         <th scope="col" class="border-0 bg-light">
-                            <div class="py-2 text-uppercase">Price</div>
+                            <div class=" text-uppercase">Price</div>
                         </th>
                         <th scope="col" class="border-0 bg-light">
-                            <div class="py-2 text-uppercase">Date</div>
+                            <div class=" text-uppercase">Date</div>
                         </th>
-                        <th scope="col" class="border-0 bg-light">
-                            <div class="py-2 text-uppercase"></div>
+                        <th scope="col" class="border-0 bg-light" style="width: 25%">
+
                         </th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="cd: ${cart.cartDetailList}">
-                        <th scope="row" class="border-0">
-                            <div class="p-2" th:each="img, imgState : ${#strings.arraySplit(cd.product.listImage, ' ')}" th:if="${imgState.index==0}">
-                                <img th:src="@{${img}}" alt="" width="70" class="img-fluid rounded shadow-sm">
-                                <div class="ml-name d-inline-block align-middle">
+                        <td class="border-0">
+                            <div class="d-flex align-items-center" th:each="img, imgState : ${#strings.arraySplit(cd.product.listImage, ' ')}" th:if="${imgState.index==0}">
+                                <div class="ratio ratio-1x1 avatar-xl">
+                                    <img th:src="@{${img}}" alt="" width="70" class="op-center of-cover">
+                                </div>
+                                <div class="ms-3 w-fit-content">
                                     <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle" th:text="${cd.product.productName}"></a></h5>
                                 </div>
                             </div>
-                        </th>
-                        <td class="border-0 align-middle"><strong th:text="'$' + ${cd.bid.bidPrice}"></strong></td>
-                        <td class="border-0 align-middle"><strong th:text="${cd.bid.bidTime}"></strong></td>
+                        </td>
+                        <td class="border-0 align-middle"><strong th:text="'$' + ${#numbers.formatDecimal(cd.bid.bidPrice,1,'COMMA',2,'POINT')}"></strong></td>
+                        <td class="border-0 align-middle"><strong th:text="${#temporals.format(cd.bid.bidTime, 'HH:mm:ss dd/MM/yyyy')}"></strong></td>
                         <td class="border-0 align-middle"><a type="submit" class="btn px-5 btn-primary rounded-0 p-2"
                                                              th:href="@{/bill/billConfirm/{cartDetailId}(cartDetailId = ${cd.cartDetailID})}" >Confirm transport</a>
                         </td>

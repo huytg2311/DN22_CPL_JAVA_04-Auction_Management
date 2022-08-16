@@ -152,7 +152,7 @@
     for (const row of rows) {
         $(row, 'td').click(function (){
             console.log('a')
-            window.location=$(row).data(' ');
+            window.location=$(row).data('href');
         })
     }
 </script>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"  xmlns:nl2br="https://github.com/bufferings/thymeleaf-extras-nl2br"
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:nl2br="https://github.com/bufferings/thymeleaf-extras-nl2br"
       lang="en-US" xml:lang="en-US">
 
@@ -229,7 +229,7 @@
                                                 <i class="bi bi-trophy-fill text-primary ms-2"
                                                    th:if="${bidState.index==0}" id="winnerRow"></i>
                                             </td>
-                                            <td th:text="${bid.user.account.username}"></td>
+                                            <td  th:class="${#request.userPrincipal != null && bid.user.account.username == #request.userPrincipal.name} ? 'fw-bold' : ''" th:text="${bid.user.account.username}"></td>
                                             <td th:text="${'$' + #numbers.formatDecimal(bid.bidPrice,1,'COMMA',0,'POINT')}"></td>
                                             <td th:text="${#temporals.format(bid.bidTime, 'HH:mm:ss dd/MM/yyyy')}"></td>
                                         </tr>
@@ -407,35 +407,6 @@
         minimumIntegerDigits: 1,
     });
 
-    let x = function () {
-        let finishTime = new Date($('#timeFinish').val()).getTime()
-        let now = $.now()
-        let timeLeft = finishTime - now;
-
-        let hours = Math.floor(timeLeft / (1000 * 60 * 60)).toString();
-        let minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60)).toString();
-        let seconds = Math.floor((timeLeft % (1000 * 60)) / 1000).toString();
-
-        hours = hours.length < 2 ? "0" + hours : hours;
-        minutes = minutes.length < 2 ? "0" + minutes : minutes;
-        seconds = seconds.length < 2 ? "0" + seconds : seconds;
-
-        $('#hour').html(hours)
-        $('#minute').html(minutes)
-        $('#second').html(seconds)
-
-        if (timeLeft <= 0) {
-            clearInterval(timer);
-            $('#bid-place-area').addClass('d-none')
-            $('#timer').html('Please wait...')
-            $('#spinner-load').addClass('show')
-            finishAuctionTask()
-
-        }
-    }
-	x()
-    let timer = setInterval(x, 1000);
-
     let finishAuctionTask = function () {
         $.ajax({
             headers: {
@@ -464,6 +435,38 @@
         })
 
     }
+
+    let x = function () {
+        let finishTime = new Date($('#timeFinish').val()).getTime()
+        let now = $.now()
+        let timeLeft = finishTime - now;
+
+        let hours = Math.floor(timeLeft / (1000 * 60 * 60)).toString();
+        let minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60)).toString();
+        let seconds = Math.floor((timeLeft % (1000 * 60)) / 1000).toString();
+
+        hours = hours.length < 2 ? "0" + hours : hours;
+        minutes = minutes.length < 2 ? "0" + minutes : minutes;
+        seconds = seconds.length < 2 ? "0" + seconds : seconds;
+
+        $('#hour').html(hours)
+        $('#minute').html(minutes)
+        $('#second').html(seconds)
+
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            $('#bid-place-area').addClass('d-none')
+            $('#timer').html('Please wait...')
+            $('#spinner-load').addClass('show')
+            setTimeout(finishAuctionTask, 1000)
+
+        }
+    }
+    let timer = setInterval(x, 1000);
+	x()
+
+
+
 
     function getWinnerDetail() {
         let cartDetail
