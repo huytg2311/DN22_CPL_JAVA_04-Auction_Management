@@ -9,8 +9,7 @@ public interface IEWalletService extends IService<EWallet, Long> {
 
     EWallet getEWalletByAccount_Username(String username);
 
-    @Override
-    EWallet save(EWallet entity);
+
 
     @Override
     Optional<EWallet> getById(Long id);

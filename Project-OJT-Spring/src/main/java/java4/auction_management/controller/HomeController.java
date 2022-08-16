@@ -67,14 +67,14 @@ public class HomeController {
 
 
     @RequestMapping(value = {"/","/welcome", "/search"}, method = RequestMethod.GET)
-    public String welcomePage(Model model,@PageableDefault(size = 8) Pageable pageable, String name, String nameProduct, HttpServletRequest httpServletRequest) {
+    public String welcomePage(Model model,@PageableDefault(size = 12) Pageable pageable, String name, String nameProduct, HttpServletRequest httpServletRequest) {
         Page<Auction> auctionList;
         List<Category> category = categoryService.getAll();
         if (name != null && nameProduct != null) {
-             name = httpServletRequest.getParameter("name");
+            name = httpServletRequest.getParameter("name");
             nameProduct = httpServletRequest.getParameter("nameProduct");
 
-            auctionList = auctionService.searchAuction(pageable, name, nameProduct);
+            auctionList = auctionService.searchAuction(pageable, name , '%' + nameProduct + '%');
             model.addAttribute("auctions", auctionList);
             return "index";
         }
