@@ -2,6 +2,7 @@ package java4.auction_management.controller;
 
 import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.bid.Bid;
+import java4.auction_management.entity.product.Product;
 import java4.auction_management.service.impl.AuctionService;
 import java4.auction_management.service.impl.BidService;
 import java4.auction_management.service.impl.CartDetailService;
@@ -114,10 +115,6 @@ public class AuctionController {
     public String createFormProduct(Model model) {
         model.addAttribute("product", new Product());
         return "/products/create-product";
-    }
-
-
-        return "user/bidding";
     }
 
 

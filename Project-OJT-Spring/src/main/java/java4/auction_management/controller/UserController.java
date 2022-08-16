@@ -27,6 +27,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/user")
@@ -89,32 +90,23 @@ public class UserController {
     }
 
     @PostMapping("/edit-profile")
-    public String editUser(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes,
+    public String editUser(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpServletRequest httpServletRequest,
                            @RequestParam("file") MultipartFile file) throws IOException {
 
-        accountValidator.validate(user, bindingResult);
-        if (bindingResult.hasErrors()) {
-            return "/user-form";
-        }
-
-        if (file.isEmpty()) {
+        Account account = accountService.findByUsername(httpServletRequest.getUserPrincipal().getName());
+        User user1 = userService.getUserByUsername(httpServletRequest.getUserPrincipal().getName());
+        if(Objects.equals(user.getEmail(), user1.getEmail())) {
+            user.setAccount(account);
             userService.saveUserNotPassword(user);
             return "/user-form";
         } else {
-            try {
-                Map uploadResult = cloudc.upload(file.getBytes(),
-                        ObjectUtils.asMap("resourcetype", "auto"));
-                user.setImage(uploadResult.get("url").toString());
-                if (bindingResult.hasErrors()) {
-                    return "redirect:/user/view-profile/{username}";
-                }
-                userService.saveUserNotPassword(user);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return "redirect:/user/view-profile/{username}";
+
+            accountValidator.validate(user, bindingResult);
+            if (bindingResult.hasErrors()) {
+                return "/user-form";
             }
-            return "/user-form";
         }
+        return "/user-form";
     }
 
     @GetMapping("/changePassword")
