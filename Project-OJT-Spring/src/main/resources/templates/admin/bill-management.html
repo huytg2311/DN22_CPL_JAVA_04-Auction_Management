@@ -90,7 +90,7 @@
             th:if="${#lists.isEmpty(bills)}">
             No bill has been created yet.</h3>
         <div class="header-spacer bg-dark"></div>
-        <main class="content"   th:if="!${#lists.isEmpty(bills)}" >
+        <main class="content"  th:if="${!#lists.isEmpty(bills)}" >
             <div class="container-fluid p-0">
                 <h1 class="h3 m-3">Bill Management</h1>
                 <div class="row ms-0">
