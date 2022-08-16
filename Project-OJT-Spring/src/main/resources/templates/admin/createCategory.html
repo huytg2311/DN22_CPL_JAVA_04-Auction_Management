@@ -3,12 +3,14 @@
 
 <head>
 	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Smart Auction Create Category  </title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="" name="keywords">
+	<meta content="" name="description">
 
-	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<!-- Favicon -->
+	<link th:href="@{/img/logo.svg}" rel="icon">
 
-	<title>Administration</title>
 
 	<link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
 	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
@@ -24,13 +26,15 @@
 	<!-- Icon Font Stylesheet -->
 	<script src="https://kit.fontawesome.com/091e570025.js" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/lib/bootstrap-icons/bootstrap-icons.css}">
 
 </head>
 <body>
 <div class="" th:insert="header :: my-header"></div>
 <div class="wrapper">
 	<nav id="sidebar" class="sidebar js-sidebar" >
-		<div id="" class="header-spacer bg-dark"></div>
+
 		<div class="sidebar-content js-simplebar">
 			<a class="sidebar-brand text-center" href="/admin">
 					<span class="align-middle text-primary ">
@@ -38,14 +42,14 @@
 					</span>
 			</a>
 			<ul class="sidebar-nav">
-				<li class="sidebar-item active">
+				<li class="sidebar-item ">
 					<a class="sidebar-link" th:href="@{/admin}">
 						<i class="align-middle" data-feather="user"></i> <span
 							class="align-middle">User management</span>
 					</a>
 				</li>
 
-				<li class="sidebar-item">
+				<li class="sidebar-item active">
 					<a class="sidebar-link" th:href="@{/admin/categories}">
 						<i class="align-middle" data-feather="grid"></i><span
 							class="align-middle">Category management</span>
@@ -125,7 +129,7 @@
 	</div>
 </div>
 
-
+<div class="" th:insert="footer :: my-footer"></div>
 <!--****** JS ******-->
 <script>
     feather.replace()

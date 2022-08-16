@@ -24,4 +24,6 @@ public interface IProductService extends IService<Product, Long>{
 
     Product getProductByAuctionId(Long id);
 
+    List<Product> getProductsSoldByUserId(Long id);
+
 }

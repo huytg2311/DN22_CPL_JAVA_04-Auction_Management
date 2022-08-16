@@ -6,9 +6,11 @@ import com.google.gson.JsonObject;
 import java4.auction_management.config.CloudinaryConfig;
 import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.bid.Bid;
+import java4.auction_management.entity.cart.Cart;
 import java4.auction_management.entity.category.Category;
 import java4.auction_management.entity.product.Product;
 import java4.auction_management.entity.user.User;
+import java4.auction_management.repository.IProductRepository;
 import java4.auction_management.service.IAuctionService;
 import java4.auction_management.service.IBidService;
 import java4.auction_management.service.ICategoryService;
@@ -56,6 +58,9 @@ public class ProductController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private IProductRepository iProductRepository;
 
 
     @ModelAttribute("categories")
@@ -116,7 +121,7 @@ public class ProductController {
         }
 
         redirectAttributes.addFlashAttribute("message", "Edit successful");
-        return "redirect:/auctions/my-auctions";
+        return "redirect:/user/my-auctions";
     }
 
     @GetMapping("/load/{id}")
@@ -133,32 +138,7 @@ public class ProductController {
     }
 
 
-//     ajax controller history bid
-//    @RequestMapping(value = "/loadBid/{id}", method = RequestMethod.GET,
-//            produces = MediaType.APPLICATION_JSON_VALUE, consumes = {"application/json"})
-//
-//    public @ResponseBody ResponseEntity<Object> sortListBid(@PathVariable("id") Product product) {
-//        List<Bid> bidList = iBidService.listBidSort(product.getProductId());
-//        List<JSONObject> entities = new ArrayList<>();
-//
-//        for (Bid b : bidList) {
-//            JSONObject jsonObject = new JSONObject();
-//            jsonObject.put("id", b.getProduct().getProductId());
-//            entities.add(jsonObject);
-//        }
-//        System.out.println(product.getProductId());
-//        System.out.println(iBidService.listBidSort(product.getProductId()));
-//        return new ResponseEntity<Object>(entities, HttpStatus.OK);
-//    }
 
-
-//    @GetMapping("/auction/{username}")
-//    public String loadAuction(@PathVariable("username") String username, Model model){
-//        List<Product> products = productService.findProductsByUsername(username);
-//        model.addAttribute("products", products);
-//
-//        return "user/auction";
-//    }
 
     @GetMapping(value = "/productDetail")
     public String productDetail(){ return "product-detail";}
@@ -202,6 +182,15 @@ public class ProductController {
 
         redirectAttributes.addFlashAttribute("message", "Edit successful");
         return "redirect:/auctions/my-auctions/" ;
+    }
+
+    @GetMapping("/sold")
+    public String showProductsSold(HttpServletRequest httpServletRequest, Model model) {
+        User user = userService.getUserByUsername(httpServletRequest.getUserPrincipal().getName());
+        List<Product> products = iProductRepository.getProductsSoldByUserId(user.getId());
+
+        model.addAttribute("products", products);
+        return "/products/productsSold";
     }
 
 }

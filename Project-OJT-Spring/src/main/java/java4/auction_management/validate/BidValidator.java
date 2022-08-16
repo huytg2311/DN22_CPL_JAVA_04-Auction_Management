@@ -32,8 +32,11 @@ public class BidValidator {
             responseMess = responseMess.replace("none", "Cannot place bid in your own auctions!");
         } else if (bid.getUser().getAccount().getRole() == ERole.ROLE_ADMIN) {
             responseMess = responseMess.replace("true", "false");
-            responseMess = responseMess.replace("none", "Admin cannot place bids");
-        } else if (bidList.isEmpty()) {
+            responseMess = responseMess.replace("none", "Admin cannot place bids!");
+        } else if(bid.getUser().getAccount().getEWallet().getBalance() < bid.getBidPrice()){
+            responseMess = responseMess.replace("true", "false");
+            responseMess = responseMess.replace("none", "Your balance is not enough to place this bid!");
+        }else if (bidList.isEmpty()) {
             if (bid.getBidPrice() < currentAuction.getReservePrice()) {
                 responseMess = responseMess.replace("true", "false");
                 responseMess = responseMess.replace("none", "Your bid is the first! It must be greater or equal the reserve price!");

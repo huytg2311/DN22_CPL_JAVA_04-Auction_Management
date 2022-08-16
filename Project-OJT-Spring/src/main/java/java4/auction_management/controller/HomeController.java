@@ -51,8 +51,7 @@ public class HomeController {
     @Autowired
     private AccountService accountService;
 
-    @Autowired
-    private ProductService productService;
+
 
     @Autowired
     private AuctionService auctionService;
@@ -77,18 +76,7 @@ public class HomeController {
     }
 
 
-//        String[] listImage = products.getListImage().split(" ");
-//        for (String image: listImage
-//        ) {
-//            System.out.println(image);
-//        }
-//        model.addAttribute("listImage", listImage);
 
-
-//        String[] listImages = product.getListImage().split(" ");
-//        model.addAttribute("listImages", listImages);
-//        model.addAttribute("user", user1);
-//        System.out.println(user1.toString());
 
 
 

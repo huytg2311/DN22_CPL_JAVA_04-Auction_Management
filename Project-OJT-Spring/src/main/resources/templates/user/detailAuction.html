@@ -5,10 +5,13 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Pay.Picker</title>
+    <title>Smart Auction Success  </title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link th:href="@{/img/logo.svg}" rel="icon">
 
     <!-- Favicon -->
     <link href="https://cdn2.iconfinder.com/data/icons/content-design-production-1/66/36-512.png" rel="icon">
@@ -55,12 +58,13 @@
 <body>
 <div class="main-wrapper bg-light">
     <div class="" th:insert="header :: my-header"></div>
-    <div class="header-spacer"></div>
+
 
     <div class="main bg-light">
         <main class="content px-lg-4 pt-lg-4 pb-lg-3 py-3 p-0">
             <div class="container-fluid m-0">
-                <div class="card mw-1200px px-lg-5 px-4 pt-5 pb-4 mx-auto my-0" th:object="${products}">
+                <div class="card mw-1200px px-lg-5 px-4 pt-5 pb-4 mx-auto my-0" th:object="${auction}"
+                     th:with="listImage=${#strings.arraySplit(auction.product.listImage,' ')}">
                     <div class="row m-0 flex-lg-row flex-sm-column">
                         <div class="col-lg-4 p-0 m-0 mb-3">
                             <div class="row m-0 justify-content-between">
@@ -134,28 +138,55 @@
 
 
                         </div>
-                        <div class="col-lg-8 m-0 pt-2 " >
-                            <h5 class="product-title mt-4 " th:text="*{productName}"></h5>
-                            <h6 class="price"> Time:
-                                <span th:text="*{auction.auctionTime}"></span></h6>
+                        <div class="col-lg-8 m-0 pt-0 " >
+                            <h5 class="h4 text-uppercase text-primary" th:text="*{product.productName}"></h5>
+                            <span class="fw-light small" th:text="${#temporals.format(auction.product.datePost, 'HH:mm:ss dd/MM/yyy')}"></span>
+                            <th:block th:switch="${auction.auctionStatus.toString()}">
+                                <div th:case="'WAITING'" class="d-flex align-items-center ">
+                                    <div class="rounded-circle btn-xs-square bg-blue me-1 "></div>
+                                    Waiting Approval
 
+                                </div>
+                                <div th:case="'ACCEPTED'" th:if="${T(java.time.LocalDateTime).now().isBefore(auction.finishTime)}" class="d-flex align-items-center ">
+                                    <div class="rounded-circle btn-xs-square bg-success me-1 "></div>
+                                    In auction time
+                                    <a th:href="@{'/auctions/detail-auction/' + ${auction.auctionID}}">
+                                        <span class="ms-3 btn btn-primary rounded-0 fs-6">Go to Auction</span>
+                                    </a>
+                                </div>
+                                <div th:if="${T(java.time.LocalDateTime).now().isAfter(auction.finishTime) && auction.auctionStatus.toString().equals('ACCEPTED')}" class="d-flex align-items-center ">
+                                    <div class="rounded-circle btn-xs-square bg-primary me-1 "></div>
+                                    Finished
+<!--                                    chuyển tới sản phẩm đã bán-->
+                                    <a th:if="${auction.product.isSold()}" th:href="@{/sold}">
+                                        <span class="ms-3 btn btn-primary rounded-0 fs-6">Go to Sold items</span>
+                                    </a>
+<!--                                    link restart auction + chuyển trang về lại my-auctions-->
+                                    <a th:if="${!(auction.product.isSold())}" th:href="${'/user/my-auctions/restart-auction/' + auction.auctionID}">
+                                        <span class="ms-3 btn btn-primary rounded-0 fs-6">Restart Auction</span>
+                                    </a>
+                                </div>
+                                <div th:case="'REJECTED'" class="d-flex align-items-center ">
+                                    <div class="rounded-circle btn-xs-square bg-danger me-1 "></div>
+                                    Rejected
+                                    <a th:href="@{/}">
+                                        <span class="ms-3 btn btn-primary rounded-0 fs-6">Edit this Auction</span>
+                                    </a>
+                                </div>
+                            </th:block>
+
+                            <h6 class="text-secondary fs-6 mt-4">Auction time: <span class="fw-normal" th:text="*{auctionTime + ' minutes'}"></span></h6>
+                            <h6 class="text-secondary fs-6">Is sold: <span class="fw-normal" th:text="${auction.product.isSold()} ? 'SOLD' : 'Not yet'"></span></h6>
+                            <div class="divider"></div>
+                            <h6 class="text-secondary fs-6">Reserve price: <span class="fw-normal" th:text="*{'$' + #numbers.formatDecimal(reservePrice,1,'COMMA',2,'POINT')}"></span></h6>
+                            <h6 class="text-secondary fs-6">Step price: <span class="fw-normal" th:text="*{'$' + #numbers.formatDecimal(stepPrice,1,'COMMA',2,'POINT')}"></span></h6>
+                            <div class="divider"></div>
                             <div >
-                                <h5 class="text-secondary fs-7">Product description:</h5>
-                                <p nl2br:text="*{description}" class="text-secondary fs-6"></p>
+                                <h6 class="text-secondary fs-6">Product description:</h6>
+                                <p nl2br:text="*{product.description}" class="text-secondary fs-6"></p>
                             </div>
-
-
-                            <h6 class="price">Reserve price:
-                                <span th:text="*{auction.reservePrice}"></span></h6>
-                            <h6 class="price">Step price:
-                                <span th:text="*{auction.stepPrice}"></span>
-                            </h6>
-                            <a style="text-decoration: none;"  class="mb-4" th:href="@{/auctions/my-auctions}">
-
-                                <button type="button" class="btn btn-outline-success ">Back</button>
-                            </a>
-                            <a style="text-decoration: none;" th:if=" ${#strings.equals(products.auction.auctionStatus,'REJECTED')} "
-                                                                               th:href="@{/products/edit/{id}(id = ${products.productId})}">
+                            <a style="text-decoration: none;" th:if=" ${#strings.equals(auction.auctionStatus,'REJECTED')} "
+                               th:href="@{/products/edit/{id}(id = ${auction.product.productId})}">
                                 <button type="button" class="btn btn-outline-success">Edit</button>
                             </a>
 
@@ -187,7 +218,26 @@
 
 <!-- Template Javascript -->
 <script th:src="@{/js/main.js}"></script>
-<script th:src="@{/js/timer.js}"></script>
+<script>
+    console.log([[${T(java.time.LocalDateTime).now().isAfter(auction.finishTime)}]])
+    $('.owl-carousel').owlCarousel({
+        margin: 10,
+        dots: false,
+        items: 3,
+    })
+    var owl = $('.owl-carousel');
+    owl.owlCarousel();
+    // Go to the next item
+    $('.customNextBtn').click(function () {
+        owl.trigger('next.owl.carousel');
+    })
+    // Go to the previous item
+    $('.customPrevBtn').click(function () {
+        // With optional speed parameter
+        // Parameters has to be in square bracket '[]'
+        owl.trigger('prev.owl.carousel', [300]);
+    })
+</script>
 
 
 

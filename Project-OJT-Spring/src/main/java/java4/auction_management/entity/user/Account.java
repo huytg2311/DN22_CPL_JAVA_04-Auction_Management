@@ -43,6 +43,9 @@ public class Account {
     private User user;
 
 
+    @OneToOne(mappedBy = "account")
+    private EWallet eWallet;
+
 
 
     public boolean getEnable() {

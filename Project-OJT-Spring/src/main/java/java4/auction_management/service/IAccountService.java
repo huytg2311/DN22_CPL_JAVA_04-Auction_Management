@@ -10,6 +10,8 @@ public interface IAccountService extends IService<Account, String>{
 
     boolean changePassword(ChangePasswordRequest changePasswordRequest);
 
+    void updatePassword(Account account, String newPassword);
+
     Boolean existByUserName(String username);
 
     Boolean sendOtpToEmail(String toEmail, String otp);

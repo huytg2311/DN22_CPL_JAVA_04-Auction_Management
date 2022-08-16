@@ -39,6 +39,7 @@ public class AccountService implements IAccountService {
         }).orElse(false);
     }
 
+    @Override
     public void updatePassword(Account account, String newPassword) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(newPassword);

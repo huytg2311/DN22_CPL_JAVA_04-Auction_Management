@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Pay.Picker</title>
+	<title>Smart Auction My Auction</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 	<meta content="" name="keywords">
 	<meta content="" name="description">
@@ -36,7 +36,8 @@
 
 <body>
 <div class="main-wrapper">
-	<div th:insert="header :: my-header"></div>
+<div class="main-wrapper">
+	<div class="sticky-top" th:insert="header :: my-header"></div>
 
 
 	<div class="main bg-white">
@@ -83,7 +84,7 @@
 								</thead>
 								<tbody>
 								<tr th:each="auction, auctionState : ${auctionList}"
-									th:data-href="${'/user/detailAuction/' + auction.auctionID}"
+									th:data-href="${'/user/my-auctions/auction-detail/' + auction.auctionID}"
 									class="cursor-p">
 									<td>
 										<div class="d-flex align-items-center">
@@ -129,6 +130,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 
 	<div class="" th:insert="footer :: my-footer"></div>
 </div>
@@ -138,10 +140,11 @@
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script th:src="@{/lib/wow/wow.min.js}"></script>
-<script th:src="@{/lib/easing/easing.min.js}"></script>
-<script th:src="@{/lib/waypoints/waypoints.min.js}"></script>
-<script th:src="@{/lib/counterup/counterup.min.js}"></script>
+	<script th:src="@{/lib/wow/wow.min.js}"></script>
+	<script th:src="@{/lib/easing/easing.min.js}"></script>
+	<script th:src="@{/lib/waypoints/waypoints.min.js}"></script>
+	<script th:src="@{/lib/counterup/counterup.min.js}"></script>
+	<script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
 <!-- Template Javascript -->
 <script th:src="@{/js/main.js}"></script>
 <script>

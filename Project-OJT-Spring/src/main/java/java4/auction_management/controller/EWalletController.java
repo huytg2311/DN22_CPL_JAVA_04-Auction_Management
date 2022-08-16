@@ -1,18 +1,22 @@
 package java4.auction_management.controller;
 
 import java4.auction_management.entity.payment.EType;
+import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.payment.EWallet;
 import java4.auction_management.entity.payment.Transaction;
 import java4.auction_management.entity.user.User;
+import java4.auction_management.service.IAuctionService;
 import java4.auction_management.service.ITransactionService;
 import java4.auction_management.service.IUserService;
 import java4.auction_management.service.impl.EWalletService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,9 +33,12 @@ public class EWalletController {
     IUserService iUserService;
 
     @Autowired
+    IAuctionService iAuctionService;
+
+    @Autowired
     ITransactionService transactionService;
 
-    @GetMapping("/myEwallet")
+    @GetMapping("/EWallet/myEwallet")
     public String getMoneyInEWallet(HttpServletRequest httpServletRequest, Model model) {
         EWallet eWallet = ieWalletService.getEWalletByAccount_Username(httpServletRequest.getUserPrincipal().getName());
         User user = iUserService.getUserByUsername(httpServletRequest.getUserPrincipal().getName());

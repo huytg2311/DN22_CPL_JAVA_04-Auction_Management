@@ -26,7 +26,6 @@ public class Bill {
 
     private LocalDateTime timeBill;
 
-    @NotBlank(message = "Delivery Address is required")
     private String deliveryAddress;
 
     @Enumerated(EnumType.STRING)
@@ -36,7 +35,7 @@ public class Bill {
     @Enumerated(EnumType.STRING)
     private ETransport eTransport = ETransport.WAITING;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     private CartDetail cartDetail;
 
 

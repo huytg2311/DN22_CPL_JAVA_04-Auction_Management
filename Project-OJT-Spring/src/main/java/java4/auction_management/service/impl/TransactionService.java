@@ -4,6 +4,7 @@ import java4.auction_management.entity.payment.Transaction;
 import java4.auction_management.repository.ITransactionRepository;
 import java4.auction_management.service.ITransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import java4.auction_management.service.ITransactionService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,6 +37,7 @@ public class TransactionService implements ITransactionService {
     }
 
     @Override
+
     public List<Transaction> findTransactionsByUsername(String username) {
         return iTransactionRepository.findTransactionsByUsername(username);
     }

@@ -3,17 +3,19 @@
 
 <head>
 	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Smart Auction Products Management  </title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="" name="keywords">
+	<meta content="" name="description">
 
-	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<!-- Favicon -->
+	<link th:href="@{/img/logo.svg}" rel="icon">
 
-	<title>Administration</title>
 
 	<link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
 	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 	<link th:href="@{/css/style.css}" rel="stylesheet">
-	<link th:href="@{edmin/css/button.css}" rel="stylesheet">
+	<link th:href="@{/edmin/css/button.css}" rel="stylesheet">
 
 	<!-- Google Web Fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,17 +23,20 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 
+
 	<!-- Icon Font Stylesheet -->
 	<script src="https://kit.fontawesome.com/091e570025.js" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/lib/bootstrap-icons/bootstrap-icons.css}">
 
 </head>
-<body>
+<body class="bg-light">
 <div class="" th:insert="header :: my-header"></div>
-<div class="wrapper" style="margin-top: 100px">
+<div class="wrapper">
 
 	<nav id="sidebar" class="sidebar js-sidebar">
-		<div id="" class="header-spacer bg-dark"></div>
+
 		<div class="sidebar-content js-simplebar">
 			<a class="sidebar-brand text-center" href="/admin">
 					<span class="align-middle text-primary ">
@@ -39,7 +44,7 @@
 					</span>
 			</a>
 			<ul class="sidebar-nav">
-				<li class="sidebar-item active">
+				<li class="sidebar-item ">
 					<a class="sidebar-link" th:href="@{/admin}">
 						<i class="align-middle" data-feather="user"></i> <span
 							class="align-middle">User management</span>
@@ -60,10 +65,10 @@
 						<span class="align-middle">Product management</span>
 					</a>
 					<ul class="collapse list-unstyled sidebar-submenu-item" id="sidebarSubmenu">
-						<li class="sidebar-item ">
+						<li class="sidebar-item active">
 							<a th:href="@{/admin/waitingAuctions}" class="sidebar-link ps-5 pe-2 small">
 								<i class="align-middle" data-feather="archive"></i>
-								<span class="align-middle">Product Awaiting Approval</span>
+								<span class="align-middle ">Product Awaiting Approval</span>
 							</a>
 						</li>
 						<li class="sidebar-item">
@@ -79,16 +84,16 @@
 
 		</div>
 		<div class="sidebar-toggle-btn js-sidebar-toggle">
-			<i class="fa fa-right-left fs-"></i>
+			<i class="bi bi-arrow-left-right"></i>
 		</div>
 	</nav>
-	<div class="main">
+	<div class="main bg-light">
 		<div  class="header-spacer bg-dark"></div>
-		<nav class="navbar navbar-expand navbar-light bg-light px-4 py-3 shadow-sm">
-
-		</nav>
 		<main class="content">
-			<div class="container-fluid p-0">
+			<h3 class="text-secondary text-center"
+				th:if="${#lists.isEmpty(auction)}">
+				There are no products in the waiting state.</h3>
+			<div class="container-fluid p-0" th:if="!${#lists.isEmpty(auction)}">
 				<h1 class="h3 m-3">Product Awaiting Approval</h1>
 				<div class="row ms-0">
 					<div class="col-12">
@@ -111,12 +116,7 @@
 									<td class="d-none d-md-table-cell" th:text="${auction.reservePrice}"></td>
 									<td class="d-none d-md-table-cell" th:text="${auction.stepPrice}"></td>
 
-<!--									<td>-->
-<!--											<a style="text-decoration: none;"-->
-<!--										   th:href="@{/admin/detail/{id}(id = ${user.id})}">-->
-<!--											<button type="button" class="btn btn-primary">Detail</button>-->
-<!--											</a>-->
-<!--									</td>-->
+
 								</tr>
 								</tbody>
 							</table>
@@ -127,6 +127,7 @@
 		</main>
 	</div>
 </div>
+<div class="" th:insert="footer :: my-footer"></div>
 
 
 <!--****** JS ******-->
@@ -161,8 +162,6 @@
 <script>
 
 	function changeEnableUser(username) {
-		console.log("vo ham")
-		console.log( "," + username);
 		$.ajax({
 			headers: {
 				'Accept': 'application/json',

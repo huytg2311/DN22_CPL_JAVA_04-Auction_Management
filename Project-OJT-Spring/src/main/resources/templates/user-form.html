@@ -3,13 +3,13 @@
 
 <head>
     <meta charset="utf-8">
-    <title>F.Auction - Auction Now!</title>
+    <title>Smart Auction Profile</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <!--    <link href="img/favicon.ico" rel="icon">-->
+    <link th:href="@{/img/logo.svg}" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,7 +28,7 @@
 
     <head>
         <meta charset="utf-8">
-        <title>Pay.Picker</title>
+        <title>Smart Auction    </title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -80,11 +80,11 @@
                                 </div>
                                 <hr class="my-0">
                                 <div class="card-body" style="padding-bottom: 66%">
-                                    <a th:href="@{/changePassword/{username}(username = ${#request.userPrincipal.name})}" style="text-align: center;font-size: 120%; margin-top: 20px; display: block">
+                                    <a th:href="@{/user/changePassword}" style="text-align: center;font-size: 120%; margin-top: 20px; display: block">
                                         <i class="bi bi-lock-fill ml-"></i>
                                         <span>Change Password</span>
                                     </a>
-                                    <a th:href="@{/changeAvatar}" style="text-align: center;font-size: 120%; margin-top: 20px; display: block; margin-left: -30px">
+                                    <a th:href="@{/user/changeAvatar}" style="text-align: center;font-size: 120%; margin-top: 20px; display: block; margin-left: -30px">
                                         <i class="bi bi-person-bounding-box"></i>
                                         <span>Change Avatar</span>
                                     </a>
@@ -103,7 +103,7 @@
                         <div class="col-md-6 col-xl-8">
                             <div class="card">
                                 <strong style="font-size: 200%; margin-left: 6%;margin-top: 3%;margin-bottom: 6%;">My Profile <a id="btnEdit" onclick="editUser()" class="bi bi-pencil-square" style="margin-left: 510px"></a></strong>
-                                <form id="formEdit" th:action="@{/edit-profile}" th:object="${user}" method="post" enctype="multipart/form-data" style="padding-left: 10%; padding-right: 10%; padding-bottom: 20%">
+                                <form id="formEdit" th:action="@{/user/edit-profile}" th:object="${user}" method="post" enctype="multipart/form-data" style="padding-left: 10%; padding-right: 10%; padding-bottom: 20%">
                                     <input type="hidden" th:field="*{id}">
                                     <input type="hidden" th:field="*{account.password}">
 
@@ -182,12 +182,12 @@
                     </div>
                 </div>
             </div>
-            <!-- Contact End -->
+            <!-- Contact End --><div th:insert="footer :: my-footer"></div>
         </div>
 
 
 <!-- Footer Start -->
-<div th:insert="footer :: my-footer"></div>
+
 <!-- Footer End -->
 
 <script type="text/javascript">

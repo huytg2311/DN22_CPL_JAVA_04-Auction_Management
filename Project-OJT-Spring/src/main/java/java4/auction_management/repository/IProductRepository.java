@@ -20,4 +20,7 @@ public interface  IProductRepository extends JpaRepository<Product, Long> {
 
     @Query(value = "select p from Product as p where p.auction.auctionID = ?1")
     Product getProductByAuctionId(Long id);
+
+    @Query(value = "select p from Product  as p where  p.auction.user.id = ?1 and p.isSold = true")
+    List<Product> getProductsSoldByUserId(Long id);
 }

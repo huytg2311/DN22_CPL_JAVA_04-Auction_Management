@@ -2,8 +2,16 @@ package java4.auction_management.timerTask;
 
 import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.bid.Bid;
+import java4.auction_management.entity.bill.Bill;
 import java4.auction_management.entity.cart.CartDetail;
+import java4.auction_management.entity.payment.EType;
+import java4.auction_management.entity.payment.EWallet;
+import java4.auction_management.entity.payment.Transaction;
+import java4.auction_management.service.IEWalletService;
+import java4.auction_management.service.IProductService;
+import java4.auction_management.service.ITransactionService;
 import java4.auction_management.service.impl.AuctionService;
+import java4.auction_management.service.impl.BillService;
 import java4.auction_management.service.impl.CartDetailService;
 import java4.auction_management.service.impl.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +24,8 @@ import java.util.*;
 public class AuctionTimer {
 
     @Autowired
+    IProductService iProductService;
+    @Autowired
     AuctionService auctionService;
 
     @Autowired
@@ -23,6 +33,15 @@ public class AuctionTimer {
 
     @Autowired
     CartDetailService cartDetailService;
+
+    @Autowired
+    BillService billService;
+
+    @Autowired
+    ITransactionService iTransactionService;
+
+    @Autowired
+    IEWalletService ieWalletService;
 
     Timer timer = new Timer();
     Map<Long, TimerTask> taskList = new HashMap<>();
@@ -37,9 +56,11 @@ public class AuctionTimer {
                 //if the auction has bid then move the product of auction tAo winner user cart
                 if (!auction.getBidList().isEmpty() && !now.isBefore(finishTime)) {
                     CartDetail cartDetail = new CartDetail();
+                    Bill bill = new Bill();
+                    Transaction buyerTransaction = new Transaction();
+                    Transaction sellerTransaction = new Transaction();
 
                     cartDetail.setProduct(auction.getProduct());
-                    cartDetail.setCart(cartService.findCartByUser(auction.getUser()));
 
                     //sort bidList of the auction by bid price
                     List<Bid> bidList = auction.getBidList();
@@ -49,12 +70,41 @@ public class AuctionTimer {
                             return Double.compare(o2.getBidPrice(), o1.getBidPrice());
                         }
                     });
+                    Bid winBid = bidList.get(0);
 
-                    cartDetail.setBid(bidList.get(0));
-
+                    cartDetail.setBid(winBid);
+                    cartDetail.setCart(cartService.findCartByUser(winBid.getUser()));
                     cartDetailService.save(cartDetail);
+
+                    //transaction and ewallet buyer
+                    buyerTransaction.setAmount(winBid.getBidPrice());
+                    buyerTransaction.setEType(EType.BUYING);
+                    buyerTransaction.setEWallet(winBid.getUser().getAccount().getEWallet());
+                    buyerTransaction.setDateTransaction(LocalDateTime.now());
+                    iTransactionService.save(buyerTransaction);
+
+                    EWallet eWalletOfBuyer = winBid.getUser().getAccount().getEWallet();
+                    eWalletOfBuyer.setBalance(eWalletOfBuyer.getBalance() - winBid.getBidPrice());
+                    ieWalletService.save(eWalletOfBuyer);
+
+                    //transaction and ewallet seller
+                    sellerTransaction.setAmount(winBid.getBidPrice());
+                    sellerTransaction.setEType(EType.SELLING);
+                    sellerTransaction.setEWallet(winBid.getUser().getAccount().getEWallet());
+                    sellerTransaction.setDateTransaction(LocalDateTime.now());
+                    iTransactionService.save(sellerTransaction);
+
+                    EWallet eWalletOfSeller = winBid.getUser().getAccount().getEWallet();
+                    eWalletOfSeller.setBalance(eWalletOfSeller.getBalance() + winBid.getBidPrice());
+                    ieWalletService.save(eWalletOfSeller);
+
+                    //add bill
+                    bill.setCartDetail(cartDetail);
+                    billService.save(bill);
+
+                    //
                     auction.getProduct().setSold(true);
-                    auctionService.save(auction);
+                    iProductService.save(auction.getProduct());
                 }
             }
         };

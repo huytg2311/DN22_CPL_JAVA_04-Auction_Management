@@ -36,15 +36,6 @@ public class AuctionController {
     @Autowired
     HttpServletRequest httpServletRequest;
 
-    @GetMapping("/my-auctions")
-    public String loadAuction(Model model) {
-        List<Auction> auctions =
-                auctionService.findAuctionsByUsername(httpServletRequest.getUserPrincipal().getName());
-        model.addAttribute(
-                "auctionList",
-                auctions);
-        return "user/auction";
-    }
 
     @GetMapping("/detail-auction/{id}")
     public String load(@PathVariable(
@@ -89,6 +80,8 @@ public class AuctionController {
                 throw new IllegalStateException("No auction was found by Id: " + auctionId);
             });
 
+            if (auction.getProduct().getCartDetail() == null) return result;
+
             String winnerUsername = auction.getProduct().getCartDetail().getBid().getUser().getAccount().getUsername();
 
             Iterator<Bid> bidList = auction.getBidList().iterator();
@@ -98,9 +91,9 @@ public class AuctionController {
                 String usernameOfBid = bid.getUser().getAccount().getUsername();
                 String usernameCurrent = httpServletRequest.getUserPrincipal().getName();
                 if (usernameCurrent.equals(usernameOfBid)) {
-                    if (usernameCurrent.equals(winnerUsername)){
-                        result = result.replace("visitor","winner");
-                    } else{
+                    if (usernameCurrent.equals(winnerUsername)) {
+                        result = result.replace("visitor", "winner");
+                    } else {
                         result = result.replace("visitor", "loser");
                     }
                     break;
@@ -117,11 +110,12 @@ public class AuctionController {
         simpMessagingTemplate.convertAndSend("/auctions/new-bid-alert-receiver/" + auctionId, alert);
     }
 
-    @GetMapping("/my-bidding")
-    public String showAuctionBidding(Model model) {
-        List<Bid> bidList= bidService.getAuctionsHadBeenBidByUsername(httpServletRequest.getUserPrincipal().getName());
+    @GetMapping("/create")
+    public String createFormProduct(Model model) {
+        model.addAttribute("product", new Product());
+        return "/products/create-product";
+    }
 
-        model.addAttribute("bids",bidList);
 
         return "user/bidding";
     }

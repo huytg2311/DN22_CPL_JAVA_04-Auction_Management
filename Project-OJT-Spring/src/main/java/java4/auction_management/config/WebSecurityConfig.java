@@ -74,7 +74,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/auctions/my-auctions").access("hasRole('ROLE_USER')");
         http.authorizeRequests().antMatchers("/auctions/detail-auction/{id}").permitAll();
         http.authorizeRequests().antMatchers("/auctions/get-winner-cartDetail/{auctionId}").access("hasRole('ROLE_USER')");
-        http.authorizeRequests().antMatchers("/auctions/auction-result/{auctionId}").access("hasRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/auctions/auction-result/{auctionId}").permitAll();
         http.authorizeRequests().antMatchers("/auctions/auctions/new-bid-alert/{auctionId}").permitAll();
 
         //  bid

@@ -67,6 +67,11 @@ public class ProductService implements IProductService {
         return iProductRepository.getProductByAuctionId(id);
     }
 
+    @Override
+    public List<Product> getProductsSoldByUserId(Long id) {
+        return iProductRepository.getProductsSoldByUserId(id);
+    }
+
 
     @Override
     public Optional<Product> findById(Long productId){
