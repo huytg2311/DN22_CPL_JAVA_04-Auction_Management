@@ -64,7 +64,7 @@ public class EWalletController {
         Double updateMoney = Double.valueOf(httpServletRequest.getParameter("updateMoney"));
         Double total = updateMoney + eWallet.getBalance();
         ieWalletService.updateDeposit(eWallet, total);
-        return "redirect:/myEwallet";
+        return "redirect:/EWallet/myEwallet";
     }
 
 

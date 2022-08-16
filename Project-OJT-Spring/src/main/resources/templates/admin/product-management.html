@@ -90,7 +90,10 @@
 
 		</nav>
 		<main class="content">
-			<div class="container-fluid p-0">
+			<h3 class="text-secondary text-center"
+				th:if="${#lists.isEmpty(auction)}">
+				There are no products in the waiting state.</h3>
+			<div class="container-fluid p-0" th:if="!${#lists.isEmpty(auction)}">
 				<h1 class="h3 m-3">Product Awaiting Approval</h1>
 				<div class="row ms-0">
 					<div class="col-12">
@@ -113,12 +116,7 @@
 									<td class="d-none d-md-table-cell" th:text="${auction.reservePrice}"></td>
 									<td class="d-none d-md-table-cell" th:text="${auction.stepPrice}"></td>
 
-<!--									<td>-->
-<!--											<a style="text-decoration: none;"-->
-<!--										   th:href="@{/admin/detail/{id}(id = ${user.id})}">-->
-<!--											<button type="button" class="btn btn-primary">Detail</button>-->
-<!--											</a>-->
-<!--									</td>-->
+
 								</tr>
 								</tbody>
 							</table>
