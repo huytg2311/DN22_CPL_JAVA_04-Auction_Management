@@ -3,6 +3,7 @@ package java4.auction_management.service;
 import java4.auction_management.entity.payment.Transaction;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import java.util.List;
 @Service

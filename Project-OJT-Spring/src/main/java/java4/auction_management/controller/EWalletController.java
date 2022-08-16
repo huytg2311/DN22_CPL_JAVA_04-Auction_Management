@@ -36,7 +36,7 @@ public class EWalletController {
     @Autowired
     ITransactionService iTransactionService;
 
-    @GetMapping("/myEwallet")
+    @GetMapping("/EWallet/myEwallet")
     public String getMoneyInEWallet(HttpServletRequest httpServletRequest, Model model) {
         EWallet eWallet = ieWalletService.getEWalletByAccount_Username(httpServletRequest.getUserPrincipal().getName());
         User user = iUserService.getUserByUsername(httpServletRequest.getUserPrincipal().getName());
@@ -62,7 +62,7 @@ public class EWalletController {
         User user  = iUserService.getUserByUsername(httpServletRequest.getUserPrincipal().getName());
         eWallet.setAccount(user.getAccount());
         ieWalletService.save(eWallet);
-        return "redirect:/myEwallet";
+        return "redirect:/EWallet/myEwallet";
     }
 
     @PostMapping("/updateDeposit")
@@ -71,7 +71,7 @@ public class EWalletController {
         Double updateMoney = Double.valueOf(httpServletRequest.getParameter("updateMoney"));
         Double total = updateMoney + eWallet.getBalance();
         ieWalletService.updateDeposit(eWallet, total);
-        return "redirect:/myEwallet";
+        return "redirect:/EWallet/myEwallet";
     }
 
 

@@ -1,45 +1,46 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"  xmlns:nl2br="https://github.com/bufferings/thymeleaf-extras-nl2br"
       xmlns:nl2br="https://github.com/bufferings/thymeleaf-extras-nl2br"
       lang="en-US" xml:lang="en-US">
 
 <head>
-    <meta charset="utf-8">
-    <title>Pay.Picker</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+	<meta charset="utf-8">
+	<title>Smart Auction Detail Auction</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="" name="keywords">
+	<meta content="" name="description">
 
-    <!-- Favicon -->
-    <link href="https://cdn2.iconfinder.com/data/icons/content-design-production-1/66/36-512.png" rel="icon">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet">
+	<link th:href="@{/img/logo.svg}" rel="icon">
 
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/091e570025.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" th:href="@{/lib/bootstrap-icons/bootstrap-icons.css}">
+	<!-- Google Web Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap"
+		  rel="stylesheet">
 
-
-    <!-- Libraries Stylesheet -->
-    <link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
-    <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
-    <link th:href="@{/lib/owlcarousel/assets/owl.theme.default.css}" rel="stylesheet">
+	<!-- Icon Font Stylesheet -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/091e570025.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" th:href="@{/lib/bootstrap-icons/bootstrap-icons.css}">
 
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link th:href="@{/button/styles/buttons.css}" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link th:href="@{/css/style.css}" rel="stylesheet">
+	<!-- Libraries Stylesheet -->
+	<link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
+	<link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+	<link th:href="@{/lib/owlcarousel/assets/owl.theme.default.css}" rel="stylesheet">
 
 
-    <!--	SocketJS and STOMP-->
-    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
-    <script th:src="@{/lib/stomp/stomp.min.js}"></script>
+	<!-- Customized Bootstrap Stylesheet -->
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+	<link th:href="@{/button/styles/buttons.css}" rel="stylesheet">
+
+	<!-- Template Stylesheet -->
+	<link th:href="@{/css/style.css}" rel="stylesheet">
+
+
+	<!--	SocketJS and STOMP-->
+	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+	<script th:src="@{/lib/stomp/stomp.min.js}"></script>
 
 
 </head>

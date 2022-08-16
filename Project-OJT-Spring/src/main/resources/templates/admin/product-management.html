@@ -3,12 +3,14 @@
 
 <head>
 	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Smart Auction Products Management  </title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="" name="keywords">
+	<meta content="" name="description">
 
-	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<!-- Favicon -->
+	<link th:href="@{/img/logo.svg}" rel="icon">
 
-	<title>Administration</title>
 
 	<link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
 	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
@@ -88,7 +90,10 @@
 
 		</nav>
 		<main class="content">
-			<div class="container-fluid p-0">
+			<h3 class="text-secondary text-center"
+				th:if="${#lists.isEmpty(auction)}">
+				There are no products in the waiting state.</h3>
+			<div class="container-fluid p-0" th:if="!${#lists.isEmpty(auction)}">
 				<h1 class="h3 m-3">Product Awaiting Approval</h1>
 				<div class="row ms-0">
 					<div class="col-12">
@@ -111,12 +116,7 @@
 									<td class="d-none d-md-table-cell" th:text="${auction.reservePrice}"></td>
 									<td class="d-none d-md-table-cell" th:text="${auction.stepPrice}"></td>
 
-<!--									<td>-->
-<!--											<a style="text-decoration: none;"-->
-<!--										   th:href="@{/admin/detail/{id}(id = ${user.id})}">-->
-<!--											<button type="button" class="btn btn-primary">Detail</button>-->
-<!--											</a>-->
-<!--									</td>-->
+
 								</tr>
 								</tbody>
 							</table>
@@ -127,6 +127,7 @@
 		</main>
 	</div>
 </div>
+<div class="" th:insert="footer :: my-footer"></div>
 
 
 <!--****** JS ******-->

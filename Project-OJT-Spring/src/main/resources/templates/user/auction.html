@@ -130,6 +130,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 
 	<div class="" th:insert="footer :: my-footer"></div>
 </div>
@@ -151,7 +152,7 @@
     for (const row of rows) {
         $(row, 'td').click(function (){
             console.log('a')
-            window.location=$(row).data('href');
+            window.location=$(row).data(' ');
         })
     }
 </script>
