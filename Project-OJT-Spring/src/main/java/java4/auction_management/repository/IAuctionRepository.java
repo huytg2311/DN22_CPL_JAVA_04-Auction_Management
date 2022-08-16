@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,8 +31,8 @@ public interface IAuctionRepository extends JpaRepository<Auction, Long> {
     Page<Auction> getAllAuctionByStatus(Pageable pageable);
 
 //    @Query(value = "select c.category_id, c.name, p.product_name, is_sold, list_image, auction_time, max_price, finish_time from category c left join product p on c.category_id = p.category_id left join auction a on p.auction_id = a.auctionid join (select auction_id, max(bid_price) as max_price from bid group by auction_id) as b on a.auctionid = b.auction_id where (c.name like %?1 and p.product_name like %?2 and current_timestamp < finish_time and b.max_price between ?3 and ?4  ) order by b.max_price asc", nativeQuery = true)
-    @Query(value = "select a.auction from Bid as a where a.auction.product.category.name like ?1 and a.auction.product.productName like  ?2 and a.bidPrice >  ?3 group by a.auction order by a.auction.finishTime desc ")
-    List<Auction> searchAuction(String categoryName, String productName, Double minPrice, Double maxPrice);
+    @Query(value = "select a from Auction as a where a.product.category.name like ?1% and a.product.productName like ?2%")
+    Page<Auction> searchAuction(Pageable pageable, String categoryName, String productName);
 
 }
 
