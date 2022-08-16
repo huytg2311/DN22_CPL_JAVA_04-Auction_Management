@@ -30,7 +30,7 @@
     <link rel="stylesheet" th:href="@{/lib/bootstrap-icons/bootstrap-icons.css}">
 
 </head>
-<body class="bg-light">
+<body>
 <div class="" th:insert="header :: my-header"></div>
 <div class="wrapper" >
     <nav id="sidebar" class="sidebar js-sidebar">
@@ -82,15 +82,18 @@
 
         </div>
         <div class="sidebar-toggle-btn js-sidebar-toggle">
-            <i class="bi bi-arrow-left-right"></i>
+            <i class="fa fa-right-left fs-"></i>
         </div>
     </nav>
-    <div class="main bg-light">
+    <div class="main">
         <h3 class="text-secondary text-center"
             th:if="${#lists.isEmpty(bills)}">
             No bill has been created yet.</h3>
         <div class="header-spacer bg-dark"></div>
-        <main class="content"   th:if="!${#lists.isEmpty(bills)}" >
+        <nav class="navbar navbar-expand navbar-light bg-light px-4 py-3 shadow-sm">
+
+        </nav>
+        <main class="content" th:if="!${#lists.isEmpty(bills)}" >
             <div class="container-fluid p-0">
                 <h1 class="h3 m-3">Bill Management</h1>
                 <div class="row ms-0">
