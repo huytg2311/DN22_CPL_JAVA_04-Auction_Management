@@ -30,9 +30,9 @@
 	<link rel="stylesheet" th:href="@{/lib/bootstrap-icons/bootstrap-icons.css}">
 
 </head>
-<body>
+<body class="bg-light">
 <div class="" th:insert="header :: my-header"></div>
-<div class="wrapper" style="margin-top: 100px">
+<div class="wrapper" >
 	<nav id="sidebar" class="sidebar js-sidebar">
 
 		<div class="sidebar-content js-simplebar">
@@ -82,17 +82,14 @@
 
 		</div>
 		<div class="sidebar-toggle-btn js-sidebar-toggle">
-			<i class="fa fa-right-left fs-"></i>
+			<i class="bi bi-arrow-left-right"></i>
 		</div>
 	</nav>
-	<div class="main">
+	<div class="main bg-light">
 		<h3 class="text-secondary text-center"
 				th:if="${#lists.isEmpty(categories)}">
 			You have not created any category yet.</h3>
 		<div  class="header-spacer bg-dark"></div>
-		<nav class="navbar navbar-expand navbar-light bg-light px-4 py-3 shadow-sm">
-
-		</nav>
 		<main class="content" th:if="!${#lists.isEmpty(categories)}">
 			<div class="row">
 				<div class="col-12 col-lg-8 col-xxl-9 d-flex" style="margin-left: 140px; margin-top: 35px">
