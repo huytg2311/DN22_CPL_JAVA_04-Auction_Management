@@ -66,11 +66,22 @@ public class HomeController {
     ICategoryService categoryService;
 
 
-    @RequestMapping(value = {"/","/welcome"}, method = RequestMethod.GET)
-    public String welcomePage(Model model,@PageableDefault(size = 8) Pageable pageable) {
-        Page<Auction> auctions = auctionService.getAllAuctionByStatus(pageable);
+    @RequestMapping(value = {"/","/welcome", "/search"}, method = RequestMethod.GET)
+    public String welcomePage(Model model,@PageableDefault(size = 8) Pageable pageable, String name, String nameProduct, HttpServletRequest httpServletRequest) {
+        Page<Auction> auctionList;
         List<Category> category = categoryService.getAll();
-        model.addAttribute("auctions", auctions);
+        if (name != null && nameProduct != null) {
+             name = httpServletRequest.getParameter("name");
+            nameProduct = httpServletRequest.getParameter("nameProduct");
+
+            auctionList = auctionService.searchAuction(pageable, name, nameProduct);
+            model.addAttribute("auctions", auctionList);
+            return "index";
+        }
+        else {
+            auctionList = auctionService.getAllAuctionByStatus(pageable);
+        }
+        model.addAttribute("auctions", auctionList);
         model.addAttribute("category", category);
         return "index";
     }

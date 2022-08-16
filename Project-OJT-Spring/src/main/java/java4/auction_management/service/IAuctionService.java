@@ -29,7 +29,8 @@ public interface IAuctionService extends IService<Auction, Long>{
 
     Auction getAuctionByAuctionID(Long id);
 
-    List<Auction> searchAuction(String categoryName, String productName, Double minPrice, Double maxPrice);
+    Page<Auction> searchAuction(Pageable pageable, String categoryName, String productName);
+
 
 
 }

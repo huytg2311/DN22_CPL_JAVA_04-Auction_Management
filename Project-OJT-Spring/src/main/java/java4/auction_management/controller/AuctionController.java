@@ -118,26 +118,14 @@ public class AuctionController {
     }
 
 
-    @GetMapping("/search")
-    public String searchAuction(HttpServletRequest httpServletRequest, Model model) {
-        String name = httpServletRequest.getParameter("name");
-        String nameProduct = httpServletRequest.getParameter("nameProduct");
-        double maxPrice, minPrice;
-
-        if(httpServletRequest.getParameter("minPrice").equals("")){
-            minPrice = 0.0;
-        } else {
-            minPrice = Double.parseDouble(httpServletRequest.getParameter("minPrice"));
-        }
-        if(httpServletRequest.getParameter("maxPrice").equals("")){
-            maxPrice = Double.MAX_VALUE;
-        } else {
-            maxPrice = Double.parseDouble(httpServletRequest.getParameter("maxPrice"));
-        }
-
-        List<Auction> auctionList = auctionService.searchAuction(name, nameProduct, minPrice, maxPrice);
-        model.addAttribute("auctions", auctionList);
-        return "index";
-
-    }
+//    @GetMapping("/search")
+//    public String searchAuction(HttpServletRequest httpServletRequest, Model model) {
+//        String name = httpServletRequest.getParameter("name");
+//        String nameProduct = httpServletRequest.getParameter("nameProduct");
+//
+//        List<Auction> auctionList = auctionService.searchAuction(name, nameProduct);
+//        model.addAttribute("auctions", auctionList);
+//        return "index";
+//
+//    }
 }
