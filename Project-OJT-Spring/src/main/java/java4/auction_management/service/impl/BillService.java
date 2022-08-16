@@ -26,7 +26,7 @@ public class BillService implements IBillService {
 
     @Override
     public Optional<Bill> getById(Long id) {
-        return Optional.empty();
+        return iBillRepository.findById(id);
     }
 
     @Override

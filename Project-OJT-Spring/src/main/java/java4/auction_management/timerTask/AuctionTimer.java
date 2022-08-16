@@ -10,10 +10,7 @@ import java4.auction_management.entity.payment.Transaction;
 import java4.auction_management.service.IEWalletService;
 import java4.auction_management.service.IProductService;
 import java4.auction_management.service.ITransactionService;
-import java4.auction_management.service.impl.AuctionService;
-import java4.auction_management.service.impl.BillService;
-import java4.auction_management.service.impl.CartDetailService;
-import java4.auction_management.service.impl.CartService;
+import java4.auction_management.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -38,10 +35,10 @@ public class AuctionTimer {
     BillService billService;
 
     @Autowired
-    ITransactionService iTransactionService;
+    TransactionService transactionService;
 
     @Autowired
-    IEWalletService ieWalletService;
+    EWalletService eWalletService;
 
     Timer timer = new Timer();
     Map<Long, TimerTask> taskList = new HashMap<>();
@@ -81,22 +78,22 @@ public class AuctionTimer {
                     buyerTransaction.setEType(EType.BUYING);
                     buyerTransaction.setEWallet(winBid.getUser().getAccount().getEWallet());
                     buyerTransaction.setDateTransaction(LocalDateTime.now());
-                    iTransactionService.save(buyerTransaction);
+                    transactionService.save(buyerTransaction);
 
                     EWallet eWalletOfBuyer = winBid.getUser().getAccount().getEWallet();
                     eWalletOfBuyer.setBalance(eWalletOfBuyer.getBalance() - winBid.getBidPrice());
-                    ieWalletService.save(eWalletOfBuyer);
+                    eWalletService.save(eWalletOfBuyer);
 
                     //transaction and ewallet seller
                     sellerTransaction.setAmount(winBid.getBidPrice());
                     sellerTransaction.setEType(EType.SELLING);
                     sellerTransaction.setEWallet(winBid.getUser().getAccount().getEWallet());
                     sellerTransaction.setDateTransaction(LocalDateTime.now());
-                    iTransactionService.save(sellerTransaction);
+                    transactionService.save(sellerTransaction);
 
-                    EWallet eWalletOfSeller = winBid.getUser().getAccount().getEWallet();
+                    EWallet eWalletOfSeller = auction.getUser().getAccount().getEWallet();
                     eWalletOfSeller.setBalance(eWalletOfSeller.getBalance() + winBid.getBidPrice());
-                    ieWalletService.save(eWalletOfSeller);
+                    eWalletService.save(eWalletOfSeller);
 
                     //add bill
                     bill.setCartDetail(cartDetail);

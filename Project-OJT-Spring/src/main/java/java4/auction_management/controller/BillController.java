@@ -26,11 +26,12 @@ public class BillController {
     @Autowired
     CartDetailService cartDetailService;
 
-    @GetMapping("/billConfirm/{cartDetailId}")
-    public String showBillConfirmForm(@PathVariable("cartDetailId") Long cartDetailId, Model model) {
-        Bill bill = iBillService.getBillCartDetailId(cartDetailId);
+    @GetMapping("/billConfirm/{billId}")
+    public String showBillConfirmForm(@PathVariable("billId") Long billId, Model model) {
+        Bill bill = iBillService.getById(billId).orElseThrow(() -> {
+            throw  new IllegalStateException("No bill was found by id: " + billId);
+        });
         model.addAttribute("bill", bill);
-        model.addAttribute("cartdetailid", cartDetailId);
         return "/bill/bill-confirm";
     }
 
@@ -38,9 +39,10 @@ public class BillController {
     @PostMapping("/billConfirm")
     public String editBillConfirm(@Valid @ModelAttribute  Bill bill, BindingResult bindingResult, HttpServletRequest request, RedirectAttributes redirectAttributes)
     {
-        Long cartdetailid = Long.valueOf(request.getParameter("cartdetailid"));
-        CartDetail cartDetail = cartDetailService.getCartDetailByCartDetailID(cartdetailid);
+        String cartDetailID = request.getParameter("cartdetailid");
+        CartDetail cartDetail = cartDetailService.getCartDetailByCartDetailID(Long.parseLong(cartDetailID));
         bill.setCartDetail(cartDetail);
+
         iBillService.save(bill);
         return "redirect:/cart";
 

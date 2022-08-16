@@ -64,9 +64,10 @@ public class AuctionService implements IAuctionService {
         return iAuctionRepository.getAuctionByAuctionID(id);
     }
 
+
     @Override
-    public List<Auction> searchAuction(String categoryName, String productName, Double minPrice, Double maxPrice) {
-        return iAuctionRepository.searchAuction(categoryName, productName, minPrice, maxPrice);
+    public Page<Auction> searchAuction(Pageable pageable, String categoryName, String productName) {
+        return iAuctionRepository.searchAuction(pageable, categoryName);
     }
 
 }

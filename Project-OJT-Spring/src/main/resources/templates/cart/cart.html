@@ -64,7 +64,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="cd: ${cart.cartDetailList}">
+                    <tr th:each="cd : ${cart.cartDetailList}">
                         <td class="border-0">
                             <div class="d-flex align-items-center" th:each="img, imgState : ${#strings.arraySplit(cd.product.listImage, ' ')}" th:if="${imgState.index==0}">
                                 <div class="ratio ratio-1x1 avatar-xl">
@@ -78,7 +78,7 @@
                         <td class="border-0 align-middle"><strong th:text="'$' + ${#numbers.formatDecimal(cd.bid.bidPrice,1,'COMMA',2,'POINT')}"></strong></td>
                         <td class="border-0 align-middle"><strong th:text="${#temporals.format(cd.bid.bidTime, 'HH:mm:ss dd/MM/yyyy')}"></strong></td>
                         <td class="border-0 align-middle"><a type="submit" class="btn px-5 btn-primary rounded-0 p-2"
-                                                             th:href="@{/bill/billConfirm/{cartDetailId}(cartDetailId = ${cd.cartDetailID})}" >Confirm transport</a>
+                                                             th:href="@{/bill/billConfirm/{billId}(billId = ${cd.bill.billId})}" >Confirm transport</a>
                         </td>
                     </tr>
 

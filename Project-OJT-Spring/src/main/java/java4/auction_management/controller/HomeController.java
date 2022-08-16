@@ -67,7 +67,7 @@ public class HomeController {
 
 
     @RequestMapping(value = {"/","/welcome"}, method = RequestMethod.GET)
-    public String welcomePage(Model model,@PageableDefault(size = 8) Pageable pageable) {
+    public String welcomePage(Model model,@PageableDefault(size = 12) Pageable pageable) {
         Page<Auction> auctions = auctionService.getAllAuctionByStatus(pageable);
         List<Category> category = categoryService.getAll();
         model.addAttribute("auctions", auctions);
