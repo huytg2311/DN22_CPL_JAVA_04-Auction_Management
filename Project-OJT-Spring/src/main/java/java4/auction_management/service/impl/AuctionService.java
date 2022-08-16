@@ -67,7 +67,7 @@ public class AuctionService implements IAuctionService {
 
     @Override
     public Page<Auction> searchAuction(Pageable pageable, String categoryName, String productName) {
-        return iAuctionRepository.searchAuction(pageable, categoryName);
+        return iAuctionRepository.searchAuction(pageable, categoryName,productName);
     }
 
 }
