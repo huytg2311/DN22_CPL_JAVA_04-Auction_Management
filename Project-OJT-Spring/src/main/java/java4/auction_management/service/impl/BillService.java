@@ -46,4 +46,9 @@ public class BillService implements IBillService {
     public Bill getBillCartDetailId(Long cartDetailId) {
         return iBillRepository.getBillCartDetailId(cartDetailId);
     }
+
+    @Override
+    public List<Bill> getAllBill() {
+        return iBillRepository.getAllBill();
+    }
 }

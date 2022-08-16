@@ -210,7 +210,7 @@ public class AdminController {
 
     @GetMapping("/billManagement")
     public String showAllBills(Model model) {
-        model.addAttribute("bills", billService.getAll());
+        model.addAttribute("bills", billService.getAllBill());
         return "admin/bill-management";
     }
 
