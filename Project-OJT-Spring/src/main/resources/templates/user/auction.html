@@ -84,7 +84,7 @@
 								</thead>
 								<tbody>
 								<tr th:each="auction, auctionState : ${auctionList}"
-									th:data-href="${'/user/detailAuction/' + auction.auctionID}"
+									th:data-href="${'/user/my-auctions/auction-detail/' + auction.auctionID}"
 									class="cursor-p">
 									<td>
 										<div class="d-flex align-items-center">

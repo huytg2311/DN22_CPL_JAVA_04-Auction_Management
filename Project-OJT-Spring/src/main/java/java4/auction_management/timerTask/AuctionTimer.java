@@ -72,13 +72,13 @@ public class AuctionTimer {
                     cartDetail.setCart(cartService.findCartByUser(winBid.getUser()));
                     cartDetailService.save(cartDetail);
 
-                    bill.setCartDetail(cartDetail);
-                    billService.save(bill);
 
                     transaction.setAmount(winBid.getBidPrice());
                     transaction.setEType(EType.BUYING);
                     transaction.setEWallet(winBid.getUser().getAccount().getEWallet());
                     iTransactionService.save(transaction);
+                    bill.setCartDetail(cartDetail);
+                    billService.save(bill);
 
                     EWallet eWalletOfWinner = winBid.getUser().getAccount().getEWallet();
                     eWalletOfWinner.setBalance(eWalletOfWinner.getBalance() - winBid.getBidPrice());

@@ -169,7 +169,7 @@
 				<div class="mt-4 col-lg-3  col-md-4 col-sm-6 cursor-p" th:each="auction : ${auctions}"
 					 style="--bs-gutter-y: 30px">
 					<a th:href="'/auctions/detail-auction/' + ${auction.auctionID}">
-						<div class=" wow fadeIn" data-wow-delay="0s" data-wow-duration="1.3s">
+						<div class="">
 							<div class="product-item p-2 d-flex flex-column bg-white rounded-0 overflow-hidden h-100">
 								<div class="ratio ratio-1x1">
 									<img class="img-fluid of-cover op-center"
@@ -262,8 +262,8 @@
 <!-- Template Javascript -->
 <script th:src="@{/js/main.js}"></script>
 <script>
-
-    let x = setInterval(function () {
+	let hadRequestSend = false;
+    let x = function () {
 		let auctionTimers = $('.js-auction-timer');
 		let finishTimes = $('.js-auction-finish-time');
 		let timeLeftDisplayers = $('.js-auction-time-left');
@@ -280,28 +280,37 @@
             minutes = minutes.length < 2 ? "0" + minutes : minutes;
             seconds = seconds.length < 2 ? "0" + seconds : seconds;
 
-            timeLeftDisplayers.eq(i).html(hours + ' : ' + minutes + ' : ' + seconds)
-            if(timeLeft <= 0){
+            if ( timeLeft > 0){
+				timeLeftDisplayers.eq(i).html(hours + ' : ' + minutes + ' : ' + seconds)
+			} else if (!hadRequestSend){
 				timeLeftDisplayers.eq(i).html('Auction Ended')
-				setTimeout(reloadAuctions, 500)
+				hadRequestSend = true;
+				let pageNum = Number($('return-page').data('prevPageNumber')) + 1
+				$.ajax({
+					headers: {
+						'Content-Type': 'HTML'
+					},
+					type: "GET",
+					url: "/?page=" + pageNum,
+					success: function (result) {
+						let reload = function() {
+							$("#list-auction").replaceWith($(result).find("#list-auction"))
+							x()
+							hadRequestSend = false;
+						}
+						setTimeout(reload,2000)
+
+					}
+				})
             }
         }
 
-    }, 1000)
+    }
+	x()
+	setInterval(x,1000)
 
 	let reloadAuctions = function (){
-        let pageNum = Number($('return-page').data('prevPageNumber')) + 1
-        console.log(pageNum)
-        $.ajax({
-            headers: {
-                'Content-Type': 'HTML'
-            },
-            type: "GET",
-            url: "/?page=" + pageNum,
-            success: function (result) {
-                $("#list-auction").replaceWith($(result).find("#list-auction"))
-            }
-        })
+
     }
 </script>
 

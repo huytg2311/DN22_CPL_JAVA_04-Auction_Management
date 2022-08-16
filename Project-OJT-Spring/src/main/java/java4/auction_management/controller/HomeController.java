@@ -71,20 +71,6 @@ public class HomeController {
 
 
 
-    @GetMapping("/view-profile/{username}")
-    public String editProfile(@PathVariable("username") String username, Model model) {
-        User user = userService.getUserByUsername(username);
-        Account account = accountService.getById(user.getAccount().getUsername()).orElseThrow(() -> {
-            throw new IllegalStateException("Not account found");
-        });
-        System.out.println(username);
-        model.addAttribute("user", user);
-        model.addAttribute("account", account);
-        return "user-form";
-    }
-
-
-
     @GetMapping(value = {"/403"})
     public String accessDenied(Model model) {
         return "403";

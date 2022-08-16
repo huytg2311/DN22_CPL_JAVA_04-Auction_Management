@@ -151,15 +151,15 @@
                                         <span class="ms-3 btn btn-primary rounded-0 fs-6">Go to Auction</span>
                                     </a>
                                 </div>
-                                <div th:case="'ACCEPTED'" th:if="${T(java.time.LocalDateTime).now().isAfter(auction.finishTime)}" class="d-flex align-items-center ">
-                                    <div class="rounded-circle btn-xs-square bg-success me-1 "></div>
+                                <div th:if="${T(java.time.LocalDateTime).now().isAfter(auction.finishTime) && auction.auctionStatus.toString().equals('ACCEPTED')}" class="d-flex align-items-center ">
+                                    <div class="rounded-circle btn-xs-square bg-primary me-1 "></div>
                                     Finished
 <!--                                    chuyển tới sản phẩm đã bán-->
-                                    <a th:if="${auction.product.isSold()}" th:href="">
+                                    <a th:if="${auction.product.isSold()}" th:href="@{/sold}">
                                         <span class="ms-3 btn btn-primary rounded-0 fs-6">Go to Sold items</span>
                                     </a>
 <!--                                    link restart auction + chuyển trang về lại my-auctions-->
-                                    <a th:if="${!auction.product.isSold()}" th:href="">
+                                    <a th:if="${!(auction.product.isSold())}" th:href="${'/user/my-auctions/restart-auction/' + auction.auctionID}">
                                         <span class="ms-3 btn btn-primary rounded-0 fs-6">Restart Auction</span>
                                     </a>
                                 </div>
@@ -216,6 +216,7 @@
 <!-- Template Javascript -->
 <script th:src="@{/js/main.js}"></script>
 <script>
+    console.log([[${T(java.time.LocalDateTime).now().isAfter(auction.finishTime)}]])
     $('.owl-carousel').owlCarousel({
         margin: 10,
         dots: false,

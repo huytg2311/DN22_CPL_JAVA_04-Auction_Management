@@ -3,6 +3,7 @@ package java4.auction_management.service;
 import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.bid.Bid;
 import java4.auction_management.entity.product.Product;
+import java4.auction_management.entity.user.User;
 import org.springframework.security.access.method.P;
 
 import java.util.List;
@@ -22,5 +23,7 @@ public interface IBidService extends IService<Bid,Long> {
     List<Bid> findBiddingByUserId(Long userId);
 
 
+    List<Bid> getAuctionsHadBeenBidByUsername(String username);
 
+    Bid getBidByAuctionAndUser(Auction auction, User user);
 }

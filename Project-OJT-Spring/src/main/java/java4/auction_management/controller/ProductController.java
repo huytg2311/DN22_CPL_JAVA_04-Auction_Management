@@ -121,7 +121,7 @@ public class ProductController {
         }
 
         redirectAttributes.addFlashAttribute("message", "Edit successful");
-        return "redirect:/auctions/my-auctions";
+        return "redirect:/user/my-auctions";
     }
 
     @GetMapping("/load/{id}")

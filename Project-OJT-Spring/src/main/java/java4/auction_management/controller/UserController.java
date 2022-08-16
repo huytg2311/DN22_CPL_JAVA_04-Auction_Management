@@ -4,18 +4,13 @@ import com.cloudinary.utils.ObjectUtils;
 import java4.auction_management.config.CloudinaryConfig;
 import java4.auction_management.entity.auction.Auction;
 import java4.auction_management.entity.bid.Bid;
-import java4.auction_management.entity.product.Product;
 import java4.auction_management.entity.user.Account;
 import java4.auction_management.entity.user.User;
-import java4.auction_management.service.IAccountService;
-import java4.auction_management.service.IBidService;
-import java4.auction_management.service.ICategoryService;
-import java4.auction_management.service.IProductService;
-import java4.auction_management.service.IUserService;
-import java4.auction_management.service.impl.AuctionService;
+import java4.auction_management.service.*;
 import java4.auction_management.service.impl.CategoryService;
 import java4.auction_management.service.impl.ProductService;
 import java4.auction_management.service.impl.UserService;
+import java4.auction_management.timerTask.AuctionTimer;
 import java4.auction_management.validate.AccountValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,9 +23,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/user")
@@ -42,6 +38,8 @@ public class UserController {
     @Autowired
     IAccountService accountService;
 
+    @Autowired
+    IAuctionService iAuctionService;
     @Autowired
     IUserService userService;
 
@@ -66,7 +64,8 @@ public class UserController {
     @Autowired
     AccountValidator accountValidator;
 
-
+    @Autowired
+    AuctionTimer auctionTimer;
 
 
     @GetMapping("/detail/{id}")
@@ -77,7 +76,7 @@ public class UserController {
     }
 
     @GetMapping("/view-profile")
-    public String editProfile( Model model) {
+    public String editProfile(Model model) {
 
         User user = userService.getUserByUsername(httpServletRequest.getUserPrincipal().getName());
         Account account = accountService.getById(user.getAccount().getUsername()).orElseThrow(() -> {
@@ -161,6 +160,42 @@ public class UserController {
         return "redirect:/changeAvatar";
     }
 
+    @GetMapping("/my-auctions")
+    public String loadAuction(Model model) {
+        List<Auction> auctions = iAuctionService.findAuctionsByUsername(httpServletRequest.getUserPrincipal().getName());
+        model.addAttribute("auctionList", auctions);
+        return "user/auction";
+    }
 
+    @GetMapping("/my-auctions/auction-detail/{auctionID}")
+    public String showDetailAuctionOfUser(@PathVariable("auctionID") Long auctionId, Model model) {
+        Auction auction = iAuctionService.getById(auctionId).orElseThrow(() -> {
+            throw new IllegalStateException("Not auction was found by Id:" + auctionId);
+        });
+        model.addAttribute("auction", auction);
+        return "user/detailAuction";
+    }
+
+    @RequestMapping("/my-auctions/restart-auction/{auctionId}")
+    public String restartAuctions(@PathVariable("auctionId") Long auctionId){
+        Auction auction = iAuctionService.getById(auctionId).orElseThrow(() -> {
+            throw new IllegalStateException("Not auction was found by Id:" + auctionId);
+        });
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime finishTime = now.plusMinutes(Long.parseLong(auction.getAuctionTime() + ""));
+        auction.setFinishTime(finishTime);
+        auctionTimer.scheduleTimerTask(auction.getAuctionID(), ChronoUnit.MILLIS.between(now, finishTime));
+        iAuctionService.save(auction);
+
+        return "redirect:/user/my-auctions/auction-detail/"+auctionId;
+    }
+
+    @GetMapping("/my-bidding")
+    public String showAuctionBidding(Model model) {
+        List<Bid> bidList = iBidService.getAuctionsHadBeenBidByUsername(httpServletRequest.getUserPrincipal().getName());
+        model.addAttribute("bids", bidList);
+
+        return "user/bidding";
+    }
 
 }
