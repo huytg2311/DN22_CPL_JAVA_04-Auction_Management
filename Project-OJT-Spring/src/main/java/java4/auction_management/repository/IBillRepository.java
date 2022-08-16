@@ -9,8 +9,11 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface IBillRepository  extends JpaRepository<Bill, Long> {
-    @Query(value = "select b from Bill as b where b.cartDetail.cartDetailID = ?1")
+    @Query(value = "select b from Bill as b where b.cartDetail.cartDetailID = ?1 ")
     Bill getBillCartDetailId(Long cartDetailId);
+
+    @Query(value = "select  b from Bill as b where  b.deliveryAddress is not null ")
+    List<Bill> getAllBill();
 
 
 }
