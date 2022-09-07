@@ -154,7 +154,7 @@
                                         <span class="ms-3 btn btn-primary rounded-0 fs-6">Go to Auction</span>
                                     </a>
                                 </div>
-                                <div th:if="${T(java.time.LocalDateTime).now().isAfter(auction.finishTime) && auction.auctionStatus.toString().equals('ACCEPTED')}" class="d-flex align-items-center ">
+                                <div th:if="${auction.finishTime!=null && T(java.time.LocalDateTime).now().isAfter(auction.finishTime) && auction.auctionStatus.toString().equals('ACCEPTED')}" class="d-flex align-items-center ">
                                     <div class="rounded-circle btn-xs-square bg-primary me-1 "></div>
                                     Finished
 <!--                                    chuyển tới sản phẩm đã bán-->

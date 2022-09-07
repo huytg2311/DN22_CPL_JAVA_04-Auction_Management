@@ -40,7 +40,7 @@
             if (count <= 0)
             {
                 clearInterval(counter);
-                window.location = "http://localhost:8080/login";
+                window.location = "/login";
             }
 
             document.getElementById("timer").innerHTML= "Redirected to login page in " + count + " secs";
@@ -56,7 +56,9 @@
     <h1 style="color: #EAA636;
     text-align: center;
     margin-top: -20px;">Sign up Successfully !</h1>
-    <img style="width: 500px; margin-left: 500px" th:src="@{/img/teddysc.gif}">
+    <div class="mw-1200px mx-auto d-flex align-items-center justify-content-center">
+        <img class="of-contain op-center" th:src="@{/img/teddysc.gif}">
+    </div>
     <div style="text-align: center">
         <span style="color: red; text-align: center;font-weight: bold" id="timer"></span>
     </div>

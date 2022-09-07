@@ -108,7 +108,7 @@
                                 <tbody>
                                 <tr th:each="user : ${users}" th:href="@{/admin/detail/{id}(id = ${user.id})}">
                                     <td>
-                                        <img class="avatar-lg img-fluid rounded-1" th:src="@{${user.image}}">
+                                        <img class="avatar-lg img-fluid rounded-1" th:src="${user.image==null} ? 'img/logo-onecolor-primary.svg' : ${user.image}">
                                     </td>
                                     <td id="getUsername" th:text="${user.account.username}"></td>
                                     <td class="d-none d-md-table-cell" th:text="${user.fullname}"></td>
